@@ -489,6 +489,7 @@
             cmbMarca.Size = new Size(331, 22);
             cmbMarca.TabIndex = 37;
             cmbMarca.Text = "7";
+            cmbMarca.Leave += cmbMarca_Leave;
             // 
             // label22
             // 
@@ -513,8 +514,7 @@
             cmbCategoria.Size = new Size(331, 22);
             cmbCategoria.TabIndex = 36;
             cmbCategoria.Text = "6";
-            cmbCategoria.SelectedIndexChanged += cmbCategoria_SelectedIndexChanged;
-            cmbCategoria.Validating += cmbCategoria_Validating;
+            cmbCategoria.Leave += cmbCategoria_Leave;
             // 
             // label23
             // 

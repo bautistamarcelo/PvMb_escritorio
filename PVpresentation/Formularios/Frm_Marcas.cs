@@ -25,6 +25,30 @@ namespace PVpresentation.Formularios
             _marcasService = marcasService;
         }
 
+        private Frm_Productos ObtenerFormularioAbierto()
+        {
+            foreach (Form formPadre in Application.OpenForms)
+            {
+                if (formPadre is Frm_Productos)
+                {
+                    return (Frm_Productos)formPadre;
+                }
+            }
+            return null; // No se encontró un formulario abierto de tipo Frm_Productos
+        }
+
+        public void LimpiarMantenimiento()
+        {
+            txtID.Text = "";
+            txtNombre.Text = "";
+            txtID.Enabled = false;
+            txtNombre.Enabled = false;
+            txtBuscar.Select();
+            btnGrabar.Enabled = false;
+            btnCancelar.Enabled = true;
+
+        }
+
         private async Task MostrarMarcas(string Buscar = "")
         {
 
@@ -47,18 +71,6 @@ namespace PVpresentation.Formularios
             dgvListado.ImplementarConfiguracion("Editar");
             //MostrarTabs(tabListado.Name);
             await MostrarMarcas();
-        }
-
-        private void LimpiarMantenimiento()
-        {
-            txtID.Text = "";
-            txtNombre.Text = "";
-            txtID.Enabled = false;
-            txtNombre.Enabled = false;
-            txtBuscar.Select();
-            btnGrabar.Enabled = false;
-            btnCancelar.Enabled = true;
-
         }
 
         private async void btnBuscar_Click(object sender, EventArgs e)
@@ -145,5 +157,15 @@ namespace PVpresentation.Formularios
 
 
 
+        private async void Frm_Marcas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Frm_Productos fProd = ObtenerFormularioAbierto();
+            if (fProd != null)
+            {
+                fProd.CambiarVisibilidadControles();
+                await fProd.agregarMarcaComboBox(txtNombre.Text.Trim());
+                fProd.cmbMarca.SelectedItem = txtNombre.Text.Trim();
+            }
+        }
     }
 }

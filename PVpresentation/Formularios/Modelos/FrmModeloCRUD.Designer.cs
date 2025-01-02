@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmModeloCRUD));
+            pnGral=new Panel();
             pnTituloFormulario = new Panel();
             txtInstancia = new TextBox();
             txtOpcion = new TextBox();
@@ -54,16 +55,24 @@
             btnBuscar = new Button();
             tabNuevo = new TabPage();
             tabEditar = new TabPage();
-            pnGral = new Panel();
+            //pnGral = new Panel();
+            pnGral.SuspendLayout();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
-            pnlContenedorPrincipal.SuspendLayout();
-            tabControlMain.SuspendLayout();
             tabListado.SuspendLayout();
             pnMantenimiento.SuspendLayout();
             pnListado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvListado).BeginInit();
             SuspendLayout();
+            // 
+            // pnGral
+            // 
+            pnGral.BackColor = Color.FromArgb(74, 154, 190);
+            pnGral.Dock = DockStyle.Fill;
+            pnGral.Location = new Point(0, 50);
+            pnGral.Name = "pnGral";
+            pnGral.Size = new Size(984, 511);
+            pnGral.TabIndex = 51;
             // 
             // pnTituloFormulario
             // 
@@ -199,7 +208,7 @@
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.Location = new Point(14, 110);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(288, 22);
+            txtNombre.Size = new Size(288, 23);
             txtNombre.TabIndex = 25;
             // 
             // label1
@@ -219,7 +228,7 @@
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Location = new Point(14, 55);
             txtID.Name = "txtID";
-            txtID.Size = new Size(288, 22);
+            txtID.Size = new Size(288, 23);
             txtID.TabIndex = 23;
             // 
             // btnEliminar
@@ -342,7 +351,7 @@
             txtBuscar.BorderStyle = BorderStyle.FixedSingle;
             txtBuscar.Location = new Point(85, 19);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(511, 22);
+            txtBuscar.Size = new Size(511, 23);
             txtBuscar.TabIndex = 14;
             // 
             // btnBuscar
@@ -380,15 +389,6 @@
             tabEditar.TabIndex = 2;
             tabEditar.Text = "Editar";
             // 
-            // pnGral
-            // 
-            pnGral.BackColor = Color.FromArgb(74, 154, 190);
-            pnGral.Dock = DockStyle.Fill;
-            pnGral.Location = new Point(0, 0);
-            pnGral.Name = "pnGral";
-            pnGral.Size = new Size(984, 561);
-            pnGral.TabIndex = 51;
-            // 
             // FrmModeloCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -396,6 +396,7 @@
             BackColor = Color.FromArgb(74, 134, 160);
             ClientSize = new Size(984, 561);
             Controls.Add(pnlContenedorPrincipal);
+            Controls.Add(pnGral);
             Controls.Add(pnTituloFormulario);
             Controls.Add(pnGral);
             FormBorderStyle = FormBorderStyle.None;
@@ -416,7 +417,7 @@
         }
 
         #endregion
-
+        public Panel pnGral;
         public Panel pnTituloFormulario;
         public TextBox txtInstancia;
         public TextBox txtOpcion;
@@ -442,6 +443,6 @@
         public TextBox txtID;
         public Panel pnMantenimiento;
         public Panel pnListado;
-        public Panel pnGral;
+        
     }
 }

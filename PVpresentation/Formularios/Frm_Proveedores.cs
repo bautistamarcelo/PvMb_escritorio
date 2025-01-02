@@ -72,10 +72,22 @@ namespace PVpresentation.Formularios
             dgvListado.Columns["CaracterID"].Visible = false;
             dgvListado.Columns["Caracter"].Visible = false;
 
-            dgvListado.Columns["Nombre"].Width= 80;
+            dgvListado.Columns["Nombre"].Width = 80;
         }
 
-        private async void LimpiarMantenimiento()
+        private Frm_Productos ObtenerFormularioAbierto()
+        {
+            foreach (Form formPadre in Application.OpenForms)
+            {
+                if (formPadre is Frm_Productos)
+                {
+                    return (Frm_Productos)formPadre;
+                }
+            }
+            return null; // No se encontró un formulario abierto de tipo Frm_Productos
+        }
+
+        public async void LimpiarMantenimiento()
         {
             txtID.Text = "";
             txtNombre.Text = "";
@@ -209,5 +221,16 @@ namespace PVpresentation.Formularios
             Close();
         }
         #endregion
+
+        private async void Frm_Proveedores_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Frm_Productos fProd = ObtenerFormularioAbierto();
+            if (fProd != null)
+            {
+                fProd.CambiarVisibilidadControles();
+                await fProd.agregarProveedorComboBox(txtNombre.Text.Trim());
+                fProd.cmbProveedor.SelectedItem = txtNombre.Text.Trim();
+            }
+        }
     }
 }

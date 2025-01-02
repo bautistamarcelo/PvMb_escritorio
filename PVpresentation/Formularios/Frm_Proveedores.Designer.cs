@@ -49,17 +49,14 @@
             pnListado.SuspendLayout();
             SuspendLayout();
             // 
+            // pnGral
+            // 
+            pnGral.Location = new Point(0, 0);
+            pnGral.Size = new Size(984, 561);
+            // 
             // btnCierreVolver
             // 
             btnCierreVolver.Click += btnCierreVolver_Click;
-            // 
-            // tabNuevo
-            // 
-            tabNuevo.Size = new Size(965, 462);
-            // 
-            // tabEditar
-            // 
-            tabEditar.Size = new Size(965, 462);
             // 
             // txtBuscar
             // 
@@ -295,6 +292,7 @@
             Name = "Frm_Proveedores";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Proveedores";
+            FormClosing += Frm_Proveedores_FormClosing;
             Load += Frm_Proveedores_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();

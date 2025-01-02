@@ -37,19 +37,16 @@
             pnListado.SuspendLayout();
             SuspendLayout();
             // 
+            // pnGral
+            // 
+            pnGral.Location = new Point(0, 0);
+            pnGral.Size = new Size(984, 561);
+            // 
             // lblTituloForm
             // 
             lblTituloForm.Location = new Point(346, 9);
             lblTituloForm.Size = new Size(291, 28);
             lblTituloForm.Text = "Mantenimiento / Marcas";
-            // 
-            // tabNuevo
-            // 
-            tabNuevo.Size = new Size(965, 462);
-            // 
-            // tabEditar
-            // 
-            tabEditar.Size = new Size(965, 462);
             // 
             // btnBuscar
             // 
@@ -98,6 +95,7 @@
             ClientSize = new Size(984, 561);
             Name = "Frm_Marcas";
             Text = "Frm_Marcas";
+            FormClosing += Frm_Marcas_FormClosing;
             Load += Frm_Marcas_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();

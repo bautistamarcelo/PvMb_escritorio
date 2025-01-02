@@ -37,6 +37,18 @@ namespace PVpresentation.Formularios
             return null; // No se encontró un formulario abierto de tipo Frm_Productos
         }
 
+        public void LimpiarMantenimiento()
+        {
+            txtID.Text = "";
+            txtNombre.Text = "";
+            txtID.Enabled = false;
+            txtNombre.Enabled = false;
+            txtBuscar.Select();
+            btnGrabar.Enabled = false;
+            btnCancelar.Enabled = true;
+
+        }
+
         private async Task MostrarCategorias(string Buscar = "")
         {
 
@@ -51,6 +63,7 @@ namespace PVpresentation.Formularios
             //Selecciono las columnas que no deseo mostrar en el formulario
             dgvListado.Columns["ID"].Visible = false;
         }
+
         #endregion
 
         private async void FrmCategorias_Load(object sender, EventArgs e)
@@ -59,17 +72,7 @@ namespace PVpresentation.Formularios
             await MostrarCategorias();
         }
 
-        public void LimpiarMantenimiento()
-        {
-            txtID.Text = "";
-            txtNombre.Text = "";
-            txtID.Enabled = false;
-            txtNombre.Enabled = false;
-            txtBuscar.Select();
-            btnGrabar.Enabled = false;
-            btnCancelar.Enabled = true;
-
-        }
+        
 
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -163,6 +166,15 @@ namespace PVpresentation.Formularios
             {
                 await MostrarCategorias();
                 MostrarTabs(tabListado.Name);
+
+                Frm_Productos fProd = ObtenerFormularioAbierto();
+                if (fProd != null)
+                {
+                    fProd.CambiarVisibilidadControles();
+                    await fProd.agregarCategoriaComboBox(txtNombre.Text.Trim());
+                    fProd.cmbCategoria.SelectedItem = txtNombre.Text.Trim();
+                }
+                LimpiarMantenimiento();
             }
         }
 
@@ -171,13 +183,14 @@ namespace PVpresentation.Formularios
 
         }
 
-        private void Frm_Categorias_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Frm_Categorias_FormClosing(object sender, FormClosingEventArgs e)
         {
             Frm_Productos fProd = ObtenerFormularioAbierto();
             if (fProd != null)
             {
                 fProd.CambiarVisibilidadControles();
-                fProd.llenarComboBox();
+                await fProd.agregarCategoriaComboBox(txtNombre.Text.Trim());
+                fProd.cmbCategoria.SelectedItem = txtNombre.Text.Trim();
             }
         }
     }

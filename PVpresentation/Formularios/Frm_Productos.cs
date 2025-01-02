@@ -19,7 +19,8 @@ using Microsoft.Identity.Client;
 using System.Windows;
 using MessageBox = System.Windows.MessageBox;
 using Application = System.Windows.Forms.Application;
-
+using System.Windows.Controls;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 
 namespace PVpresentation.Formularios
@@ -48,6 +49,7 @@ namespace PVpresentation.Formularios
             _marcasService = marcasService;
             _proveedoresService = proveedoresService;
             _serviceProvider = serviceProvider;
+            //cmbCategoria_TextChanged += cmbCategoria_TextChanged;
         }
 
         private void MostrarFormulario<TForm>() where TForm : Form
@@ -61,13 +63,35 @@ namespace PVpresentation.Formularios
             newForm.Show();
         }
 
-        private Frm_Categorias ObtenerFormularioAbierto()
+        private Frm_Categorias ObFormularioAbiertoCategoria()
         {
             foreach (Form formHijo in Application.OpenForms)
             {
                 if (formHijo is Frm_Categorias)
                 {
                     return (Frm_Categorias)formHijo;
+                }
+            }
+            return null; // No se encontró un formulario abierto de tipo Frm_Categorias
+        }
+        private Frm_Marcas ObFormularioAbiertoMarca()
+        {
+            foreach (Form formHijo in Application.OpenForms)
+            {
+                if (formHijo is Frm_Marcas)
+                {
+                    return (Frm_Marcas)formHijo;
+                }
+            }
+            return null; // No se encontró un formulario abierto de tipo Frm_Categorias
+        }
+        private Frm_Proveedores ObFormularioAbiertoProveedor()
+        {
+            foreach (Form formHijo in Application.OpenForms)
+            {
+                if (formHijo is Frm_Proveedores)
+                {
+                    return (Frm_Proveedores)formHijo;
                 }
             }
             return null; // No se encontró un formulario abierto de tipo Frm_Categorias
@@ -195,6 +219,95 @@ namespace PVpresentation.Formularios
             cmbProveedor.InsertarItems(itemsProveedor);
         }
 
+        public async Task agregarCategoriaComboBox(string nombre)
+        {
+            var ListaCategoria = await _categoriaService.Lista(nombre);
+            var itemsCategoria = ListaCategoria.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            cmbCategoria.InsertarItems(itemsCategoria);
+        }
+
+        public async Task agregarMarcaComboBox(string nombre)
+        {
+            var ListaMarca = await _marcasService.Lista(nombre);
+            var itemsMarca = ListaMarca.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            cmbMarca.InsertarItems(itemsMarca);
+        }
+
+        public async Task agregarProveedorComboBox(string nombre)
+        {
+            var ListaProveedor = await _proveedoresService.Lista(nombre);
+            var itemsProveedor = ListaProveedor.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            cmbProveedor.InsertarItems(itemsProveedor);
+        }
+
+        public void evaluarComboBox(ComboBox cmb, string formDependiente)
+        {
+            
+            string enteredText = cmb.Text;
+            bool exists = false;
+            foreach (var item in cmb.Items)
+            {
+                if ((item as OpcionesComboBox).Texto.Equals(enteredText, StringComparison.OrdinalIgnoreCase))
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                MessageBox.Show("El texto ingresado no es un elemento de la lista.", "Advertencia");
+                // Cancela el evento de validación
+
+                // El elemento no está en la lista, abrir el formulario para agregarlo
+                if (formDependiente == "Frm_Categorias")
+                {
+                    MostrarFormulario<Frm_Categorias>();
+                    // Agregar el nuevo elemento a la lista y seleccionarlo
+                    Frm_Categorias fCate = ObFormularioAbiertoCategoria();
+                    if (fCate != null)
+                    {
+                        fCate.LimpiarMantenimiento();
+                        fCate.txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
+                        fCate.txtNombre.Text = cmbCategoria.Text.ToString();
+                        fCate.txtNombre.Enabled = true;
+                        fCate.txtNombre.Select();
+                        fCate.btnGrabar.Enabled = true;
+                    }
+                }
+                else if (formDependiente == "Frm_Marcas")
+                {
+                    MostrarFormulario<Frm_Marcas>();
+                    // Agregar el nuevo elemento a la lista y seleccionarlo
+                    Frm_Marcas fCate = ObFormularioAbiertoMarca();
+                    if (fCate != null)
+                    {
+                        fCate.LimpiarMantenimiento();
+                        fCate.txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
+                        fCate.txtNombre.Text = cmbMarca.Text.ToString();
+                        fCate.txtNombre.Enabled = true;
+                        fCate.txtNombre.Select();
+                        fCate.btnGrabar.Enabled = true;
+                    }
+                }
+                else if (formDependiente == "Frm_Proveedores")
+                {
+                    MostrarFormulario<Frm_Proveedores>();
+                    // Agregar el nuevo elemento a la lista y seleccionarlo
+                    Frm_Proveedores fCate = ObFormularioAbiertoProveedor();
+                    if (fCate != null)
+                    {
+                        fCate.LimpiarMantenimiento();
+                        fCate.txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
+                        fCate.txtNombre.Text = cmbProveedor.Text.ToString();
+                        fCate.txtNombre.Enabled = true;
+                        fCate.txtNombre.Select();
+                        fCate.btnGrabar.Enabled = true;
+                    }
+
+                }
+            }
+        }
+
         #endregion
 
         private async void Frm_Productos_Load(object sender, EventArgs e)
@@ -205,7 +318,7 @@ namespace PVpresentation.Formularios
 
             //Completar los datos de los comboBox
             await llenarComboBox();
-            cmbCategoria.Validating += cmbCategoria_Validating;
+
         }
 
         private async void btnBuscar_Click(object sender, EventArgs e)
@@ -394,32 +507,14 @@ namespace PVpresentation.Formularios
             MostrarFormulario<Frm_Proveedores>();
         }
 
-        
-        private void cmbCategoria_Validating(object sender, CancelEventArgs e)
+        private async void cmbCategoria_Leave(object sender, EventArgs e)
         {
-            ComboBox cCategoria = sender as ComboBox;
-            string textoIngresado = cCategoria.Text.ToString();
-            
-            bool existe = cCategoria.Items.Cast<string>().Any(item => item.Equals(textoIngresado, StringComparison.OrdinalIgnoreCase));
-            if (!existe)
-            {
-                // El elemento no está en la lista, abrir el formulario para agregarlo
-                MostrarFormulario<Frm_Categorias>();
-                  
-                // Agregar el nuevo elemento a la lista y seleccionarlo
-                Frm_Categorias fCate = ObtenerFormularioAbierto();
-                if (fCate != null)
-                {
-                    fCate.LimpiarMantenimiento();
-                    fCate.txtNombre.Text = textoIngresado;
-                    fCate.btnGrabar.Enabled = true;
-                }
-            }
+            evaluarComboBox(cmbCategoria, "Frm_Categorias");
         }
 
-        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cmbMarca_Leave(object sender, EventArgs e)
         {
-
+            evaluarComboBox(cmbMarca, "Frm_Marcas");
         }
     }
 }

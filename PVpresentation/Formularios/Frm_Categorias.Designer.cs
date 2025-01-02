@@ -37,6 +37,11 @@
             pnListado.SuspendLayout();
             SuspendLayout();
             // 
+            // pnGral
+            // 
+            pnGral.Location = new Point(0, 0);
+            pnGral.Size = new Size(1000, 581);
+            // 
             // pnTituloFormulario
             // 
             pnTituloFormulario.Size = new Size(1000, 50);
@@ -123,10 +128,6 @@
             // pnListado
             // 
             pnListado.Size = new Size(650, 470);
-            // 
-            // pnGral
-            // 
-            pnGral.Size = new Size(1000, 581);
             // 
             // Frm_Categorias
             // 

@@ -6,5 +6,10 @@ namespace PVpresentation.Resources
     {
         public int Valor {get; set;}
         public string Texto{get; set;}
+
+        public override string ToString()
+        {
+            return Texto;
+        }
     }
 }

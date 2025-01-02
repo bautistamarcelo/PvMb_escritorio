@@ -43,6 +43,7 @@ namespace PVpresentation
                 services.AddTransient<Frm_Clientes>();
                 services.AddTransient<Frm_Empresas>();
                 services.AddTransient<Frm_Main>();
+                services.AddTransient<Frm_Marcas>();
                 services.AddTransient<Frm_Productos>();
                 services.AddTransient<Frm_Proveedores>();
                 services.AddTransient<FrmSucursales>();

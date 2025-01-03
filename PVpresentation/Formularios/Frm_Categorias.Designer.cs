@@ -137,7 +137,6 @@
             Name = "Frm_Categorias";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmCategoria";
-            FormClosing += Frm_Categorias_FormClosing;
             Load += FrmCategorias_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();

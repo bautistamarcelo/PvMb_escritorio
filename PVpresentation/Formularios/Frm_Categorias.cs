@@ -171,8 +171,10 @@ namespace PVpresentation.Formularios
                 if (fProd != null)
                 {
                     fProd.CambiarVisibilidadControles();
+                    
                     await fProd.agregarCategoriaComboBox(txtNombre.Text.Trim());
-                    fProd.cmbCategoria.SelectedItem = txtNombre.Text.Trim();
+                    fProd.cmbCategoria.Sorted = true;
+                    fProd.cmbCategoria.Select();
                 }
                 LimpiarMantenimiento();
             }
@@ -183,15 +185,6 @@ namespace PVpresentation.Formularios
 
         }
 
-        private async void Frm_Categorias_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Frm_Productos fProd = ObtenerFormularioAbierto();
-            if (fProd != null)
-            {
-                fProd.CambiarVisibilidadControles();
-                await fProd.agregarCategoriaComboBox(txtNombre.Text.Trim());
-                fProd.cmbCategoria.SelectedItem = txtNombre.Text.Trim();
-            }
-        }
+       
     }
 }

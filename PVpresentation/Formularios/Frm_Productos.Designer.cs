@@ -514,7 +514,7 @@
             cmbCategoria.Size = new Size(331, 22);
             cmbCategoria.TabIndex = 36;
             cmbCategoria.Text = "6";
-            cmbCategoria.Leave += cmbCategoria_Leave;
+            cmbCategoria.KeyDown += cmbCategoria_KeyDown;
             // 
             // label23
             // 

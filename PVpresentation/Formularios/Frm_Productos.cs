@@ -21,6 +21,8 @@ using MessageBox = System.Windows.MessageBox;
 using Application = System.Windows.Forms.Application;
 using System.Windows.Controls;
 using ComboBox = System.Windows.Forms.ComboBox;
+using Control = System.Windows.Forms.Control;
+using TextBox = System.Windows.Forms.TextBox;
 
 
 namespace PVpresentation.Formularios
@@ -49,7 +51,23 @@ namespace PVpresentation.Formularios
             _marcasService = marcasService;
             _proveedoresService = proveedoresService;
             _serviceProvider = serviceProvider;
-            //cmbCategoria_TextChanged += cmbCategoria_TextChanged;
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox)// || control is ComboBox)
+                {
+                    control.KeyDown += new KeyEventHandler(OnKeyDownHandler);
+                }
+            }
+         }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Acción a realizar cuando se presiona Enter
+                SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = true; // Para evitar que el evento se propague }
+            }
         }
 
         private void MostrarFormulario<TForm>() where TForm : Form
@@ -102,6 +120,8 @@ namespace PVpresentation.Formularios
             // Cambiar visibilidad de paneles
             pnTituloFormulario.Visible = !pnTituloFormulario.Visible;
             pnGral.SendToBack();
+            //pnlContenedorPrincipal.BringToFront();
+
             // Añade otros controles que desees manipular
         }
 
@@ -205,18 +225,22 @@ namespace PVpresentation.Formularios
             var ListaImpuesto = await _impuestosService.Lista();
             var itemsImpuesto = ListaImpuesto.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbImpuesto.InsertarItems(itemsImpuesto);
+            cmbImpuesto.Sorted = true;
 
             var ListaCategoria = await _categoriaService.Lista();
             var itemsCategoria = ListaCategoria.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbCategoria.InsertarItems(itemsCategoria);
+            cmbCategoria.Sorted = true;
 
             var ListaMarca = await _marcasService.Lista();
             var itemsMarca = ListaMarca.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbMarca.InsertarItems(itemsMarca);
+            cmbMarca.Sorted = true;
 
             var ListaProveedor = await _proveedoresService.Lista();
             var itemsProveedor = ListaProveedor.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbProveedor.InsertarItems(itemsProveedor);
+            cmbProveedor.Sorted = true;
         }
 
         public async Task agregarCategoriaComboBox(string nombre)
@@ -224,6 +248,13 @@ namespace PVpresentation.Formularios
             var ListaCategoria = await _categoriaService.Lista(nombre);
             var itemsCategoria = ListaCategoria.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbCategoria.InsertarItems(itemsCategoria);
+
+            // Obtén el valor del único registro devuelto 
+            if (itemsCategoria.Length > 0)
+            {
+                int valorBuscado = itemsCategoria[0].Valor;
+                cmbCategoria.SelectedIndex = Array.IndexOf(itemsCategoria, itemsCategoria.FirstOrDefault(item => item.Valor == valorBuscado));
+            }
         }
 
         public async Task agregarMarcaComboBox(string nombre)
@@ -231,6 +262,7 @@ namespace PVpresentation.Formularios
             var ListaMarca = await _marcasService.Lista(nombre);
             var itemsMarca = ListaMarca.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbMarca.InsertarItems(itemsMarca);
+
         }
 
         public async Task agregarProveedorComboBox(string nombre)
@@ -242,7 +274,7 @@ namespace PVpresentation.Formularios
 
         public void evaluarComboBox(ComboBox cmb, string formDependiente)
         {
-            
+
             string enteredText = cmb.Text;
             bool exists = false;
             foreach (var item in cmb.Items)
@@ -378,7 +410,17 @@ namespace PVpresentation.Formularios
         private async void btnGrabar_Click(object sender, EventArgs e)
         {
             var respuesta = "";
+            var miID = 0;
+            if (txtID.Text == "")
+            {
+                miID = 0;
+            }
+            else
+            {
+                miID = Convert.ToInt32(txtID.Text.Trim());
+            }
             txtFecha.Text = DateTime.Now.ToString();
+
             #region Validación de Campos obligatorios
             if (txtNombre.Text.Trim() == "")
             {
@@ -443,6 +485,7 @@ namespace PVpresentation.Formularios
             //Cargo los datos en el objeto Productos para guardarlo después
             var objeTo = new Productos
             {
+                ID = miID,
                 Nombre = txtNombre.Text.Trim(),
                 Situacion = itemSituación.Valor,
                 BarCode = txtBarCode.Text.Trim(),
@@ -458,8 +501,6 @@ namespace PVpresentation.Formularios
                 Talle = txtTalle.Text.Trim(),
                 Color = txtColor.Text.Trim()
             };
-
-
 
             //Evalúo si es nuevo o edición
             if (txtOpcion.Text.Trim() == "2") // Si la opcion es 2: Editar
@@ -507,14 +548,20 @@ namespace PVpresentation.Formularios
             MostrarFormulario<Frm_Proveedores>();
         }
 
-        private async void cmbCategoria_Leave(object sender, EventArgs e)
-        {
-            evaluarComboBox(cmbCategoria, "Frm_Categorias");
-        }
-
         private async void cmbMarca_Leave(object sender, EventArgs e)
         {
             evaluarComboBox(cmbMarca, "Frm_Marcas");
+        }
+
+        private void cmbCategoria_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Acción a realizar cuando se presiona Enter
+                
+                evaluarComboBox(cmbCategoria, "Frm_Categorias");
+                e.Handled = true; // Para evitar que el evento se propague
+            }
         }
     }
 }

@@ -43,13 +43,13 @@ namespace PVrepository.Implementation
         public async Task<string> crear(Categorias objeTo)
         {
             string respuesta="";
-
             using (var con = _conexion.ObtenerSqLconexion())
             {
                 con.Open();
                 var cmd = new SqlCommand("SP_Categoria_Crear", con);
                 cmd.Parameters.AddWithValue("@NombreCategoria", objeTo.Nombre);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction=ParameterDirection.Output ;
+                
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
@@ -66,6 +66,7 @@ namespace PVrepository.Implementation
             }
 
             return respuesta;
+            
         }
 
         public async Task<string> editar(Categorias objeTo)

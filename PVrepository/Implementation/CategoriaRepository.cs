@@ -40,6 +40,29 @@ namespace PVrepository.Implementation
             return list;
         }
 
+        public async Task<int> Buscar(Categorias MiID)
+        {
+            int respuesta = 0;
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Categoria_Buscar", con);
+                cmd.Parameters.AddWithValue("@NombreCategoria", MiID.Nombre);
+                cmd.Parameters.Add("@miID", SqlDbType.Int).Direction= ParameterDirection.Output;
+                cmd.CommandType= CommandType.StoredProcedure;
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    respuesta = Convert.ToInt32(cmd.Parameters["@miID"].Value);
+                }
+                catch
+                {
+                    respuesta= Convert.ToInt32(respuesta);
+                }
+            }
+            return respuesta;
+        }
+
         public async Task<string> crear(Categorias objeTo)
         {
             string respuesta="";
@@ -49,7 +72,7 @@ namespace PVrepository.Implementation
                 var cmd = new SqlCommand("SP_Categoria_Crear", con);
                 cmd.Parameters.AddWithValue("@NombreCategoria", objeTo.Nombre);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction=ParameterDirection.Output ;
-                
+                cmd.Parameters.Add("@miID", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
@@ -97,6 +120,7 @@ namespace PVrepository.Implementation
 
             return respuesta;
         }
+
         
     }
 }

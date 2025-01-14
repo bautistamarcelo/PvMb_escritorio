@@ -28,5 +28,9 @@ namespace PVservices.Implementation
             return await _CategoriaRepository.editar(objeto);
         }
 
+        public async Task<int> Buscar(Categorias MiID)
+        {
+            return await _CategoriaRepository.Buscar(MiID);
+        }
     }
 }

@@ -253,6 +253,7 @@ namespace PVpresentation.Formularios
             if (itemsCategoria.Length > 0)
             {
                 int valorBuscado = itemsCategoria[0].Valor;
+                cmbCategoria.Select();
                 cmbCategoria.SelectedIndex = Array.IndexOf(itemsCategoria, itemsCategoria.FirstOrDefault(item => item.Valor == valorBuscado));
             }
         }

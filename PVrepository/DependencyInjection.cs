@@ -15,6 +15,7 @@ namespace PVrepository
         public static void RegisterInjeccionesRepository(this IServiceCollection services)
         {
             services.AddSingleton<Conexion>();
+            services.AddTransient<ICajasRepository, CajasRepository>();
             services.AddTransient<ICaracterRepository, CaracterRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IClientesRepository, ClientesRepository>();

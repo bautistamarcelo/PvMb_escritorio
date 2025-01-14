@@ -16,6 +16,7 @@ namespace PVservices
     {
         public static void RegisterInjeccionesServices(this IServiceCollection services)
         {
+            services.AddTransient<ICajasService, CajasService>();
             services.AddTransient<ICaracterService, CaracterService>();
             services.AddTransient<ICategoriaService, CategoriaService>();
             services.AddTransient<IClientesService, ClientesService>();

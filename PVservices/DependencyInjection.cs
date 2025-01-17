@@ -22,6 +22,7 @@ namespace PVservices
             services.AddTransient<ICajasMovimientosService, CajasMovimientosService>();
             services.AddTransient<ICajasTipoService, CajasTipoService>();
             services.AddTransient<ICajasTransaccionesService, CajasTransaccionesService>();
+            services.AddTransient<ICajasUsuariosService, CajasUsuariosService>();
             services.AddTransient<ICaracterService, CaracterService>();
             services.AddTransient<ICategoriaService, CategoriaService>();
             services.AddTransient<IClientesService, ClientesService>();

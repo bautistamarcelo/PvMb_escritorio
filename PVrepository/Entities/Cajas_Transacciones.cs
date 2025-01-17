@@ -10,6 +10,7 @@ namespace PVrepository.Entities
         public string Caracter { get; set; } = string.Empty; // Values: 'suma' / 'resta'
         public int Monto { get; set; }
         public DateTime Fecha { get; set; }
+        public string ComprobanteNum { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
     }
 }

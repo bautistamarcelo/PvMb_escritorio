@@ -16,6 +16,11 @@ namespace PVrepository
         {
             services.AddSingleton<Conexion>();
             services.AddTransient<ICajasRepository, CajasRepository>();
+            services.AddTransient<ICajasMonedaMrepository, CajasMonedaMrepository>();
+            services.AddTransient<ICajasMonedaTrepository, CajasMonedaTrepository>();
+            services.AddTransient<ICajasMovimientosRepository, CajasMovimientosRepository>();
+            services.AddTransient<ICajasTipoRepository, CajasTipoRepository>();
+            services.AddTransient<ICajasTransaccionesRepository, CajasTransaccionesRepository>();
             services.AddTransient<ICaracterRepository, CaracterRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IClientesRepository, ClientesRepository>();

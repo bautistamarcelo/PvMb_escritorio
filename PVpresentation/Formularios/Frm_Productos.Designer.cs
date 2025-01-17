@@ -443,6 +443,7 @@
             cmbProveedor.Size = new Size(331, 22);
             cmbProveedor.TabIndex = 38;
             cmbProveedor.Text = "8";
+            cmbProveedor.KeyDown += cmbProveedor_KeyDown;
             // 
             // label16
             // 
@@ -489,6 +490,7 @@
             cmbMarca.Size = new Size(331, 22);
             cmbMarca.TabIndex = 37;
             cmbMarca.Text = "7";
+            cmbMarca.KeyDown += cmbMarca_KeyDown;
             cmbMarca.Leave += cmbMarca_Leave;
             // 
             // label22
@@ -588,6 +590,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(973, 523);
             Name = "Frm_Productos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Productos";
             Load += Frm_Productos_Load;
             pnTituloFormulario.ResumeLayout(false);

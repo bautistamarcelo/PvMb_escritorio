@@ -25,7 +25,7 @@ namespace PVpresentation
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             var host = CreateHostBuilder().Build();
-            var FormServices = host.Services.GetRequiredService<Frm_Productos>();
+            var FormServices = host.Services.GetRequiredService<Frm_Main>();
             Application.Run(FormServices);
         }
 
@@ -46,8 +46,8 @@ namespace PVpresentation
                 services.AddTransient<Frm_Marcas>();
                 services.AddTransient<Frm_Productos>();
                 services.AddTransient<Frm_Proveedores>();
-                services.AddTransient<FrmSucursales>();
-                services.AddTransient<FrmUsuarios>();
+                services.AddTransient<Frm_Sucursales>();
+                services.AddTransient<Frm_Usuarios>();
             });
     }
 }

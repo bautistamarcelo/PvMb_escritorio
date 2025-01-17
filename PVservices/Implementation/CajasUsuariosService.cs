@@ -29,6 +29,5 @@ namespace PVservices.Implementation
             return await _CajasUsuariosRepository.editar(objeto);
         }
     }
-    {
-    }
+    
 }

@@ -136,7 +136,7 @@
             ClientSize = new Size(1000, 581);
             Name = "Frm_Categorias";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmCategoria";
+            Text = "Categorias";
             Load += FrmCategorias_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();

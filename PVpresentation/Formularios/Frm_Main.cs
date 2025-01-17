@@ -130,7 +130,8 @@ namespace PVpresentation.Formularios
         {
             Form formulario;
             formulario = pnMain.Controls.OfType<T>().FirstOrDefault(); // Busca el formulario en la colección
-            if (pnMain.Controls.Count>1) pnMain.Controls[0].Dispose();
+            if (pnMain.Controls.Count > 1)
+                pnMain.Controls[0].Dispose();
 
             // Si el formulario no fue encontrado / no existe
             if (formulario == null)
@@ -194,6 +195,7 @@ namespace PVpresentation.Formularios
         private void btnAdmUsuarios_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            AbrirFormulario<Frm_Usuarios>();
 
         }
 
@@ -368,6 +370,12 @@ namespace PVpresentation.Formularios
         private void pnSuperior_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnAdmSucursales_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+            AbrirFormulario<Frm_Sucursales>();
         }
     }
 }

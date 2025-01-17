@@ -31,13 +31,10 @@ namespace PVrepository.Implementation
                         list.Add(new Cajas_Usuarios
                         {
                             ID = Convert.ToInt32(dr["ID"]),
-                            ID_Caja = Convert.ToInt32(dr["ID_Caja"]),
-                            ID_Usuario = Convert.ToInt32(dr["ID_Usuario"]),
-                            Fecha = Convert.ToDateTime(dr["Fecha"]),
-                            SaldoInicial = Convert.ToInt32(dr["SaldoInicial"]),
-                            SaldoFinal = Convert.ToInt32(dr["SaldoFinal"]),
-                            Condicion = dr["Condicion"].ToString(),
-                            Resultado = Convert.ToInt32(dr["Resultado"])
+                            CajaID = Convert.ToInt32(dr["ID_Caja"]),
+                            UsuarioID = Convert.ToInt32(dr["ID_Usuario"]),
+                            FechaAsignacion = Convert.ToDateTime(dr["Fecha"]),
+                            Estado = dr["Estado"].ToString()
                         });
                     }
                 }

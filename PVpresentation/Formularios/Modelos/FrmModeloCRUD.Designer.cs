@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmModeloCRUD));
-            pnGral=new Panel();
+            pnGral = new Panel();
             pnTituloFormulario = new Panel();
             txtInstancia = new TextBox();
             txtOpcion = new TextBox();
@@ -55,10 +55,10 @@
             btnBuscar = new Button();
             tabNuevo = new TabPage();
             tabEditar = new TabPage();
-            //pnGral = new Panel();
-            pnGral.SuspendLayout();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
+            pnlContenedorPrincipal.SuspendLayout();
+            tabControlMain.SuspendLayout();
             tabListado.SuspendLayout();
             pnMantenimiento.SuspendLayout();
             pnListado.SuspendLayout();
@@ -69,9 +69,9 @@
             // 
             pnGral.BackColor = Color.FromArgb(74, 154, 190);
             pnGral.Dock = DockStyle.Fill;
-            pnGral.Location = new Point(0, 50);
+            pnGral.Location = new Point(0, 0);
             pnGral.Name = "pnGral";
-            pnGral.Size = new Size(984, 511);
+            pnGral.Size = new Size(984, 561);
             pnGral.TabIndex = 51;
             // 
             // pnTituloFormulario
@@ -158,7 +158,7 @@
             tabControlMain.Name = "tabControlMain";
             tabControlMain.Padding = new Point(3, 3);
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(973, 500);
+            tabControlMain.Size = new Size(980, 502);
             tabControlMain.SizeMode = TabSizeMode.Fixed;
             tabControlMain.TabIndex = 5;
             tabControlMain.TabStyle = MiTabControl.Style.Line;
@@ -171,12 +171,13 @@
             tabListado.Location = new Point(4, 34);
             tabListado.Name = "tabListado";
             tabListado.Padding = new Padding(3);
-            tabListado.Size = new Size(965, 462);
+            tabListado.Size = new Size(972, 464);
             tabListado.TabIndex = 0;
             tabListado.Text = "Listado";
             // 
             // pnMantenimiento
             // 
+            pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
             pnMantenimiento.Controls.Add(label2);
             pnMantenimiento.Controls.Add(txtNombre);
@@ -185,10 +186,9 @@
             pnMantenimiento.Controls.Add(btnEliminar);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnGrabar);
-            pnMantenimiento.Dock = DockStyle.Fill;
-            pnMantenimiento.Location = new Point(653, 3);
+            pnMantenimiento.Location = new Point(662, 3);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(309, 456);
+            pnMantenimiento.Size = new Size(310, 456);
             pnMantenimiento.TabIndex = 1;
             // 
             // label2
@@ -208,7 +208,7 @@
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.Location = new Point(14, 110);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(288, 23);
+            txtNombre.Size = new Size(288, 22);
             txtNombre.TabIndex = 25;
             // 
             // label1
@@ -228,7 +228,7 @@
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Location = new Point(14, 55);
             txtID.Name = "txtID";
-            txtID.Size = new Size(288, 23);
+            txtID.Size = new Size(288, 22);
             txtID.TabIndex = 23;
             // 
             // btnEliminar
@@ -281,6 +281,7 @@
             // 
             // pnListado
             // 
+            pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnListado.BackColor = Color.FromArgb(45, 66, 91);
             pnListado.Controls.Add(btnEditar);
             pnListado.Controls.Add(btnNuevo);
@@ -288,10 +289,9 @@
             pnListado.Controls.Add(label4);
             pnListado.Controls.Add(txtBuscar);
             pnListado.Controls.Add(btnBuscar);
-            pnListado.Dock = DockStyle.Left;
             pnListado.Location = new Point(3, 3);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(650, 456);
+            pnListado.Size = new Size(660, 458);
             pnListado.TabIndex = 0;
             // 
             // btnEditar
@@ -328,10 +328,11 @@
             // 
             // dgvListado
             // 
+            dgvListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(14, 55);
             dgvListado.Name = "dgvListado";
-            dgvListado.Size = new Size(625, 345);
+            dgvListado.Size = new Size(639, 345);
             dgvListado.TabIndex = 16;
             // 
             // label4
@@ -351,7 +352,7 @@
             txtBuscar.BorderStyle = BorderStyle.FixedSingle;
             txtBuscar.Location = new Point(85, 19);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(511, 23);
+            txtBuscar.Size = new Size(511, 22);
             txtBuscar.TabIndex = 14;
             // 
             // btnBuscar
@@ -375,7 +376,7 @@
             tabNuevo.Location = new Point(4, 34);
             tabNuevo.Name = "tabNuevo";
             tabNuevo.Padding = new Padding(3);
-            tabNuevo.Size = new Size(965, 462);
+            tabNuevo.Size = new Size(972, 464);
             tabNuevo.TabIndex = 1;
             tabNuevo.Text = "Nueva";
             // 
@@ -385,7 +386,7 @@
             tabEditar.Location = new Point(4, 34);
             tabEditar.Name = "tabEditar";
             tabEditar.Padding = new Padding(3);
-            tabEditar.Size = new Size(965, 462);
+            tabEditar.Size = new Size(972, 464);
             tabEditar.TabIndex = 2;
             tabEditar.Text = "Editar";
             // 
@@ -396,7 +397,6 @@
             BackColor = Color.FromArgb(74, 134, 160);
             ClientSize = new Size(984, 561);
             Controls.Add(pnlContenedorPrincipal);
-            Controls.Add(pnGral);
             Controls.Add(pnTituloFormulario);
             Controls.Add(pnGral);
             FormBorderStyle = FormBorderStyle.None;

@@ -58,7 +58,10 @@ namespace PVpresentation.Formularios
                     control.KeyDown += new KeyEventHandler(OnKeyDownHandler);
                 }
             }
-         }
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(OnKeyDownHandler);
+
+        }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
@@ -73,12 +76,18 @@ namespace PVpresentation.Formularios
         private void MostrarFormulario<TForm>() where TForm : Form
         {
             var newForm = _serviceProvider.GetRequiredService<TForm>();
-            newForm.TopLevel = false;
-            newForm.TopMost = false;
+            newForm.TopLevel = false;//Esto a False
+            newForm.TopMost = false;//Esto a False
             pnGral.Controls.Add(newForm);
             pnGral.BringToFront();
             pnTituloFormulario.Visible = false;
             newForm.Show();
+        }
+
+        private void MostrarFormularioEmergente<TForm>() where TForm : Form
+        {
+            var fCate2 = _serviceProvider.GetRequiredService<TForm>();
+            fCate2.ShowDialog();
         }
 
         private Frm_Categorias ObFormularioAbiertoCategoria()
@@ -536,17 +545,17 @@ namespace PVpresentation.Formularios
 
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
-            MostrarFormulario<Frm_Categorias>();
+            MostrarFormularioEmergente<Frm_Categorias>();
         }
 
         private void btnAgregarMarca_Click(object sender, EventArgs e)
         {
-            MostrarFormulario<Frm_Marcas>();
+            MostrarFormularioEmergente<Frm_Marcas>();
         }
 
         private void btnAgregarProveedor_Click(object sender, EventArgs e)
         {
-            MostrarFormulario<Frm_Proveedores>();
+            MostrarFormularioEmergente<Frm_Proveedores>();
         }
 
         private async void cmbMarca_Leave(object sender, EventArgs e)
@@ -559,9 +568,29 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 // Acción a realizar cuando se presiona Enter
-                
+
                 evaluarComboBox(cmbCategoria, "Frm_Categorias");
                 e.Handled = true; // Para evitar que el evento se propague
+            }
+            if (e.KeyCode == Keys.F3)
+            { // Código para abrir el formulario deseado
+                MostrarFormularioEmergente<Frm_Categorias>();
+            }
+        }
+
+        private void cmbMarca_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            { // Código para abrir el formulario deseado
+                MostrarFormularioEmergente<Frm_Marcas>();
+            }
+        }
+
+        private void cmbProveedor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            { // Código para abrir el formulario deseado
+                MostrarFormularioEmergente<Frm_Proveedores>();
             }
         }
     }

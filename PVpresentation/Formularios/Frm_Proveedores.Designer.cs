@@ -58,6 +58,11 @@
             // 
             btnCierreVolver.Click += btnCierreVolver_Click;
             // 
+            // lblTituloForm
+            // 
+            lblTituloForm.Size = new Size(365, 28);
+            lblTituloForm.Text = "Mantenimiento / Proveedores";
+            // 
             // txtBuscar
             // 
             txtBuscar.TabIndex = 0;
@@ -291,7 +296,7 @@
             ClientSize = new Size(984, 561);
             Name = "Frm_Proveedores";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Frm_Proveedores";
+            Text = "Proveedores";
             FormClosing += Frm_Proveedores_FormClosing;
             Load += Frm_Proveedores_Load;
             pnTituloFormulario.ResumeLayout(false);

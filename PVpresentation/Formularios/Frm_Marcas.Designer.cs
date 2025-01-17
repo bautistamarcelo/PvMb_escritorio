@@ -92,9 +92,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(984, 561);
             Name = "Frm_Marcas";
-            Text = "Frm_Marcas";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Marcas";
             FormClosing += Frm_Marcas_FormClosing;
             Load += Frm_Marcas_Load;
             pnTituloFormulario.ResumeLayout(false);

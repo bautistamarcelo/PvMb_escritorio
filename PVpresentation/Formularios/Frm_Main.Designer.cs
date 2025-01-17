@@ -86,6 +86,8 @@
             label1 = new Label();
             pictureBox2 = new PictureBox();
             timerFechaHora = new System.Windows.Forms.Timer(components);
+            btnAdmEmpresas = new FontAwesome.Sharp.IconButton();
+            btnAdmSucursales = new FontAwesome.Sharp.IconButton();
             panelContenedor.SuspendLayout();
             pnMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -375,7 +377,7 @@
             btnSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSalir.IconSize = 32;
             btnSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSalir.Location = new Point(0, 1371);
+            btnSalir.Location = new Point(0, 1461);
             btnSalir.Margin = new Padding(0);
             btnSalir.Name = "btnSalir";
             btnSalir.Padding = new Padding(15, 0, 0, 0);
@@ -393,7 +395,7 @@
             pnRespaldos.Controls.Add(btnAdmRecuperaDatos);
             pnRespaldos.Controls.Add(btnAdmRespaldarDatos);
             pnRespaldos.Dock = DockStyle.Top;
-            pnRespaldos.Location = new Point(0, 1281);
+            pnRespaldos.Location = new Point(0, 1371);
             pnRespaldos.Name = "pnRespaldos";
             pnRespaldos.Size = new Size(233, 90);
             pnRespaldos.TabIndex = 16;
@@ -472,7 +474,7 @@
             btnRespaldos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnRespaldos.IconSize = 32;
             btnRespaldos.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRespaldos.Location = new Point(0, 1231);
+            btnRespaldos.Location = new Point(0, 1321);
             btnRespaldos.Margin = new Padding(0);
             btnRespaldos.Name = "btnRespaldos";
             btnRespaldos.Padding = new Padding(15, 0, 0, 0);
@@ -492,7 +494,7 @@
             pnSubConsultas.Controls.Add(btnCnsVentas);
             pnSubConsultas.Controls.Add(btnCnsCajas);
             pnSubConsultas.Dock = DockStyle.Top;
-            pnSubConsultas.Location = new Point(0, 1050);
+            pnSubConsultas.Location = new Point(0, 1140);
             pnSubConsultas.Name = "pnSubConsultas";
             pnSubConsultas.Size = new Size(233, 181);
             pnSubConsultas.TabIndex = 13;
@@ -626,7 +628,7 @@
             btnConsultas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnConsultas.IconSize = 32;
             btnConsultas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnConsultas.Location = new Point(0, 1000);
+            btnConsultas.Location = new Point(0, 1090);
             btnConsultas.Margin = new Padding(0);
             btnConsultas.Name = "btnConsultas";
             btnConsultas.Padding = new Padding(15, 0, 0, 0);
@@ -645,7 +647,7 @@
             pnSubCajas.Controls.Add(btnCjaIngresos);
             pnSubCajas.Controls.Add(btnCjaApertura);
             pnSubCajas.Dock = DockStyle.Top;
-            pnSubCajas.Location = new Point(0, 864);
+            pnSubCajas.Location = new Point(0, 954);
             pnSubCajas.Name = "pnSubCajas";
             pnSubCajas.Size = new Size(233, 136);
             pnSubCajas.TabIndex = 11;
@@ -751,7 +753,7 @@
             btnCajas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCajas.IconSize = 32;
             btnCajas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCajas.Location = new Point(0, 814);
+            btnCajas.Location = new Point(0, 904);
             btnCajas.Margin = new Padding(0);
             btnCajas.Name = "btnCajas";
             btnCajas.Padding = new Padding(15, 0, 0, 0);
@@ -772,7 +774,7 @@
             pnSubComprobantes.Controls.Add(btnCmpVentas);
             pnSubComprobantes.Controls.Add(btnCmpCompras);
             pnSubComprobantes.Dock = DockStyle.Top;
-            pnSubComprobantes.Location = new Point(0, 588);
+            pnSubComprobantes.Location = new Point(0, 678);
             pnSubComprobantes.Name = "pnSubComprobantes";
             pnSubComprobantes.Size = new Size(233, 226);
             pnSubComprobantes.TabIndex = 9;
@@ -934,7 +936,7 @@
             btnComprobantes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnComprobantes.IconSize = 32;
             btnComprobantes.ImageAlign = ContentAlignment.MiddleLeft;
-            btnComprobantes.Location = new Point(0, 538);
+            btnComprobantes.Location = new Point(0, 628);
             btnComprobantes.Margin = new Padding(0);
             btnComprobantes.Name = "btnComprobantes";
             btnComprobantes.Padding = new Padding(15, 0, 0, 0);
@@ -953,7 +955,7 @@
             pnSubMantenimiento.Controls.Add(btnMntClientes);
             pnSubMantenimiento.Controls.Add(btnMntArticulos);
             pnSubMantenimiento.Dock = DockStyle.Top;
-            pnSubMantenimiento.Location = new Point(0, 402);
+            pnSubMantenimiento.Location = new Point(0, 492);
             pnSubMantenimiento.Name = "pnSubMantenimiento";
             pnSubMantenimiento.Size = new Size(233, 136);
             pnSubMantenimiento.TabIndex = 7;
@@ -1059,7 +1061,7 @@
             btnMantenimiento.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnMantenimiento.IconSize = 32;
             btnMantenimiento.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMantenimiento.Location = new Point(0, 352);
+            btnMantenimiento.Location = new Point(0, 442);
             btnMantenimiento.Margin = new Padding(0);
             btnMantenimiento.Name = "btnMantenimiento";
             btnMantenimiento.Padding = new Padding(15, 0, 0, 0);
@@ -1074,13 +1076,15 @@
             // pnSubAdministracion
             // 
             pnSubAdministracion.BackColor = Color.FromArgb(45, 66, 91);
+            pnSubAdministracion.Controls.Add(btnAdmSucursales);
+            pnSubAdministracion.Controls.Add(btnAdmEmpresas);
             pnSubAdministracion.Controls.Add(btnAdmInventario);
             pnSubAdministracion.Controls.Add(btnAdmListas);
             pnSubAdministracion.Controls.Add(btnAdmUsuarios);
             pnSubAdministracion.Dock = DockStyle.Top;
             pnSubAdministracion.Location = new Point(0, 216);
             pnSubAdministracion.Name = "pnSubAdministracion";
-            pnSubAdministracion.Size = new Size(233, 136);
+            pnSubAdministracion.Size = new Size(233, 226);
             pnSubAdministracion.TabIndex = 5;
             // 
             // btnAdmInventario
@@ -1263,6 +1267,63 @@
             timerFechaHora.Enabled = true;
             timerFechaHora.Tick += timerFechaHora_Tick;
             // 
+            // btnAdmEmpresas
+            // 
+            btnAdmEmpresas.BackgroundImageLayout = ImageLayout.None;
+            btnAdmEmpresas.Cursor = Cursors.Hand;
+            btnAdmEmpresas.Dock = DockStyle.Top;
+            btnAdmEmpresas.Enabled = false;
+            btnAdmEmpresas.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
+            btnAdmEmpresas.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
+            btnAdmEmpresas.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnAdmEmpresas.FlatStyle = FlatStyle.Flat;
+            btnAdmEmpresas.Font = new Font("Microsoft Sans Serif", 10F);
+            btnAdmEmpresas.ForeColor = Color.WhiteSmoke;
+            btnAdmEmpresas.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            btnAdmEmpresas.IconColor = Color.WhiteSmoke;
+            btnAdmEmpresas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdmEmpresas.IconSize = 26;
+            btnAdmEmpresas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAdmEmpresas.Location = new Point(0, 135);
+            btnAdmEmpresas.Margin = new Padding(0);
+            btnAdmEmpresas.Name = "btnAdmEmpresas";
+            btnAdmEmpresas.Padding = new Padding(25, 0, 0, 0);
+            btnAdmEmpresas.Size = new Size(233, 45);
+            btnAdmEmpresas.TabIndex = 8;
+            btnAdmEmpresas.Text = "Empresas";
+            btnAdmEmpresas.TextAlign = ContentAlignment.MiddleLeft;
+            btnAdmEmpresas.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAdmEmpresas.UseVisualStyleBackColor = false;
+            // 
+            // btnAdmSucursales
+            // 
+            btnAdmSucursales.BackgroundImageLayout = ImageLayout.None;
+            btnAdmSucursales.Cursor = Cursors.Hand;
+            btnAdmSucursales.Dock = DockStyle.Top;
+            btnAdmSucursales.Enabled = false;
+            btnAdmSucursales.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
+            btnAdmSucursales.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
+            btnAdmSucursales.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnAdmSucursales.FlatStyle = FlatStyle.Flat;
+            btnAdmSucursales.Font = new Font("Microsoft Sans Serif", 10F);
+            btnAdmSucursales.ForeColor = Color.WhiteSmoke;
+            btnAdmSucursales.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            btnAdmSucursales.IconColor = Color.WhiteSmoke;
+            btnAdmSucursales.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdmSucursales.IconSize = 26;
+            btnAdmSucursales.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAdmSucursales.Location = new Point(0, 180);
+            btnAdmSucursales.Margin = new Padding(0);
+            btnAdmSucursales.Name = "btnAdmSucursales";
+            btnAdmSucursales.Padding = new Padding(25, 0, 0, 0);
+            btnAdmSucursales.Size = new Size(233, 45);
+            btnAdmSucursales.TabIndex = 9;
+            btnAdmSucursales.Text = "Sucursales";
+            btnAdmSucursales.TextAlign = ContentAlignment.MiddleLeft;
+            btnAdmSucursales.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAdmSucursales.UseVisualStyleBackColor = false;
+            btnAdmSucursales.Click += btnAdmSucursales_Click;
+            // 
             // Frm_Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1275,6 +1336,7 @@
             Name = "Frm_Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmMain";
+            WindowState = FormWindowState.Maximized;
             panelContenedor.ResumeLayout(false);
             pnMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -1365,5 +1427,7 @@
         private FontAwesome.Sharp.IconButton btnAdmRecuperaDatos;
         private FontAwesome.Sharp.IconPictureBox IconoFormularioActual;
         public Panel pnMain;
+        private FontAwesome.Sharp.IconButton btnAdmSucursales;
+        private FontAwesome.Sharp.IconButton btnAdmEmpresas;
     }
 }

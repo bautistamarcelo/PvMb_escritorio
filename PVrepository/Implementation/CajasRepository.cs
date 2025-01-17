@@ -37,7 +37,7 @@ namespace PVrepository.Implementation
                             FechaCierre = Convert.ToDateTime(dr["FechaCierre"]),
                             SaldoFinal = Convert.ToInt32(dr["SaldoFinal"]),
                             Condicion = dr["Condicion"].ToString(),
-                            Resultado = Convert.ToInt32(dr["Resultado"])
+                            //Resultado = Convert.ToInt32(dr["Resultado"])
                         });
                     }
                 }

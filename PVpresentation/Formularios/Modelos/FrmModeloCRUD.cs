@@ -41,5 +41,10 @@ namespace PVpresentation.Formularios.Modelos
         {
             Close();
         }
+
+        private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnEditar.Enabled = true;
+        }
     }
 }

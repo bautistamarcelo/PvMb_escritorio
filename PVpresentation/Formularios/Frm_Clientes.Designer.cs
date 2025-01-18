@@ -50,6 +50,10 @@
             tabNuevo.SuspendLayout();
             SuspendLayout();
             // 
+            // pnGral
+            // 
+            pnGral.Size = new Size(984, 532);
+            // 
             // pnTituloFormulario
             // 
             pnTituloFormulario.Size = new Size(984, 50);
@@ -114,10 +118,6 @@
             tabNuevo.Controls.SetChildIndex(txtCuit, 0);
             tabNuevo.Controls.SetChildIndex(txtEmail, 0);
             tabNuevo.Controls.SetChildIndex(txtTelefono, 0);
-            // 
-            // tabEditar
-            // 
-            //tabEditar.Size = new Size(971, 442);
             // 
             // btnEditar
             // 

@@ -49,11 +49,20 @@ namespace PVpresentation.Formularios
                 nombreFoto = item.nombreFoto,
                 clave = item.clave,
                 esActivo = item.esActivo,
-                //Situacion = item.Situacion,
+                Situacion = item.esActivo == 1 ? "Activo" : "Suspendido",
                 fechaRegistro = item.fechaRegistro
             }).ToList();
             dgvListado.DataSource = VMListaUsuarios;
             dgvListado.ImplementarConfiguracion("Editar");
+            //Selecciono las columnas que no deseo mostrar en el formulario
+            dgvListado.Columns["clave"].Visible = false;
+            dgvListado.Columns["esActivo"].Visible = false;
+            dgvListado.Columns["fechaRegistro"].Visible = false;
+            dgvListado.Columns["IDUsuario"].Visible = false;
+            dgvListado.Columns["urlFoto"].Visible = false;
+            dgvListado.Columns["nombreFoto"].Visible = false;
+            dgvListado.Columns["IDRol"].Visible = false;
+
         }
 
         public async void LimpiarMantenimiento()
@@ -66,8 +75,8 @@ namespace PVpresentation.Formularios
             txtUrlFoto.Text = "";
             txtNombreFoto.Text = "";
             txtOpcion.Text = "0"; // 1 Nuevo / 2 Edición
-            cmbEsActivo.SelectedIndex = 0;
-            cmbRol.SelectedIndex = 0;
+            cmbEsActivo.SelectedIndex = 1;
+            cmbRol.SelectedIndex = 3;
             txtID.Enabled = false;
             txtBuscar.Select();
             btnGrabar.Enabled = false;
@@ -129,13 +138,11 @@ namespace PVpresentation.Formularios
             txtNombre.Text = UsuarioSeleccionado.nombre.ToString();
             txtCorreo.Text = UsuarioSeleccionado.correo.ToString();
             txtTelefono.Text = UsuarioSeleccionado.telefono.ToString();
+            cmbEsActivo.EstablecerValor(UsuarioSeleccionado.esActivo);
             cmbRol.EstablecerValor(UsuarioSeleccionado.IDRol);
             txtUrlFoto.Text = UsuarioSeleccionado.urlFoto.ToString();
             txtNombreFoto.Text = UsuarioSeleccionado.nombreFoto.ToString();
             txtClave.Text = UsuarioSeleccionado.clave.ToString();
-
-            cmbEsActivo.EstablecerValor(UsuarioSeleccionado.esActivo);
-
             //txtIDEditar.Visible = true; //Desabilitar cuando compruebe funcionamiento
             //MostrarTabs(tabEditar.Name);
         }
@@ -166,12 +173,12 @@ namespace PVpresentation.Formularios
                 MessageBox.Show("La Clave del Usuario es obligatoria");
                 return;
             }
-            if (cmbRol.SelectedIndex == 0)
+            if (cmbRol.SelectedIndex == -1)
             {
                 MessageBox.Show("La selección del Rol es obligatoria");
                 return;
             }
-            if (cmbEsActivo.SelectedIndex == 0)
+            if (cmbEsActivo.SelectedIndex == -1)
             {
                 MessageBox.Show("La selección de la Situación es obligatoria");
                 return;

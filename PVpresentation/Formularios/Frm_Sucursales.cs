@@ -1,25 +1,9 @@
 ﻿using PVpresentation.Formularios.Modelos;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PVpresentation.ViewModels;
-using PVservices.Interfaces;
 using PVpresentation.Resources;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.CompilerServices;
+using PVpresentation.ViewModels;
 using PVrepository.Entities;
-using PVservices.Implementation;
+using PVservices.Interfaces;
+using System.Data;
 
 namespace PVpresentation.Formularios
 {
@@ -102,7 +86,7 @@ namespace PVpresentation.Formularios
             var items = listaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
 
             cmbEmpresa.InsertarItems(items);
-            
+
         }
 
         private void btnCierreVolver_Click(object sender, EventArgs e)

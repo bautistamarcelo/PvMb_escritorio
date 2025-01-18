@@ -1,27 +1,14 @@
-﻿using PVpresentation.Formularios.Modelos;
-using PVpresentation.ViewModels;
-using PVservices.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PVpresentation.Formularios.Modelos;
 using PVpresentation.Resources;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.CompilerServices;
+using PVpresentation.ViewModels;
 using PVrepository.Entities;
-using PVservices.Implementation;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Client;
-using System.Windows;
-using MessageBox = System.Windows.MessageBox;
+using PVservices.Interfaces;
+using System.Data;
 using Application = System.Windows.Forms.Application;
-using System.Windows.Controls;
 using ComboBox = System.Windows.Forms.ComboBox;
 using Control = System.Windows.Forms.Control;
+using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
 

@@ -1,20 +1,9 @@
 ﻿using PVpresentation.Formularios.Modelos;
-using PVpresentation.ViewModels;
-using PVservices.Interfaces;
 using PVpresentation.Resources;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.CompilerServices;
+using PVpresentation.ViewModels;
 using PVrepository.Entities;
-using PVservices.Implementation;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using PVservices.Interfaces;
+using System.Data;
 
 namespace PVpresentation.Formularios
 {

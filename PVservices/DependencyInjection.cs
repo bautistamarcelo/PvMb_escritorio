@@ -1,14 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PVrepository.DB;
-using PVrepository.Implementation;
-using PVrepository.Interfaces;
 using PVservices.Implementation;
 using PVservices.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PVservices
 {
@@ -17,6 +9,7 @@ namespace PVservices
         public static void RegisterInjeccionesServices(this IServiceCollection services)
         {
             services.AddTransient<ICajasService, CajasService>();
+            services.AddTransient<ICajas_VMservice, Cajas_VMservice>();
             services.AddTransient<ICajasMonedaMservice, CajasMonedaMservice>();
             services.AddTransient<ICajasMonedaTservice, CajasMonedaTservice>();
             services.AddTransient<ICajasMovimientosService, CajasMovimientosService>();

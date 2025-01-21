@@ -77,6 +77,8 @@
             btnMntArticulos = new FontAwesome.Sharp.IconButton();
             btnMantenimiento = new FontAwesome.Sharp.IconButton();
             pnSubAdministracion = new Panel();
+            btnAdmSucursales = new FontAwesome.Sharp.IconButton();
+            btnAdmEmpresas = new FontAwesome.Sharp.IconButton();
             btnAdmInventario = new FontAwesome.Sharp.IconButton();
             btnAdmListas = new FontAwesome.Sharp.IconButton();
             btnAdmUsuarios = new FontAwesome.Sharp.IconButton();
@@ -86,8 +88,6 @@
             label1 = new Label();
             pictureBox2 = new PictureBox();
             timerFechaHora = new System.Windows.Forms.Timer(components);
-            btnAdmEmpresas = new FontAwesome.Sharp.IconButton();
-            btnAdmSucursales = new FontAwesome.Sharp.IconButton();
             panelContenedor.SuspendLayout();
             pnMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -1087,6 +1087,64 @@
             pnSubAdministracion.Size = new Size(233, 226);
             pnSubAdministracion.TabIndex = 5;
             // 
+            // btnAdmSucursales
+            // 
+            btnAdmSucursales.BackgroundImageLayout = ImageLayout.None;
+            btnAdmSucursales.Cursor = Cursors.Hand;
+            btnAdmSucursales.Dock = DockStyle.Top;
+            btnAdmSucursales.Enabled = false;
+            btnAdmSucursales.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
+            btnAdmSucursales.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
+            btnAdmSucursales.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnAdmSucursales.FlatStyle = FlatStyle.Flat;
+            btnAdmSucursales.Font = new Font("Microsoft Sans Serif", 10F);
+            btnAdmSucursales.ForeColor = Color.WhiteSmoke;
+            btnAdmSucursales.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            btnAdmSucursales.IconColor = Color.WhiteSmoke;
+            btnAdmSucursales.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdmSucursales.IconSize = 26;
+            btnAdmSucursales.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAdmSucursales.Location = new Point(0, 180);
+            btnAdmSucursales.Margin = new Padding(0);
+            btnAdmSucursales.Name = "btnAdmSucursales";
+            btnAdmSucursales.Padding = new Padding(25, 0, 0, 0);
+            btnAdmSucursales.Size = new Size(233, 45);
+            btnAdmSucursales.TabIndex = 9;
+            btnAdmSucursales.Text = "Sucursales";
+            btnAdmSucursales.TextAlign = ContentAlignment.MiddleLeft;
+            btnAdmSucursales.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAdmSucursales.UseVisualStyleBackColor = false;
+            btnAdmSucursales.Click += btnAdmSucursales_Click;
+            // 
+            // btnAdmEmpresas
+            // 
+            btnAdmEmpresas.BackgroundImageLayout = ImageLayout.None;
+            btnAdmEmpresas.Cursor = Cursors.Hand;
+            btnAdmEmpresas.Dock = DockStyle.Top;
+            btnAdmEmpresas.Enabled = false;
+            btnAdmEmpresas.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
+            btnAdmEmpresas.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
+            btnAdmEmpresas.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnAdmEmpresas.FlatStyle = FlatStyle.Flat;
+            btnAdmEmpresas.Font = new Font("Microsoft Sans Serif", 10F);
+            btnAdmEmpresas.ForeColor = Color.WhiteSmoke;
+            btnAdmEmpresas.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            btnAdmEmpresas.IconColor = Color.WhiteSmoke;
+            btnAdmEmpresas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdmEmpresas.IconSize = 26;
+            btnAdmEmpresas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAdmEmpresas.Location = new Point(0, 135);
+            btnAdmEmpresas.Margin = new Padding(0);
+            btnAdmEmpresas.Name = "btnAdmEmpresas";
+            btnAdmEmpresas.Padding = new Padding(25, 0, 0, 0);
+            btnAdmEmpresas.Size = new Size(233, 45);
+            btnAdmEmpresas.TabIndex = 8;
+            btnAdmEmpresas.Text = "Empresas";
+            btnAdmEmpresas.TextAlign = ContentAlignment.MiddleLeft;
+            btnAdmEmpresas.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAdmEmpresas.UseVisualStyleBackColor = false;
+            btnAdmEmpresas.Click += btnAdmEmpresas_Click;
+            // 
             // btnAdmInventario
             // 
             btnAdmInventario.BackgroundImageLayout = ImageLayout.None;
@@ -1266,63 +1324,6 @@
             // 
             timerFechaHora.Enabled = true;
             timerFechaHora.Tick += timerFechaHora_Tick;
-            // 
-            // btnAdmEmpresas
-            // 
-            btnAdmEmpresas.BackgroundImageLayout = ImageLayout.None;
-            btnAdmEmpresas.Cursor = Cursors.Hand;
-            btnAdmEmpresas.Dock = DockStyle.Top;
-            btnAdmEmpresas.Enabled = false;
-            btnAdmEmpresas.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
-            btnAdmEmpresas.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
-            btnAdmEmpresas.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
-            btnAdmEmpresas.FlatStyle = FlatStyle.Flat;
-            btnAdmEmpresas.Font = new Font("Microsoft Sans Serif", 10F);
-            btnAdmEmpresas.ForeColor = Color.WhiteSmoke;
-            btnAdmEmpresas.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            btnAdmEmpresas.IconColor = Color.WhiteSmoke;
-            btnAdmEmpresas.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdmEmpresas.IconSize = 26;
-            btnAdmEmpresas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmEmpresas.Location = new Point(0, 135);
-            btnAdmEmpresas.Margin = new Padding(0);
-            btnAdmEmpresas.Name = "btnAdmEmpresas";
-            btnAdmEmpresas.Padding = new Padding(25, 0, 0, 0);
-            btnAdmEmpresas.Size = new Size(233, 45);
-            btnAdmEmpresas.TabIndex = 8;
-            btnAdmEmpresas.Text = "Empresas";
-            btnAdmEmpresas.TextAlign = ContentAlignment.MiddleLeft;
-            btnAdmEmpresas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnAdmEmpresas.UseVisualStyleBackColor = false;
-            // 
-            // btnAdmSucursales
-            // 
-            btnAdmSucursales.BackgroundImageLayout = ImageLayout.None;
-            btnAdmSucursales.Cursor = Cursors.Hand;
-            btnAdmSucursales.Dock = DockStyle.Top;
-            btnAdmSucursales.Enabled = false;
-            btnAdmSucursales.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
-            btnAdmSucursales.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
-            btnAdmSucursales.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
-            btnAdmSucursales.FlatStyle = FlatStyle.Flat;
-            btnAdmSucursales.Font = new Font("Microsoft Sans Serif", 10F);
-            btnAdmSucursales.ForeColor = Color.WhiteSmoke;
-            btnAdmSucursales.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            btnAdmSucursales.IconColor = Color.WhiteSmoke;
-            btnAdmSucursales.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdmSucursales.IconSize = 26;
-            btnAdmSucursales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmSucursales.Location = new Point(0, 180);
-            btnAdmSucursales.Margin = new Padding(0);
-            btnAdmSucursales.Name = "btnAdmSucursales";
-            btnAdmSucursales.Padding = new Padding(25, 0, 0, 0);
-            btnAdmSucursales.Size = new Size(233, 45);
-            btnAdmSucursales.TabIndex = 9;
-            btnAdmSucursales.Text = "Sucursales";
-            btnAdmSucursales.TextAlign = ContentAlignment.MiddleLeft;
-            btnAdmSucursales.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnAdmSucursales.UseVisualStyleBackColor = false;
-            btnAdmSucursales.Click += btnAdmSucursales_Click;
             // 
             // Frm_Main
             // 

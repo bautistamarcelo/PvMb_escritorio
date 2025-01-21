@@ -245,6 +245,7 @@ namespace PVpresentation.Formularios
         private void btnCjaApertura_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            AbrirFormulario<Frm_Cajas>();
         }
 
         private void btnCjaCierre_Click(object sender, EventArgs e)
@@ -361,6 +362,12 @@ namespace PVpresentation.Formularios
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Sucursales>();
+        }
+
+        private void btnAdmEmpresas_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+            AbrirFormulario<Frm_Empresas>();
         }
     }
 }

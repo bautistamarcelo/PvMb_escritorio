@@ -42,6 +42,30 @@ namespace PVrepository.Implementation
             return list;
         }
 
+        public async Task<Cajas_Usuarios> SeleccionarCaja(int CajaID)
+        {
+            Cajas_Usuarios cajaUsuario = new Cajas_Usuarios();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Cajas_Usuarios_SeleccionarCaja", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ID", CajaID));
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        cajaUsuario.ID = Convert.ToInt32(dr["ID"]);
+                        cajaUsuario.CajaID = Convert.ToInt32(dr["CajaID"]);
+                        cajaUsuario.UsuarioID = Convert.ToInt32(dr["UsuarioID"]);
+                        cajaUsuario.FechaAsignacion =Convert.ToDateTime(dr["FechaAsignacion"]);
+                        cajaUsuario.Estado = dr["Estado"].ToString();
+                    }
+                }
+            }
+            return cajaUsuario;
+        }
+
         public async Task<string> crear(Cajas_Usuarios objeto)
         {
             string respuesta = "";

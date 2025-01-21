@@ -4,6 +4,7 @@ namespace PVrepository.Entities
     public class Cajas
     {
         public int ID { get; set; }
+        public int SucursalID { get; set; }
         public string Nombre { get; set; }
         public DateTime FechaApertura { get; set; }
         public int SaldoInicial { get; set; }

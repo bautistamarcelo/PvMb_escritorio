@@ -20,6 +20,11 @@ namespace PVservices.Implementation
         {
             return await _CajasUsuariosRepository.Lista(FechaIni, FechaFin, Buscar);
         }
+        public async Task<Cajas_Usuarios> SeleccionarCaja(int CajaID)
+        {
+            return await _CajasUsuariosRepository.SeleccionarCaja(CajaID);
+        }
+
         public async Task<string> crear(Cajas_Usuarios objeto)
         {
             return await _CajasUsuariosRepository.crear(objeto);

@@ -7,6 +7,7 @@ namespace PVpresentation.Formularios
 {
     public partial class Frm_Login : Form
     {
+        #region VARIABLES Y CONSTRUCTOR DE SERVICIOS QUE NECESITO EN EL FORMULARIO 
         private readonly IServiceProvider _serviceProvider;
         private readonly IUsuariosService _usuariosService;
         private readonly ISucursalesService _sucursalesService;
@@ -21,9 +22,9 @@ namespace PVpresentation.Formularios
             _sucursalesService = sucursalesService;
             _usuariosService = usuariosService;
         }
+        #endregion
 
-        //METODOS PARA ARRASTRAR EL FORMULARIO------------------------------------------------------------------------------------------------------------------------------------------------------------
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        #region METODO PARA ARRASTRAR EL FORMULARIO
         private extern static void ReleaseCapture();
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -34,11 +35,7 @@ namespace PVpresentation.Formularios
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        #endregion
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
@@ -47,6 +44,11 @@ namespace PVpresentation.Formularios
             var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbSucursales.InsertarItems(itemsSucursal);
             txtUsuario.Focus();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -60,22 +62,30 @@ namespace PVpresentation.Formularios
 
             //Validamos que el usuario exista
             var usuarioEncontrado = await _usuariosService.Login(txtUsuario.Text, txtClave.Text);
-            if (usuarioEncontrado == null || usuarioEncontrado.IDUsuario==0)
+            if (usuarioEncontrado == null || usuarioEncontrado.IDUsuario == 0)
             {
                 MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
+                var cajaAbierta = await _usuariosService.BuscaCajaUsuario(usuarioEncontrado.IDUsuario);
+                if (cajaAbierta == 0)
+                {
+                    MessageBox.Show("No tiene caja abierta, por favor abra una caja.", "Caja cerrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //return;
+                }
+
                 //Asignar valores a variables globales
                 VariablesGlobales.UsuarioNombre = usuarioEncontrado.nombre;
                 VariablesGlobales.UsuarioID = usuarioEncontrado.IDUsuario;
                 VariablesGlobales.UsuarioIDrol = usuarioEncontrado.IDRol.IDRol;
                 VariablesGlobales.RolNombre = usuarioEncontrado.IDRol.descripcion;
+                VariablesGlobales.CajaID = cajaAbierta;
                 //Abrir el siguiente formulario
                 Frm_Main mainForm = (Frm_Main)_serviceProvider.GetService(typeof(Frm_Main));
                 this.Hide();
-                
+
                 mainForm.Show();
                 if (mainForm != null)
                 {
@@ -83,6 +93,11 @@ namespace PVpresentation.Formularios
                     mainForm.txtCategoria.Text = VariablesGlobales.RolNombre;
                 }
             }
+
+        }
+
+        private void LnkCambiarClave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
 
         }
     }

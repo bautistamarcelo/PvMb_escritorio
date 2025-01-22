@@ -183,6 +183,32 @@ namespace PVrepository.Implementation
 
         }
 
+        public async Task<int> VerificarUsuario(string nombre)
+        {
+            int IDusuario;
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuario_Verifica_Nombre", con);
+                cmd.Parameters.AddWithValue("@UsuarioNombre", nombre);
+                cmd.Parameters.Add("@IDusuario", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    IDusuario = Convert.ToInt32(cmd.Parameters["@IDusuario"].Value)!;
+                }
+                catch
+                {
+                    IDusuario = 0;
+                }
+            }
+
+            return IDusuario;
+        }
+
         public async Task<int> BuscaCajaUsuario(int UsuarioID)
         {
             int IDcaja;

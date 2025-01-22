@@ -37,6 +37,11 @@ namespace PVservices.Implementation
             return await _usuariosRepository.VerificarCorreo(correo);
         }
 
+        public async Task<int> VerificarUsuario(string nombre)
+        {
+            return await _usuariosRepository.VerificarUsuario(nombre);
+        }
+
         public async Task<int> BuscaCajaUsuario(int UsuarioID)
         {
             return await _usuariosRepository.BuscaCajaUsuario(UsuarioID);
@@ -46,5 +51,7 @@ namespace PVservices.Implementation
         {
             await _usuariosRepository.ActualizarClave(UsuarioID, clave);
         }
+
+        
     }
 }

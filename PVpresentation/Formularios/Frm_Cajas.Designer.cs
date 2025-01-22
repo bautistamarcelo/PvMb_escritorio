@@ -94,6 +94,7 @@
             // 
             // btnGrabar
             // 
+            btnGrabar.Enabled = false;
             btnGrabar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
@@ -105,6 +106,7 @@
             // 
             // txtNombre
             // 
+            txtNombre.Enabled = false;
             txtNombre.Location = new Point(14, 79);
             // 
             // label1
@@ -166,6 +168,7 @@
             cmbCondicion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbCondicion.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbCondicion.BackColor = Color.Gainsboro;
+            cmbCondicion.Enabled = false;
             cmbCondicion.FormattingEnabled = true;
             cmbCondicion.Location = new Point(12, 314);
             cmbCondicion.Name = "cmbCondicion";
@@ -196,6 +199,7 @@
             // 
             txtFechaCierre.BackColor = Color.Gainsboro;
             txtFechaCierre.BorderStyle = BorderStyle.FixedSingle;
+            txtFechaCierre.Enabled = false;
             txtFechaCierre.Location = new Point(12, 216);
             txtFechaCierre.Name = "txtFechaCierre";
             txtFechaCierre.Size = new Size(286, 22);
@@ -261,6 +265,7 @@
             txtResultado.Enabled = false;
             txtResultado.Location = new Point(12, 364);
             txtResultado.Name = "txtResultado";
+            txtResultado.ReadOnly = true;
             txtResultado.Size = new Size(285, 22);
             txtResultado.TabIndex = 66;
             // 

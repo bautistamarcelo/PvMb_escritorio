@@ -1380,8 +1380,6 @@
         private Panel pnInferior;
         private TextBox txtFecha;
         private TextBox txtHoraActual;
-        private TextBox txtNombreUsuario;
-        private TextBox txtCategoria;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private Panel pnSuperior;
@@ -1430,5 +1428,7 @@
         public Panel pnMain;
         private FontAwesome.Sharp.IconButton btnAdmSucursales;
         private FontAwesome.Sharp.IconButton btnAdmEmpresas;
+        public TextBox txtNombreUsuario;
+        public TextBox txtCategoria;
     }
 }

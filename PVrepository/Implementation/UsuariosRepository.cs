@@ -122,6 +122,114 @@ namespace PVrepository.Implementation
 
         }
 
+        public async Task<Usuarios> Login(string nombre, string clave)
+        {
+            Usuarios objeto = new Usuarios();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuario_Login", con);
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Clave", clave);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        objeto.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
+                        objeto.nombre = dr["nombre"].ToString()!;
+                        objeto.correo = dr["correo"].ToString()!;
+                        //objeto.telefono = dr["telefono"].ToString()!;
+                        objeto.IDRol = new Rol
+                        {
+                            IDRol = Convert.ToInt32(dr["IDRol"]),
+                            descripcion = dr["descripcion"].ToString()!
+                        };
+                        //objeto.urlFoto = dr["urlFoto"].ToString()!;
+                        //objeto.nombreFoto = dr["nombreFoto"].ToString()!;
+                        objeto.clave = dr["clave"].ToString()!;
+                        objeto.esActivo = Convert.ToInt32(dr["esActivo"]);
+                        //objeto.fechaRegistro = Convert.ToDateTime(dr["fechaRegistro"]);
+                    }
+                }
+            }
+            return objeto;
+        }
+
+        public async Task<int> VerificarCorreo(string correo)
+        {
+            int IDusuario;
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuario_Verifica_Correo", con);
+                cmd.Parameters.AddWithValue("@correo", correo);
+                cmd.Parameters.Add("@UsuarioID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    IDusuario = Convert.ToInt32(cmd.Parameters["@UsuarioID"].Value)!;
+                }
+                catch 
+                {
+                    IDusuario = 0;
+                }
+            }
+
+            return IDusuario;
+
+        }
+
+        public async Task<int> BuscaCajaUsuario(int UsuarioID)
+        {
+            int IDcaja;
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuario_Busca_Caja_Abierta", con);
+                cmd.Parameters.AddWithValue("@UsuarioID", UsuarioID);
+                cmd.Parameters.Add("@CajaID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    IDcaja = Convert.ToInt32(cmd.Parameters["@CajaID"].Value)!;
+                }
+                catch
+                {
+                    IDcaja = 0;
+                }
+            }
+
+            return IDcaja;
+        }
+
+        public async Task ActualizarClave(int UsuarioID, string clave)
+        {
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuario_Cambio_Clave", con);
+                cmd.Parameters.AddWithValue("@UsuarioID", UsuarioID);
+                cmd.Parameters.AddWithValue("@NuevaClave", clave);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+
         
     }
 }

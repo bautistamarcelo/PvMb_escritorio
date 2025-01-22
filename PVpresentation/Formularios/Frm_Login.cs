@@ -24,18 +24,18 @@ namespace PVpresentation.Formularios
         }
         #endregion
 
-        #region METODO PARA ARRASTRAR EL FORMULARIO
-        private extern static void ReleaseCapture();
+        //#region METODO PARA ARRASTRAR EL FORMULARIO
+        //private extern static void ReleaseCapture();
 
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        //[DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        //private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void pnTituloFormulario_MouseMove(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
-        #endregion
+        //private void pnTituloFormulario_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    ReleaseCapture();
+        //    SendMessage(this.Handle, 0x112, 0xf012, 0);
+        //}
+        //#endregion
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
@@ -96,9 +96,27 @@ namespace PVpresentation.Formularios
 
         }
 
-        private void LnkCambiarClave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private async void LnkCambiarClave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (txtUsuario.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor, ingrese un usuario.", "Usuario vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        }
+            var usuarioCambioClave = await _usuariosService.Buscar(txtUsuario.Text);
+            if (usuarioCambioClave == null || usuarioCambioClave.IDUsuario == 0)
+            {
+                MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            Frm_Login_NuevaClave frmCambioClave = (Frm_Login_NuevaClave)_serviceProvider.GetService(typeof(Frm_Login_NuevaClave));
+            VariablesGlobales.UsuarioID = usuarioCambioClave.IDUsuario;
+            VariablesGlobales.UsuarioNombre = usuarioCambioClave.nombre;
+            VariablesGlobales.UsuarioClave = usuarioCambioClave.clave;
+            frmCambioClave.ShowDialog();
+            
+        }   
     }
 }

@@ -33,14 +33,14 @@
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
             pnMantenimiento = new Panel();
+            txtClaveNuevaCompara = new TextBox();
             label3 = new Label();
             label2 = new Label();
-            txtClave = new TextBox();
+            txtClaveNueva = new TextBox();
             label1 = new Label();
-            txtUsuario = new TextBox();
+            txtClaveActual = new TextBox();
             btnCancelar = new Button();
             btnLogin = new Button();
-            textBox1 = new TextBox();
             pnTituloFormulario.SuspendLayout();
             pnMantenimiento.SuspendLayout();
             SuspendLayout();
@@ -93,12 +93,12 @@
             // pnMantenimiento
             // 
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
-            pnMantenimiento.Controls.Add(textBox1);
+            pnMantenimiento.Controls.Add(txtClaveNuevaCompara);
             pnMantenimiento.Controls.Add(label3);
             pnMantenimiento.Controls.Add(label2);
-            pnMantenimiento.Controls.Add(txtClave);
+            pnMantenimiento.Controls.Add(txtClaveNueva);
             pnMantenimiento.Controls.Add(label1);
-            pnMantenimiento.Controls.Add(txtUsuario);
+            pnMantenimiento.Controls.Add(txtClaveActual);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnLogin);
             pnMantenimiento.Dock = DockStyle.Top;
@@ -106,6 +106,15 @@
             pnMantenimiento.Name = "pnMantenimiento";
             pnMantenimiento.Size = new Size(304, 251);
             pnMantenimiento.TabIndex = 52;
+            // 
+            // txtClaveNuevaCompara
+            // 
+            txtClaveNuevaCompara.BackColor = Color.Gainsboro;
+            txtClaveNuevaCompara.BorderStyle = BorderStyle.FixedSingle;
+            txtClaveNuevaCompara.Location = new Point(17, 145);
+            txtClaveNuevaCompara.Name = "txtClaveNuevaCompara";
+            txtClaveNuevaCompara.Size = new Size(269, 23);
+            txtClaveNuevaCompara.TabIndex = 39;
             // 
             // label3
             // 
@@ -129,14 +138,14 @@
             label2.TabIndex = 26;
             label2.Text = "Nueva Clave:";
             // 
-            // txtClave
+            // txtClaveNueva
             // 
-            txtClave.BackColor = Color.Gainsboro;
-            txtClave.BorderStyle = BorderStyle.FixedSingle;
-            txtClave.Location = new Point(17, 92);
-            txtClave.Name = "txtClave";
-            txtClave.Size = new Size(269, 23);
-            txtClave.TabIndex = 25;
+            txtClaveNueva.BackColor = Color.Gainsboro;
+            txtClaveNueva.BorderStyle = BorderStyle.FixedSingle;
+            txtClaveNueva.Location = new Point(17, 92);
+            txtClaveNueva.Name = "txtClaveNueva";
+            txtClaveNueva.Size = new Size(269, 23);
+            txtClaveNueva.TabIndex = 25;
             // 
             // label1
             // 
@@ -149,14 +158,14 @@
             label1.TabIndex = 24;
             label1.Text = "Clave Actual:";
             // 
-            // txtUsuario
+            // txtClaveActual
             // 
-            txtUsuario.BackColor = Color.Gainsboro;
-            txtUsuario.BorderStyle = BorderStyle.FixedSingle;
-            txtUsuario.Location = new Point(17, 39);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(269, 23);
-            txtUsuario.TabIndex = 23;
+            txtClaveActual.BackColor = Color.Gainsboro;
+            txtClaveActual.BorderStyle = BorderStyle.FixedSingle;
+            txtClaveActual.Location = new Point(17, 39);
+            txtClaveActual.Name = "txtClaveActual";
+            txtClaveActual.Size = new Size(269, 23);
+            txtClaveActual.TabIndex = 23;
             // 
             // btnCancelar
             // 
@@ -173,6 +182,7 @@
             btnCancelar.TabIndex = 21;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnLogin
             // 
@@ -189,15 +199,7 @@
             btnLogin.TabIndex = 20;
             btnLogin.Text = "Ingresar";
             btnLogin.UseVisualStyleBackColor = false;
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.Gainsboro;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(17, 145);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(269, 23);
-            textBox1.TabIndex = 39;
+            btnLogin.Click += btnLogin_Click;
             // 
             // Frm_Login_NuevaClave
             // 
@@ -208,6 +210,7 @@
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Frm_Login_NuevaClave";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Login_NuevaClave";
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();
@@ -225,11 +228,11 @@
         public Panel pnMantenimiento;
         public Label label3;
         public Label label2;
-        public TextBox txtClave;
+        public TextBox txtClaveNueva;
         public Label label1;
-        public TextBox txtUsuario;
+        public TextBox txtClaveActual;
         public Button btnCancelar;
         public Button btnLogin;
-        public TextBox textBox1;
+        public TextBox txtClaveNuevaCompara;
     }
 }

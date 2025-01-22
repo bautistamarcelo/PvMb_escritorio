@@ -8,6 +8,7 @@ namespace PVrepository.Interfaces
         Task<string> crear(Usuarios objeto);
         Task<string> editar(Usuarios objeto);
         Task<Usuarios> Login(string nombre, string clave);
+        Task<Usuarios> Buscar(string vNombre);
         Task<int>VerificarCorreo(string correo);
         Task<int> VerificarUsuario(string nombre);
         Task<int>BuscaCajaUsuario(int UsuarioID);

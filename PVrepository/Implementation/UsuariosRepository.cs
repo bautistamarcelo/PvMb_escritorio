@@ -4,6 +4,7 @@ using PVrepository.DB;
 using PVrepository.Entities;
 using PVrepository.Interfaces;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace PVrepository.Implementation
@@ -131,6 +132,39 @@ namespace PVrepository.Implementation
                 var cmd = new SqlCommand("SP_Usuario_Login", con);
                 cmd.Parameters.AddWithValue("@Nombre", nombre);
                 cmd.Parameters.AddWithValue("@Clave", clave);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        objeto.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
+                        objeto.nombre = dr["nombre"].ToString()!;
+                        objeto.correo = dr["correo"].ToString()!;
+                        //objeto.telefono = dr["telefono"].ToString()!;
+                        objeto.IDRol = new Rol
+                        {
+                            IDRol = Convert.ToInt32(dr["IDRol"]),
+                            descripcion = dr["descripcion"].ToString()!
+                        };
+                        //objeto.urlFoto = dr["urlFoto"].ToString()!;
+                        //objeto.nombreFoto = dr["nombreFoto"].ToString()!;
+                        objeto.clave = dr["clave"].ToString()!;
+                        objeto.esActivo = Convert.ToInt32(dr["esActivo"]);
+                        //objeto.fechaRegistro = Convert.ToDateTime(dr["fechaRegistro"]);
+                    }
+                }
+            }
+            return objeto;
+        }
+
+        public async Task<Usuarios> Buscar(string vNombre)
+        {
+            Usuarios objeto = new Usuarios();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuario_Buscar", con);
+                cmd.Parameters.AddWithValue("@UsuarioNombre", vNombre);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = await cmd.ExecuteReaderAsync())
                 {

@@ -5,6 +5,7 @@ namespace PVpresentation.Resources
     {
         public static int UsuarioID { get; set; }
         public static string UsuarioNombre { get; set; }= string.Empty;
+        public static string UsuarioClave { get; set; } = string.Empty;
         public static int UsuarioIDrol { get; set; }
         public static string RolNombre { get; set; } = string.Empty;
 

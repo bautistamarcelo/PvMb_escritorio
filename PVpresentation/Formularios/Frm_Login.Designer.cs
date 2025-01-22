@@ -38,6 +38,7 @@
             pnListado = new Panel();
             pictureBox2 = new PictureBox();
             pnMantenimiento = new Panel();
+            LnkCambiarClave = new LinkLabel();
             label3 = new Label();
             cmbSucursales = new ComboBox();
             label2 = new Label();
@@ -46,7 +47,6 @@
             txtUsuario = new TextBox();
             btnCancelar = new Button();
             btnLogin = new Button();
-            LnkCambiarClave = new LinkLabel();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnl_Contenedor.SuspendLayout();
@@ -68,7 +68,6 @@
             pnTituloFormulario.Name = "pnTituloFormulario";
             pnTituloFormulario.Size = new Size(605, 50);
             pnTituloFormulario.TabIndex = 50;
-            pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
             // 
             // pictureBox1
             // 
@@ -161,6 +160,18 @@
             pnMantenimiento.Name = "pnMantenimiento";
             pnMantenimiento.Size = new Size(302, 323);
             pnMantenimiento.TabIndex = 2;
+            // 
+            // LnkCambiarClave
+            // 
+            LnkCambiarClave.AutoSize = true;
+            LnkCambiarClave.LinkColor = Color.SteelBlue;
+            LnkCambiarClave.Location = new Point(199, 136);
+            LnkCambiarClave.Name = "LnkCambiarClave";
+            LnkCambiarClave.Size = new Size(84, 15);
+            LnkCambiarClave.TabIndex = 38;
+            LnkCambiarClave.TabStop = true;
+            LnkCambiarClave.Text = "Cambiar Clave";
+            LnkCambiarClave.LinkClicked += LnkCambiarClave_LinkClicked;
             // 
             // label3
             // 
@@ -258,18 +269,6 @@
             btnLogin.Text = "Ingresar";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
-            // 
-            // LnkCambiarClave
-            // 
-            LnkCambiarClave.AutoSize = true;
-            LnkCambiarClave.LinkColor = Color.SteelBlue;
-            LnkCambiarClave.Location = new Point(199, 136);
-            LnkCambiarClave.Name = "LnkCambiarClave";
-            LnkCambiarClave.Size = new Size(84, 15);
-            LnkCambiarClave.TabIndex = 38;
-            LnkCambiarClave.TabStop = true;
-            LnkCambiarClave.Text = "Cambiar Clave";
-            LnkCambiarClave.LinkClicked += LnkCambiarClave_LinkClicked;
             // 
             // Frm_Login
             // 

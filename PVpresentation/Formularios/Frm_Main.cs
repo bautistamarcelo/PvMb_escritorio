@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PVpresentation.Resources;
 using System.Runtime.InteropServices;
 
 namespace PVpresentation.Formularios
@@ -225,6 +226,36 @@ namespace PVpresentation.Formularios
         private void btnCmpVentas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            if (VariablesGlobales.Frm_Venta01 == 0)
+            {
+                VariablesGlobales.Frm_Venta01 = 1;
+                Frm_Ventas frmVenta01 = new Frm_Ventas();
+                frmVenta01.lblTituloForm.Text = "Venta N° 1";
+                frmVenta01.txtInstancia.Text = "1";
+                
+                frmVenta01.Show();
+                return;
+            }
+            if (VariablesGlobales.Frm_Venta02 == 0)
+            {
+                VariablesGlobales.Frm_Venta02 = 1;
+                Frm_Ventas frmVenta02 = new Frm_Ventas();
+                frmVenta02.lblTituloForm.Text = "Venta N° 2";
+                frmVenta02.txtInstancia.Text = "2";
+                
+                frmVenta02.Show();
+                return;
+            }
+            if (VariablesGlobales.Frm_Venta03 == 0)
+            {
+                VariablesGlobales.Frm_Venta03 = 1;
+                Frm_Ventas frmVenta03 = new Frm_Ventas();
+                frmVenta03.lblTituloForm.Text = "Venta N° 3";
+                frmVenta03.txtInstancia.Text = "3";
+                
+                frmVenta03.Show();
+                return;
+            }
         }
 
         private void btnCmpCierresZ_Click(object sender, EventArgs e)

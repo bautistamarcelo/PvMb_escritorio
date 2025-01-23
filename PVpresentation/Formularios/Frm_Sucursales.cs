@@ -81,7 +81,6 @@ namespace PVpresentation.Formularios
             await MostrarSucursales();
 
             //Completo los datos de los comboBox no enlazados con otras tablas
-
             var listaEmpresas = await _empresaService.Lista();
             var items = listaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
 

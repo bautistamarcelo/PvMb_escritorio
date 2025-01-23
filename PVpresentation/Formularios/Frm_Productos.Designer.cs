@@ -212,6 +212,7 @@
             btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
+            btnEliminar.Location = new Point(862, 382);
             btnEliminar.TabStop = false;
             // 
             // btnCancelar
@@ -219,6 +220,7 @@
             btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnCancelar.Location = new Point(708, 382);
             btnCancelar.TabIndex = 46;
             btnCancelar.TabStop = false;
             btnCancelar.Click += btnCancelar_Click;
@@ -229,6 +231,7 @@
             btnGrabar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnGrabar.Location = new Point(559, 382);
             btnGrabar.TabIndex = 45;
             btnGrabar.Click += btnGrabar_Click;
             // 
@@ -442,7 +445,6 @@
             cmbProveedor.Name = "cmbProveedor";
             cmbProveedor.Size = new Size(331, 22);
             cmbProveedor.TabIndex = 38;
-            cmbProveedor.Text = "8";
             cmbProveedor.KeyDown += cmbProveedor_KeyDown;
             // 
             // label16
@@ -489,7 +491,6 @@
             cmbMarca.Name = "cmbMarca";
             cmbMarca.Size = new Size(331, 22);
             cmbMarca.TabIndex = 37;
-            cmbMarca.Text = "7";
             cmbMarca.KeyDown += cmbMarca_KeyDown;
             cmbMarca.Leave += cmbMarca_Leave;
             // 
@@ -515,7 +516,6 @@
             cmbCategoria.Name = "cmbCategoria";
             cmbCategoria.Size = new Size(331, 22);
             cmbCategoria.TabIndex = 36;
-            cmbCategoria.Text = "6";
             cmbCategoria.KeyDown += cmbCategoria_KeyDown;
             // 
             // label23

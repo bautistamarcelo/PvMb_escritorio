@@ -40,6 +40,7 @@ namespace PVpresentation
                 services.RegisterInjeccionesServices();
                 services.AddTransient<FrmModeloCRUD>();
                 services.AddTransient<Frm_Cajas>();
+                services.AddTransient<Frm_Cajas_Abrir>();
                 services.AddTransient<Frm_Categorias>();
                 services.AddTransient<Frm_Clientes>();
                 services.AddTransient<Frm_Empresas>();
@@ -51,6 +52,7 @@ namespace PVpresentation
                 services.AddTransient<Frm_Proveedores>();
                 services.AddTransient<Frm_Sucursales>();
                 services.AddTransient<Frm_Usuarios>();
+                services.AddTransient<Frm_Ventas>();
             });
     }
 }

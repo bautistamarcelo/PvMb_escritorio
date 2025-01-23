@@ -19,6 +19,7 @@ namespace PVservices
             services.AddTransient<ICaracterService, CaracterService>();
             services.AddTransient<ICategoriaService, CategoriaService>();
             services.AddTransient<IClientesService, ClientesService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IEmpresaService, EmpresaService>();
             services.AddTransient<IImpuestosService, ImpuestosService>();
             services.AddTransient<IMarcasService, MarcasService>();

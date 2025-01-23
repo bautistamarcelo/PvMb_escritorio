@@ -9,9 +9,17 @@ namespace PVpresentation.Resources
         public static int UsuarioIDrol { get; set; }
         public static string RolNombre { get; set; } = string.Empty;
 
+        public static int SucursalID { get; set; }
+
         public static int CajaID { get; set; }
         public static string CajaNombre { get; set; } = string.Empty;
         public static string CajaCondicion { get; set; } = string.Empty; //values: 'Abierta' / 'Cerrada'   
+
+        //Instancias de Formularios Ventas
+        public static int Frm_Venta01 { get; set; } //values: 0 Cerrado / 1 Abierto
+        public static int Frm_Venta02 { get; set; } //values: 0 Cerrado / 1 Abierto
+        public static int Frm_Venta03 { get; set; } //values: 0 Cerrado / 1 Abierto
+
     }
 
 

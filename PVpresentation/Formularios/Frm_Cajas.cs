@@ -10,15 +10,18 @@ namespace PVpresentation.Formularios
     public partial class Frm_Cajas : FrmModeloCRUD
     {
         #region Funcionalidades y Constructor del formulario
+        private readonly IServiceProvider _serviceProvider;
         private readonly ICajasService _cajasService;
         private readonly ICajas_VMservice _cajas_VMservice;
 
         public Frm_Cajas(ICajasService cajasService,
-                        ICajas_VMservice cajas_VMservice)
+                        ICajas_VMservice cajas_VMservice,
+                        IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _cajasService = cajasService;
             _cajas_VMservice = cajas_VMservice;
+            _serviceProvider = serviceProvider;
         }
         public void LimpiarMantenimiento()
         {
@@ -90,12 +93,40 @@ namespace PVpresentation.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            if(VariablesGlobales.CajaID != 0)
+            {
+                MessageBox.Show("Ya posee una caja abierta. Cierre la caja Antes de abrir una nueva", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            Frm_Cajas_Abrir frmCajasAbrir = (Frm_Cajas_Abrir)_serviceProvider.GetService(typeof(Frm_Cajas_Abrir))!;
+            frmCajasAbrir.ShowDialog();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-
+            var CajaSeleccionada = (Cajas_VM)dgvListado.CurrentRow.DataBoundItem;
+            if (CajaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una caja para editar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            txtID.Text = CajaSeleccionada.Id.ToString();
+            txtNombre.Text = CajaSeleccionada.CajaNombre;
+            txtFechaApertura.Text = CajaSeleccionada.FechaApertura.ToString();
+            txtSaldoInicial.Text = CajaSeleccionada.SaldoInicial.ToString();
+            txtFechaCierre.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            txtSaldoFinal.Text = CajaSeleccionada.SaldoFinal.ToString();
+            cmbCondicion.SelectedIndex = CajaSeleccionada.Condicion == "Abierta" ? 0 : 1;
+            txtResultado.Text = "";
+            txtID.Enabled = false;
+            txtNombre.Enabled = false;
+            txtFechaApertura.Enabled = false;
+            txtSaldoInicial.Enabled = false;
+            txtFechaCierre.Enabled = false;
+            txtSaldoFinal.Enabled = false;
+            cmbCondicion.Enabled = true;
+            btnGrabar.Enabled = true;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

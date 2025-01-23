@@ -1337,7 +1337,6 @@
             Name = "Frm_Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmMain";
-            WindowState = FormWindowState.Maximized;
             panelContenedor.ResumeLayout(false);
             pnMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

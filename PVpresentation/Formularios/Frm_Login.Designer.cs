@@ -47,6 +47,7 @@
             txtUsuario = new TextBox();
             btnCancelar = new Button();
             btnLogin = new Button();
+            LnkOlvideClave = new LinkLabel();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnl_Contenedor.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
+            pnMantenimiento.Controls.Add(LnkOlvideClave);
             pnMantenimiento.Controls.Add(LnkCambiarClave);
             pnMantenimiento.Controls.Add(label3);
             pnMantenimiento.Controls.Add(cmbSucursales);
@@ -270,6 +272,17 @@
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
             // 
+            // LnkOlvideClave
+            // 
+            LnkOlvideClave.AutoSize = true;
+            LnkOlvideClave.LinkColor = Color.FromArgb(255, 128, 128);
+            LnkOlvideClave.Location = new Point(169, 212);
+            LnkOlvideClave.Name = "LnkOlvideClave";
+            LnkOlvideClave.Size = new Size(114, 15);
+            LnkOlvideClave.TabIndex = 39;
+            LnkOlvideClave.TabStop = true;
+            LnkOlvideClave.Text = "Olvié mi Contraseña";
+            // 
             // Frm_Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -313,5 +326,6 @@
         public Label label3;
         public ComboBox cmbSucursales;
         private LinkLabel LnkCambiarClave;
+        private LinkLabel LnkOlvideClave;
     }
 }

@@ -220,6 +220,7 @@ namespace PVpresentation.Formularios
             {
                 await MostrarUsuarios();
                 MostrarTabs(tabListado.Name);
+                LimpiarMantenimiento();
                 btnGrabar.Enabled = false;
             }
         }

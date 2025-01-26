@@ -7,5 +7,6 @@ namespace PVrepository.Interfaces
         Task<List<Productos>> Lista(string Buscar = "");
         Task<string> crear(Productos objeto);
         Task<string> editar(Productos objeto);
+        Task<Productos>Obtener(int IDproducto);
     }
 }

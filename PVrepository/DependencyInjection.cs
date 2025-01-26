@@ -35,6 +35,7 @@ namespace PVrepository
             services.AddTransient<ISucursalesRepository, SucursalesRepository>();
             services.AddTransient<ITramitesRepository, TramitesRepository>();
             services.AddTransient<IUsuariosRepository, UsuariosRepository>();
+            //TODO: Agregar las interfaces de Ventas y Ventas Detalles
         }
     }
 }

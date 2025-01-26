@@ -1,24 +1,12 @@
 ﻿namespace PVpresentation.Formularios
 {
-    partial class Frm_Ventas
+    partial class Frm_Compras
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+ 
 
         #region Windows Form Designer generated code
 
@@ -38,34 +26,10 @@
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
             pnMantenimiento = new Panel();
-            label16 = new Label();
-            txtVendedorID = new TextBox();
-            label21 = new Label();
-            txtSucursalID = new TextBox();
-            cmbLista = new ComboBox();
-            label20 = new Label();
-            label17 = new Label();
-            txtTctaCte = new TextBox();
-            label18 = new Label();
-            txtTtarjeta = new TextBox();
-            label19 = new Label();
-            txtTdebito = new TextBox();
-            label15 = new Label();
-            txtMontoFinal = new TextBox();
-            label14 = new Label();
-            txtDtoGral = new TextBox();
-            label13 = new Label();
-            txtTotal = new TextBox();
-            label12 = new Label();
-            txtDtoEfectivo = new TextBox();
-            label11 = new Label();
-            txtSubTotal = new TextBox();
-            cmbTipo = new ComboBox();
-            label10 = new Label();
             label2 = new Label();
-            txtTefectivo = new TextBox();
+            txtNombre = new TextBox();
             label1 = new Label();
-            txtNumero = new TextBox();
+            txtID = new TextBox();
             btnEliminar = new Button();
             btnCancelar = new Button();
             btnGrabar = new Button();
@@ -77,7 +41,7 @@
             label7 = new Label();
             textBox4 = new TextBox();
             label6 = new Label();
-            txtFecha = new TextBox();
+            textBox3 = new TextBox();
             label5 = new Label();
             textBox2 = new TextBox();
             label3 = new Label();
@@ -205,34 +169,10 @@
             // pnMantenimiento
             // 
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
-            pnMantenimiento.Controls.Add(label16);
-            pnMantenimiento.Controls.Add(txtVendedorID);
-            pnMantenimiento.Controls.Add(label21);
-            pnMantenimiento.Controls.Add(txtSucursalID);
-            pnMantenimiento.Controls.Add(cmbLista);
-            pnMantenimiento.Controls.Add(label20);
-            pnMantenimiento.Controls.Add(label17);
-            pnMantenimiento.Controls.Add(txtTctaCte);
-            pnMantenimiento.Controls.Add(label18);
-            pnMantenimiento.Controls.Add(txtTtarjeta);
-            pnMantenimiento.Controls.Add(label19);
-            pnMantenimiento.Controls.Add(txtTdebito);
-            pnMantenimiento.Controls.Add(label15);
-            pnMantenimiento.Controls.Add(txtMontoFinal);
-            pnMantenimiento.Controls.Add(label14);
-            pnMantenimiento.Controls.Add(txtDtoGral);
-            pnMantenimiento.Controls.Add(label13);
-            pnMantenimiento.Controls.Add(txtTotal);
-            pnMantenimiento.Controls.Add(label12);
-            pnMantenimiento.Controls.Add(txtDtoEfectivo);
-            pnMantenimiento.Controls.Add(label11);
-            pnMantenimiento.Controls.Add(txtSubTotal);
-            pnMantenimiento.Controls.Add(cmbTipo);
-            pnMantenimiento.Controls.Add(label10);
             pnMantenimiento.Controls.Add(label2);
-            pnMantenimiento.Controls.Add(txtTefectivo);
+            pnMantenimiento.Controls.Add(txtNombre);
             pnMantenimiento.Controls.Add(label1);
-            pnMantenimiento.Controls.Add(txtNumero);
+            pnMantenimiento.Controls.Add(txtID);
             pnMantenimiento.Controls.Add(btnEliminar);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnGrabar);
@@ -242,305 +182,45 @@
             pnMantenimiento.Size = new Size(318, 467);
             pnMantenimiento.TabIndex = 52;
             // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("EngraversGothic BT", 10F);
-            label16.ForeColor = Color.FromArgb(224, 224, 224);
-            label16.Location = new Point(26, 342);
-            label16.Name = "label16";
-            label16.Size = new Size(24, 15);
-            label16.TabIndex = 68;
-            label16.Text = "ID:";
-            // 
-            // txtVendedorID
-            // 
-            txtVendedorID.BackColor = Color.FromArgb(130, 149, 169);
-            txtVendedorID.BorderStyle = BorderStyle.FixedSingle;
-            txtVendedorID.Location = new Point(26, 360);
-            txtVendedorID.Name = "txtVendedorID";
-            txtVendedorID.ReadOnly = true;
-            txtVendedorID.Size = new Size(112, 23);
-            txtVendedorID.TabIndex = 67;
-            txtVendedorID.TabStop = false;
-            txtVendedorID.Visible = false;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("EngraversGothic BT", 10F);
-            label21.ForeColor = Color.FromArgb(224, 224, 224);
-            label21.Location = new Point(179, 342);
-            label21.Name = "label21";
-            label21.Size = new Size(24, 15);
-            label21.TabIndex = 66;
-            label21.Text = "ID:";
-            // 
-            // txtSucursalID
-            // 
-            txtSucursalID.BackColor = Color.FromArgb(130, 149, 169);
-            txtSucursalID.BorderStyle = BorderStyle.FixedSingle;
-            txtSucursalID.Location = new Point(179, 360);
-            txtSucursalID.Name = "txtSucursalID";
-            txtSucursalID.ReadOnly = true;
-            txtSucursalID.Size = new Size(112, 23);
-            txtSucursalID.TabIndex = 65;
-            txtSucursalID.TabStop = false;
-            txtSucursalID.Visible = false;
-            // 
-            // cmbLista
-            // 
-            cmbLista.BackColor = Color.Gainsboro;
-            cmbLista.FormattingEnabled = true;
-            cmbLista.Location = new Point(178, 110);
-            cmbLista.Name = "cmbLista";
-            cmbLista.Size = new Size(113, 23);
-            cmbLista.TabIndex = 64;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("EngraversGothic BT", 10F);
-            label20.ForeColor = Color.FromArgb(224, 224, 224);
-            label20.Location = new Point(178, 92);
-            label20.Name = "label20";
-            label20.Size = new Size(109, 15);
-            label20.TabIndex = 63;
-            label20.Text = "Lista de Precios";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new Font("EngraversGothic BT", 10F);
-            label17.ForeColor = Color.FromArgb(224, 224, 224);
-            label17.Location = new Point(179, 282);
-            label17.Name = "label17";
-            label17.Size = new Size(63, 15);
-            label17.TabIndex = 60;
-            label17.Text = "Cta. Cte.";
-            // 
-            // txtTctaCte
-            // 
-            txtTctaCte.BackColor = Color.Gainsboro;
-            txtTctaCte.BorderStyle = BorderStyle.FixedSingle;
-            txtTctaCte.Location = new Point(178, 300);
-            txtTctaCte.Name = "txtTctaCte";
-            txtTctaCte.Size = new Size(113, 23);
-            txtTctaCte.TabIndex = 59;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("EngraversGothic BT", 10F);
-            label18.ForeColor = Color.FromArgb(224, 224, 224);
-            label18.Location = new Point(179, 235);
-            label18.Name = "label18";
-            label18.Size = new Size(52, 15);
-            label18.TabIndex = 58;
-            label18.Text = "Tarjeta";
-            // 
-            // txtTtarjeta
-            // 
-            txtTtarjeta.BackColor = Color.Gainsboro;
-            txtTtarjeta.BorderStyle = BorderStyle.FixedSingle;
-            txtTtarjeta.Location = new Point(178, 253);
-            txtTtarjeta.Name = "txtTtarjeta";
-            txtTtarjeta.Size = new Size(113, 23);
-            txtTtarjeta.TabIndex = 57;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new Font("EngraversGothic BT", 10F);
-            label19.ForeColor = Color.FromArgb(224, 224, 224);
-            label19.Location = new Point(179, 187);
-            label19.Name = "label19";
-            label19.Size = new Size(48, 15);
-            label19.TabIndex = 56;
-            label19.Text = "Debito";
-            // 
-            // txtTdebito
-            // 
-            txtTdebito.BackColor = Color.Gainsboro;
-            txtTdebito.BorderStyle = BorderStyle.FixedSingle;
-            txtTdebito.Location = new Point(178, 205);
-            txtTdebito.Name = "txtTdebito";
-            txtTdebito.Size = new Size(113, 23);
-            txtTdebito.TabIndex = 55;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("EngraversGothic BT", 10F);
-            label15.ForeColor = Color.FromArgb(224, 224, 224);
-            label15.Location = new Point(26, 283);
-            label15.Name = "label15";
-            label15.Size = new Size(80, 15);
-            label15.TabIndex = 54;
-            label15.Text = "Monto Final";
-            // 
-            // txtMontoFinal
-            // 
-            txtMontoFinal.BackColor = Color.FromArgb(130, 149, 169);
-            txtMontoFinal.BorderStyle = BorderStyle.FixedSingle;
-            txtMontoFinal.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtMontoFinal.Location = new Point(25, 301);
-            txtMontoFinal.Name = "txtMontoFinal";
-            txtMontoFinal.ReadOnly = true;
-            txtMontoFinal.Size = new Size(113, 25);
-            txtMontoFinal.TabIndex = 53;
-            txtMontoFinal.TabStop = false;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("EngraversGothic BT", 10F);
-            label14.ForeColor = Color.FromArgb(224, 224, 224);
-            label14.Location = new Point(26, 233);
-            label14.Name = "label14";
-            label14.Size = new Size(96, 15);
-            label14.TabIndex = 52;
-            label14.Text = "Dto. Adicional";
-            // 
-            // txtDtoGral
-            // 
-            txtDtoGral.BackColor = Color.Gainsboro;
-            txtDtoGral.BorderStyle = BorderStyle.FixedSingle;
-            txtDtoGral.Location = new Point(25, 251);
-            txtDtoGral.Name = "txtDtoGral";
-            txtDtoGral.Size = new Size(113, 23);
-            txtDtoGral.TabIndex = 51;
-            txtDtoGral.TabStop = false;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("EngraversGothic BT", 10F);
-            label13.ForeColor = Color.FromArgb(224, 224, 224);
-            label13.Location = new Point(26, 186);
-            label13.Name = "label13";
-            label13.Size = new Size(39, 15);
-            label13.TabIndex = 50;
-            label13.Text = "Total";
-            // 
-            // txtTotal
-            // 
-            txtTotal.BackColor = Color.FromArgb(130, 149, 169);
-            txtTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtTotal.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtTotal.Location = new Point(25, 204);
-            txtTotal.Name = "txtTotal";
-            txtTotal.ReadOnly = true;
-            txtTotal.Size = new Size(113, 25);
-            txtTotal.TabIndex = 49;
-            txtTotal.TabStop = false;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("EngraversGothic BT", 10F);
-            label12.ForeColor = Color.FromArgb(224, 224, 224);
-            label12.Location = new Point(26, 138);
-            label12.Name = "label12";
-            label12.Size = new Size(105, 15);
-            label12.TabIndex = 48;
-            label12.Text = "Dto. x Efectivo";
-            // 
-            // txtDtoEfectivo
-            // 
-            txtDtoEfectivo.BackColor = Color.FromArgb(130, 149, 169);
-            txtDtoEfectivo.BorderStyle = BorderStyle.FixedSingle;
-            txtDtoEfectivo.Location = new Point(25, 156);
-            txtDtoEfectivo.Name = "txtDtoEfectivo";
-            txtDtoEfectivo.ReadOnly = true;
-            txtDtoEfectivo.Size = new Size(113, 23);
-            txtDtoEfectivo.TabIndex = 47;
-            txtDtoEfectivo.TabStop = false;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("EngraversGothic BT", 10F);
-            label11.ForeColor = Color.FromArgb(224, 224, 224);
-            label11.Location = new Point(26, 92);
-            label11.Name = "label11";
-            label11.Size = new Size(68, 15);
-            label11.TabIndex = 46;
-            label11.Text = "SubTotal:";
-            // 
-            // txtSubTotal
-            // 
-            txtSubTotal.BackColor = Color.FromArgb(130, 149, 169);
-            txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtSubTotal.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtSubTotal.Location = new Point(25, 110);
-            txtSubTotal.Name = "txtSubTotal";
-            txtSubTotal.ReadOnly = true;
-            txtSubTotal.Size = new Size(113, 25);
-            txtSubTotal.TabIndex = 45;
-            txtSubTotal.TabStop = false;
-            // 
-            // cmbTipo
-            // 
-            cmbTipo.BackColor = Color.Gainsboro;
-            cmbTipo.FormattingEnabled = true;
-            cmbTipo.Location = new Point(178, 59);
-            cmbTipo.Name = "cmbTipo";
-            cmbTipo.Size = new Size(113, 23);
-            cmbTipo.TabIndex = 44;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("EngraversGothic BT", 10F);
-            label10.ForeColor = Color.FromArgb(224, 224, 224);
-            label10.Location = new Point(178, 41);
-            label10.Name = "label10";
-            label10.Size = new Size(31, 15);
-            label10.TabIndex = 43;
-            label10.Text = "Tipo";
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("EngraversGothic BT", 10F);
             label2.ForeColor = Color.FromArgb(224, 224, 224);
-            label2.Location = new Point(178, 141);
+            label2.Location = new Point(14, 92);
             label2.Name = "label2";
-            label2.Size = new Size(61, 15);
+            label2.Size = new Size(60, 15);
             label2.TabIndex = 26;
-            label2.Text = "Efectivo";
+            label2.Text = "Nombre:";
             // 
-            // txtTefectivo
+            // txtNombre
             // 
-            txtTefectivo.BackColor = Color.Gainsboro;
-            txtTefectivo.BorderStyle = BorderStyle.FixedSingle;
-            txtTefectivo.Location = new Point(178, 159);
-            txtTefectivo.Name = "txtTefectivo";
-            txtTefectivo.Size = new Size(113, 23);
-            txtTefectivo.TabIndex = 25;
+            txtNombre.BackColor = Color.Gainsboro;
+            txtNombre.BorderStyle = BorderStyle.FixedSingle;
+            txtNombre.Location = new Point(14, 110);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(113, 23);
+            txtNombre.TabIndex = 25;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("EngraversGothic BT", 10F);
             label1.ForeColor = Color.FromArgb(224, 224, 224);
-            label1.Location = new Point(25, 41);
+            label1.Location = new Point(14, 37);
             label1.Name = "label1";
             label1.Size = new Size(24, 15);
             label1.TabIndex = 24;
             label1.Text = "ID:";
             // 
-            // txtNumero
+            // txtID
             // 
-            txtNumero.BackColor = Color.FromArgb(130, 149, 169);
-            txtNumero.BorderStyle = BorderStyle.FixedSingle;
-            txtNumero.Location = new Point(25, 59);
-            txtNumero.Name = "txtNumero";
-            txtNumero.ReadOnly = true;
-            txtNumero.Size = new Size(112, 23);
-            txtNumero.TabIndex = 23;
-            txtNumero.TabStop = false;
+            txtID.BackColor = Color.Gainsboro;
+            txtID.BorderStyle = BorderStyle.FixedSingle;
+            txtID.Location = new Point(14, 55);
+            txtID.Name = "txtID";
+            txtID.Size = new Size(113, 23);
+            txtID.TabIndex = 23;
             // 
             // btnEliminar
             // 
@@ -589,7 +269,6 @@
             btnGrabar.TabIndex = 20;
             btnGrabar.Text = "Grabar";
             btnGrabar.UseVisualStyleBackColor = false;
-            btnGrabar.Click += btnGrabar_Click;
             // 
             // pnListado
             // 
@@ -602,7 +281,7 @@
             pnListado.Controls.Add(label7);
             pnListado.Controls.Add(textBox4);
             pnListado.Controls.Add(label6);
-            pnListado.Controls.Add(txtFecha);
+            pnListado.Controls.Add(textBox3);
             pnListado.Controls.Add(label5);
             pnListado.Controls.Add(textBox2);
             pnListado.Controls.Add(label3);
@@ -632,7 +311,7 @@
             // textBox6
             // 
             textBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox6.BackColor = Color.FromArgb(130, 149, 169);
+            textBox6.BackColor = Color.Silver;
             textBox6.BorderStyle = BorderStyle.FixedSingle;
             textBox6.Enabled = false;
             textBox6.Font = new Font("Square721 BT", 12F);
@@ -661,7 +340,7 @@
             // textBox5
             // 
             textBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox5.BackColor = Color.FromArgb(130, 149, 169);
+            textBox5.BackColor = Color.Silver;
             textBox5.BorderStyle = BorderStyle.FixedSingle;
             textBox5.Enabled = false;
             textBox5.Font = new Font("Square721 BT", 12F);
@@ -690,7 +369,7 @@
             // textBox4
             // 
             textBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox4.BackColor = Color.FromArgb(130, 149, 169);
+            textBox4.BackColor = Color.Silver;
             textBox4.BorderStyle = BorderStyle.FixedSingle;
             textBox4.Enabled = false;
             textBox4.Font = new Font("Square721 BT", 12F);
@@ -711,19 +390,19 @@
             label6.ForeColor = Color.FromArgb(224, 224, 224);
             label6.Location = new Point(13, 402);
             label6.Name = "label6";
-            label6.Size = new Size(48, 15);
+            label6.Size = new Size(60, 15);
             label6.TabIndex = 28;
-            label6.Text = "Fecha:";
+            label6.Text = "Nombre:";
             // 
-            // txtFecha
+            // textBox3
             // 
-            txtFecha.BackColor = Color.FromArgb(130, 149, 169);
-            txtFecha.BorderStyle = BorderStyle.FixedSingle;
-            txtFecha.Enabled = false;
-            txtFecha.Location = new Point(13, 420);
-            txtFecha.Name = "txtFecha";
-            txtFecha.Size = new Size(113, 23);
-            txtFecha.TabIndex = 27;
+            textBox3.BackColor = Color.Silver;
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
+            textBox3.Enabled = false;
+            textBox3.Location = new Point(13, 420);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(113, 23);
+            textBox3.TabIndex = 27;
             // 
             // label5
             // 
@@ -862,9 +541,9 @@
         public Label lblTituloForm;
         public Panel pnMantenimiento;
         public Label label2;
-        public TextBox txtTefectivo;
+        public TextBox txtNombre;
         public Label label1;
-        public TextBox txtNumero;
+        public TextBox txtID;
         public Button btnEliminar;
         public Button btnCancelar;
         public Button btnGrabar;
@@ -889,30 +568,6 @@
         public Label label7;
         public TextBox textBox4;
         public Label label6;
-        public TextBox txtFecha;
-        public Label label15;
-        public TextBox txtMontoFinal;
-        public Label label14;
-        public TextBox txtDtoGral;
-        public Label label13;
-        public TextBox txtTotal;
-        public Label label12;
-        public TextBox txtDtoEfectivo;
-        public Label label11;
-        public TextBox txtSubTotal;
-        private ComboBox cmbTipo;
-        private Label label10;
-        public Label label17;
-        public TextBox txtTctaCte;
-        public Label label18;
-        public TextBox txtTtarjeta;
-        public Label label19;
-        public TextBox txtTdebito;
-        public Label label16;
-        public TextBox txtVendedorID;
-        public Label label21;
-        public TextBox txtSucursalID;
-        private ComboBox cmbLista;
-        private Label label20;
+        public TextBox textBox3;
     }
 }

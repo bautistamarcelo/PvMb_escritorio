@@ -34,6 +34,11 @@ namespace PVservices.Implementation
             return await _productosRepository.Lista(Buscar);
         }
 
+        public async Task<Productos> Obtener(int IDproducto)
+        {
+            return await _productosRepository.Obtener(IDproducto);
+        }
+
         public async Task<int> obtenerId(Productos objeto, int id)
         {
             return await _productosRepository.obtenerId(objeto, id);

@@ -10,6 +10,7 @@ namespace PVrepository.Entities
         public Rol IDRol {get; set;}
         public string urlFoto {get; set;}
         public string nombreFoto {get;set;}
+        public string nombreUsuario {get;set;}
         public string clave {get;set; }
         public int esActivo {get; set;}
         public DateTime fechaRegistro {get; set;}

@@ -7,7 +7,6 @@ namespace PVrepository.Entities
         public DateTime Fecha {get; set;}
         public int Tipo {get; set;}
         public string Numero {get; set;}
-        public Clientes ClienteID {get; set;}
         public int SubTotal {get; set;}
         public int DtoEfectivo {get; set;}
         public int Bruto {get; set;}
@@ -20,6 +19,8 @@ namespace PVrepository.Entities
         public int Ttarjeta {get; set;}
         public int Tcredito {get; set;}
         public int Situacion {get; set;}
+
+        public Clientes ClienteID {get; set;}
         public Usuarios VendedorID {get; set;}
         public Sucursales SucursalID {get; set;}
         public Listas ListaID {get; set;} 

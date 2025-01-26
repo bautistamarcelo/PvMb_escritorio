@@ -1,12 +1,8 @@
-﻿using PVpresentation.Resources;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
-
-
+﻿using System.Runtime.InteropServices;
 
 namespace PVpresentation.Formularios
 {
-    public partial class Frm_Ventas : Form
+    public partial class Frm_Compras : Form
     {
         //Variables para maximizar y minimizar formulario
         private int lx;
@@ -22,7 +18,7 @@ namespace PVpresentation.Formularios
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         //CONSTRUCTOR
-        public Frm_Ventas()
+        public Frm_Compras()
         {
             InitializeComponent();
         }
@@ -88,44 +84,6 @@ namespace PVpresentation.Formularios
         private void pnTituloFormulario_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void btnGrabar_Click(object sender, EventArgs e)
-        {
-
-            //    XElement Venta = new XElement(this.Name.ToString(),
-            //        new XElement("Fecha", txtFecha.Text.Trim()),
-            //        new XElement("Tipo", cmbTipo.Text.Trim()),
-            //        new XElement("Numero", txtNumero.Text.Trim()),
-            //        new XElement("SubTotal", txtSubTotal.Text.Trim()),
-            //        new XElement("DtoEfectivo", txtDtoEfectivo.Text.Trim()),
-            //        new XElement("Bruto", txtTotal.Text.Trim()),
-            //        new XElement("DtoGeneral", txtDtoGral.Text.Trim()),
-            //        new XElement("Monto", txtMontoFinal.Text.Trim()),
-            //        new XElement("Tefectivo", txtTefectivo.Text.Trim()),
-            //        new XElement("Tdebito", txtTdebito.Text.Trim()),
-            //        new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
-            //        new XElement("Tcredito", txtTctaCte.Text.Trim()),
-            //        new XElement("Situacion",0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
-            //        new XElement("ClienteID", VariablesGlobales.Venta01_ClienteID),
-            //        new XElement("VendedorID", VariablesGlobales.UsuarioID),
-            //        new XElement("SucursalID", VariablesGlobales.SucursalID),
-            //        new XElement("ListaID", cmbLista.SelectedIndex)
-            //        );
-            //    XElement VentaDetalle = new XElement("VentaDetalle");
-            //    foreach (Venta_Dvm item in _VentaDetalle)
-            //    {
-            //        VentaDetalle.Add(new XElement("Item",
-            //            new XElement("ProductoID", item.ProductoID),
-            //            new XElement("Cantidad", item.Cantidad),
-            //            new XElement("pOferta", item.pOferta),
-            //            new XElement("pVenta", item.pVenta),
-            //            new XElement("pTotalOferta", item.pTotalOferta),
-            //            new XElement("pTotalVenta", item.pTotalVenta)
-            //            )
-            //         );
-            //    }
-            //    Venta.Add(VentaDetalle);
         }
     }
 }

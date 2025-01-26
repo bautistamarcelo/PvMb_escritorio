@@ -20,6 +20,42 @@ namespace PVpresentation.Resources
         public static int Frm_Venta02 { get; set; } //values: 0 Cerrado / 1 Abierto
         public static int Frm_Venta03 { get; set; } //values: 0 Cerrado / 1 Abierto
 
+        public static int Venta01_ClienteID {get; set;}
+        public static string Venta01_ClienteNombre {get; set;}
+        public static string Venta01_ClienteDomicilio {get; set;}
+        public static string Venta01_ClienteCUIT {get; set;}
+        public static string Venta01_ClienteCondicionIVA {get; set;}
+        public static int Venta01_Tipo {get; set;}
+        public static int Venta01_SubTotal {get; set;}
+        public static int Venta01_DtoEfectivo {get; set;}
+        public static int Venta01_Bruto {get; set;}
+        public static int Venta01_DtoAdicional {get; set;}
+        public static int Venta01_Monto {get; set;}
+
+        public static int Venta02_ClienteID {get; set;}
+        public static string Venta02_ClienteNombre {get; set;}
+        public static string Venta02_ClienteDomicilio {get; set;}
+        public static string Venta02_ClienteCUIT {get; set;}
+        public static string Venta02_ClienteCondicionIVA {get; set;}
+        public static int Venta02_Tipo {get; set;}
+        public static int Venta02_SubTotal {get; set;}
+        public static int Venta02_DtoEfectivo {get; set;}
+        public static int Venta02_Bruto {get; set;}
+        public static int Venta02_DtoAdicional {get; set;}
+        public static int Venta02_Monto {get; set;}
+
+        public static int Venta03_ClienteID {get; set;}
+        public static string Venta03_ClienteNombre {get; set;}
+        public static string Venta03_ClienteDomicilio {get; set;}
+        public static string Venta03_ClienteCUIT {get; set;}
+        public static string Venta03_ClienteCondicionIVA {get; set;}
+        public static int Venta03_Tipo {get; set;}
+        public static int Venta03_SubTotal {get; set;}
+        public static int Venta03_DtoEfectivo {get; set;}
+        public static int Venta03_Bruto {get; set;}
+        public static int Venta03_DtoAdicional {get; set;}
+        public static int Venta03_Monto {get; set;}
+
     }
 
 

@@ -59,10 +59,16 @@
             lblTituloForm.Size = new Size(270, 28);
             lblTituloForm.Text = "Mantenimiento / Cajas";
             // 
+            // txtBuscar
+            // 
+            txtBuscar.TabIndex = 0;
+            // 
             // btnBuscar
             // 
+            btnBuscar.Enabled = false;
             btnBuscar.FlatAppearance.BorderSize = 0;
             btnBuscar.FlatAppearance.MouseDownBackColor = Color.FromArgb(84, 141, 212);
+            btnBuscar.TabStop = false;
             btnBuscar.Click += btnBuscar_Click;
             // 
             // btnEditar
@@ -70,6 +76,8 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnEditar.TabIndex = 2;
+            btnEditar.TabStop = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
@@ -77,19 +85,25 @@
             btnNuevo.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnNuevo.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnNuevo.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnNuevo.TabIndex = 1;
             btnNuevo.Click += btnNuevo_Click;
             // 
             // btnEliminar
             // 
+            btnEliminar.Enabled = false;
             btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
+            btnEliminar.TabStop = false;
             // 
             // btnCancelar
             // 
+            btnCancelar.Enabled = false;
             btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnCancelar.TabIndex = 12;
+            btnCancelar.TabStop = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGrabar
@@ -98,6 +112,7 @@
             btnGrabar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnGrabar.TabIndex = 11;
             btnGrabar.Click += btnGrabar_Click;
             // 
             // label2
@@ -108,6 +123,8 @@
             // 
             txtNombre.Enabled = false;
             txtNombre.Location = new Point(14, 79);
+            txtNombre.TabIndex = 4;
+            txtNombre.TabStop = false;
             // 
             // label1
             // 
@@ -117,6 +134,8 @@
             // 
             txtID.Enabled = false;
             txtID.Location = new Point(14, 33);
+            txtID.TabIndex = 3;
+            txtID.TabStop = false;
             // 
             // pnMantenimiento
             // 
@@ -173,7 +192,7 @@
             cmbCondicion.Location = new Point(12, 314);
             cmbCondicion.Name = "cmbCondicion";
             cmbCondicion.Size = new Size(285, 22);
-            cmbCondicion.TabIndex = 59;
+            cmbCondicion.TabIndex = 9;
             // 
             // txtSaldoInicial
             // 
@@ -182,7 +201,7 @@
             txtSaldoInicial.Location = new Point(12, 171);
             txtSaldoInicial.Name = "txtSaldoInicial";
             txtSaldoInicial.Size = new Size(285, 22);
-            txtSaldoInicial.TabIndex = 57;
+            txtSaldoInicial.TabIndex = 6;
             // 
             // label6
             // 
@@ -203,7 +222,8 @@
             txtFechaCierre.Location = new Point(12, 216);
             txtFechaCierre.Name = "txtFechaCierre";
             txtFechaCierre.Size = new Size(286, 22);
-            txtFechaCierre.TabIndex = 58;
+            txtFechaCierre.TabIndex = 7;
+            txtFechaCierre.TabStop = false;
             // 
             // label5
             // 
@@ -224,7 +244,8 @@
             txtFechaApertura.Location = new Point(12, 124);
             txtFechaApertura.Name = "txtFechaApertura";
             txtFechaApertura.Size = new Size(285, 22);
-            txtFechaApertura.TabIndex = 56;
+            txtFechaApertura.TabIndex = 5;
+            txtFechaApertura.TabStop = false;
             // 
             // label3
             // 
@@ -245,7 +266,8 @@
             txtSaldoFinal.Location = new Point(12, 265);
             txtSaldoFinal.Name = "txtSaldoFinal";
             txtSaldoFinal.Size = new Size(285, 22);
-            txtSaldoFinal.TabIndex = 64;
+            txtSaldoFinal.TabIndex = 8;
+            txtSaldoFinal.TabStop = false;
             // 
             // label7
             // 
@@ -267,7 +289,8 @@
             txtResultado.Name = "txtResultado";
             txtResultado.ReadOnly = true;
             txtResultado.Size = new Size(285, 22);
-            txtResultado.TabIndex = 66;
+            txtResultado.TabIndex = 10;
+            txtResultado.TabStop = false;
             // 
             // label9
             // 

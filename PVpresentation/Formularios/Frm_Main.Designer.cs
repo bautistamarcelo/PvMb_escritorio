@@ -87,6 +87,7 @@
             pnLogo = new Panel();
             label1 = new Label();
             pictureBox2 = new PictureBox();
+            label2 = new Label();
             timerFechaHora = new System.Windows.Forms.Timer(components);
             panelContenedor.SuspendLayout();
             pnMain.SuspendLayout();
@@ -222,9 +223,9 @@
             // 
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(483, 37);
+            pictureBox3.Location = new Point(462, 36);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(39, 30);
+            pictureBox3.Size = new Size(65, 39);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 5;
             pictureBox3.TabStop = false;
@@ -1292,6 +1293,7 @@
             // 
             pnLogo.BackColor = Color.FromArgb(4, 41, 68);
             pnLogo.Controls.Add(label1);
+            pnLogo.Controls.Add(label2);
             pnLogo.Controls.Add(pictureBox2);
             pnLogo.Dock = DockStyle.Top;
             pnLogo.Location = new Point(0, 0);
@@ -1302,13 +1304,13 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 10F);
+            label1.Font = new Font("Play", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(48, 82);
+            label1.Location = new Point(33, 65);
             label1.Name = "label1";
-            label1.Size = new Size(141, 17);
+            label1.Size = new Size(83, 18);
             label1.TabIndex = 1;
-            label1.Text = "Ropa Kids por Mayor";
+            label1.Text = "Solucionnes";
             // 
             // pictureBox2
             // 
@@ -1319,6 +1321,17 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Play", 10F);
+            label2.ForeColor = Color.WhiteSmoke;
+            label2.Location = new Point(122, 65);
+            label2.Name = "label2";
+            label2.Size = new Size(89, 18);
+            label2.TabIndex = 3;
+            label2.Text = "Informáticas";
             // 
             // timerFechaHora
             // 
@@ -1429,5 +1442,6 @@
         private FontAwesome.Sharp.IconButton btnAdmEmpresas;
         public TextBox txtNombreUsuario;
         public TextBox txtCategoria;
+        private Label label2;
     }
 }

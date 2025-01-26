@@ -230,7 +230,7 @@ namespace PVpresentation.Formularios
             {
                 VariablesGlobales.Frm_Venta01 = 1;
                 Frm_Ventas frmVenta01 = new Frm_Ventas();
-                frmVenta01.lblTituloForm.Text = "Venta N° 1";
+                frmVenta01.lblTituloForm.Text = "Instancia de Venta N° 1";
                 frmVenta01.txtInstancia.Text = "1";
                 
                 frmVenta01.Show();
@@ -240,7 +240,7 @@ namespace PVpresentation.Formularios
             {
                 VariablesGlobales.Frm_Venta02 = 1;
                 Frm_Ventas frmVenta02 = new Frm_Ventas();
-                frmVenta02.lblTituloForm.Text = "Venta N° 2";
+                frmVenta02.lblTituloForm.Text = "Instancia de Venta N° 2";
                 frmVenta02.txtInstancia.Text = "2";
                 
                 frmVenta02.Show();
@@ -250,7 +250,7 @@ namespace PVpresentation.Formularios
             {
                 VariablesGlobales.Frm_Venta03 = 1;
                 Frm_Ventas frmVenta03 = new Frm_Ventas();
-                frmVenta03.lblTituloForm.Text = "Venta N° 3";
+                frmVenta03.lblTituloForm.Text = "Instancia de Venta N° 3";
                 frmVenta03.txtInstancia.Text = "3";
                 
                 frmVenta03.Show();

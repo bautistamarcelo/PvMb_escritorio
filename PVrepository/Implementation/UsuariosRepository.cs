@@ -43,6 +43,7 @@ namespace PVrepository.Implementation
                             },
                             urlFoto = dr["urlFoto"].ToString()!,
                             nombreFoto = dr["nombreFoto"].ToString()!,
+                            nombreUsuario = dr["nombreUsuario"].ToString()!,
                             clave = dr["clave"].ToString()!,
                             esActivo = Convert.ToInt32(dr["esActivo"]),
                             fechaRegistro = Convert.ToDateTime(dr["fechaRegistro"])
@@ -67,6 +68,7 @@ namespace PVrepository.Implementation
                 cmd.Parameters.AddWithValue("@IDRol", objeto.IDRol.IDRol);
                 cmd.Parameters.AddWithValue("@UrlFoto", objeto.urlFoto);
                 cmd.Parameters.AddWithValue("@NombreFoto", objeto.nombreFoto);
+                cmd.Parameters.AddWithValue("@nombreUsuario", objeto.nombreUsuario);
                 cmd.Parameters.AddWithValue("@Clave", objeto.clave);
                 cmd.Parameters.AddWithValue("@esActivo", objeto.esActivo);
                 cmd.Parameters.AddWithValue("@FechaRegistro", objeto.fechaRegistro);
@@ -102,6 +104,7 @@ namespace PVrepository.Implementation
                 cmd.Parameters.AddWithValue("@IDRol", objeto.IDRol.IDRol);
                 cmd.Parameters.AddWithValue("@UrlFoto", objeto.urlFoto);
                 cmd.Parameters.AddWithValue("@NombreFoto", objeto.nombreFoto);
+                cmd.Parameters.AddWithValue("@nombreUsuario", objeto.nombreUsuario);
                 cmd.Parameters.AddWithValue("@Clave", objeto.clave);
                 cmd.Parameters.AddWithValue("@esActivo", objeto.esActivo);
                 //cmd.Parameters.AddWithValue("@FechaRegistro", objeto.fechaRegistro);

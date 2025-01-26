@@ -24,18 +24,19 @@ namespace PVpresentation.Formularios
         }
         #endregion
 
-        //#region METODO PARA ARRASTRAR EL FORMULARIO
-        //private extern static void ReleaseCapture();
+        #region METODOS PARA ARRASTRAR EL FORMULARIO------------------------------------------------------------------------------------------------------------------------------------------------------------
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
 
-        //[DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        //private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        //private void pnTituloFormulario_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    ReleaseCapture();
-        //    SendMessage(this.Handle, 0x112, 0xf012, 0);
-        //}
-        //#endregion
+        private void pnTituloFormulario_MouseMove(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+        #endregion
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
@@ -111,13 +112,41 @@ namespace PVpresentation.Formularios
                 MessageBox.Show("Usuario no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             Frm_Login_NuevaClave frmCambioClave = (Frm_Login_NuevaClave)_serviceProvider.GetService(typeof(Frm_Login_NuevaClave));
             VariablesGlobales.UsuarioID = usuarioCambioClave.IDUsuario;
             VariablesGlobales.UsuarioNombre = usuarioCambioClave.nombre;
             VariablesGlobales.UsuarioClave = usuarioCambioClave.clave;
             frmCambioClave.ShowDialog();
-            
-        }   
+
+        }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtClave.Text = string.Empty;
+                txtClave.Focus();
+            }
+        }
+
+        private void txtClave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbSucursales.Focus();
+            }
+        }
+
+        private void cmbSucursales_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                btnLogin.Focus();
+            }
+        }
     }
 }

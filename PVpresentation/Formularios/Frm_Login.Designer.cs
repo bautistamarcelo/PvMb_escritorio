@@ -38,6 +38,7 @@
             pnListado = new Panel();
             pictureBox2 = new PictureBox();
             pnMantenimiento = new Panel();
+            LnkOlvideClave = new LinkLabel();
             LnkCambiarClave = new LinkLabel();
             label3 = new Label();
             cmbSucursales = new ComboBox();
@@ -47,7 +48,6 @@
             txtUsuario = new TextBox();
             btnCancelar = new Button();
             btnLogin = new Button();
-            LnkOlvideClave = new LinkLabel();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnl_Contenedor.SuspendLayout();
@@ -69,12 +69,13 @@
             pnTituloFormulario.Name = "pnTituloFormulario";
             pnTituloFormulario.Size = new Size(605, 50);
             pnTituloFormulario.TabIndex = 50;
+            pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
             // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Image = Properties.Resources.LogoMB2;
-            pictureBox1.Location = new Point(12, 4);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(535, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(67, 43);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -105,6 +106,7 @@
             // 
             lblTituloForm.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTituloForm.AutoSize = true;
+            lblTituloForm.Enabled = false;
             lblTituloForm.Font = new Font("EngraversGothic BT", 20F);
             lblTituloForm.ForeColor = Color.White;
             lblTituloForm.Location = new Point(225, 9);
@@ -120,7 +122,7 @@
             pnl_Contenedor.Dock = DockStyle.Top;
             pnl_Contenedor.Location = new Point(0, 50);
             pnl_Contenedor.Name = "pnl_Contenedor";
-            pnl_Contenedor.Size = new Size(605, 325);
+            pnl_Contenedor.Size = new Size(605, 309);
             pnl_Contenedor.TabIndex = 51;
             // 
             // pnListado
@@ -130,16 +132,16 @@
             pnListado.Controls.Add(pictureBox2);
             pnListado.Location = new Point(-2, 0);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(306, 323);
+            pnListado.Size = new Size(306, 309);
             pnListado.TabIndex = 3;
             // 
             // pictureBox2
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(27, 55);
+            pictureBox2.Image = Properties.Resources.Logo_PV_SinFondo;
+            pictureBox2.Location = new Point(28, 37);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(240, 225);
+            pictureBox2.Size = new Size(254, 211);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -160,14 +162,25 @@
             pnMantenimiento.Controls.Add(btnLogin);
             pnMantenimiento.Location = new Point(303, 0);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(302, 323);
+            pnMantenimiento.Size = new Size(302, 309);
             pnMantenimiento.TabIndex = 2;
+            // 
+            // LnkOlvideClave
+            // 
+            LnkOlvideClave.AutoSize = true;
+            LnkOlvideClave.LinkColor = Color.FromArgb(255, 128, 128);
+            LnkOlvideClave.Location = new Point(169, 224);
+            LnkOlvideClave.Name = "LnkOlvideClave";
+            LnkOlvideClave.Size = new Size(114, 15);
+            LnkOlvideClave.TabIndex = 39;
+            LnkOlvideClave.TabStop = true;
+            LnkOlvideClave.Text = "Olvié mi Contraseña";
             // 
             // LnkCambiarClave
             // 
             LnkCambiarClave.AutoSize = true;
             LnkCambiarClave.LinkColor = Color.SteelBlue;
-            LnkCambiarClave.Location = new Point(199, 136);
+            LnkCambiarClave.Location = new Point(14, 224);
             LnkCambiarClave.Name = "LnkCambiarClave";
             LnkCambiarClave.Size = new Size(84, 15);
             LnkCambiarClave.TabIndex = 38;
@@ -196,7 +209,8 @@
             cmbSucursales.Location = new Point(14, 176);
             cmbSucursales.Name = "cmbSucursales";
             cmbSucursales.Size = new Size(269, 23);
-            cmbSucursales.TabIndex = 36;
+            cmbSucursales.TabIndex = 2;
+            cmbSucursales.KeyDown += cmbSucursales_KeyDown;
             // 
             // label2
             // 
@@ -216,7 +230,8 @@
             txtClave.Location = new Point(14, 110);
             txtClave.Name = "txtClave";
             txtClave.Size = new Size(269, 23);
-            txtClave.TabIndex = 25;
+            txtClave.TabIndex = 1;
+            txtClave.KeyDown += txtClave_KeyDown;
             // 
             // label1
             // 
@@ -236,7 +251,8 @@
             txtUsuario.Location = new Point(14, 55);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(269, 23);
-            txtUsuario.TabIndex = 23;
+            txtUsuario.TabIndex = 0;
+            txtUsuario.KeyDown += txtUsuario_KeyDown;
             // 
             // btnCancelar
             // 
@@ -247,10 +263,11 @@
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(178, 271);
+            btnCancelar.Location = new Point(169, 261);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
-            btnCancelar.TabIndex = 21;
+            btnCancelar.TabIndex = 4;
+            btnCancelar.TabStop = false;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
@@ -264,30 +281,19 @@
             btnLogin.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.ForeColor = Color.WhiteSmoke;
-            btnLogin.Location = new Point(37, 272);
+            btnLogin.Location = new Point(28, 262);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(86, 32);
-            btnLogin.TabIndex = 20;
+            btnLogin.TabIndex = 3;
             btnLogin.Text = "Ingresar";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
-            // 
-            // LnkOlvideClave
-            // 
-            LnkOlvideClave.AutoSize = true;
-            LnkOlvideClave.LinkColor = Color.FromArgb(255, 128, 128);
-            LnkOlvideClave.Location = new Point(169, 212);
-            LnkOlvideClave.Name = "LnkOlvideClave";
-            LnkOlvideClave.Size = new Size(114, 15);
-            LnkOlvideClave.TabIndex = 39;
-            LnkOlvideClave.TabStop = true;
-            LnkOlvideClave.Text = "Olvié mi Contraseña";
             // 
             // Frm_Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(605, 371);
+            ClientSize = new Size(605, 359);
             Controls.Add(pnl_Contenedor);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;

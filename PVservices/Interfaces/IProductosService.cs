@@ -8,5 +8,6 @@ namespace PVservices.Interfaces
         Task<string> crear(Productos objeto);
         Task<string> editar(Productos objeto);
         Task<int> obtenerId(Productos objeto, int id);
+        Task<Productos> Obtener(int IDproducto);
     }
 }

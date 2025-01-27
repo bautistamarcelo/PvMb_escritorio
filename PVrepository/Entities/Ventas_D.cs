@@ -4,7 +4,7 @@ namespace PVrepository.Entities
     public class Ventas_D
     {
         public int ID {get; set;}
-        public Ventas_E VentaID {get; set;}
+        public int VentaID {get; set;}
         public Productos ProductoID {get; set;}
         public int Cantidad {get; set;}
         public int pOferta {get; set;}

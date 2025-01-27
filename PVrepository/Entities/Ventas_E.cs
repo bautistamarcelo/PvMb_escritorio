@@ -23,7 +23,7 @@ namespace PVrepository.Entities
         public Clientes ClienteID {get; set;}
         public Usuarios VendedorID {get; set;}
         public Sucursales SucursalID {get; set;}
-        public Listas ListaID {get; set;} 
-
+        public Listas ListaID {get; set;}
+        public List<Ventas_D>VentaDetalle {get; set;}
     }
 }

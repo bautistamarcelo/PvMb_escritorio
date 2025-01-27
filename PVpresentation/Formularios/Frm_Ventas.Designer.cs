@@ -55,7 +55,7 @@
             label14 = new Label();
             txtDtoGral = new TextBox();
             label13 = new Label();
-            txtTotal = new TextBox();
+            txtBruto = new TextBox();
             label12 = new Label();
             txtDtoEfectivo = new TextBox();
             label11 = new Label();
@@ -71,22 +71,22 @@
             btnGrabar = new Button();
             pnListado = new Panel();
             label9 = new Label();
-            textBox6 = new TextBox();
+            txtBruto1 = new TextBox();
             label8 = new Label();
-            textBox5 = new TextBox();
+            txtDtoEfectivo1 = new TextBox();
             label7 = new Label();
-            textBox4 = new TextBox();
+            txtSubTotal1 = new TextBox();
             label6 = new Label();
             txtFecha = new TextBox();
             label5 = new Label();
-            textBox2 = new TextBox();
+            txtCantidad = new TextBox();
             label3 = new Label();
-            textBox1 = new TextBox();
-            button1 = new Button();
+            txtBuscarProducto = new TextBox();
+            btnBuscarProducto = new Button();
             dgvListado = new DataGridView();
             label4 = new Label();
-            txtBuscar = new TextBox();
-            btnBuscar = new Button();
+            txtBuscarCliente = new TextBox();
+            btnBuscarCliente = new Button();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnRestaurar).BeginInit();
@@ -222,7 +222,7 @@
             pnMantenimiento.Controls.Add(label14);
             pnMantenimiento.Controls.Add(txtDtoGral);
             pnMantenimiento.Controls.Add(label13);
-            pnMantenimiento.Controls.Add(txtTotal);
+            pnMantenimiento.Controls.Add(txtBruto);
             pnMantenimiento.Controls.Add(label12);
             pnMantenimiento.Controls.Add(txtDtoEfectivo);
             pnMantenimiento.Controls.Add(label11);
@@ -327,6 +327,8 @@
             txtTctaCte.Name = "txtTctaCte";
             txtTctaCte.Size = new Size(113, 23);
             txtTctaCte.TabIndex = 59;
+            txtTctaCte.Text = "0";
+            txtTctaCte.TextAlign = HorizontalAlignment.Right;
             // 
             // label18
             // 
@@ -347,6 +349,8 @@
             txtTtarjeta.Name = "txtTtarjeta";
             txtTtarjeta.Size = new Size(113, 23);
             txtTtarjeta.TabIndex = 57;
+            txtTtarjeta.Text = "0";
+            txtTtarjeta.TextAlign = HorizontalAlignment.Right;
             // 
             // label19
             // 
@@ -367,6 +371,8 @@
             txtTdebito.Name = "txtTdebito";
             txtTdebito.Size = new Size(113, 23);
             txtTdebito.TabIndex = 55;
+            txtTdebito.Text = "0";
+            txtTdebito.TextAlign = HorizontalAlignment.Right;
             // 
             // label15
             // 
@@ -390,6 +396,8 @@
             txtMontoFinal.Size = new Size(113, 25);
             txtMontoFinal.TabIndex = 53;
             txtMontoFinal.TabStop = false;
+            txtMontoFinal.Text = "0";
+            txtMontoFinal.TextAlign = HorizontalAlignment.Right;
             // 
             // label14
             // 
@@ -411,6 +419,8 @@
             txtDtoGral.Size = new Size(113, 23);
             txtDtoGral.TabIndex = 51;
             txtDtoGral.TabStop = false;
+            txtDtoGral.Text = "0";
+            txtDtoGral.TextAlign = HorizontalAlignment.Right;
             // 
             // label13
             // 
@@ -423,17 +433,19 @@
             label13.TabIndex = 50;
             label13.Text = "Total";
             // 
-            // txtTotal
+            // txtBruto
             // 
-            txtTotal.BackColor = Color.FromArgb(130, 149, 169);
-            txtTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtTotal.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtTotal.Location = new Point(25, 204);
-            txtTotal.Name = "txtTotal";
-            txtTotal.ReadOnly = true;
-            txtTotal.Size = new Size(113, 25);
-            txtTotal.TabIndex = 49;
-            txtTotal.TabStop = false;
+            txtBruto.BackColor = Color.FromArgb(130, 149, 169);
+            txtBruto.BorderStyle = BorderStyle.FixedSingle;
+            txtBruto.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            txtBruto.Location = new Point(25, 204);
+            txtBruto.Name = "txtBruto";
+            txtBruto.ReadOnly = true;
+            txtBruto.Size = new Size(113, 25);
+            txtBruto.TabIndex = 49;
+            txtBruto.TabStop = false;
+            txtBruto.Text = "0";
+            txtBruto.TextAlign = HorizontalAlignment.Right;
             // 
             // label12
             // 
@@ -456,6 +468,8 @@
             txtDtoEfectivo.Size = new Size(113, 23);
             txtDtoEfectivo.TabIndex = 47;
             txtDtoEfectivo.TabStop = false;
+            txtDtoEfectivo.Text = "0";
+            txtDtoEfectivo.TextAlign = HorizontalAlignment.Right;
             // 
             // label11
             // 
@@ -479,6 +493,8 @@
             txtSubTotal.Size = new Size(113, 25);
             txtSubTotal.TabIndex = 45;
             txtSubTotal.TabStop = false;
+            txtSubTotal.Text = "0";
+            txtSubTotal.TextAlign = HorizontalAlignment.Right;
             // 
             // cmbTipo
             // 
@@ -519,6 +535,8 @@
             txtTefectivo.Name = "txtTefectivo";
             txtTefectivo.Size = new Size(113, 23);
             txtTefectivo.TabIndex = 25;
+            txtTefectivo.Text = "0";
+            txtTefectivo.TextAlign = HorizontalAlignment.Right;
             // 
             // label1
             // 
@@ -541,6 +559,7 @@
             txtNumero.Size = new Size(112, 23);
             txtNumero.TabIndex = 23;
             txtNumero.TabStop = false;
+            txtNumero.TextAlign = HorizontalAlignment.Right;
             // 
             // btnEliminar
             // 
@@ -587,7 +606,7 @@
             btnGrabar.Name = "btnGrabar";
             btnGrabar.Size = new Size(86, 32);
             btnGrabar.TabIndex = 20;
-            btnGrabar.Text = "Grabar";
+            btnGrabar.Text = "Registrar";
             btnGrabar.UseVisualStyleBackColor = false;
             btnGrabar.Click += btnGrabar_Click;
             // 
@@ -596,22 +615,22 @@
             pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnListado.BackColor = Color.FromArgb(45, 66, 91);
             pnListado.Controls.Add(label9);
-            pnListado.Controls.Add(textBox6);
+            pnListado.Controls.Add(txtBruto1);
             pnListado.Controls.Add(label8);
-            pnListado.Controls.Add(textBox5);
+            pnListado.Controls.Add(txtDtoEfectivo1);
             pnListado.Controls.Add(label7);
-            pnListado.Controls.Add(textBox4);
+            pnListado.Controls.Add(txtSubTotal1);
             pnListado.Controls.Add(label6);
             pnListado.Controls.Add(txtFecha);
             pnListado.Controls.Add(label5);
-            pnListado.Controls.Add(textBox2);
+            pnListado.Controls.Add(txtCantidad);
             pnListado.Controls.Add(label3);
-            pnListado.Controls.Add(textBox1);
-            pnListado.Controls.Add(button1);
+            pnListado.Controls.Add(txtBuscarProducto);
+            pnListado.Controls.Add(btnBuscarProducto);
             pnListado.Controls.Add(dgvListado);
             pnListado.Controls.Add(label4);
-            pnListado.Controls.Add(txtBuscar);
-            pnListado.Controls.Add(btnBuscar);
+            pnListado.Controls.Add(txtBuscarCliente);
+            pnListado.Controls.Add(btnBuscarCliente);
             pnListado.Location = new Point(0, 45);
             pnListado.Name = "pnListado";
             pnListado.Size = new Size(651, 467);
@@ -629,22 +648,22 @@
             label9.TabIndex = 34;
             label9.Text = "Total";
             // 
-            // textBox6
+            // txtBruto1
             // 
-            textBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox6.BackColor = Color.FromArgb(130, 149, 169);
-            textBox6.BorderStyle = BorderStyle.FixedSingle;
-            textBox6.Enabled = false;
-            textBox6.Font = new Font("Square721 BT", 12F);
-            textBox6.ForeColor = Color.FromArgb(4, 41, 68);
-            textBox6.Location = new Point(516, 420);
-            textBox6.Name = "textBox6";
-            textBox6.ReadOnly = true;
-            textBox6.Size = new Size(113, 27);
-            textBox6.TabIndex = 33;
-            textBox6.TabStop = false;
-            textBox6.Text = "900";
-            textBox6.TextAlign = HorizontalAlignment.Center;
+            txtBruto1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtBruto1.BackColor = Color.FromArgb(130, 149, 169);
+            txtBruto1.BorderStyle = BorderStyle.FixedSingle;
+            txtBruto1.Enabled = false;
+            txtBruto1.Font = new Font("Square721 BT", 12F);
+            txtBruto1.ForeColor = Color.FromArgb(4, 41, 68);
+            txtBruto1.Location = new Point(516, 420);
+            txtBruto1.Name = "txtBruto1";
+            txtBruto1.ReadOnly = true;
+            txtBruto1.Size = new Size(113, 27);
+            txtBruto1.TabIndex = 33;
+            txtBruto1.TabStop = false;
+            txtBruto1.Text = "900";
+            txtBruto1.TextAlign = HorizontalAlignment.Center;
             // 
             // label8
             // 
@@ -658,22 +677,22 @@
             label8.TabIndex = 32;
             label8.Text = "Dto. Efectivo";
             // 
-            // textBox5
+            // txtDtoEfectivo1
             // 
-            textBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox5.BackColor = Color.FromArgb(130, 149, 169);
-            textBox5.BorderStyle = BorderStyle.FixedSingle;
-            textBox5.Enabled = false;
-            textBox5.Font = new Font("Square721 BT", 12F);
-            textBox5.ForeColor = Color.FromArgb(4, 41, 68);
-            textBox5.Location = new Point(383, 420);
-            textBox5.Name = "textBox5";
-            textBox5.ReadOnly = true;
-            textBox5.Size = new Size(113, 27);
-            textBox5.TabIndex = 31;
-            textBox5.TabStop = false;
-            textBox5.Text = "600";
-            textBox5.TextAlign = HorizontalAlignment.Center;
+            txtDtoEfectivo1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtDtoEfectivo1.BackColor = Color.FromArgb(130, 149, 169);
+            txtDtoEfectivo1.BorderStyle = BorderStyle.FixedSingle;
+            txtDtoEfectivo1.Enabled = false;
+            txtDtoEfectivo1.Font = new Font("Square721 BT", 12F);
+            txtDtoEfectivo1.ForeColor = Color.FromArgb(4, 41, 68);
+            txtDtoEfectivo1.Location = new Point(383, 420);
+            txtDtoEfectivo1.Name = "txtDtoEfectivo1";
+            txtDtoEfectivo1.ReadOnly = true;
+            txtDtoEfectivo1.Size = new Size(113, 27);
+            txtDtoEfectivo1.TabIndex = 31;
+            txtDtoEfectivo1.TabStop = false;
+            txtDtoEfectivo1.Text = "600";
+            txtDtoEfectivo1.TextAlign = HorizontalAlignment.Center;
             // 
             // label7
             // 
@@ -687,22 +706,22 @@
             label7.TabIndex = 30;
             label7.Text = "SubTotal";
             // 
-            // textBox4
+            // txtSubTotal1
             // 
-            textBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox4.BackColor = Color.FromArgb(130, 149, 169);
-            textBox4.BorderStyle = BorderStyle.FixedSingle;
-            textBox4.Enabled = false;
-            textBox4.Font = new Font("Square721 BT", 12F);
-            textBox4.ForeColor = Color.FromArgb(4, 41, 68);
-            textBox4.Location = new Point(253, 420);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(113, 27);
-            textBox4.TabIndex = 29;
-            textBox4.TabStop = false;
-            textBox4.Text = "1500";
-            textBox4.TextAlign = HorizontalAlignment.Center;
+            txtSubTotal1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtSubTotal1.BackColor = Color.FromArgb(130, 149, 169);
+            txtSubTotal1.BorderStyle = BorderStyle.FixedSingle;
+            txtSubTotal1.Enabled = false;
+            txtSubTotal1.Font = new Font("Square721 BT", 12F);
+            txtSubTotal1.ForeColor = Color.FromArgb(4, 41, 68);
+            txtSubTotal1.Location = new Point(253, 420);
+            txtSubTotal1.Name = "txtSubTotal1";
+            txtSubTotal1.ReadOnly = true;
+            txtSubTotal1.Size = new Size(113, 27);
+            txtSubTotal1.TabIndex = 29;
+            txtSubTotal1.TabStop = false;
+            txtSubTotal1.Text = "1500";
+            txtSubTotal1.TextAlign = HorizontalAlignment.Center;
             // 
             // label6
             // 
@@ -722,7 +741,7 @@
             txtFecha.Enabled = false;
             txtFecha.Location = new Point(13, 420);
             txtFecha.Name = "txtFecha";
-            txtFecha.Size = new Size(113, 23);
+            txtFecha.Size = new Size(147, 23);
             txtFecha.TabIndex = 27;
             // 
             // label5
@@ -736,16 +755,16 @@
             label5.TabIndex = 23;
             label5.Text = "Cantidad:";
             // 
-            // textBox2
+            // txtCantidad
             // 
-            textBox2.BackColor = Color.Gainsboro;
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Location = new Point(77, 55);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(49, 23);
-            textBox2.TabIndex = 22;
-            textBox2.Text = "1";
-            textBox2.TextAlign = HorizontalAlignment.Center;
+            txtCantidad.BackColor = Color.Gainsboro;
+            txtCantidad.BorderStyle = BorderStyle.FixedSingle;
+            txtCantidad.Location = new Point(77, 55);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(49, 23);
+            txtCantidad.TabIndex = 22;
+            txtCantidad.Text = "1";
+            txtCantidad.TextAlign = HorizontalAlignment.Center;
             // 
             // label3
             // 
@@ -758,29 +777,30 @@
             label3.TabIndex = 21;
             label3.Text = "Artículo:";
             // 
-            // textBox1
+            // txtBuscarProducto
             // 
-            textBox1.BackColor = Color.Gainsboro;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(205, 55);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(392, 23);
-            textBox1.TabIndex = 20;
+            txtBuscarProducto.BackColor = Color.Gainsboro;
+            txtBuscarProducto.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscarProducto.Location = new Point(205, 55);
+            txtBuscarProducto.Name = "txtBuscarProducto";
+            txtBuscarProducto.Size = new Size(392, 23);
+            txtBuscarProducto.TabIndex = 20;
+            txtBuscarProducto.KeyDown += txtBuscarProducto_KeyDown;
             // 
-            // button1
+            // btnBuscarProducto
             // 
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(84, 141, 212);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.FromArgb(23, 54, 93);
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(603, 56);
-            button1.Name = "button1";
-            button1.Size = new Size(24, 22);
-            button1.TabIndex = 19;
-            button1.UseVisualStyleBackColor = true;
+            btnBuscarProducto.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBuscarProducto.Cursor = Cursors.Hand;
+            btnBuscarProducto.FlatAppearance.BorderSize = 0;
+            btnBuscarProducto.FlatAppearance.MouseDownBackColor = Color.FromArgb(84, 141, 212);
+            btnBuscarProducto.FlatStyle = FlatStyle.Flat;
+            btnBuscarProducto.ForeColor = Color.FromArgb(23, 54, 93);
+            btnBuscarProducto.Image = (Image)resources.GetObject("btnBuscarProducto.Image");
+            btnBuscarProducto.Location = new Point(603, 56);
+            btnBuscarProducto.Name = "btnBuscarProducto";
+            btnBuscarProducto.Size = new Size(24, 22);
+            btnBuscarProducto.TabIndex = 19;
+            btnBuscarProducto.UseVisualStyleBackColor = true;
             // 
             // dgvListado
             // 
@@ -802,29 +822,29 @@
             label4.TabIndex = 15;
             label4.Text = "Cliente:";
             // 
-            // txtBuscar
+            // txtBuscarCliente
             // 
-            txtBuscar.BackColor = Color.Gainsboro;
-            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
-            txtBuscar.Location = new Point(77, 15);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(520, 23);
-            txtBuscar.TabIndex = 14;
+            txtBuscarCliente.BackColor = Color.Gainsboro;
+            txtBuscarCliente.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscarCliente.Location = new Point(77, 15);
+            txtBuscarCliente.Name = "txtBuscarCliente";
+            txtBuscarCliente.Size = new Size(520, 23);
+            txtBuscarCliente.TabIndex = 14;
             // 
-            // btnBuscar
+            // btnBuscarCliente
             // 
-            btnBuscar.BackgroundImageLayout = ImageLayout.Zoom;
-            btnBuscar.Cursor = Cursors.Hand;
-            btnBuscar.FlatAppearance.BorderSize = 0;
-            btnBuscar.FlatAppearance.MouseDownBackColor = Color.FromArgb(84, 141, 212);
-            btnBuscar.FlatStyle = FlatStyle.Flat;
-            btnBuscar.ForeColor = Color.FromArgb(23, 54, 93);
-            btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.Location = new Point(603, 17);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(24, 22);
-            btnBuscar.TabIndex = 13;
-            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscarCliente.BackgroundImageLayout = ImageLayout.Zoom;
+            btnBuscarCliente.Cursor = Cursors.Hand;
+            btnBuscarCliente.FlatAppearance.BorderSize = 0;
+            btnBuscarCliente.FlatAppearance.MouseDownBackColor = Color.FromArgb(84, 141, 212);
+            btnBuscarCliente.FlatStyle = FlatStyle.Flat;
+            btnBuscarCliente.ForeColor = Color.FromArgb(23, 54, 93);
+            btnBuscarCliente.Image = (Image)resources.GetObject("btnBuscarCliente.Image");
+            btnBuscarCliente.Location = new Point(603, 17);
+            btnBuscarCliente.Name = "btnBuscarCliente";
+            btnBuscarCliente.Size = new Size(24, 22);
+            btnBuscarCliente.TabIndex = 13;
+            btnBuscarCliente.UseVisualStyleBackColor = true;
             // 
             // Frm_Ventas
             // 
@@ -840,6 +860,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Ventas";
             FormClosing += Frm_Ventas_FormClosing;
+            Load += Frm_Ventas_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).EndInit();
@@ -871,23 +892,23 @@
         public Panel pnListado;
         public DataGridView dgvListado;
         public Label label4;
-        public TextBox txtBuscar;
-        public Button btnBuscar;
+        public TextBox txtBuscarCliente;
+        public Button btnBuscarCliente;
         public Label label5;
-        public TextBox textBox2;
+        public TextBox txtCantidad;
         public Label label3;
-        public TextBox textBox1;
-        public Button button1;
+        public TextBox txtBuscarProducto;
+        public Button btnBuscarProducto;
         private PictureBox btnMaximizar;
         private PictureBox btnRestaurar;
         private PictureBox btnCerrar;
         private PictureBox btnMinimizar;
         public Label label9;
-        public TextBox textBox6;
+        public TextBox txtBruto1;
         public Label label8;
-        public TextBox textBox5;
+        public TextBox txtDtoEfectivo1;
         public Label label7;
-        public TextBox textBox4;
+        public TextBox txtSubTotal1;
         public Label label6;
         public TextBox txtFecha;
         public Label label15;
@@ -895,7 +916,7 @@
         public Label label14;
         public TextBox txtDtoGral;
         public Label label13;
-        public TextBox txtTotal;
+        public TextBox txtBruto;
         public Label label12;
         public TextBox txtDtoEfectivo;
         public Label label11;

@@ -1,0 +1,25 @@
+1. Formatear valores al mostrarlos en controles (TextBox, Label, etc.)
+Si estás mostrando los valores en un TextBox, Label o cualquier otro control, puedes formatear el valor antes de asignarlo al control.
+
+Ejemplo en Windows Forms:
+// Supongamos que tienes los siguientes valores enteros
+int costo = 1234567;
+int precioVenta = 9876543;
+int total = 1111111;
+
+// Formatear los valores con separadores de miles y dos decimales
+txtCosto.Text = (costo / 100.0).ToString("N2");
+txtPrecioVenta.Text = (precioVenta / 100.0).ToString("N2");
+lblTotal.Text = (total / 100.0).ToString("N2");
+
+2. Formatear valores en un DataGridView
+Si estás mostrando los valores en un DataGridView, puedes formatear las celdas directamente.
+
+Ejemplo en Windows Forms:
+// Supongamos que tienes un DataGridView llamado dgvProductos
+dgvProductos.Columns["Costo"].DefaultCellStyle.Format = "N2";
+dgvProductos.Columns["PrecioVenta"].DefaultCellStyle.Format = "N2";
+dgvProductos.Columns["Total"].DefaultCellStyle.Format = "N2";
+
+// Asignar los datos (ejemplo)
+dgvProductos.DataSource = ObtenerDatosProductos();

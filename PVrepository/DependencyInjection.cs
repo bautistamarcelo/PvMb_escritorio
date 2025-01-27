@@ -28,6 +28,7 @@ namespace PVrepository
             services.AddTransient<IClientesRepository, ClientesRepository>();
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
             services.AddTransient<IImpuestosRepository, ImpuestosRepository>();
+            services.AddTransient<IListasRepository, ListasRepository>();
             services.AddTransient<IMarcasRepository, MarcasRepository>();
             services.AddTransient<IProductosRepository, ProductosRepository>();
             services.AddTransient<IProveedoresRepository, ProveedoresRepository>();
@@ -35,6 +36,7 @@ namespace PVrepository
             services.AddTransient<ISucursalesRepository, SucursalesRepository>();
             services.AddTransient<ITramitesRepository, TramitesRepository>();
             services.AddTransient<IUsuariosRepository, UsuariosRepository>();
+            services.AddTransient<IVentas_E_repository, Ventas_E_respository>();
             //TODO: Agregar las interfaces de Ventas y Ventas Detalles
         }
     }

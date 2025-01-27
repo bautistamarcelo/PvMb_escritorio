@@ -22,6 +22,7 @@ namespace PVservices
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IEmpresaService, EmpresaService>();
             services.AddTransient<IImpuestosService, ImpuestosService>();
+            services.AddTransient<IListasService, ListasService>();
             services.AddTransient<IMarcasService, MarcasService>();
             services.AddTransient<IProductosService, ProductosService>();
             services.AddTransient<IProveedoresService, ProveedoresServices>();
@@ -29,6 +30,7 @@ namespace PVservices
             services.AddTransient<ISucursalesService, SucursalesService>();
             services.AddTransient<ITramitesService, TramitesService>();
             services.AddTransient<IUsuariosService, UsuariosService>();
+            services.AddTransient<IVenta_E_Service, Venta_E_Service>();
         }
     }
 }

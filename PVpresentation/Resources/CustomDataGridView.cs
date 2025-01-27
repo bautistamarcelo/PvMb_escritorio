@@ -53,7 +53,7 @@ namespace PVpresentation.Resources
                 btnEditarColumn.UseColumnTextForButtonValue = true;
                 btnEditarColumn.Width = 50;
                 btnEditarColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                btnEditarColumn.Visible = false;
+                btnEditarColumn.Visible = true;
 
                 datagrid.Columns.Add(btnEditarColumn);
 

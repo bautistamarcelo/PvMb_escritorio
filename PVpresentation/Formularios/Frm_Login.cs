@@ -82,7 +82,7 @@ namespace PVpresentation.Formularios
                 VariablesGlobales.UsuarioID = usuarioEncontrado.IDUsuario;
                 VariablesGlobales.UsuarioIDrol = usuarioEncontrado.IDRol.IDRol;
                 VariablesGlobales.RolNombre = usuarioEncontrado.IDRol.descripcion;
-                VariablesGlobales.SucursalID = cmbSucursales.SelectedIndex;
+                VariablesGlobales.SucursalID = cmbSucursales.SelectedIndex + 1;
                 VariablesGlobales.CajaID = cajaAbierta;
                 //Abrir el siguiente formulario
                 Frm_Main mainForm = (Frm_Main)_serviceProvider.GetService(typeof(Frm_Main));

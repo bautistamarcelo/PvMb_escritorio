@@ -239,6 +239,7 @@ namespace PVpresentation.Formularios
                 frmVenta01.txtInstancia.Text = "1";
                 
                 frmVenta01.Show();
+                this.WindowState = FormWindowState.Minimized;
                 return;
             }
             if (VariablesGlobales.Frm_Venta02 == 0)
@@ -248,6 +249,7 @@ namespace PVpresentation.Formularios
                 frmVenta02.lblTituloForm.Text = "Instancia de Venta N° 2";
                 frmVenta02.txtInstancia.Text = "2";
                 frmVenta02.Show();
+                this.WindowState = FormWindowState.Minimized;
                 return;
             }
             if (VariablesGlobales.Frm_Venta03 == 0)
@@ -257,6 +259,7 @@ namespace PVpresentation.Formularios
                 frmVenta03.lblTituloForm.Text = "Instancia de Venta N° 3";
                 frmVenta03.txtInstancia.Text = "3";
                 frmVenta03.Show();
+                this.WindowState = FormWindowState.Minimized;
                 return;
             }
         }

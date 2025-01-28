@@ -19,26 +19,26 @@ namespace PVrepository.Implementation
             _conexion = conexion;
         }
 
-        public async Task<int> Registrar(string ventaXml)
+        public async Task<string> Registrar(string ventaXml)
         {
-            int respuestaVentaID = 0;
+            string respuestaVentaID = "0";
 
             using (var con = _conexion.ObtenerSqLconexion())
             {
                 con.Open();
                 var cmd = new SqlCommand("SP_Venta_Registrar", con);
-                cmd.Parameters.AddWithValue("@VentaXml", ventaXml);
-                cmd.Parameters.Add("@VentaID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.AddWithValue("@VentasXml", ventaXml);
+                cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
                 {
                     await cmd.ExecuteNonQueryAsync();
-                    respuestaVentaID = Convert.ToInt32(cmd.Parameters["@VentaID"].Value)!;
+                    respuestaVentaID = Convert.ToString(cmd.Parameters["@MsjError"].Value)!;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    respuestaVentaID =0;
+                    respuestaVentaID = ex.Message;
                 }
             }
 
@@ -125,6 +125,47 @@ namespace PVrepository.Implementation
             }
             return list;
         }
-        
+
+        public async Task<string> Grabar(Ventas_E objeto)
+        {
+            string respuesta = "";
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Ventas_E_grabar", con);
+                cmd.Parameters.AddWithValue("@Fecha", objeto.Fecha);
+                cmd.Parameters.AddWithValue("@Tipo", objeto.Tipo);
+                cmd.Parameters.AddWithValue("@SubTotal", objeto.SubTotal);
+                cmd.Parameters.AddWithValue("@DtoEfectivo", objeto.DtoEfectivo);
+                cmd.Parameters.AddWithValue("@Bruto", objeto.Bruto);
+                cmd.Parameters.AddWithValue("@DtoGeneral", objeto.DtoGeneral);
+                cmd.Parameters.AddWithValue("@Monto", objeto.Monto);
+                cmd.Parameters.AddWithValue("@Tefectivo", objeto.Tefectivo);
+                cmd.Parameters.AddWithValue("@Tdebito", objeto.Tdebito);
+                cmd.Parameters.AddWithValue("@Ttarjeta", objeto.Ttarjeta);
+                cmd.Parameters.AddWithValue("@Tcredito", objeto.Tcredito);
+                cmd.Parameters.AddWithValue("@Situacion", objeto.Situacion);
+                cmd.Parameters.AddWithValue("@ClienteID", objeto.ClienteID.ID);
+                cmd.Parameters.AddWithValue("@VendedorID", objeto.VendedorID.IDUsuario);
+                cmd.Parameters.AddWithValue("@SucursalID", objeto.SucursalID.ID);
+                cmd.Parameters.AddWithValue("@ListaID", objeto.ListaID.ID);
+                //cmd.Parameters.AddWithValue("@DetalleVenta", objeto.VentaDetalle);
+                cmd.Parameters.Add("@MjeVenta", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    respuesta = Convert.ToString(cmd.Parameters["@MsjError"].Value)!;
+                }
+                catch (Exception ex)
+                {
+                    respuesta = ex.Message;
+                }
+            }
+
+            return respuesta;
+        }
     }
 }

@@ -38,12 +38,18 @@
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
             pnMantenimiento = new Panel();
+            label9 = new Label();
+            label6 = new Label();
+            txtBruto = new TextBox();
+            txtSaldoPago = new TextBox();
+            label8 = new Label();
             label16 = new Label();
+            txtDtoEfectivo = new TextBox();
             txtVendedorID = new TextBox();
+            label7 = new Label();
             label21 = new Label();
+            txtSubTotal = new TextBox();
             txtSucursalID = new TextBox();
-            cmbLista = new ComboBox();
-            label20 = new Label();
             label17 = new Label();
             txtTctaCte = new TextBox();
             label18 = new Label();
@@ -54,29 +60,17 @@
             txtMontoFinal = new TextBox();
             label14 = new Label();
             txtDtoGral = new TextBox();
-            label13 = new Label();
-            txtBruto = new TextBox();
-            label12 = new Label();
-            txtDtoEfectivo = new TextBox();
-            label11 = new Label();
-            txtSubTotal = new TextBox();
-            cmbTipo = new ComboBox();
-            label10 = new Label();
             label2 = new Label();
             txtTefectivo = new TextBox();
             label1 = new Label();
             txtNumero = new TextBox();
-            btnEliminar = new Button();
             btnCancelar = new Button();
             btnGrabar = new Button();
+            cmbLista = new ComboBox();
+            label20 = new Label();
+            cmbTipo = new ComboBox();
+            label10 = new Label();
             pnListado = new Panel();
-            label9 = new Label();
-            txtBruto1 = new TextBox();
-            label8 = new Label();
-            txtDtoEfectivo1 = new TextBox();
-            label7 = new Label();
-            txtSubTotal1 = new TextBox();
-            label6 = new Label();
             txtFecha = new TextBox();
             label5 = new Label();
             txtCantidad = new TextBox();
@@ -113,7 +107,6 @@
             pnTituloFormulario.Name = "pnTituloFormulario";
             pnTituloFormulario.Size = new Size(968, 45);
             pnTituloFormulario.TabIndex = 50;
-            pnTituloFormulario.Paint += pnTituloFormulario_Paint;
             pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
             // 
             // btnMaximizar
@@ -176,6 +169,7 @@
             txtInstancia.Name = "txtInstancia";
             txtInstancia.Size = new Size(34, 23);
             txtInstancia.TabIndex = 47;
+            txtInstancia.TabStop = false;
             txtInstancia.Text = "0";
             txtInstancia.Visible = false;
             // 
@@ -205,12 +199,18 @@
             // pnMantenimiento
             // 
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
+            pnMantenimiento.Controls.Add(label9);
+            pnMantenimiento.Controls.Add(label6);
+            pnMantenimiento.Controls.Add(txtBruto);
+            pnMantenimiento.Controls.Add(txtSaldoPago);
+            pnMantenimiento.Controls.Add(label8);
             pnMantenimiento.Controls.Add(label16);
+            pnMantenimiento.Controls.Add(txtDtoEfectivo);
             pnMantenimiento.Controls.Add(txtVendedorID);
+            pnMantenimiento.Controls.Add(label7);
             pnMantenimiento.Controls.Add(label21);
+            pnMantenimiento.Controls.Add(txtSubTotal);
             pnMantenimiento.Controls.Add(txtSucursalID);
-            pnMantenimiento.Controls.Add(cmbLista);
-            pnMantenimiento.Controls.Add(label20);
             pnMantenimiento.Controls.Add(label17);
             pnMantenimiento.Controls.Add(txtTctaCte);
             pnMantenimiento.Controls.Add(label18);
@@ -221,19 +221,10 @@
             pnMantenimiento.Controls.Add(txtMontoFinal);
             pnMantenimiento.Controls.Add(label14);
             pnMantenimiento.Controls.Add(txtDtoGral);
-            pnMantenimiento.Controls.Add(label13);
-            pnMantenimiento.Controls.Add(txtBruto);
-            pnMantenimiento.Controls.Add(label12);
-            pnMantenimiento.Controls.Add(txtDtoEfectivo);
-            pnMantenimiento.Controls.Add(label11);
-            pnMantenimiento.Controls.Add(txtSubTotal);
-            pnMantenimiento.Controls.Add(cmbTipo);
-            pnMantenimiento.Controls.Add(label10);
             pnMantenimiento.Controls.Add(label2);
             pnMantenimiento.Controls.Add(txtTefectivo);
             pnMantenimiento.Controls.Add(label1);
             pnMantenimiento.Controls.Add(txtNumero);
-            pnMantenimiento.Controls.Add(btnEliminar);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnGrabar);
             pnMantenimiento.Dock = DockStyle.Right;
@@ -242,78 +233,167 @@
             pnMantenimiento.Size = new Size(318, 467);
             pnMantenimiento.TabIndex = 52;
             // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label9.AutoSize = true;
+            label9.Font = new Font("EngraversGothic BT", 10F);
+            label9.ForeColor = Color.FromArgb(224, 224, 224);
+            label9.Location = new Point(13, 154);
+            label9.Name = "label9";
+            label9.Size = new Size(39, 15);
+            label9.TabIndex = 34;
+            label9.Text = "Total";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("EngraversGothic BT", 10F);
+            label6.ForeColor = Color.FromArgb(224, 224, 224);
+            label6.Location = new Point(178, 256);
+            label6.Name = "label6";
+            label6.Size = new Size(47, 15);
+            label6.TabIndex = 70;
+            label6.Text = "Saldo:";
+            // 
+            // txtBruto
+            // 
+            txtBruto.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtBruto.BackColor = Color.FromArgb(130, 149, 169);
+            txtBruto.BorderStyle = BorderStyle.FixedSingle;
+            txtBruto.Font = new Font("Square721 BT", 12F);
+            txtBruto.ForeColor = Color.FromArgb(4, 41, 68);
+            txtBruto.Location = new Point(13, 172);
+            txtBruto.Name = "txtBruto";
+            txtBruto.ReadOnly = true;
+            txtBruto.Size = new Size(124, 27);
+            txtBruto.TabIndex = 33;
+            txtBruto.TabStop = false;
+            txtBruto.Text = "900";
+            txtBruto.TextAlign = HorizontalAlignment.Right;
+            // 
+            // txtSaldoPago
+            // 
+            txtSaldoPago.BackColor = Color.FromArgb(130, 149, 169);
+            txtSaldoPago.BorderStyle = BorderStyle.FixedSingle;
+            txtSaldoPago.Font = new Font("Square721 BT", 12F);
+            txtSaldoPago.Location = new Point(178, 274);
+            txtSaldoPago.Name = "txtSaldoPago";
+            txtSaldoPago.ReadOnly = true;
+            txtSaldoPago.Size = new Size(124, 27);
+            txtSaldoPago.TabIndex = 69;
+            txtSaldoPago.TabStop = false;
+            txtSaldoPago.Text = "0";
+            txtSaldoPago.TextAlign = HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label8.AutoSize = true;
+            label8.Font = new Font("EngraversGothic BT", 10F);
+            label8.ForeColor = Color.FromArgb(224, 224, 224);
+            label8.Location = new Point(13, 96);
+            label8.Name = "label8";
+            label8.Size = new Size(94, 15);
+            label8.TabIndex = 32;
+            label8.Text = "Dto. Efectivo";
+            // 
             // label16
             // 
             label16.AutoSize = true;
             label16.Font = new Font("EngraversGothic BT", 10F);
             label16.ForeColor = Color.FromArgb(224, 224, 224);
-            label16.Location = new Point(26, 342);
+            label16.Location = new Point(46, 364);
             label16.Name = "label16";
             label16.Size = new Size(24, 15);
             label16.TabIndex = 68;
             label16.Text = "ID:";
             // 
+            // txtDtoEfectivo
+            // 
+            txtDtoEfectivo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtDtoEfectivo.BackColor = Color.FromArgb(130, 149, 169);
+            txtDtoEfectivo.BorderStyle = BorderStyle.FixedSingle;
+            txtDtoEfectivo.Font = new Font("Square721 BT", 12F);
+            txtDtoEfectivo.ForeColor = Color.FromArgb(4, 41, 68);
+            txtDtoEfectivo.Location = new Point(13, 114);
+            txtDtoEfectivo.Name = "txtDtoEfectivo";
+            txtDtoEfectivo.ReadOnly = true;
+            txtDtoEfectivo.Size = new Size(124, 27);
+            txtDtoEfectivo.TabIndex = 31;
+            txtDtoEfectivo.TabStop = false;
+            txtDtoEfectivo.Text = "600";
+            txtDtoEfectivo.TextAlign = HorizontalAlignment.Right;
+            // 
             // txtVendedorID
             // 
             txtVendedorID.BackColor = Color.FromArgb(130, 149, 169);
             txtVendedorID.BorderStyle = BorderStyle.FixedSingle;
-            txtVendedorID.Location = new Point(26, 360);
+            txtVendedorID.Location = new Point(46, 382);
             txtVendedorID.Name = "txtVendedorID";
             txtVendedorID.ReadOnly = true;
-            txtVendedorID.Size = new Size(112, 23);
+            txtVendedorID.Size = new Size(24, 23);
             txtVendedorID.TabIndex = 67;
             txtVendedorID.TabStop = false;
             txtVendedorID.Visible = false;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new Font("EngraversGothic BT", 10F);
+            label7.ForeColor = Color.FromArgb(224, 224, 224);
+            label7.Location = new Point(14, 37);
+            label7.Name = "label7";
+            label7.Size = new Size(63, 15);
+            label7.TabIndex = 30;
+            label7.Text = "SubTotal";
             // 
             // label21
             // 
             label21.AutoSize = true;
             label21.Font = new Font("EngraversGothic BT", 10F);
             label21.ForeColor = Color.FromArgb(224, 224, 224);
-            label21.Location = new Point(179, 342);
+            label21.Location = new Point(76, 364);
             label21.Name = "label21";
             label21.Size = new Size(24, 15);
             label21.TabIndex = 66;
             label21.Text = "ID:";
             // 
+            // txtSubTotal
+            // 
+            txtSubTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtSubTotal.BackColor = Color.FromArgb(130, 149, 169);
+            txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
+            txtSubTotal.Font = new Font("Square721 BT", 12F);
+            txtSubTotal.ForeColor = Color.FromArgb(4, 41, 68);
+            txtSubTotal.Location = new Point(14, 55);
+            txtSubTotal.Name = "txtSubTotal";
+            txtSubTotal.ReadOnly = true;
+            txtSubTotal.Size = new Size(124, 27);
+            txtSubTotal.TabIndex = 29;
+            txtSubTotal.TabStop = false;
+            txtSubTotal.Text = "1500";
+            txtSubTotal.TextAlign = HorizontalAlignment.Right;
+            // 
             // txtSucursalID
             // 
             txtSucursalID.BackColor = Color.FromArgb(130, 149, 169);
             txtSucursalID.BorderStyle = BorderStyle.FixedSingle;
-            txtSucursalID.Location = new Point(179, 360);
+            txtSucursalID.Location = new Point(76, 382);
             txtSucursalID.Name = "txtSucursalID";
             txtSucursalID.ReadOnly = true;
-            txtSucursalID.Size = new Size(112, 23);
+            txtSucursalID.Size = new Size(25, 23);
             txtSucursalID.TabIndex = 65;
             txtSucursalID.TabStop = false;
             txtSucursalID.Visible = false;
-            // 
-            // cmbLista
-            // 
-            cmbLista.BackColor = Color.Gainsboro;
-            cmbLista.FormattingEnabled = true;
-            cmbLista.Location = new Point(178, 110);
-            cmbLista.Name = "cmbLista";
-            cmbLista.Size = new Size(113, 23);
-            cmbLista.TabIndex = 64;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("EngraversGothic BT", 10F);
-            label20.ForeColor = Color.FromArgb(224, 224, 224);
-            label20.Location = new Point(178, 92);
-            label20.Name = "label20";
-            label20.Size = new Size(109, 15);
-            label20.TabIndex = 63;
-            label20.Text = "Lista de Precios";
             // 
             // label17
             // 
             label17.AutoSize = true;
             label17.Font = new Font("EngraversGothic BT", 10F);
             label17.ForeColor = Color.FromArgb(224, 224, 224);
-            label17.Location = new Point(179, 282);
+            label17.Location = new Point(179, 206);
             label17.Name = "label17";
             label17.Size = new Size(63, 15);
             label17.TabIndex = 60;
@@ -323,19 +403,21 @@
             // 
             txtTctaCte.BackColor = Color.Gainsboro;
             txtTctaCte.BorderStyle = BorderStyle.FixedSingle;
-            txtTctaCte.Location = new Point(178, 300);
+            txtTctaCte.Font = new Font("Square721 BT", 12F);
+            txtTctaCte.Location = new Point(178, 224);
             txtTctaCte.Name = "txtTctaCte";
-            txtTctaCte.Size = new Size(113, 23);
+            txtTctaCte.Size = new Size(124, 27);
             txtTctaCte.TabIndex = 59;
             txtTctaCte.Text = "0";
             txtTctaCte.TextAlign = HorizontalAlignment.Right;
+            txtTctaCte.KeyDown += txtTctaCte_KeyDown;
             // 
             // label18
             // 
             label18.AutoSize = true;
             label18.Font = new Font("EngraversGothic BT", 10F);
             label18.ForeColor = Color.FromArgb(224, 224, 224);
-            label18.Location = new Point(179, 235);
+            label18.Location = new Point(180, 154);
             label18.Name = "label18";
             label18.Size = new Size(52, 15);
             label18.TabIndex = 58;
@@ -345,19 +427,21 @@
             // 
             txtTtarjeta.BackColor = Color.Gainsboro;
             txtTtarjeta.BorderStyle = BorderStyle.FixedSingle;
-            txtTtarjeta.Location = new Point(178, 253);
+            txtTtarjeta.Font = new Font("Square721 BT", 12F);
+            txtTtarjeta.Location = new Point(179, 172);
             txtTtarjeta.Name = "txtTtarjeta";
-            txtTtarjeta.Size = new Size(113, 23);
+            txtTtarjeta.Size = new Size(124, 27);
             txtTtarjeta.TabIndex = 57;
             txtTtarjeta.Text = "0";
             txtTtarjeta.TextAlign = HorizontalAlignment.Right;
+            txtTtarjeta.KeyDown += txtTtarjeta_KeyDown;
             // 
             // label19
             // 
             label19.AutoSize = true;
             label19.Font = new Font("EngraversGothic BT", 10F);
             label19.ForeColor = Color.FromArgb(224, 224, 224);
-            label19.Location = new Point(179, 187);
+            label19.Location = new Point(179, 96);
             label19.Name = "label19";
             label19.Size = new Size(48, 15);
             label19.TabIndex = 56;
@@ -367,19 +451,21 @@
             // 
             txtTdebito.BackColor = Color.Gainsboro;
             txtTdebito.BorderStyle = BorderStyle.FixedSingle;
-            txtTdebito.Location = new Point(178, 205);
+            txtTdebito.Font = new Font("Square721 BT", 12F);
+            txtTdebito.Location = new Point(178, 114);
             txtTdebito.Name = "txtTdebito";
-            txtTdebito.Size = new Size(113, 23);
+            txtTdebito.Size = new Size(124, 27);
             txtTdebito.TabIndex = 55;
             txtTdebito.Text = "0";
             txtTdebito.TextAlign = HorizontalAlignment.Right;
+            txtTdebito.KeyDown += txtTdebito_KeyDown;
             // 
             // label15
             // 
             label15.AutoSize = true;
             label15.Font = new Font("EngraversGothic BT", 10F);
             label15.ForeColor = Color.FromArgb(224, 224, 224);
-            label15.Location = new Point(26, 283);
+            label15.Location = new Point(15, 256);
             label15.Name = "label15";
             label15.Size = new Size(80, 15);
             label15.TabIndex = 54;
@@ -389,11 +475,11 @@
             // 
             txtMontoFinal.BackColor = Color.FromArgb(130, 149, 169);
             txtMontoFinal.BorderStyle = BorderStyle.FixedSingle;
-            txtMontoFinal.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtMontoFinal.Location = new Point(25, 301);
+            txtMontoFinal.Font = new Font("Square721 BT", 12F);
+            txtMontoFinal.Location = new Point(14, 274);
             txtMontoFinal.Name = "txtMontoFinal";
             txtMontoFinal.ReadOnly = true;
-            txtMontoFinal.Size = new Size(113, 25);
+            txtMontoFinal.Size = new Size(124, 27);
             txtMontoFinal.TabIndex = 53;
             txtMontoFinal.TabStop = false;
             txtMontoFinal.Text = "0";
@@ -404,7 +490,7 @@
             label14.AutoSize = true;
             label14.Font = new Font("EngraversGothic BT", 10F);
             label14.ForeColor = Color.FromArgb(224, 224, 224);
-            label14.Location = new Point(26, 233);
+            label14.Location = new Point(15, 206);
             label14.Name = "label14";
             label14.Size = new Size(96, 15);
             label14.TabIndex = 52;
@@ -414,114 +500,22 @@
             // 
             txtDtoGral.BackColor = Color.Gainsboro;
             txtDtoGral.BorderStyle = BorderStyle.FixedSingle;
-            txtDtoGral.Location = new Point(25, 251);
+            txtDtoGral.Font = new Font("Square721 BT", 12F);
+            txtDtoGral.Location = new Point(14, 224);
             txtDtoGral.Name = "txtDtoGral";
-            txtDtoGral.Size = new Size(113, 23);
+            txtDtoGral.Size = new Size(124, 27);
             txtDtoGral.TabIndex = 51;
             txtDtoGral.TabStop = false;
             txtDtoGral.Text = "0";
             txtDtoGral.TextAlign = HorizontalAlignment.Right;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("EngraversGothic BT", 10F);
-            label13.ForeColor = Color.FromArgb(224, 224, 224);
-            label13.Location = new Point(26, 186);
-            label13.Name = "label13";
-            label13.Size = new Size(39, 15);
-            label13.TabIndex = 50;
-            label13.Text = "Total";
-            // 
-            // txtBruto
-            // 
-            txtBruto.BackColor = Color.FromArgb(130, 149, 169);
-            txtBruto.BorderStyle = BorderStyle.FixedSingle;
-            txtBruto.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtBruto.Location = new Point(25, 204);
-            txtBruto.Name = "txtBruto";
-            txtBruto.ReadOnly = true;
-            txtBruto.Size = new Size(113, 25);
-            txtBruto.TabIndex = 49;
-            txtBruto.TabStop = false;
-            txtBruto.Text = "0";
-            txtBruto.TextAlign = HorizontalAlignment.Right;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("EngraversGothic BT", 10F);
-            label12.ForeColor = Color.FromArgb(224, 224, 224);
-            label12.Location = new Point(26, 138);
-            label12.Name = "label12";
-            label12.Size = new Size(105, 15);
-            label12.TabIndex = 48;
-            label12.Text = "Dto. x Efectivo";
-            // 
-            // txtDtoEfectivo
-            // 
-            txtDtoEfectivo.BackColor = Color.FromArgb(130, 149, 169);
-            txtDtoEfectivo.BorderStyle = BorderStyle.FixedSingle;
-            txtDtoEfectivo.Location = new Point(25, 156);
-            txtDtoEfectivo.Name = "txtDtoEfectivo";
-            txtDtoEfectivo.ReadOnly = true;
-            txtDtoEfectivo.Size = new Size(113, 23);
-            txtDtoEfectivo.TabIndex = 47;
-            txtDtoEfectivo.TabStop = false;
-            txtDtoEfectivo.Text = "0";
-            txtDtoEfectivo.TextAlign = HorizontalAlignment.Right;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("EngraversGothic BT", 10F);
-            label11.ForeColor = Color.FromArgb(224, 224, 224);
-            label11.Location = new Point(26, 92);
-            label11.Name = "label11";
-            label11.Size = new Size(68, 15);
-            label11.TabIndex = 46;
-            label11.Text = "SubTotal:";
-            // 
-            // txtSubTotal
-            // 
-            txtSubTotal.BackColor = Color.FromArgb(130, 149, 169);
-            txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtSubTotal.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            txtSubTotal.Location = new Point(25, 110);
-            txtSubTotal.Name = "txtSubTotal";
-            txtSubTotal.ReadOnly = true;
-            txtSubTotal.Size = new Size(113, 25);
-            txtSubTotal.TabIndex = 45;
-            txtSubTotal.TabStop = false;
-            txtSubTotal.Text = "0";
-            txtSubTotal.TextAlign = HorizontalAlignment.Right;
-            // 
-            // cmbTipo
-            // 
-            cmbTipo.BackColor = Color.Gainsboro;
-            cmbTipo.FormattingEnabled = true;
-            cmbTipo.Location = new Point(178, 59);
-            cmbTipo.Name = "cmbTipo";
-            cmbTipo.Size = new Size(113, 23);
-            cmbTipo.TabIndex = 44;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("EngraversGothic BT", 10F);
-            label10.ForeColor = Color.FromArgb(224, 224, 224);
-            label10.Location = new Point(178, 41);
-            label10.Name = "label10";
-            label10.Size = new Size(31, 15);
-            label10.TabIndex = 43;
-            label10.Text = "Tipo";
+            txtDtoGral.KeyDown += txtDtoGral_KeyDown;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("EngraversGothic BT", 10F);
             label2.ForeColor = Color.FromArgb(224, 224, 224);
-            label2.Location = new Point(178, 141);
+            label2.Location = new Point(178, 38);
             label2.Name = "label2";
             label2.Size = new Size(61, 15);
             label2.TabIndex = 26;
@@ -531,19 +525,21 @@
             // 
             txtTefectivo.BackColor = Color.Gainsboro;
             txtTefectivo.BorderStyle = BorderStyle.FixedSingle;
-            txtTefectivo.Location = new Point(178, 159);
+            txtTefectivo.Font = new Font("Square721 BT", 12F);
+            txtTefectivo.Location = new Point(178, 56);
             txtTefectivo.Name = "txtTefectivo";
-            txtTefectivo.Size = new Size(113, 23);
+            txtTefectivo.Size = new Size(124, 27);
             txtTefectivo.TabIndex = 25;
             txtTefectivo.Text = "0";
             txtTefectivo.TextAlign = HorizontalAlignment.Right;
+            txtTefectivo.KeyDown += txtTefectivo_KeyDown;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("EngraversGothic BT", 10F);
             label1.ForeColor = Color.FromArgb(224, 224, 224);
-            label1.Location = new Point(25, 41);
+            label1.Location = new Point(14, 364);
             label1.Name = "label1";
             label1.Size = new Size(24, 15);
             label1.TabIndex = 24;
@@ -553,40 +549,24 @@
             // 
             txtNumero.BackColor = Color.FromArgb(130, 149, 169);
             txtNumero.BorderStyle = BorderStyle.FixedSingle;
-            txtNumero.Location = new Point(25, 59);
+            txtNumero.Location = new Point(14, 382);
             txtNumero.Name = "txtNumero";
             txtNumero.ReadOnly = true;
-            txtNumero.Size = new Size(112, 23);
+            txtNumero.Size = new Size(24, 23);
             txtNumero.TabIndex = 23;
             txtNumero.TabStop = false;
             txtNumero.TextAlign = HorizontalAlignment.Right;
             // 
-            // btnEliminar
-            // 
-            btnEliminar.BackColor = Color.Red;
-            btnEliminar.Cursor = Cursors.Hand;
-            btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
-            btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
-            btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
-            btnEliminar.FlatStyle = FlatStyle.Flat;
-            btnEliminar.ForeColor = Color.WhiteSmoke;
-            btnEliminar.Location = new Point(216, 411);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(86, 32);
-            btnEliminar.TabIndex = 22;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = false;
-            // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = Color.SteelBlue;
+            btnCancelar.BackColor = Color.Red;
             btnCancelar.Cursor = Cursors.Hand;
             btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(114, 411);
+            btnCancelar.Location = new Point(216, 411);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
             btnCancelar.TabIndex = 21;
@@ -610,18 +590,55 @@
             btnGrabar.UseVisualStyleBackColor = false;
             btnGrabar.Click += btnGrabar_Click;
             // 
+            // cmbLista
+            // 
+            cmbLista.BackColor = Color.Gainsboro;
+            cmbLista.Font = new Font("Square721 BT", 12F);
+            cmbLista.FormattingEnabled = true;
+            cmbLista.Location = new Point(345, 422);
+            cmbLista.Name = "cmbLista";
+            cmbLista.Size = new Size(220, 28);
+            cmbLista.TabIndex = 64;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("EngraversGothic BT", 10F);
+            label20.ForeColor = Color.FromArgb(224, 224, 224);
+            label20.Location = new Point(345, 404);
+            label20.Name = "label20";
+            label20.Size = new Size(109, 15);
+            label20.TabIndex = 63;
+            label20.Text = "Lista de Precios";
+            // 
+            // cmbTipo
+            // 
+            cmbTipo.BackColor = Color.Gainsboro;
+            cmbTipo.Font = new Font("Square721 BT", 12F);
+            cmbTipo.FormattingEnabled = true;
+            cmbTipo.Location = new Point(77, 422);
+            cmbTipo.Name = "cmbTipo";
+            cmbTipo.Size = new Size(220, 28);
+            cmbTipo.TabIndex = 44;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("EngraversGothic BT", 10F);
+            label10.ForeColor = Color.FromArgb(224, 224, 224);
+            label10.Location = new Point(77, 404);
+            label10.Name = "label10";
+            label10.Size = new Size(31, 15);
+            label10.TabIndex = 43;
+            label10.Text = "Tipo";
+            // 
             // pnListado
             // 
             pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnListado.BackColor = Color.FromArgb(45, 66, 91);
-            pnListado.Controls.Add(label9);
-            pnListado.Controls.Add(txtBruto1);
-            pnListado.Controls.Add(label8);
-            pnListado.Controls.Add(txtDtoEfectivo1);
-            pnListado.Controls.Add(label7);
-            pnListado.Controls.Add(txtSubTotal1);
-            pnListado.Controls.Add(label6);
+            pnListado.Controls.Add(cmbLista);
             pnListado.Controls.Add(txtFecha);
+            pnListado.Controls.Add(label20);
             pnListado.Controls.Add(label5);
             pnListado.Controls.Add(txtCantidad);
             pnListado.Controls.Add(label3);
@@ -631,125 +648,31 @@
             pnListado.Controls.Add(label4);
             pnListado.Controls.Add(txtBuscarCliente);
             pnListado.Controls.Add(btnBuscarCliente);
+            pnListado.Controls.Add(cmbTipo);
+            pnListado.Controls.Add(label10);
             pnListado.Location = new Point(0, 45);
             pnListado.Name = "pnListado";
             pnListado.Size = new Size(651, 467);
             pnListado.TabIndex = 51;
             // 
-            // label9
-            // 
-            label9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label9.AutoSize = true;
-            label9.Font = new Font("EngraversGothic BT", 10F);
-            label9.ForeColor = Color.FromArgb(224, 224, 224);
-            label9.Location = new Point(516, 402);
-            label9.Name = "label9";
-            label9.Size = new Size(39, 15);
-            label9.TabIndex = 34;
-            label9.Text = "Total";
-            // 
-            // txtBruto1
-            // 
-            txtBruto1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtBruto1.BackColor = Color.FromArgb(130, 149, 169);
-            txtBruto1.BorderStyle = BorderStyle.FixedSingle;
-            txtBruto1.Enabled = false;
-            txtBruto1.Font = new Font("Square721 BT", 12F);
-            txtBruto1.ForeColor = Color.FromArgb(4, 41, 68);
-            txtBruto1.Location = new Point(516, 420);
-            txtBruto1.Name = "txtBruto1";
-            txtBruto1.ReadOnly = true;
-            txtBruto1.Size = new Size(113, 27);
-            txtBruto1.TabIndex = 33;
-            txtBruto1.TabStop = false;
-            txtBruto1.Text = "900";
-            txtBruto1.TextAlign = HorizontalAlignment.Center;
-            // 
-            // label8
-            // 
-            label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label8.AutoSize = true;
-            label8.Font = new Font("EngraversGothic BT", 10F);
-            label8.ForeColor = Color.FromArgb(224, 224, 224);
-            label8.Location = new Point(383, 402);
-            label8.Name = "label8";
-            label8.Size = new Size(94, 15);
-            label8.TabIndex = 32;
-            label8.Text = "Dto. Efectivo";
-            // 
-            // txtDtoEfectivo1
-            // 
-            txtDtoEfectivo1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtDtoEfectivo1.BackColor = Color.FromArgb(130, 149, 169);
-            txtDtoEfectivo1.BorderStyle = BorderStyle.FixedSingle;
-            txtDtoEfectivo1.Enabled = false;
-            txtDtoEfectivo1.Font = new Font("Square721 BT", 12F);
-            txtDtoEfectivo1.ForeColor = Color.FromArgb(4, 41, 68);
-            txtDtoEfectivo1.Location = new Point(383, 420);
-            txtDtoEfectivo1.Name = "txtDtoEfectivo1";
-            txtDtoEfectivo1.ReadOnly = true;
-            txtDtoEfectivo1.Size = new Size(113, 27);
-            txtDtoEfectivo1.TabIndex = 31;
-            txtDtoEfectivo1.TabStop = false;
-            txtDtoEfectivo1.Text = "600";
-            txtDtoEfectivo1.TextAlign = HorizontalAlignment.Center;
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label7.AutoSize = true;
-            label7.Font = new Font("EngraversGothic BT", 10F);
-            label7.ForeColor = Color.FromArgb(224, 224, 224);
-            label7.Location = new Point(253, 402);
-            label7.Name = "label7";
-            label7.Size = new Size(63, 15);
-            label7.TabIndex = 30;
-            label7.Text = "SubTotal";
-            // 
-            // txtSubTotal1
-            // 
-            txtSubTotal1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSubTotal1.BackColor = Color.FromArgb(130, 149, 169);
-            txtSubTotal1.BorderStyle = BorderStyle.FixedSingle;
-            txtSubTotal1.Enabled = false;
-            txtSubTotal1.Font = new Font("Square721 BT", 12F);
-            txtSubTotal1.ForeColor = Color.FromArgb(4, 41, 68);
-            txtSubTotal1.Location = new Point(253, 420);
-            txtSubTotal1.Name = "txtSubTotal1";
-            txtSubTotal1.ReadOnly = true;
-            txtSubTotal1.Size = new Size(113, 27);
-            txtSubTotal1.TabIndex = 29;
-            txtSubTotal1.TabStop = false;
-            txtSubTotal1.Text = "1500";
-            txtSubTotal1.TextAlign = HorizontalAlignment.Center;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("EngraversGothic BT", 10F);
-            label6.ForeColor = Color.FromArgb(224, 224, 224);
-            label6.Location = new Point(13, 402);
-            label6.Name = "label6";
-            label6.Size = new Size(48, 15);
-            label6.TabIndex = 28;
-            label6.Text = "Fecha:";
-            // 
             // txtFecha
             // 
             txtFecha.BackColor = Color.FromArgb(130, 149, 169);
             txtFecha.BorderStyle = BorderStyle.FixedSingle;
-            txtFecha.Enabled = false;
-            txtFecha.Location = new Point(13, 420);
+            txtFecha.Font = new Font("Square721 BT", 12F);
+            txtFecha.Location = new Point(13, 59);
             txtFecha.Name = "txtFecha";
-            txtFecha.Size = new Size(147, 23);
+            txtFecha.ReadOnly = true;
+            txtFecha.Size = new Size(158, 27);
             txtFecha.TabIndex = 27;
+            txtFecha.TabStop = false;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("EngraversGothic BT", 10F);
             label5.ForeColor = Color.FromArgb(224, 224, 224);
-            label5.Location = new Point(13, 58);
+            label5.Location = new Point(190, 62);
             label5.Name = "label5";
             label5.Size = new Size(62, 15);
             label5.TabIndex = 23;
@@ -759,7 +682,7 @@
             // 
             txtCantidad.BackColor = Color.Gainsboro;
             txtCantidad.BorderStyle = BorderStyle.FixedSingle;
-            txtCantidad.Location = new Point(77, 55);
+            txtCantidad.Location = new Point(254, 59);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(49, 23);
             txtCantidad.TabIndex = 22;
@@ -771,7 +694,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("EngraversGothic BT", 10F);
             label3.ForeColor = Color.FromArgb(224, 224, 224);
-            label3.Location = new Point(140, 58);
+            label3.Location = new Point(310, 62);
             label3.Name = "label3";
             label3.Size = new Size(67, 15);
             label3.TabIndex = 21;
@@ -781,10 +704,10 @@
             // 
             txtBuscarProducto.BackColor = Color.Gainsboro;
             txtBuscarProducto.BorderStyle = BorderStyle.FixedSingle;
-            txtBuscarProducto.Location = new Point(205, 55);
+            txtBuscarProducto.Location = new Point(383, 59);
             txtBuscarProducto.Name = "txtBuscarProducto";
-            txtBuscarProducto.Size = new Size(392, 23);
-            txtBuscarProducto.TabIndex = 20;
+            txtBuscarProducto.Size = new Size(214, 23);
+            txtBuscarProducto.TabIndex = 0;
             txtBuscarProducto.KeyDown += txtBuscarProducto_KeyDown;
             // 
             // btnBuscarProducto
@@ -796,11 +719,12 @@
             btnBuscarProducto.FlatStyle = FlatStyle.Flat;
             btnBuscarProducto.ForeColor = Color.FromArgb(23, 54, 93);
             btnBuscarProducto.Image = (Image)resources.GetObject("btnBuscarProducto.Image");
-            btnBuscarProducto.Location = new Point(603, 56);
+            btnBuscarProducto.Location = new Point(606, 55);
             btnBuscarProducto.Name = "btnBuscarProducto";
-            btnBuscarProducto.Size = new Size(24, 22);
+            btnBuscarProducto.Size = new Size(30, 30);
             btnBuscarProducto.TabIndex = 19;
             btnBuscarProducto.UseVisualStyleBackColor = true;
+            btnBuscarProducto.Click += btnBuscarProducto_Click;
             // 
             // dgvListado
             // 
@@ -810,6 +734,7 @@
             dgvListado.Name = "dgvListado";
             dgvListado.Size = new Size(616, 304);
             dgvListado.TabIndex = 16;
+            dgvListado.CellContentClick += dgvListado_CellContentClick;
             // 
             // label4
             // 
@@ -824,12 +749,15 @@
             // 
             // txtBuscarCliente
             // 
-            txtBuscarCliente.BackColor = Color.Gainsboro;
+            txtBuscarCliente.BackColor = Color.FromArgb(130, 149, 169);
             txtBuscarCliente.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscarCliente.Font = new Font("Square721 BT", 12F);
             txtBuscarCliente.Location = new Point(77, 15);
             txtBuscarCliente.Name = "txtBuscarCliente";
-            txtBuscarCliente.Size = new Size(520, 23);
+            txtBuscarCliente.ReadOnly = true;
+            txtBuscarCliente.Size = new Size(520, 27);
             txtBuscarCliente.TabIndex = 14;
+            txtBuscarCliente.TabStop = false;
             // 
             // btnBuscarCliente
             // 
@@ -840,9 +768,9 @@
             btnBuscarCliente.FlatStyle = FlatStyle.Flat;
             btnBuscarCliente.ForeColor = Color.FromArgb(23, 54, 93);
             btnBuscarCliente.Image = (Image)resources.GetObject("btnBuscarCliente.Image");
-            btnBuscarCliente.Location = new Point(603, 17);
+            btnBuscarCliente.Location = new Point(603, 11);
             btnBuscarCliente.Name = "btnBuscarCliente";
-            btnBuscarCliente.Size = new Size(24, 22);
+            btnBuscarCliente.Size = new Size(30, 30);
             btnBuscarCliente.TabIndex = 13;
             btnBuscarCliente.UseVisualStyleBackColor = true;
             // 
@@ -886,7 +814,6 @@
         public TextBox txtTefectivo;
         public Label label1;
         public TextBox txtNumero;
-        public Button btnEliminar;
         public Button btnCancelar;
         public Button btnGrabar;
         public Panel pnListado;
@@ -904,22 +831,15 @@
         private PictureBox btnCerrar;
         private PictureBox btnMinimizar;
         public Label label9;
-        public TextBox txtBruto1;
+        public TextBox txtBruto;
         public Label label8;
-        public TextBox txtDtoEfectivo1;
+        public TextBox txtDtoEfectivo;
         public Label label7;
-        public TextBox txtSubTotal1;
-        public Label label6;
         public TextBox txtFecha;
         public Label label15;
         public TextBox txtMontoFinal;
         public Label label14;
         public TextBox txtDtoGral;
-        public Label label13;
-        public TextBox txtBruto;
-        public Label label12;
-        public TextBox txtDtoEfectivo;
-        public Label label11;
         public TextBox txtSubTotal;
         private ComboBox cmbTipo;
         private Label label10;
@@ -935,5 +855,7 @@
         public TextBox txtSucursalID;
         private ComboBox cmbLista;
         private Label label20;
+        public Label label6;
+        public TextBox txtSaldoPago;
     }
 }

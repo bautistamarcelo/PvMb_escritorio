@@ -1,13 +1,16 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Client;
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
+using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
-
+using System.IO;
 
 
 namespace PVpresentation.Formularios
@@ -91,28 +94,28 @@ namespace PVpresentation.Formularios
                 encontrado.pTotalOferta = encontrado.pOferta * encontrado.Cantidad;
                 encontrado.pTotalVenta = encontrado.pVenta * encontrado.Cantidad;
             }
-            int SubTotal = _VentaDetalle.Sum(x => x.pTotalVenta);
-            txtSubTotal.Text = SubTotal.ToString("N2");
-            txtSubTotal1.Text = SubTotal.ToString("N2");
-            txtBuscarProducto.Text = "";
+            ActualizaMontos();
+            dgvListado.Refresh();
         }
 
         private void LimpiarMantenimiento()
         {
-            txtSubTotal.Text = (0 / 1.0).ToString("N2");
-            txtSubTotal1.Text = (0 / 1.0).ToString("N2");
-            txtDtoEfectivo.Text = (0 / 1.0).ToString("N2");
-            txtDtoEfectivo1.Text = (0 / 1.0).ToString("N2");
-            txtBruto.Text = (0 / 1.0).ToString("N2");
-            txtBruto1.Text = (0 / 1.0).ToString("N2");
-            txtDtoGral.Text = (0 / 1.0).ToString("N2");
-            txtMontoFinal.Text = (0 / 1.0).ToString("N2");
-            txtTefectivo.Text = (0 / 1.0).ToString("N2");
-            txtTdebito.Text = (0 / 1.0).ToString("N2");
-            txtTtarjeta.Text = (0 / 1.0).ToString("N2");
-            txtTctaCte.Text = (0 / 1.0).ToString("N2");
-            cmbLista.SelectedIndex = 0;
-            cmbTipo.SelectedIndex = 0;
+            txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            txtSubTotal.Text = "0";//(0 / 1.0).ToString("N0");
+            txtBuscarCliente.Text = VariablesGlobales.Venta01_ClienteNombre;
+            txtSubTotal.Text = "0";// (0 / 1.0).ToString("N0");
+            txtDtoEfectivo.Text = "0";// (0 / 1.0).ToString("N0");
+            txtDtoEfectivo.Text = "0";// (0 / 1.0).ToString("N0");
+            txtBruto.Text = "0";// (0 / 1.0).ToString("N0");
+            txtBruto.Text = "0";// (0 / 1.0).ToString("N0");
+            txtDtoGral.Text = "0";// (0 / 1.0).ToString("N0");
+            txtMontoFinal.Text = "0";// (0 / 1.0).ToString("N0");
+            txtTefectivo.Text = "0";// (0 / 1.0).ToString("N0");
+            txtTdebito.Text = "0";// (0 / 1.0).ToString("N0");
+            txtTtarjeta.Text = "0";// (0 / 1.0).ToString("N0");
+            txtTctaCte.Text = "0";// (0 / 1.0).ToString("N0");
+            cmbLista.SelectedIndex = 1;// 1;"Oferta Contado";2;"Mayorista"
+            cmbTipo.SelectedIndex = 0;// 1;"Contado";2;"Cuenta Corriente"
 
         }
 
@@ -129,9 +132,16 @@ namespace PVpresentation.Formularios
             //Completo los datos del comboBox enlazado con otra tabla
             var ListaPrecios = await _listasService.Lista();
             var items = ListaPrecios.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
-
             cmbLista.InsertarItems(items);
+
+            //Completo los datos del cliente por defecto en la clase de variables globales
+            VariablesGlobales.Venta01_ClienteID = 1;
+            VariablesGlobales.Venta01_ClienteNombre = "***Consumidor Final***";
+            VariablesGlobales.Venta01_ClienteDomicilio = "***No Especificado***";
+            VariablesGlobales.Venta01_ClienteCUIT = "";
+
             LimpiarMantenimiento();
+
 
             #region PERSONALIZACION DEL DATAGRIDVIEW
             dgvListado.ImplementarConfiguracion("Eliminar");
@@ -202,47 +212,27 @@ namespace PVpresentation.Formularios
             this.Close();
         }
 
-        private void pnTituloFormulario_Paint(object sender, PaintEventArgs e)
+        public void ActualizaMontos()
         {
-
-        }
-
-        private void btnGrabar_Click(object sender, EventArgs e)
-        {
-
-            //    XElement Venta = new XElement(this.Name.ToString(),
-            //        new XElement("Fecha", txtFecha.Text.Trim()),
-            //        new XElement("Tipo", cmbTipo.Text.Trim()),
-            //        new XElement("Numero", txtNumero.Text.Trim()),
-            //        new XElement("SubTotal", txtSubTotal.Text.Trim()),
-            //        new XElement("DtoEfectivo", txtDtoEfectivo.Text.Trim()),
-            //        new XElement("Bruto", txtTotal.Text.Trim()),
-            //        new XElement("DtoGeneral", txtDtoGral.Text.Trim()),
-            //        new XElement("Monto", txtMontoFinal.Text.Trim()),
-            //        new XElement("Tefectivo", txtTefectivo.Text.Trim()),
-            //        new XElement("Tdebito", txtTdebito.Text.Trim()),
-            //        new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
-            //        new XElement("Tcredito", txtTctaCte.Text.Trim()),
-            //        new XElement("Situacion",0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
-            //        new XElement("ClienteID", VariablesGlobales.Venta01_ClienteID),
-            //        new XElement("VendedorID", VariablesGlobales.UsuarioID),
-            //        new XElement("SucursalID", VariablesGlobales.SucursalID),
-            //        new XElement("ListaID", cmbLista.SelectedIndex)
-            //        );
-            //    XElement VentaDetalle = new XElement("VentaDetalle");
-            //    foreach (Venta_Dvm item in _VentaDetalle)
-            //    {
-            //        VentaDetalle.Add(new XElement("Item",
-            //            new XElement("ProductoID", item.ProductoID),
-            //            new XElement("Cantidad", item.Cantidad),
-            //            new XElement("pOferta", item.pOferta),
-            //            new XElement("pVenta", item.pVenta),
-            //            new XElement("pTotalOferta", item.pTotalOferta),
-            //            new XElement("pTotalVenta", item.pTotalVenta)
-            //            )
-            //         );
-            //    }
-            //    Venta.Add(VentaDetalle);
+            int _SubTotal = _VentaDetalle.Sum(x => x.pTotalVenta);
+            int _Bruto = _VentaDetalle.Sum(x => x.pTotalOferta);
+            int _TotalFinal;
+            if (txtDtoGral.Text.Trim() == "0")
+            {
+                _TotalFinal = _Bruto;
+            }
+            else
+            {
+                _TotalFinal = _Bruto - Convert.ToInt32(txtDtoGral.Text);
+            }
+            //int _TotalFinal = _Bruto - Convert.ToInt32(txtDtoGral.Text);
+            int _SumaPagos = Convert.ToInt32(txtTefectivo.Text.Trim()) + Convert.ToInt32(txtTdebito.Text.Trim()) + Convert.ToInt32(txtTtarjeta.Text.Trim()) + Convert.ToInt32(txtTctaCte.Text.Trim());
+            int _Diferencia = _TotalFinal - _SumaPagos;
+            txtSubTotal.Text = _SubTotal.ToString();
+            txtDtoEfectivo.Text = (_SubTotal - _Bruto).ToString();
+            txtBruto.Text = _Bruto.ToString();
+            txtMontoFinal.Text = _TotalFinal.ToString();
+            txtSaldoPago.Text = _Diferencia.ToString();
         }
 
         private void txtBuscarProducto_KeyDown(object sender, KeyEventArgs e)
@@ -252,11 +242,167 @@ namespace PVpresentation.Formularios
                 if (txtBuscarProducto.Text.Trim() != "")
                 {
                     AgregarProducto(Convert.ToInt32(txtBuscarProducto.Text.Trim()));
+                    txtBuscarProducto.Text = "";
                 }
             }
         }
-        //1;"Contado";2;"Cuenta Corriente"
 
+        private async void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+            var frmBuscarProducto = _serviceProvider.GetRequiredService<Frm_Productos_BuscaDeInstancia>();
+            var resultadobusqueda = frmBuscarProducto.ShowDialog();
+            if (resultadobusqueda == DialogResult.OK)
+            {
+                var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
+                txtBuscarProducto.Text = _ProductoSeleccionado.ID.ToString();
+                await AgregarProducto(_ProductoSeleccionado.ID);
+            }
+        }
 
+        private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var filaSeleccionada = (Venta_D_VM)dgvListado.CurrentRow.DataBoundItem;
+                var index = _VentaDetalle.IndexOf(filaSeleccionada);
+                _VentaDetalle.RemoveAt(index);
+
+                ActualizaMontos();
+            }
+        }
+
+        private async void btnGrabar_Click(object sender, EventArgs e)
+        {
+            #region VALIDACIONES PREVIAS
+
+            if (_VentaDetalle.Count == 0)
+            {
+                MessageBox.Show("No hay productos en la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cmbTipo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un tipo de venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cmbLista.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar una lista de precios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtTefectivo.Text.Trim() == "0" && txtTdebito.Text.Trim() == "0" && txtTtarjeta.Text.Trim() == "0" && txtTctaCte.Text.Trim() == "0")
+            {
+                MessageBox.Show("Debe ingresar al menos un medio de pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            #endregion
+
+            int _tipo = cmbTipo.SelectedIndex + 1;
+            int _lista = cmbLista.SelectedIndex + 1;
+
+            XElement Venta = new XElement("Venta",
+                new XElement("Fecha", txtFecha.Text.Trim()),
+                new XElement("Tipo", _tipo.ToString()),
+                new XElement("Numero", "001-1025"),
+                new XElement("SubTotal", Convert.ToInt32( txtSubTotal.Text.Trim())),
+                new XElement("DtoEfectivo", Convert.ToInt32(txtDtoEfectivo.Text.Trim())),
+                new XElement("Bruto", Convert.ToInt32(txtBruto.Text.Trim())),
+                new XElement("DtoGeneral", Convert.ToInt32(txtDtoGral.Text.Trim())),
+                new XElement("Monto", Convert.ToInt32(txtMontoFinal.Text.Trim())),
+                new XElement("Tefectivo",Convert.ToInt32( txtTefectivo.Text.Trim())),
+                new XElement("Tdebito", Convert.ToInt32(txtTdebito.Text.Trim())),
+                new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
+                new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Trim())),
+                new XElement("Situacion", 0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
+                new XElement("ClienteID", VariablesGlobales.Venta01_ClienteID),
+                new XElement("VendedorID", VariablesGlobales.UsuarioID),
+                new XElement("SucursalID", VariablesGlobales.SucursalID),
+                new XElement("ListaID", _lista.ToString())
+                );
+            XElement VentaDetalle = new XElement("VentaDetalle");
+            foreach (Venta_D_VM item in _VentaDetalle)
+            {
+                VentaDetalle.Add(new XElement("Item",
+                    new XElement("ProductoID", item.ProductoID),
+                    new XElement("Cantidad", item.Cantidad),
+                    new XElement("pOferta", item.pOferta),
+                    new XElement("pVenta", item.pVenta),
+                    new XElement("pTotalOferta", item.pTotalOferta),
+                    new XElement("pTotalVenta", item.pTotalVenta),
+                    new XElement("SucursalID", VariablesGlobales.SucursalID)
+                    )
+                 );
+            }
+            Venta.Add(VentaDetalle);
+
+            #region Guardar XML
+            string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
+            string fileName = "venta.xml"; // Nombre del archivo
+            string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
+
+            File.WriteAllText(fullPath, Venta.ToString());
+
+            #endregion
+
+            var VentaNumero = await _venta_E_Service.Registrar(Venta.ToString());
+            if (VentaNumero != "" || VentaNumero != null )
+            {
+                MessageBox.Show("Venta registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarMantenimiento();
+                _VentaDetalle.Clear();
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void txtDtoGral_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ActualizaMontos();
+                txtTefectivo.Focus();
+            }
+        }
+
+        private void txtTefectivo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ActualizaMontos();
+                txtTdebito.Focus();
+            }
+        }
+
+        private void txtTdebito_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ActualizaMontos();
+                txtTtarjeta.Focus();
+            }
+        }
+
+        private void txtTtarjeta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ActualizaMontos();
+                txtTctaCte.Focus();
+            }
+        }
+
+        private void txtTctaCte_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ActualizaMontos();
+                btnGrabar.Focus();
+            }
+        }
     }
 }

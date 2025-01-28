@@ -229,8 +229,10 @@
             txtClave.BorderStyle = BorderStyle.FixedSingle;
             txtClave.Location = new Point(14, 110);
             txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
             txtClave.Size = new Size(269, 23);
             txtClave.TabIndex = 1;
+            txtClave.UseSystemPasswordChar = true;
             txtClave.KeyDown += txtClave_KeyDown;
             // 
             // label1

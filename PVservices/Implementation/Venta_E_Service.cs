@@ -12,7 +12,7 @@ namespace PVservices.Implementation
             _ventas_E_Repository = ventas_E_Repository;
         }
 
-        public async Task<int> Registrar(string ventaXml)
+        public async Task<string> Registrar(string ventaXml)
         {
             return await _ventas_E_Repository.Registrar(ventaXml);
         }
@@ -27,6 +27,9 @@ namespace PVservices.Implementation
             return await _ventas_E_Repository.ObtenerDetalleVenta(VentasID);
         }
 
-        
+        public async Task<string> Grabar(Ventas_E objeto)
+        {
+            return await _ventas_E_Repository.Grabar(objeto);
+        }
     }
 }

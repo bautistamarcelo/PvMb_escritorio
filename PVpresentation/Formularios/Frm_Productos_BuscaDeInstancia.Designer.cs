@@ -38,8 +38,6 @@
             txtInstancia = new TextBox();
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
-            btnCancelar = new Button();
-            btnGrabar = new Button();
             pnListado = new Panel();
             label4 = new Label();
             dgvListado = new DataGridView();
@@ -169,51 +167,17 @@
             lblTituloForm.TabIndex = 4;
             lblTituloForm.Text = "Instancia de Venta N° 0";
             // 
-            // btnCancelar
-            // 
-            btnCancelar.BackColor = Color.SteelBlue;
-            btnCancelar.Cursor = Cursors.Hand;
-            btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
-            btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
-            btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnCancelar.FlatStyle = FlatStyle.Flat;
-            btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(728, 424);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(86, 32);
-            btnCancelar.TabIndex = 21;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = false;
-            // 
-            // btnGrabar
-            // 
-            btnGrabar.BackColor = Color.SteelBlue;
-            btnGrabar.Cursor = Cursors.Hand;
-            btnGrabar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
-            btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
-            btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnGrabar.FlatStyle = FlatStyle.Flat;
-            btnGrabar.ForeColor = Color.WhiteSmoke;
-            btnGrabar.Location = new Point(16, 421);
-            btnGrabar.Name = "btnGrabar";
-            btnGrabar.Size = new Size(86, 32);
-            btnGrabar.TabIndex = 20;
-            btnGrabar.Text = "Grabar";
-            btnGrabar.UseVisualStyleBackColor = false;
-            // 
             // pnListado
             // 
             pnListado.Anchor = AnchorStyles.None;
             pnListado.BackColor = Color.FromArgb(45, 66, 91);
             pnListado.Controls.Add(label4);
             pnListado.Controls.Add(dgvListado);
-            pnListado.Controls.Add(btnCancelar);
-            pnListado.Controls.Add(btnGrabar);
             pnListado.Controls.Add(txtBuscar);
             pnListado.Controls.Add(btnBuscar);
             pnListado.Location = new Point(0, 44);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(831, 469);
+            pnListado.Size = new Size(831, 374);
             pnListado.TabIndex = 53;
             // 
             // label4
@@ -233,8 +197,10 @@
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(13, 56);
             dgvListado.Name = "dgvListado";
-            dgvListado.Size = new Size(801, 350);
+            dgvListado.Size = new Size(801, 299);
             dgvListado.TabIndex = 16;
+            dgvListado.CellContentClick += dgvListado_CellContentClick;
+            dgvListado.CellDoubleClick += dgvListado_CellDoubleClick;
             // 
             // txtBuscar
             // 
@@ -254,22 +220,24 @@
             btnBuscar.FlatStyle = FlatStyle.Flat;
             btnBuscar.ForeColor = Color.FromArgb(23, 54, 93);
             btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.Location = new Point(790, 19);
+            btnBuscar.Location = new Point(787, 14);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(24, 22);
+            btnBuscar.Size = new Size(30, 30);
             btnBuscar.TabIndex = 13;
             btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // Frm_Productos_BuscaDeInstancia
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(831, 512);
+            ClientSize = new Size(831, 419);
             Controls.Add(pnListado);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Frm_Productos_BuscaDeInstancia";
             Text = "Frm_Productos_BuscaDeInstancia";
+            Load += Frm_Productos_BuscaDeInstancia_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).EndInit();
@@ -293,8 +261,6 @@
         public TextBox txtOpcion;
         public Label lblTituloForm;
         public Label label1;
-        public Button btnCancelar;
-        public Button btnGrabar;
         public Panel pnListado;
         public Label label4;
         public DataGridView dgvListado;

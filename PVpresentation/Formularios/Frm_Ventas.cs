@@ -318,6 +318,7 @@ namespace PVpresentation.Formularios
                 new XElement("ClienteID", VariablesGlobales.Venta01_ClienteID),
                 new XElement("VendedorID", VariablesGlobales.UsuarioID),
                 new XElement("SucursalID", VariablesGlobales.SucursalID),
+                new XElement("CajaID",VariablesGlobales.CajaID),
                 new XElement("ListaID", _lista.ToString())
                 );
             XElement VentaDetalle = new XElement("VentaDetalle");
@@ -351,7 +352,7 @@ namespace PVpresentation.Formularios
                 MessageBox.Show("Venta registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarMantenimiento();
                 _VentaDetalle.Clear();
-                return;
+                this.Close();
             }
             else
             {

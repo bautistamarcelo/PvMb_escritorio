@@ -75,7 +75,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(535, 4);
+            pictureBox1.Location = new Point(12, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(67, 43);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -109,7 +109,7 @@
             lblTituloForm.Enabled = false;
             lblTituloForm.Font = new Font("EngraversGothic BT", 20F);
             lblTituloForm.ForeColor = Color.White;
-            lblTituloForm.Location = new Point(225, 9);
+            lblTituloForm.Location = new Point(224, 9);
             lblTituloForm.Name = "lblTituloForm";
             lblTituloForm.Size = new Size(174, 28);
             lblTituloForm.TabIndex = 4;
@@ -132,16 +132,16 @@
             pnListado.Controls.Add(pictureBox2);
             pnListado.Location = new Point(-2, 0);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(306, 309);
+            pnListado.Size = new Size(284, 309);
             pnListado.TabIndex = 3;
             // 
             // pictureBox2
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox2.Image = Properties.Resources.Logo_PV_SinFondo;
-            pictureBox2.Location = new Point(28, 37);
+            pictureBox2.Location = new Point(24, 37);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(254, 211);
+            pictureBox2.Size = new Size(232, 211);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -160,16 +160,16 @@
             pnMantenimiento.Controls.Add(txtUsuario);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnLogin);
-            pnMantenimiento.Location = new Point(303, 0);
+            pnMantenimiento.Location = new Point(280, 0);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(302, 309);
+            pnMantenimiento.Size = new Size(325, 309);
             pnMantenimiento.TabIndex = 2;
             // 
             // LnkOlvideClave
             // 
             LnkOlvideClave.AutoSize = true;
-            LnkOlvideClave.LinkColor = Color.FromArgb(255, 128, 128);
-            LnkOlvideClave.Location = new Point(169, 224);
+            LnkOlvideClave.LinkColor = Color.SteelBlue;
+            LnkOlvideClave.Location = new Point(189, 224);
             LnkOlvideClave.Name = "LnkOlvideClave";
             LnkOlvideClave.Size = new Size(114, 15);
             LnkOlvideClave.TabIndex = 39;
@@ -180,7 +180,7 @@
             // 
             LnkCambiarClave.AutoSize = true;
             LnkCambiarClave.LinkColor = Color.SteelBlue;
-            LnkCambiarClave.Location = new Point(14, 224);
+            LnkCambiarClave.Location = new Point(22, 224);
             LnkCambiarClave.Name = "LnkCambiarClave";
             LnkCambiarClave.Size = new Size(84, 15);
             LnkCambiarClave.TabIndex = 38;
@@ -193,7 +193,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("EngraversGothic BT", 10F);
             label3.ForeColor = Color.FromArgb(224, 224, 224);
-            label3.Location = new Point(14, 158);
+            label3.Location = new Point(22, 158);
             label3.Name = "label3";
             label3.Size = new Size(71, 15);
             label3.TabIndex = 37;
@@ -205,10 +205,11 @@
             cmbSucursales.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbSucursales.BackColor = Color.Gainsboro;
             cmbSucursales.DropDownWidth = 269;
+            cmbSucursales.Font = new Font("Square721 BT", 12F);
             cmbSucursales.FormattingEnabled = true;
-            cmbSucursales.Location = new Point(14, 176);
+            cmbSucursales.Location = new Point(22, 176);
             cmbSucursales.Name = "cmbSucursales";
-            cmbSucursales.Size = new Size(269, 23);
+            cmbSucursales.Size = new Size(281, 28);
             cmbSucursales.TabIndex = 2;
             cmbSucursales.KeyDown += cmbSucursales_KeyDown;
             // 
@@ -217,7 +218,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("EngraversGothic BT", 10F);
             label2.ForeColor = Color.FromArgb(224, 224, 224);
-            label2.Location = new Point(14, 92);
+            label2.Location = new Point(22, 92);
             label2.Name = "label2";
             label2.Size = new Size(82, 15);
             label2.TabIndex = 26;
@@ -227,10 +228,11 @@
             // 
             txtClave.BackColor = Color.Gainsboro;
             txtClave.BorderStyle = BorderStyle.FixedSingle;
-            txtClave.Location = new Point(14, 110);
+            txtClave.Font = new Font("Square721 BT", 12F);
+            txtClave.Location = new Point(22, 110);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '*';
-            txtClave.Size = new Size(269, 23);
+            txtClave.Size = new Size(281, 27);
             txtClave.TabIndex = 1;
             txtClave.UseSystemPasswordChar = true;
             txtClave.KeyDown += txtClave_KeyDown;
@@ -240,7 +242,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("EngraversGothic BT", 10F);
             label1.ForeColor = Color.FromArgb(224, 224, 224);
-            label1.Location = new Point(14, 37);
+            label1.Location = new Point(22, 37);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
             label1.TabIndex = 24;
@@ -250,22 +252,23 @@
             // 
             txtUsuario.BackColor = Color.Gainsboro;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
-            txtUsuario.Location = new Point(14, 55);
+            txtUsuario.Font = new Font("Square721 BT", 12F);
+            txtUsuario.Location = new Point(22, 55);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(269, 23);
+            txtUsuario.Size = new Size(281, 27);
             txtUsuario.TabIndex = 0;
             txtUsuario.KeyDown += txtUsuario_KeyDown;
             // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = Color.SteelBlue;
+            btnCancelar.BackColor = Color.Red;
             btnCancelar.Cursor = Cursors.Hand;
             btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(169, 261);
+            btnCancelar.Location = new Point(189, 262);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
             btnCancelar.TabIndex = 4;
@@ -283,7 +286,7 @@
             btnLogin.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.ForeColor = Color.WhiteSmoke;
-            btnLogin.Location = new Point(28, 262);
+            btnLogin.Location = new Point(45, 262);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(86, 32);
             btnLogin.TabIndex = 3;

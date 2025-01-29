@@ -55,12 +55,17 @@ namespace PVpresentation.Formularios
             cmbSucursales.Enabled = false;
             txtFechaApertura.Enabled = false;
             txtSaldoInicial.Focus();
-            cmbSucursales.SelectedIndex = VariablesGlobales.SucursalID;
+            cmbSucursales.SelectedIndex = VariablesGlobales.SucursalID - 1;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

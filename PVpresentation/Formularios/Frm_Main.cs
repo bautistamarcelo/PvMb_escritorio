@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PVpresentation.Resources;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System;
 using System.Runtime.InteropServices;
@@ -10,8 +11,8 @@ namespace PVpresentation.Formularios
     public partial class Frm_Main : Form
     {
         private readonly IServiceProvider _serviceProvider;
-
-        public Frm_Main(IServiceProvider serviceProvider)
+        private readonly IUsuariosService _usuariosService;
+        public Frm_Main(IServiceProvider serviceProvider, IUsuariosService usuariosService)
         {
             InitializeComponent();
             CustomizeMenu();
@@ -19,6 +20,7 @@ namespace PVpresentation.Formularios
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
             _serviceProvider = serviceProvider;
+            _usuariosService = usuariosService;
         }
         #region FUNCIONALIDADES DEL FORMULARIO
 
@@ -226,42 +228,53 @@ namespace PVpresentation.Formularios
             OcultarSubMEnu();
         }
 
-        private void btnCmpVentas_Click(object sender, EventArgs e)
+        private async void btnCmpVentas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
-            if (VariablesGlobales.Frm_Venta01 == 0)
-            {
-                VariablesGlobales.Frm_Venta01 = 1;
 
-                // Resolver el formulario de ventas desde el contenedor
-                var frmVenta01 = _serviceProvider.GetRequiredService<Frm_Ventas>();
-                frmVenta01.lblTituloForm.Text = "Instancia de Venta N° 1";
-                frmVenta01.txtInstancia.Text = "1";
-                
-                frmVenta01.Show();
-                this.WindowState = FormWindowState.Minimized;
-                return;
-            }
-            if (VariablesGlobales.Frm_Venta02 == 0)
+            var cajaAbierta = await _usuariosService.BuscaCajaUsuario(VariablesGlobales.UsuarioID);
+            if (cajaAbierta == 0)
             {
-                VariablesGlobales.Frm_Venta02 = 1;
-                var frmVenta02 = _serviceProvider.GetRequiredService<Frm_Ventas>();
-                frmVenta02.lblTituloForm.Text = "Instancia de Venta N° 2";
-                frmVenta02.txtInstancia.Text = "2";
-                frmVenta02.Show();
-                this.WindowState = FormWindowState.Minimized;
-                return;
+                MessageBox.Show("No tiene caja abierta, por favor abra una caja.", "Caja cerrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //return;
             }
-            if (VariablesGlobales.Frm_Venta03 == 0)
+            else
             {
-                VariablesGlobales.Frm_Venta03 = 1;
-                var frmVenta03 = _serviceProvider.GetRequiredService<Frm_Ventas>();
-                frmVenta03.lblTituloForm.Text = "Instancia de Venta N° 3";
-                frmVenta03.txtInstancia.Text = "3";
-                frmVenta03.Show();
-                this.WindowState = FormWindowState.Minimized;
-                return;
+                if (VariablesGlobales.Frm_Venta01 == 0)
+                {
+                    VariablesGlobales.Frm_Venta01 = 1;
+
+                    // Resolver el formulario de ventas desde el contenedor
+                    var frmVenta01 = _serviceProvider.GetRequiredService<Frm_Ventas>();
+                    frmVenta01.lblTituloForm.Text = "Instancia de Venta N° 1";
+                    frmVenta01.txtInstancia.Text = "1";
+
+                    frmVenta01.Show();
+                    this.WindowState = FormWindowState.Minimized;
+                    return;
+                }
+                if (VariablesGlobales.Frm_Venta02 == 0)
+                {
+                    VariablesGlobales.Frm_Venta02 = 1;
+                    var frmVenta02 = _serviceProvider.GetRequiredService<Frm_Ventas>();
+                    frmVenta02.lblTituloForm.Text = "Instancia de Venta N° 2";
+                    frmVenta02.txtInstancia.Text = "2";
+                    frmVenta02.Show();
+                    this.WindowState = FormWindowState.Minimized;
+                    return;
+                }
+                if (VariablesGlobales.Frm_Venta03 == 0)
+                {
+                    VariablesGlobales.Frm_Venta03 = 1;
+                    var frmVenta03 = _serviceProvider.GetRequiredService<Frm_Ventas>();
+                    frmVenta03.lblTituloForm.Text = "Instancia de Venta N° 3";
+                    frmVenta03.txtInstancia.Text = "3";
+                    frmVenta03.Show();
+                    this.WindowState = FormWindowState.Minimized;
+                    return;
+                }
             }
+            
         }
 
         private void btnCmpCierresZ_Click(object sender, EventArgs e)

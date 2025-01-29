@@ -280,6 +280,7 @@
             btnAbrirCaja.TabIndex = 20;
             btnAbrirCaja.Text = "Ingresar";
             btnAbrirCaja.UseVisualStyleBackColor = false;
+            btnAbrirCaja.Click += btnAbrirCaja_Click;
             // 
             // Frm_Cajas_Abrir
             // 

@@ -43,6 +43,7 @@ namespace PVpresentation
                 services.AddTransient<Frm_Cajas_Abrir>();
                 services.AddTransient<Frm_Categorias>();
                 services.AddTransient<Frm_Clientes>();
+                services.AddTransient<Frm_Clientes_Buscar>();
                 services.AddTransient<Frm_Compras>();
                 services.AddTransient<Frm_Empresas>();
                 services.AddTransient<Frm_Login>();

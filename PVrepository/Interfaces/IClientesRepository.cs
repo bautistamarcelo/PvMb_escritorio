@@ -9,6 +9,7 @@ namespace PVrepository.Interfaces
         Task<string> crear(Clientes objeto);
         Task<string> editar(Clientes objeto);
         Task<int> obtenerId(Clientes objeto, int id);
+        Task<int> Buscar(string Buscar = "");
 
     }
 }

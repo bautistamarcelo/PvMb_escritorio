@@ -126,7 +126,7 @@ namespace PVrepository.Implementation
             using (var con = _conexion.ObtenerSqLconexion())
             {
                 con.Open();
-                var cmd = new SqlCommand("SP_Cliente_ObtenerID", con);
+                var cmd = new SqlCommand("SP_Cliente_BuscarID", con);
                 cmd.Parameters.Add("@ID_cliente", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -138,6 +138,32 @@ namespace PVrepository.Implementation
                 catch (Exception ex)
                 {
                     respuesta = ex.Message;
+                }
+            }
+
+            return resultado;
+        }
+
+        public async Task<int> Buscar(string Buscar = "")
+        {
+            int resultado = 0;
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Cliente_BuscarID", con);
+                cmd.Parameters.AddWithValue("@Buscar", Buscar);
+                cmd.Parameters.Add("@ClienteID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    resultado = Convert.ToInt32(cmd.Parameters["@ClienteID"].Value)!;
+                }
+                catch 
+                {
+                    resultado = 0;
                 }
             }
 

@@ -36,5 +36,10 @@ namespace PVservices.Implementation
         {
             return await _ClientesRepository.obtenerId(objeto, id);
         }
+
+        public async Task<int> Buscar(string Buscar = "")
+        {
+            return await _ClientesRepository.Buscar(Buscar);
+        }
     }
 }

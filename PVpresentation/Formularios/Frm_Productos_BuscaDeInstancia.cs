@@ -61,8 +61,6 @@ namespace PVpresentation.Formularios
         private async void Frm_Productos_BuscaDeInstancia_Load(object sender, EventArgs e)
         {
             dgvListado.ImplementarConfiguracion("Seleccionar");
-
-
             await MostrarProductos();
         }
 
@@ -86,6 +84,24 @@ namespace PVpresentation.Formularios
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private async void btnBuscar_Click_1(object sender, EventArgs e)
+        {
+            await MostrarProductos(txtBuscar.Text.Trim());
+        }
+
+        private async void txtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await MostrarProductos(txtBuscar.Text.Trim());
+            }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

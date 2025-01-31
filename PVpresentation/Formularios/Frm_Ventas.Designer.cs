@@ -773,6 +773,7 @@
             btnBuscarCliente.Size = new Size(30, 30);
             btnBuscarCliente.TabIndex = 13;
             btnBuscarCliente.UseVisualStyleBackColor = true;
+            btnBuscarCliente.Click += btnBuscarCliente_Click;
             // 
             // Frm_Ventas
             // 

@@ -301,24 +301,51 @@ namespace PVpresentation.Formularios
             int _tipo = cmbTipo.SelectedIndex + 1;
             int _lista = cmbLista.SelectedIndex + 1;
 
+            #region VALIDAR LOS DATOS DEL CLIENTE SEGÚN LA INSTANCIA DEL FORMULARIO DE VENTAS ABIERTO
+            string _ClienteNombre = "";
+            int _ClienteID = 0;
+            string _ClienteDomicilio = "";
+
+            if (txtInstancia.Text == "1")
+            {
+                _ClienteID = VariablesGlobales.Venta01_ClienteID;
+                _ClienteNombre = VariablesGlobales.Venta01_ClienteNombre;
+                _ClienteDomicilio = VariablesGlobales.Venta01_ClienteDomicilio;
+            }
+            if (txtInstancia.Text == "2")
+            {
+                _ClienteID = VariablesGlobales.Venta02_ClienteID;
+                _ClienteNombre = VariablesGlobales.Venta02_ClienteNombre;
+                _ClienteDomicilio = VariablesGlobales.Venta02_ClienteDomicilio;
+            }
+            if (txtInstancia.Text == "3")
+            {
+                _ClienteID = VariablesGlobales.Venta03_ClienteID;
+                _ClienteNombre = VariablesGlobales.Venta03_ClienteNombre;
+                _ClienteDomicilio = VariablesGlobales.Venta03_ClienteDomicilio;
+            }
+            #endregion
+
             XElement Venta = new XElement("Venta",
                 new XElement("Fecha", txtFecha.Text.Trim()),
                 new XElement("Tipo", _tipo.ToString()),
                 new XElement("Numero", "001-1025"),
-                new XElement("SubTotal", Convert.ToInt32( txtSubTotal.Text.Trim())),
+                new XElement("SubTotal", Convert.ToInt32(txtSubTotal.Text.Trim())),
                 new XElement("DtoEfectivo", Convert.ToInt32(txtDtoEfectivo.Text.Trim())),
                 new XElement("Bruto", Convert.ToInt32(txtBruto.Text.Trim())),
                 new XElement("DtoGeneral", Convert.ToInt32(txtDtoGral.Text.Trim())),
                 new XElement("Monto", Convert.ToInt32(txtMontoFinal.Text.Trim())),
-                new XElement("Tefectivo",Convert.ToInt32( txtTefectivo.Text.Trim())),
+                new XElement("Tefectivo", Convert.ToInt32(txtTefectivo.Text.Trim())),
                 new XElement("Tdebito", Convert.ToInt32(txtTdebito.Text.Trim())),
                 new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
                 new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Trim())),
                 new XElement("Situacion", 0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
-                new XElement("ClienteID", VariablesGlobales.Venta01_ClienteID),
+                new XElement("ClienteID", _ClienteID),
+                new XElement("ClienteNombre", _ClienteNombre),
+                new XElement("ClienteDomicilio", _ClienteDomicilio),
                 new XElement("VendedorID", VariablesGlobales.UsuarioID),
                 new XElement("SucursalID", VariablesGlobales.SucursalID),
-                new XElement("CajaID",VariablesGlobales.CajaID),
+                new XElement("CajaID", VariablesGlobales.CajaID),
                 new XElement("ListaID", _lista.ToString())
                 );
             XElement VentaDetalle = new XElement("VentaDetalle");
@@ -347,7 +374,7 @@ namespace PVpresentation.Formularios
             #endregion
 
             var VentaNumero = await _venta_E_Service.Registrar(Venta.ToString());
-            if (VentaNumero != "" || VentaNumero != null )
+            if (VentaNumero != "" || VentaNumero != null)
             {
                 MessageBox.Show("Venta registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarMantenimiento();
@@ -404,6 +431,43 @@ namespace PVpresentation.Formularios
                 ActualizaMontos();
                 btnGrabar.Focus();
             }
+        }
+
+        private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            var frmBuscarCliente = _serviceProvider.GetRequiredService<Frm_Clientes_Buscar>();
+            var resultadobusqueda = frmBuscarCliente.ShowDialog();
+            frmBuscarCliente.txtInstancia.Text = txtInstancia.Text;
+            if (resultadobusqueda == DialogResult.OK)
+            {
+                var _clienteSeleccionado = frmBuscarCliente._ClienteSeleccionado;
+                txtBuscarCliente.Text = _clienteSeleccionado.Nombre.ToString();
+
+                #region VALIDAR LOS DATOS DEL CLIENTE SEGÚN LA INSTANCIA DEL FORMULARIO DE VENTAS ABIERTO
+
+                if (txtInstancia.Text == "1")
+                {
+                    VariablesGlobales.Venta01_ClienteID=_clienteSeleccionado.ID;
+                    VariablesGlobales.Venta01_ClienteNombre = _clienteSeleccionado.Nombre;
+                    VariablesGlobales.Venta01_ClienteDomicilio = _clienteSeleccionado.Domicilio;
+                    
+                }
+                if (txtInstancia.Text == "2")
+                {
+                    VariablesGlobales.Venta02_ClienteID = _clienteSeleccionado.ID;
+                    VariablesGlobales.Venta02_ClienteNombre = _clienteSeleccionado.Nombre;
+                    VariablesGlobales.Venta02_ClienteDomicilio = _clienteSeleccionado.Domicilio;
+                }
+                if (txtInstancia.Text == "3")
+                {
+                    VariablesGlobales.Venta03_ClienteID = _clienteSeleccionado.ID;
+                    VariablesGlobales.Venta03_ClienteNombre = _clienteSeleccionado.Nombre;
+                    VariablesGlobales.Venta03_ClienteDomicilio = _clienteSeleccionado.Domicilio;
+                }
+                #endregion
+            }
+
+
         }
     }
 }

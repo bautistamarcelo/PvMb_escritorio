@@ -12,6 +12,7 @@ namespace PVpresentation.Formularios
     {
         private readonly IEmpresaService _empresaService;
         private readonly ICaracterService _caracterService;
+        OpenFileDialog _openFileDialog = new OpenFileDialog();
 
         public Frm_Empresas(IEmpresaService empresaService, ICaracterService caracterService)
         {
@@ -88,9 +89,12 @@ namespace PVpresentation.Formularios
         private async void Frm_Empresas_Load(object sender, EventArgs e)
         {
 
-            dgvListado.ImplementarConfiguracion("Editar");
+            dgvListado.ImplementarConfiguracion("");
             MostrarTabs(tabListado.Name);
             await MostrarEmpresas();
+            _openFileDialog.Filter = "Escoger Imagen Logo (*.JPG;*.PNG)|*.jpg;*.png";
+            ImagenLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+
 
             //Completo los datos de los comboBox no enlazados con otras tablas
 
@@ -121,6 +125,12 @@ namespace PVpresentation.Formularios
             txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
             txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
             MostrarTabs(tabNuevo.Name);
+
+            if (txtLogoUrl.Text != "")
+                ImagenLogo.ImageLocation = txtLogoUrl.Text;
+
+
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -200,6 +210,16 @@ namespace PVpresentation.Formularios
                 MostrarTabs(tabListado.Name);
             }
 
+        }
+
+        private void btnAgregarLogo_Click(object sender, EventArgs e)
+        {
+            if (_openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                _openFileDialog.OpenFile();
+                ImagenLogo.Image = Image.FromFile(_openFileDialog.FileName);
+                txtLogoUrl.Text = _openFileDialog.FileName;
+            }
         }
     }
 }

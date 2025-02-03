@@ -11,6 +11,7 @@ namespace PVrepository.Entities
         public DateTime FechaCierre { get; set; }
         public int SaldoFinal { get; set; }
         public string Condicion { get; set; } //Values: 'Abierta' / 'Cerrada'
+        public int UsuarioID {get; set; }
         public int Resultado { get;}
     }
 }

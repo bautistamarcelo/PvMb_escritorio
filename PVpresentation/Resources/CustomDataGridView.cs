@@ -33,6 +33,7 @@ namespace PVpresentation.Resources
             };
             datagrid.DefaultCellStyle = new DataGridViewCellStyle
             {
+                //Alignment = DataGridViewContentAlignment.TopRight,
                 BackColor =Color.FromArgb(141,162,182),
                 //ForeColor = Color.FromArgb(45,66,91),
                 ForeColor = Color.FromArgb(0, 0, 0),

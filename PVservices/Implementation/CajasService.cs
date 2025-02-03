@@ -22,9 +22,9 @@ namespace PVservices.Implementation
             return await _CajasRepository.Lista(FechaIni, FechaFin, Buscar);
         }
 
-        public async Task<string> crear(Cajas objeto)
+        public async Task<string> crear(string cajaXml)
         {
-            return await _CajasRepository.crear(objeto);
+            return await _CajasRepository.crear(cajaXml);
         }
 
         public async Task<string> editar(Cajas objeto)

@@ -76,6 +76,29 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
-       
+        public async Task<Cajas_Moneda_M> ObtenerSaldo(int cajaID)
+        {
+            Cajas_Moneda_M oBjeto = new Cajas_Moneda_M();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Cajas_Calcular_Saldos", con);
+                cmd.Parameters.AddWithValue("@CajaID", cajaID);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        oBjeto = new Cajas_Moneda_M
+                        {
+                            Efectivo = Convert.ToInt32(dr["Efectivo"]),
+                            Debito = Convert.ToInt32(dr["Debito"]),
+                            Tarjeta = Convert.ToInt32(dr["Tarjeta"])
+                        };
+                    }
+                }
+            }
+            return oBjeto;
+        }
     }
 }

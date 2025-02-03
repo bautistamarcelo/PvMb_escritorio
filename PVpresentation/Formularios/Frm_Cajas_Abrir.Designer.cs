@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnTituloFormulario = new Panel();
+            txtCondicion = new TextBox();
             txtInstancia = new TextBox();
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
@@ -54,6 +55,7 @@
             // pnTituloFormulario
             // 
             pnTituloFormulario.BackColor = Color.FromArgb(74, 134, 160);
+            pnTituloFormulario.Controls.Add(txtCondicion);
             pnTituloFormulario.Controls.Add(txtInstancia);
             pnTituloFormulario.Controls.Add(txtOpcion);
             pnTituloFormulario.Controls.Add(lblTituloForm);
@@ -63,6 +65,16 @@
             pnTituloFormulario.Name = "pnTituloFormulario";
             pnTituloFormulario.Size = new Size(316, 50);
             pnTituloFormulario.TabIndex = 52;
+            // 
+            // txtCondicion
+            // 
+            txtCondicion.BorderStyle = BorderStyle.FixedSingle;
+            txtCondicion.Location = new Point(263, 12);
+            txtCondicion.Name = "txtCondicion";
+            txtCondicion.Size = new Size(34, 23);
+            txtCondicion.TabIndex = 48;
+            txtCondicion.Text = "0";
+            txtCondicion.Visible = false;
             // 
             // txtInstancia
             // 
@@ -134,23 +146,28 @@
             // 
             cmbSucursales.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbSucursales.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbSucursales.BackColor = Color.Gainsboro;
+            cmbSucursales.BackColor = Color.FromArgb(4, 41, 68);
             cmbSucursales.Enabled = false;
+            cmbSucursales.Font = new Font("Copperplate Gothic Light", 12F);
+            cmbSucursales.ForeColor = Color.White;
             cmbSucursales.FormattingEnabled = true;
             cmbSucursales.Location = new Point(12, 123);
             cmbSucursales.Name = "cmbSucursales";
-            cmbSucursales.Size = new Size(285, 23);
+            cmbSucursales.Size = new Size(285, 25);
             cmbSucursales.TabIndex = 80;
+            cmbSucursales.TabStop = false;
             // 
             // txtNombre
             // 
-            txtNombre.BackColor = Color.Gainsboro;
+            txtNombre.BackColor = Color.FromArgb(4, 41, 68);
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
-            txtNombre.Enabled = false;
+            txtNombre.Font = new Font("Copperplate Gothic Light", 12F);
+            txtNombre.ForeColor = Color.White;
             txtNombre.Location = new Point(12, 75);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(285, 23);
+            txtNombre.Size = new Size(285, 25);
             txtNombre.TabIndex = 78;
+            txtNombre.TabStop = false;
             // 
             // label2
             // 
@@ -165,13 +182,15 @@
             // 
             // txtID
             // 
-            txtID.BackColor = Color.Gainsboro;
+            txtID.BackColor = Color.FromArgb(4, 41, 68);
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Enabled = false;
+            txtID.Font = new Font("Copperplate Gothic Light", 12F);
+            txtID.ForeColor = Color.White;
             txtID.Location = new Point(12, 30);
             txtID.Name = "txtID";
-            txtID.Size = new Size(285, 23);
+            txtID.Size = new Size(285, 25);
             txtID.TabIndex = 76;
+            txtID.TabStop = false;
             // 
             // label1
             // 
@@ -199,21 +218,26 @@
             // 
             cmbCondicion.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbCondicion.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbCondicion.BackColor = Color.Gainsboro;
+            cmbCondicion.BackColor = Color.FromArgb(4, 41, 68);
             cmbCondicion.Enabled = false;
+            cmbCondicion.Font = new Font("Copperplate Gothic Light", 12F);
+            cmbCondicion.ForeColor = Color.White;
             cmbCondicion.FormattingEnabled = true;
             cmbCondicion.Location = new Point(12, 263);
             cmbCondicion.Name = "cmbCondicion";
-            cmbCondicion.Size = new Size(285, 23);
+            cmbCondicion.Size = new Size(285, 25);
             cmbCondicion.TabIndex = 69;
+            cmbCondicion.TabStop = false;
             // 
             // txtSaldoInicial
             // 
-            txtSaldoInicial.BackColor = Color.Gainsboro;
+            txtSaldoInicial.BackColor = Color.FromArgb(224, 224, 224);
             txtSaldoInicial.BorderStyle = BorderStyle.FixedSingle;
+            txtSaldoInicial.Font = new Font("Copperplate Gothic Light", 12F);
+            txtSaldoInicial.ForeColor = Color.Black;
             txtSaldoInicial.Location = new Point(12, 216);
             txtSaldoInicial.Name = "txtSaldoInicial";
-            txtSaldoInicial.Size = new Size(285, 23);
+            txtSaldoInicial.Size = new Size(285, 25);
             txtSaldoInicial.TabIndex = 67;
             // 
             // label6
@@ -229,13 +253,15 @@
             // 
             // txtFechaApertura
             // 
-            txtFechaApertura.BackColor = Color.Gainsboro;
+            txtFechaApertura.BackColor = Color.FromArgb(4, 41, 68);
             txtFechaApertura.BorderStyle = BorderStyle.FixedSingle;
-            txtFechaApertura.Enabled = false;
+            txtFechaApertura.Font = new Font("Copperplate Gothic Light", 12F);
+            txtFechaApertura.ForeColor = Color.White;
             txtFechaApertura.Location = new Point(12, 169);
             txtFechaApertura.Name = "txtFechaApertura";
-            txtFechaApertura.Size = new Size(285, 23);
+            txtFechaApertura.Size = new Size(285, 25);
             txtFechaApertura.TabIndex = 66;
+            txtFechaApertura.TabStop = false;
             // 
             // label3
             // 
@@ -322,5 +348,6 @@
         public Label label6;
         public TextBox txtFechaApertura;
         public Label label3;
+        public TextBox txtCondicion;
     }
 }

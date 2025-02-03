@@ -15,6 +15,10 @@ namespace PVpresentation.Resources
         public static string CajaNombre { get; set; } = string.Empty;
         public static string CajaCondicion { get; set; } = string.Empty; //values: 'Abierta' / 'Cerrada'   
 
+        public static int cajaSeleccionadaID { get; set; }
+        public static int cajaSeleccionadaSaldoInicial { get; set; }
+
+
         //Instancias de Formularios Ventas
         public static int Frm_Venta01 { get; set; } //values: 0 Cerrado / 1 Abierto
         public static int Frm_Venta02 { get; set; } //values: 0 Cerrado / 1 Abierto

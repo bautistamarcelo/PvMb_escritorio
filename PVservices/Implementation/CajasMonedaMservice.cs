@@ -32,5 +32,10 @@ namespace PVservices.Implementation
         {
             return await _ICajasMonedaMrepository.Lista(Buscar);
         }
+
+        public async Task<Cajas_Moneda_M> ObtenerSaldo(int cajaID)
+        {
+            return await _ICajasMonedaMrepository.ObtenerSaldo(cajaID);
+        }
     }
 }

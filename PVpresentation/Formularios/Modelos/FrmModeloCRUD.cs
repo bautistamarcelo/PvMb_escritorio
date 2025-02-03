@@ -20,7 +20,7 @@ namespace PVpresentation.Formularios.Modelos
             {
                 if (tab.Name != tabName)
                 {
-                    //tab.Parent = null;
+                    tab.Parent = null;
                 }
                 else
                 {
@@ -33,7 +33,7 @@ namespace PVpresentation.Formularios.Modelos
         public FrmModeloCRUD()
         {
             InitializeComponent();
-            dgvListado.ImplementarConfiguracion("Editar");
+            dgvListado.ImplementarConfiguracion("");
             MostrarTabs(tabListado.Name);
         }
 
@@ -45,6 +45,8 @@ namespace PVpresentation.Formularios.Modelos
         private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEditar.Enabled = true;
+            if (btnDetalles.Visible=true)btnDetalles.Enabled=true;
+
         }
     }
 }

@@ -55,6 +55,7 @@
             btnBuscar = new Button();
             tabNuevo = new TabPage();
             tabEditar = new TabPage();
+            btnDetalles = new Button();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             pnlContenedorPrincipal.SuspendLayout();
@@ -283,6 +284,7 @@
             // 
             pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnListado.BackColor = Color.FromArgb(45, 66, 91);
+            pnListado.Controls.Add(btnDetalles);
             pnListado.Controls.Add(btnEditar);
             pnListado.Controls.Add(btnNuevo);
             pnListado.Controls.Add(dgvListado);
@@ -304,7 +306,7 @@
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.ForeColor = Color.WhiteSmoke;
-            btnEditar.Location = new Point(106, 411);
+            btnEditar.Location = new Point(222, 411);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(86, 32);
             btnEditar.TabIndex = 18;
@@ -392,6 +394,24 @@
             tabEditar.TabIndex = 2;
             tabEditar.Text = "Editar";
             // 
+            // btnDetalles
+            // 
+            btnDetalles.BackColor = Color.SteelBlue;
+            btnDetalles.Cursor = Cursors.Hand;
+            btnDetalles.Enabled = false;
+            btnDetalles.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnDetalles.FlatStyle = FlatStyle.Flat;
+            btnDetalles.ForeColor = Color.WhiteSmoke;
+            btnDetalles.Location = new Point(116, 411);
+            btnDetalles.Name = "btnDetalles";
+            btnDetalles.Size = new Size(86, 32);
+            btnDetalles.TabIndex = 20;
+            btnDetalles.Text = "Detalles";
+            btnDetalles.UseVisualStyleBackColor = false;
+            btnDetalles.Visible = false;
+            // 
             // FrmModeloCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -445,6 +465,6 @@
         public TextBox txtID;
         public Panel pnMantenimiento;
         public Panel pnListado;
-        
+        public Button btnDetalles;
     }
 }

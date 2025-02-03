@@ -81,6 +81,27 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
-        
+        public async Task<Cajas_Movimientos> ObtenerSaldo(int cajaID)
+        {
+            Cajas_Movimientos oBjeto = new Cajas_Movimientos();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Cajas_Calcular_Saldos", con);
+                cmd.Parameters.AddWithValue("@CajaID", cajaID);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        oBjeto = new Cajas_Movimientos
+                        {
+                            Monto = Convert.ToInt32(dr["Saldo"])
+                        };
+                    }
+                }
+            }
+            return oBjeto;
+        }
     }
 }

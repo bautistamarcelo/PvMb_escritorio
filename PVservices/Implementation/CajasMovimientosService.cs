@@ -31,5 +31,10 @@ namespace PVservices.Implementation
         {
             return await _CajasMovimientosRepository.editar(objeto);
         }
+
+        public async Task<Cajas_Movimientos> ObtenerSaldo(int cajaID)
+        {
+            return await _CajasMovimientosRepository.ObtenerSaldo(cajaID);
+        }
     } 
 }

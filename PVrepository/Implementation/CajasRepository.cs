@@ -50,21 +50,15 @@ namespace PVrepository.Implementation
         }
 
 
-        public async Task<string> crear(Cajas objeto)
+        public async Task<string> crear(string cajaXml)
         {
             string respuesta = "";
             using (var con = _conexion.ObtenerSqLconexion())
             {
                 con.Open();
-                var cmd = new SqlCommand("SP_Cajas_Crear", con);
+                var cmd = new SqlCommand("SP_Cajas_CrearNueva", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Nombre", objeto.Nombre));
-                cmd.Parameters.Add(new SqlParameter("@FechaApertura", objeto.FechaApertura));
-                cmd.Parameters.Add(new SqlParameter("@SaldoInicial", objeto.SaldoInicial));
-                cmd.Parameters.Add(new SqlParameter("@FechaCierre", objeto.FechaCierre));
-                cmd.Parameters.Add(new SqlParameter("@SaldoFinal", objeto.SaldoFinal));
-                cmd.Parameters.Add(new SqlParameter("@Condicion", objeto.Condicion));
-                cmd.Parameters.Add(new SqlParameter("@Resultado", objeto.Resultado));
+                cmd.Parameters.AddWithValue("@cajaXml", cajaXml);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 try
                 {
@@ -112,4 +106,5 @@ namespace PVrepository.Implementation
         }
         
     }
+
 }

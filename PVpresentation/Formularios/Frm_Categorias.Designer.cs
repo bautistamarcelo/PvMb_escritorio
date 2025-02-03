@@ -39,7 +39,6 @@
             // 
             // pnGral
             // 
-            pnGral.Location = new Point(0, 0);
             pnGral.Size = new Size(1000, 581);
             // 
             // pnTituloFormulario
@@ -123,11 +122,18 @@
             // 
             // pnMantenimiento
             // 
+            pnMantenimiento.Location = new Point(663, 3);
             pnMantenimiento.Size = new Size(317, 470);
             // 
             // pnListado
             // 
             pnListado.Size = new Size(650, 470);
+            // 
+            // btnDetalles
+            // 
+            btnDetalles.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             // 
             // Frm_Categorias
             // 

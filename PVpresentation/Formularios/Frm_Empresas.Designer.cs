@@ -42,13 +42,20 @@
             label7 = new Label();
             txtMoneda = new TextBox();
             label10 = new Label();
+            ImagenLogo = new PictureBox();
+            btnAgregarLogo = new Button();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             pnlContenedorPrincipal.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabListado.SuspendLayout();
             tabNuevo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ImagenLogo).BeginInit();
             SuspendLayout();
+            // 
+            // pnGral
+            // 
+            pnGral.Size = new Size(984, 532);
             // 
             // pnTituloFormulario
             // 
@@ -78,6 +85,8 @@
             // 
             // tabNuevo
             // 
+            tabNuevo.Controls.Add(btnAgregarLogo);
+            tabNuevo.Controls.Add(ImagenLogo);
             tabNuevo.Controls.Add(txtMoneda);
             tabNuevo.Controls.Add(label10);
             tabNuevo.Controls.Add(txtLogoNombre);
@@ -114,6 +123,8 @@
             tabNuevo.Controls.SetChildIndex(txtLogoNombre, 0);
             tabNuevo.Controls.SetChildIndex(label10, 0);
             tabNuevo.Controls.SetChildIndex(txtMoneda, 0);
+            tabNuevo.Controls.SetChildIndex(ImagenLogo, 0);
+            tabNuevo.Controls.SetChildIndex(btnAgregarLogo, 0);
             // 
             // btnEditar
             // 
@@ -143,6 +154,7 @@
             // 
             txtNombre.Location = new Point(35, 117);
             txtNombre.Size = new Size(421, 22);
+            txtNombre.TabIndex = 31;
             // 
             // label1
             // 
@@ -174,23 +186,24 @@
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnGrabar.Location = new Point(38, 379);
+            btnGrabar.TabIndex = 40;
             btnGrabar.Click += btnGrabar_Click;
             // 
             // cmbCaracter
             // 
             cmbCaracter.BackColor = Color.Gainsboro;
             cmbCaracter.FormattingEnabled = true;
-            cmbCaracter.Location = new Point(514, 173);
+            cmbCaracter.Location = new Point(497, 67);
             cmbCaracter.Name = "cmbCaracter";
             cmbCaracter.Size = new Size(421, 22);
-            cmbCaracter.TabIndex = 44;
+            cmbCaracter.TabIndex = 35;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("EngraversGothic BT", 10F);
             label8.ForeColor = Color.FromArgb(224, 224, 224);
-            label8.Location = new Point(514, 156);
+            label8.Location = new Point(497, 50);
             label8.Name = "label8";
             label8.Size = new Size(64, 15);
             label8.TabIndex = 43;
@@ -203,7 +216,7 @@
             txtTelefono.Location = new Point(35, 285);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(421, 22);
-            txtTelefono.TabIndex = 53;
+            txtTelefono.TabIndex = 34;
             // 
             // txtCuit
             // 
@@ -212,7 +225,7 @@
             txtCuit.Location = new Point(35, 227);
             txtCuit.Name = "txtCuit";
             txtCuit.Size = new Size(421, 22);
-            txtCuit.TabIndex = 52;
+            txtCuit.TabIndex = 33;
             // 
             // txtDomicilio
             // 
@@ -221,7 +234,7 @@
             txtDomicilio.Location = new Point(35, 173);
             txtDomicilio.Name = "txtDomicilio";
             txtDomicilio.Size = new Size(421, 22);
-            txtDomicilio.TabIndex = 51;
+            txtDomicilio.TabIndex = 32;
             // 
             // label9
             // 
@@ -260,17 +273,19 @@
             // 
             txtLogoUrl.BackColor = Color.Gainsboro;
             txtLogoUrl.BorderStyle = BorderStyle.FixedSingle;
-            txtLogoUrl.Location = new Point(514, 62);
+            txtLogoUrl.Enabled = false;
+            txtLogoUrl.Location = new Point(497, 231);
             txtLogoUrl.Name = "txtLogoUrl";
-            txtLogoUrl.Size = new Size(421, 22);
-            txtLogoUrl.TabIndex = 55;
+            txtLogoUrl.ReadOnly = true;
+            txtLogoUrl.Size = new Size(382, 22);
+            txtLogoUrl.TabIndex = 38;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("EngraversGothic BT", 10F);
             label6.ForeColor = Color.FromArgb(224, 224, 224);
-            label6.Location = new Point(514, 44);
+            label6.Location = new Point(497, 213);
             label6.Name = "label6";
             label6.Size = new Size(66, 15);
             label6.TabIndex = 54;
@@ -280,17 +295,17 @@
             // 
             txtLogoNombre.BackColor = Color.Gainsboro;
             txtLogoNombre.BorderStyle = BorderStyle.FixedSingle;
-            txtLogoNombre.Location = new Point(514, 117);
+            txtLogoNombre.Location = new Point(497, 173);
             txtLogoNombre.Name = "txtLogoNombre";
             txtLogoNombre.Size = new Size(421, 22);
-            txtLogoNombre.TabIndex = 57;
+            txtLogoNombre.TabIndex = 37;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("EngraversGothic BT", 10F);
             label7.ForeColor = Color.FromArgb(224, 224, 224);
-            label7.Location = new Point(514, 99);
+            label7.Location = new Point(497, 155);
             label7.Name = "label7";
             label7.Size = new Size(91, 15);
             label7.TabIndex = 56;
@@ -300,21 +315,49 @@
             // 
             txtMoneda.BackColor = Color.Gainsboro;
             txtMoneda.BorderStyle = BorderStyle.FixedSingle;
-            txtMoneda.Location = new Point(514, 227);
+            txtMoneda.Location = new Point(497, 121);
             txtMoneda.Name = "txtMoneda";
             txtMoneda.Size = new Size(421, 22);
-            txtMoneda.TabIndex = 59;
+            txtMoneda.TabIndex = 36;
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("EngraversGothic BT", 10F);
             label10.ForeColor = Color.FromArgb(224, 224, 224);
-            label10.Location = new Point(514, 209);
+            label10.Location = new Point(497, 103);
             label10.Name = "label10";
             label10.Size = new Size(106, 15);
             label10.TabIndex = 58;
             label10.Text = "Símbolo Moneda";
+            // 
+            // ImagenLogo
+            // 
+            ImagenLogo.BackColor = Color.FromArgb(74, 134, 160);
+            ImagenLogo.BorderStyle = BorderStyle.FixedSingle;
+            ImagenLogo.Location = new Point(691, 267);
+            ImagenLogo.Name = "ImagenLogo";
+            ImagenLogo.Size = new Size(227, 144);
+            ImagenLogo.TabIndex = 60;
+            ImagenLogo.TabStop = false;
+            // 
+            // btnAgregarLogo
+            // 
+            btnAgregarLogo.BackColor = Color.SteelBlue;
+            btnAgregarLogo.Cursor = Cursors.Hand;
+            btnAgregarLogo.FlatAppearance.BorderSize = 0;
+            btnAgregarLogo.FlatStyle = FlatStyle.Flat;
+            btnAgregarLogo.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAgregarLogo.ForeColor = Color.WhiteSmoke;
+            btnAgregarLogo.Location = new Point(887, 231);
+            btnAgregarLogo.Margin = new Padding(0);
+            btnAgregarLogo.Name = "btnAgregarLogo";
+            btnAgregarLogo.Size = new Size(31, 23);
+            btnAgregarLogo.TabIndex = 39;
+            btnAgregarLogo.TabStop = false;
+            btnAgregarLogo.Text = "...";
+            btnAgregarLogo.UseVisualStyleBackColor = false;
+            btnAgregarLogo.Click += btnAgregarLogo_Click;
             // 
             // Frm_Empresas
             // 
@@ -333,6 +376,7 @@
             tabListado.PerformLayout();
             tabNuevo.ResumeLayout(false);
             tabNuevo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ImagenLogo).EndInit();
             ResumeLayout(false);
         }
 
@@ -352,5 +396,7 @@
         private Label label7;
         private TextBox txtLogoUrl;
         private Label label6;
+        private PictureBox ImagenLogo;
+        private Button btnAgregarLogo;
     }
 }

@@ -79,16 +79,16 @@
             pnSubAdministracion = new Panel();
             btnAdmSucursales = new FontAwesome.Sharp.IconButton();
             btnAdmEmpresas = new FontAwesome.Sharp.IconButton();
-            btnAdmInventario = new FontAwesome.Sharp.IconButton();
             btnAdmListas = new FontAwesome.Sharp.IconButton();
             btnAdmUsuarios = new FontAwesome.Sharp.IconButton();
             iconButton1 = new FontAwesome.Sharp.IconButton();
             btnMenuHome = new FontAwesome.Sharp.IconButton();
             pnLogo = new Panel();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
             label2 = new Label();
+            pictureBox2 = new PictureBox();
             timerFechaHora = new System.Windows.Forms.Timer(components);
+            btnAdmInventario = new FontAwesome.Sharp.IconButton();
             panelContenedor.SuspendLayout();
             pnMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -1077,9 +1077,9 @@
             // pnSubAdministracion
             // 
             pnSubAdministracion.BackColor = Color.FromArgb(45, 66, 91);
+            pnSubAdministracion.Controls.Add(btnAdmInventario);
             pnSubAdministracion.Controls.Add(btnAdmSucursales);
             pnSubAdministracion.Controls.Add(btnAdmEmpresas);
-            pnSubAdministracion.Controls.Add(btnAdmInventario);
             pnSubAdministracion.Controls.Add(btnAdmListas);
             pnSubAdministracion.Controls.Add(btnAdmUsuarios);
             pnSubAdministracion.Dock = DockStyle.Top;
@@ -1105,7 +1105,7 @@
             btnAdmSucursales.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAdmSucursales.IconSize = 26;
             btnAdmSucursales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmSucursales.Location = new Point(0, 180);
+            btnAdmSucursales.Location = new Point(0, 135);
             btnAdmSucursales.Margin = new Padding(0);
             btnAdmSucursales.Name = "btnAdmSucursales";
             btnAdmSucursales.Padding = new Padding(25, 0, 0, 0);
@@ -1122,7 +1122,6 @@
             btnAdmEmpresas.BackgroundImageLayout = ImageLayout.None;
             btnAdmEmpresas.Cursor = Cursors.Hand;
             btnAdmEmpresas.Dock = DockStyle.Top;
-            btnAdmEmpresas.Enabled = false;
             btnAdmEmpresas.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
             btnAdmEmpresas.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
             btnAdmEmpresas.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
@@ -1134,7 +1133,7 @@
             btnAdmEmpresas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAdmEmpresas.IconSize = 26;
             btnAdmEmpresas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmEmpresas.Location = new Point(0, 135);
+            btnAdmEmpresas.Location = new Point(0, 90);
             btnAdmEmpresas.Margin = new Padding(0);
             btnAdmEmpresas.Name = "btnAdmEmpresas";
             btnAdmEmpresas.Padding = new Padding(25, 0, 0, 0);
@@ -1145,35 +1144,6 @@
             btnAdmEmpresas.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAdmEmpresas.UseVisualStyleBackColor = false;
             btnAdmEmpresas.Click += btnAdmEmpresas_Click;
-            // 
-            // btnAdmInventario
-            // 
-            btnAdmInventario.BackgroundImageLayout = ImageLayout.None;
-            btnAdmInventario.Cursor = Cursors.Hand;
-            btnAdmInventario.Dock = DockStyle.Top;
-            btnAdmInventario.Enabled = false;
-            btnAdmInventario.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
-            btnAdmInventario.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
-            btnAdmInventario.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
-            btnAdmInventario.FlatStyle = FlatStyle.Flat;
-            btnAdmInventario.Font = new Font("Microsoft Sans Serif", 10F);
-            btnAdmInventario.ForeColor = Color.WhiteSmoke;
-            btnAdmInventario.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            btnAdmInventario.IconColor = Color.WhiteSmoke;
-            btnAdmInventario.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdmInventario.IconSize = 26;
-            btnAdmInventario.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmInventario.Location = new Point(0, 90);
-            btnAdmInventario.Margin = new Padding(0);
-            btnAdmInventario.Name = "btnAdmInventario";
-            btnAdmInventario.Padding = new Padding(25, 0, 0, 0);
-            btnAdmInventario.Size = new Size(233, 45);
-            btnAdmInventario.TabIndex = 7;
-            btnAdmInventario.Text = "Inventario";
-            btnAdmInventario.TextAlign = ContentAlignment.MiddleLeft;
-            btnAdmInventario.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnAdmInventario.UseVisualStyleBackColor = false;
-            btnAdmInventario.Click += btnAdmInventario_Click;
             // 
             // btnAdmListas
             // 
@@ -1312,16 +1282,6 @@
             label1.TabIndex = 1;
             label1.Text = "Solucionnes";
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(74, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(87, 76);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -1333,10 +1293,48 @@
             label2.TabIndex = 3;
             label2.Text = "Informáticas";
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(74, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(87, 76);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 2;
+            pictureBox2.TabStop = false;
+            // 
             // timerFechaHora
             // 
             timerFechaHora.Enabled = true;
             timerFechaHora.Tick += timerFechaHora_Tick;
+            // 
+            // btnAdmInventario
+            // 
+            btnAdmInventario.BackgroundImageLayout = ImageLayout.None;
+            btnAdmInventario.Cursor = Cursors.Hand;
+            btnAdmInventario.Dock = DockStyle.Top;
+            btnAdmInventario.Enabled = false;
+            btnAdmInventario.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
+            btnAdmInventario.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
+            btnAdmInventario.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnAdmInventario.FlatStyle = FlatStyle.Flat;
+            btnAdmInventario.Font = new Font("Microsoft Sans Serif", 10F);
+            btnAdmInventario.ForeColor = Color.WhiteSmoke;
+            btnAdmInventario.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            btnAdmInventario.IconColor = Color.WhiteSmoke;
+            btnAdmInventario.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdmInventario.IconSize = 26;
+            btnAdmInventario.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAdmInventario.Location = new Point(0, 180);
+            btnAdmInventario.Margin = new Padding(0);
+            btnAdmInventario.Name = "btnAdmInventario";
+            btnAdmInventario.Padding = new Padding(25, 0, 0, 0);
+            btnAdmInventario.Size = new Size(233, 45);
+            btnAdmInventario.TabIndex = 10;
+            btnAdmInventario.Text = "Inventario";
+            btnAdmInventario.TextAlign = ContentAlignment.MiddleLeft;
+            btnAdmInventario.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAdmInventario.UseVisualStyleBackColor = false;
             // 
             // Frm_Main
             // 
@@ -1418,7 +1416,6 @@
         private Panel pnRespaldos;
         private FontAwesome.Sharp.IconButton btnAdmUsuarios;
         private FontAwesome.Sharp.IconButton btnAdmListas;
-        private FontAwesome.Sharp.IconButton btnAdmInventario;
         private FontAwesome.Sharp.IconButton btnMntArticulos;
         private FontAwesome.Sharp.IconButton btnMntClientes;
         private FontAwesome.Sharp.IconButton btnMntProveedores;
@@ -1443,5 +1440,6 @@
         public TextBox txtNombreUsuario;
         public TextBox txtCategoria;
         private Label label2;
+        private FontAwesome.Sharp.IconButton btnAdmInventario;
     }
 }

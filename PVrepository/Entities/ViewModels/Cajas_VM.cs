@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PVrepository.Entities
+namespace PVrepository.Entities.ViewModels
 {
     public class Cajas_VM
     {

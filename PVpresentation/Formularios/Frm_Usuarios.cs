@@ -89,7 +89,7 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Usuarios_Load(object sender, EventArgs e)
         {
-            dgvListado.ImplementarConfiguracion("Editar");
+            //dgvListado.ImplementarConfiguracion("Editar");
             MostrarTabs(tabListado.Name);
 
             //Completo los datos de los comboBox no enlazados con otras tablas

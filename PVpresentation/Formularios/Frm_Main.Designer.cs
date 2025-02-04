@@ -38,7 +38,6 @@
             txtHoraActual = new TextBox();
             txtNombreUsuario = new TextBox();
             txtCategoria = new TextBox();
-            pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             pnSuperior = new Panel();
             IconoFormularioActual = new FontAwesome.Sharp.IconPictureBox();
@@ -77,23 +76,19 @@
             btnMntArticulos = new FontAwesome.Sharp.IconButton();
             btnMantenimiento = new FontAwesome.Sharp.IconButton();
             pnSubAdministracion = new Panel();
+            btnAdmInventario = new FontAwesome.Sharp.IconButton();
             btnAdmSucursales = new FontAwesome.Sharp.IconButton();
             btnAdmEmpresas = new FontAwesome.Sharp.IconButton();
-            btnAdmListas = new FontAwesome.Sharp.IconButton();
             btnAdmUsuarios = new FontAwesome.Sharp.IconButton();
             iconButton1 = new FontAwesome.Sharp.IconButton();
             btnMenuHome = new FontAwesome.Sharp.IconButton();
             pnLogo = new Panel();
-            label1 = new Label();
-            label2 = new Label();
             pictureBox2 = new PictureBox();
             timerFechaHora = new System.Windows.Forms.Timer(components);
-            btnAdmInventario = new FontAwesome.Sharp.IconButton();
             panelContenedor.SuspendLayout();
             pnMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnInferior.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             pnSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)IconoFormularioActual).BeginInit();
@@ -122,7 +117,7 @@
             panelContenedor.Dock = DockStyle.Fill;
             panelContenedor.Location = new Point(0, 0);
             panelContenedor.Name = "panelContenedor";
-            panelContenedor.Size = new Size(1250, 758);
+            panelContenedor.Size = new Size(1250, 720);
             panelContenedor.TabIndex = 0;
             // 
             // pnMain
@@ -132,16 +127,16 @@
             pnMain.Dock = DockStyle.Fill;
             pnMain.Location = new Point(250, 45);
             pnMain.Name = "pnMain";
-            pnMain.Size = new Size(1000, 625);
+            pnMain.Size = new Size(1000, 587);
             pnMain.TabIndex = 13;
             // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Image = Properties.Resources.Logo_PV_SinFondo;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(184, 141);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(641, 355);
+            pictureBox1.Size = new Size(641, 317);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -153,10 +148,9 @@
             pnInferior.Controls.Add(txtHoraActual);
             pnInferior.Controls.Add(txtNombreUsuario);
             pnInferior.Controls.Add(txtCategoria);
-            pnInferior.Controls.Add(pictureBox3);
             pnInferior.Controls.Add(pictureBox4);
             pnInferior.Dock = DockStyle.Bottom;
-            pnInferior.Location = new Point(250, 670);
+            pnInferior.Location = new Point(250, 632);
             pnInferior.Name = "pnInferior";
             pnInferior.Size = new Size(1000, 88);
             pnInferior.TabIndex = 12;
@@ -218,17 +212,6 @@
             txtCategoria.Size = new Size(251, 16);
             txtCategoria.TabIndex = 6;
             txtCategoria.Text = "Categoria";
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(462, 36);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(65, 39);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 5;
-            pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
@@ -358,7 +341,7 @@
             pnMenuPrincipal.Dock = DockStyle.Left;
             pnMenuPrincipal.Location = new Point(0, 0);
             pnMenuPrincipal.Name = "pnMenuPrincipal";
-            pnMenuPrincipal.Size = new Size(250, 758);
+            pnMenuPrincipal.Size = new Size(250, 720);
             pnMenuPrincipal.TabIndex = 0;
             // 
             // btnSalir
@@ -378,7 +361,7 @@
             btnSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSalir.IconSize = 32;
             btnSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSalir.Location = new Point(0, 1461);
+            btnSalir.Location = new Point(0, 1393);
             btnSalir.Margin = new Padding(0);
             btnSalir.Name = "btnSalir";
             btnSalir.Padding = new Padding(15, 0, 0, 0);
@@ -396,7 +379,7 @@
             pnRespaldos.Controls.Add(btnAdmRecuperaDatos);
             pnRespaldos.Controls.Add(btnAdmRespaldarDatos);
             pnRespaldos.Dock = DockStyle.Top;
-            pnRespaldos.Location = new Point(0, 1371);
+            pnRespaldos.Location = new Point(0, 1303);
             pnRespaldos.Name = "pnRespaldos";
             pnRespaldos.Size = new Size(233, 90);
             pnRespaldos.TabIndex = 16;
@@ -475,7 +458,7 @@
             btnRespaldos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnRespaldos.IconSize = 32;
             btnRespaldos.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRespaldos.Location = new Point(0, 1321);
+            btnRespaldos.Location = new Point(0, 1253);
             btnRespaldos.Margin = new Padding(0);
             btnRespaldos.Name = "btnRespaldos";
             btnRespaldos.Padding = new Padding(15, 0, 0, 0);
@@ -495,7 +478,7 @@
             pnSubConsultas.Controls.Add(btnCnsVentas);
             pnSubConsultas.Controls.Add(btnCnsCajas);
             pnSubConsultas.Dock = DockStyle.Top;
-            pnSubConsultas.Location = new Point(0, 1140);
+            pnSubConsultas.Location = new Point(0, 1072);
             pnSubConsultas.Name = "pnSubConsultas";
             pnSubConsultas.Size = new Size(233, 181);
             pnSubConsultas.TabIndex = 13;
@@ -629,7 +612,7 @@
             btnConsultas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnConsultas.IconSize = 32;
             btnConsultas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnConsultas.Location = new Point(0, 1090);
+            btnConsultas.Location = new Point(0, 1022);
             btnConsultas.Margin = new Padding(0);
             btnConsultas.Name = "btnConsultas";
             btnConsultas.Padding = new Padding(15, 0, 0, 0);
@@ -648,7 +631,7 @@
             pnSubCajas.Controls.Add(btnCjaIngresos);
             pnSubCajas.Controls.Add(btnCjaApertura);
             pnSubCajas.Dock = DockStyle.Top;
-            pnSubCajas.Location = new Point(0, 954);
+            pnSubCajas.Location = new Point(0, 886);
             pnSubCajas.Name = "pnSubCajas";
             pnSubCajas.Size = new Size(233, 136);
             pnSubCajas.TabIndex = 11;
@@ -754,7 +737,7 @@
             btnCajas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCajas.IconSize = 32;
             btnCajas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCajas.Location = new Point(0, 904);
+            btnCajas.Location = new Point(0, 836);
             btnCajas.Margin = new Padding(0);
             btnCajas.Name = "btnCajas";
             btnCajas.Padding = new Padding(15, 0, 0, 0);
@@ -775,7 +758,7 @@
             pnSubComprobantes.Controls.Add(btnCmpVentas);
             pnSubComprobantes.Controls.Add(btnCmpCompras);
             pnSubComprobantes.Dock = DockStyle.Top;
-            pnSubComprobantes.Location = new Point(0, 678);
+            pnSubComprobantes.Location = new Point(0, 610);
             pnSubComprobantes.Name = "pnSubComprobantes";
             pnSubComprobantes.Size = new Size(233, 226);
             pnSubComprobantes.TabIndex = 9;
@@ -937,7 +920,7 @@
             btnComprobantes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnComprobantes.IconSize = 32;
             btnComprobantes.ImageAlign = ContentAlignment.MiddleLeft;
-            btnComprobantes.Location = new Point(0, 628);
+            btnComprobantes.Location = new Point(0, 560);
             btnComprobantes.Margin = new Padding(0);
             btnComprobantes.Name = "btnComprobantes";
             btnComprobantes.Padding = new Padding(15, 0, 0, 0);
@@ -956,7 +939,7 @@
             pnSubMantenimiento.Controls.Add(btnMntClientes);
             pnSubMantenimiento.Controls.Add(btnMntArticulos);
             pnSubMantenimiento.Dock = DockStyle.Top;
-            pnSubMantenimiento.Location = new Point(0, 492);
+            pnSubMantenimiento.Location = new Point(0, 424);
             pnSubMantenimiento.Name = "pnSubMantenimiento";
             pnSubMantenimiento.Size = new Size(233, 136);
             pnSubMantenimiento.TabIndex = 7;
@@ -1062,7 +1045,7 @@
             btnMantenimiento.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnMantenimiento.IconSize = 32;
             btnMantenimiento.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMantenimiento.Location = new Point(0, 442);
+            btnMantenimiento.Location = new Point(0, 374);
             btnMantenimiento.Margin = new Padding(0);
             btnMantenimiento.Name = "btnMantenimiento";
             btnMantenimiento.Padding = new Padding(15, 0, 0, 0);
@@ -1080,13 +1063,40 @@
             pnSubAdministracion.Controls.Add(btnAdmInventario);
             pnSubAdministracion.Controls.Add(btnAdmSucursales);
             pnSubAdministracion.Controls.Add(btnAdmEmpresas);
-            pnSubAdministracion.Controls.Add(btnAdmListas);
             pnSubAdministracion.Controls.Add(btnAdmUsuarios);
             pnSubAdministracion.Dock = DockStyle.Top;
-            pnSubAdministracion.Location = new Point(0, 216);
+            pnSubAdministracion.Location = new Point(0, 193);
             pnSubAdministracion.Name = "pnSubAdministracion";
-            pnSubAdministracion.Size = new Size(233, 226);
+            pnSubAdministracion.Size = new Size(233, 181);
             pnSubAdministracion.TabIndex = 5;
+            // 
+            // btnAdmInventario
+            // 
+            btnAdmInventario.BackgroundImageLayout = ImageLayout.None;
+            btnAdmInventario.Cursor = Cursors.Hand;
+            btnAdmInventario.Dock = DockStyle.Top;
+            btnAdmInventario.Enabled = false;
+            btnAdmInventario.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
+            btnAdmInventario.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
+            btnAdmInventario.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnAdmInventario.FlatStyle = FlatStyle.Flat;
+            btnAdmInventario.Font = new Font("Microsoft Sans Serif", 10F);
+            btnAdmInventario.ForeColor = Color.WhiteSmoke;
+            btnAdmInventario.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            btnAdmInventario.IconColor = Color.WhiteSmoke;
+            btnAdmInventario.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAdmInventario.IconSize = 26;
+            btnAdmInventario.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAdmInventario.Location = new Point(0, 135);
+            btnAdmInventario.Margin = new Padding(0);
+            btnAdmInventario.Name = "btnAdmInventario";
+            btnAdmInventario.Padding = new Padding(25, 0, 0, 0);
+            btnAdmInventario.Size = new Size(233, 45);
+            btnAdmInventario.TabIndex = 10;
+            btnAdmInventario.Text = "Inventario";
+            btnAdmInventario.TextAlign = ContentAlignment.MiddleLeft;
+            btnAdmInventario.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAdmInventario.UseVisualStyleBackColor = false;
             // 
             // btnAdmSucursales
             // 
@@ -1105,7 +1115,7 @@
             btnAdmSucursales.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAdmSucursales.IconSize = 26;
             btnAdmSucursales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmSucursales.Location = new Point(0, 135);
+            btnAdmSucursales.Location = new Point(0, 90);
             btnAdmSucursales.Margin = new Padding(0);
             btnAdmSucursales.Name = "btnAdmSucursales";
             btnAdmSucursales.Padding = new Padding(25, 0, 0, 0);
@@ -1133,7 +1143,7 @@
             btnAdmEmpresas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAdmEmpresas.IconSize = 26;
             btnAdmEmpresas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmEmpresas.Location = new Point(0, 90);
+            btnAdmEmpresas.Location = new Point(0, 45);
             btnAdmEmpresas.Margin = new Padding(0);
             btnAdmEmpresas.Name = "btnAdmEmpresas";
             btnAdmEmpresas.Padding = new Padding(25, 0, 0, 0);
@@ -1144,34 +1154,6 @@
             btnAdmEmpresas.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAdmEmpresas.UseVisualStyleBackColor = false;
             btnAdmEmpresas.Click += btnAdmEmpresas_Click;
-            // 
-            // btnAdmListas
-            // 
-            btnAdmListas.BackgroundImageLayout = ImageLayout.None;
-            btnAdmListas.Cursor = Cursors.Hand;
-            btnAdmListas.Dock = DockStyle.Top;
-            btnAdmListas.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
-            btnAdmListas.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
-            btnAdmListas.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
-            btnAdmListas.FlatStyle = FlatStyle.Flat;
-            btnAdmListas.Font = new Font("Microsoft Sans Serif", 10F);
-            btnAdmListas.ForeColor = Color.WhiteSmoke;
-            btnAdmListas.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            btnAdmListas.IconColor = Color.WhiteSmoke;
-            btnAdmListas.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdmListas.IconSize = 26;
-            btnAdmListas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmListas.Location = new Point(0, 45);
-            btnAdmListas.Margin = new Padding(0);
-            btnAdmListas.Name = "btnAdmListas";
-            btnAdmListas.Padding = new Padding(25, 0, 0, 0);
-            btnAdmListas.Size = new Size(233, 45);
-            btnAdmListas.TabIndex = 6;
-            btnAdmListas.Text = "Listas de Precios";
-            btnAdmListas.TextAlign = ContentAlignment.MiddleLeft;
-            btnAdmListas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnAdmListas.UseVisualStyleBackColor = false;
-            btnAdmListas.Click += btnAdmListas_Click;
             // 
             // btnAdmUsuarios
             // 
@@ -1218,7 +1200,7 @@
             iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton1.IconSize = 32;
             iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(0, 166);
+            iconButton1.Location = new Point(0, 143);
             iconButton1.Margin = new Padding(0);
             iconButton1.Name = "iconButton1";
             iconButton1.Padding = new Padding(15, 0, 0, 0);
@@ -1247,7 +1229,7 @@
             btnMenuHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnMenuHome.IconSize = 32;
             btnMenuHome.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMenuHome.Location = new Point(0, 116);
+            btnMenuHome.Location = new Point(0, 93);
             btnMenuHome.Margin = new Padding(0);
             btnMenuHome.Name = "btnMenuHome";
             btnMenuHome.Padding = new Padding(15, 0, 0, 0);
@@ -1262,43 +1244,19 @@
             // pnLogo
             // 
             pnLogo.BackColor = Color.FromArgb(4, 41, 68);
-            pnLogo.Controls.Add(label1);
-            pnLogo.Controls.Add(label2);
             pnLogo.Controls.Add(pictureBox2);
             pnLogo.Dock = DockStyle.Top;
             pnLogo.Location = new Point(0, 0);
             pnLogo.Name = "pnLogo";
-            pnLogo.Size = new Size(233, 116);
+            pnLogo.Size = new Size(233, 93);
             pnLogo.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Play", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(33, 65);
-            label1.Name = "label1";
-            label1.Size = new Size(83, 18);
-            label1.TabIndex = 1;
-            label1.Text = "Solucionnes";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Play", 10F);
-            label2.ForeColor = Color.WhiteSmoke;
-            label2.Location = new Point(122, 65);
-            label2.Name = "label2";
-            label2.Size = new Size(89, 18);
-            label2.TabIndex = 3;
-            label2.Text = "Informáticas";
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(74, 3);
+            pictureBox2.Location = new Point(42, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(87, 76);
+            pictureBox2.Size = new Size(129, 88);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
@@ -1308,40 +1266,12 @@
             timerFechaHora.Enabled = true;
             timerFechaHora.Tick += timerFechaHora_Tick;
             // 
-            // btnAdmInventario
-            // 
-            btnAdmInventario.BackgroundImageLayout = ImageLayout.None;
-            btnAdmInventario.Cursor = Cursors.Hand;
-            btnAdmInventario.Dock = DockStyle.Top;
-            btnAdmInventario.Enabled = false;
-            btnAdmInventario.FlatAppearance.BorderColor = Color.FromArgb(4, 41, 68);
-            btnAdmInventario.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
-            btnAdmInventario.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
-            btnAdmInventario.FlatStyle = FlatStyle.Flat;
-            btnAdmInventario.Font = new Font("Microsoft Sans Serif", 10F);
-            btnAdmInventario.ForeColor = Color.WhiteSmoke;
-            btnAdmInventario.IconChar = FontAwesome.Sharp.IconChar.ListDots;
-            btnAdmInventario.IconColor = Color.WhiteSmoke;
-            btnAdmInventario.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAdmInventario.IconSize = 26;
-            btnAdmInventario.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAdmInventario.Location = new Point(0, 180);
-            btnAdmInventario.Margin = new Padding(0);
-            btnAdmInventario.Name = "btnAdmInventario";
-            btnAdmInventario.Padding = new Padding(25, 0, 0, 0);
-            btnAdmInventario.Size = new Size(233, 45);
-            btnAdmInventario.TabIndex = 10;
-            btnAdmInventario.Text = "Inventario";
-            btnAdmInventario.TextAlign = ContentAlignment.MiddleLeft;
-            btnAdmInventario.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnAdmInventario.UseVisualStyleBackColor = false;
-            // 
             // Frm_Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 242, 233);
-            ClientSize = new Size(1250, 758);
+            ClientSize = new Size(1250, 720);
             Controls.Add(panelContenedor);
             FormBorderStyle = FormBorderStyle.None;
             MinimumSize = new Size(1250, 690);
@@ -1353,7 +1283,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnInferior.ResumeLayout(false);
             pnInferior.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             pnSuperior.ResumeLayout(false);
             pnSuperior.PerformLayout();
@@ -1370,7 +1299,6 @@
             pnSubMantenimiento.ResumeLayout(false);
             pnSubAdministracion.ResumeLayout(false);
             pnLogo.ResumeLayout(false);
-            pnLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
@@ -1384,13 +1312,11 @@
         private System.Windows.Forms.Timer timerFechaHora;
         private Panel pnMenuPrincipal;
         private Panel pnLogo;
-        private Label label1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Panel pnInferior;
         private TextBox txtFecha;
         private TextBox txtHoraActual;
-        private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private Panel pnSuperior;
         private PictureBox btnMaximizar;
@@ -1415,7 +1341,6 @@
         private FontAwesome.Sharp.IconButton btnSalir;
         private Panel pnRespaldos;
         private FontAwesome.Sharp.IconButton btnAdmUsuarios;
-        private FontAwesome.Sharp.IconButton btnAdmListas;
         private FontAwesome.Sharp.IconButton btnMntArticulos;
         private FontAwesome.Sharp.IconButton btnMntClientes;
         private FontAwesome.Sharp.IconButton btnMntProveedores;
@@ -1439,7 +1364,6 @@
         private FontAwesome.Sharp.IconButton btnAdmEmpresas;
         public TextBox txtNombreUsuario;
         public TextBox txtCategoria;
-        private Label label2;
         private FontAwesome.Sharp.IconButton btnAdmInventario;
     }
 }

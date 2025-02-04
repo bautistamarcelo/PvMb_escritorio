@@ -1,4 +1,4 @@
-﻿using PVrepository.Entities;
+﻿using PVrepository.Entities.ViewModels;
 using PVrepository.Interfaces;
 
 namespace PVservices.Implementation

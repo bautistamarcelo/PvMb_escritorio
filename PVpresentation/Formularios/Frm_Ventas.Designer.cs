@@ -238,7 +238,7 @@
             label9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label9.AutoSize = true;
             label9.Font = new Font("EngraversGothic BT", 10F);
-            label9.ForeColor = Color.FromArgb(224, 224, 224);
+            label9.ForeColor = Color.Silver;
             label9.Location = new Point(13, 154);
             label9.Name = "label9";
             label9.Size = new Size(39, 15);
@@ -249,7 +249,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("EngraversGothic BT", 10F);
-            label6.ForeColor = Color.FromArgb(224, 224, 224);
+            label6.ForeColor = Color.Silver;
             label6.Location = new Point(178, 256);
             label6.Name = "label6";
             label6.Size = new Size(47, 15);
@@ -259,10 +259,10 @@
             // txtBruto
             // 
             txtBruto.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtBruto.BackColor = Color.FromArgb(130, 149, 169);
+            txtBruto.BackColor = Color.FromArgb(4, 41, 68);
             txtBruto.BorderStyle = BorderStyle.FixedSingle;
             txtBruto.Font = new Font("Square721 BT", 12F);
-            txtBruto.ForeColor = Color.FromArgb(4, 41, 68);
+            txtBruto.ForeColor = Color.White;
             txtBruto.Location = new Point(13, 172);
             txtBruto.Name = "txtBruto";
             txtBruto.ReadOnly = true;
@@ -274,9 +274,10 @@
             // 
             // txtSaldoPago
             // 
-            txtSaldoPago.BackColor = Color.FromArgb(130, 149, 169);
+            txtSaldoPago.BackColor = Color.FromArgb(4, 41, 68);
             txtSaldoPago.BorderStyle = BorderStyle.FixedSingle;
             txtSaldoPago.Font = new Font("Square721 BT", 12F);
+            txtSaldoPago.ForeColor = Color.White;
             txtSaldoPago.Location = new Point(178, 274);
             txtSaldoPago.Name = "txtSaldoPago";
             txtSaldoPago.ReadOnly = true;
@@ -291,7 +292,7 @@
             label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Font = new Font("EngraversGothic BT", 10F);
-            label8.ForeColor = Color.FromArgb(224, 224, 224);
+            label8.ForeColor = Color.Silver;
             label8.Location = new Point(13, 96);
             label8.Name = "label8";
             label8.Size = new Size(94, 15);
@@ -312,10 +313,10 @@
             // txtDtoEfectivo
             // 
             txtDtoEfectivo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtDtoEfectivo.BackColor = Color.FromArgb(130, 149, 169);
+            txtDtoEfectivo.BackColor = Color.FromArgb(4, 41, 68);
             txtDtoEfectivo.BorderStyle = BorderStyle.FixedSingle;
             txtDtoEfectivo.Font = new Font("Square721 BT", 12F);
-            txtDtoEfectivo.ForeColor = Color.FromArgb(4, 41, 68);
+            txtDtoEfectivo.ForeColor = Color.White;
             txtDtoEfectivo.Location = new Point(13, 114);
             txtDtoEfectivo.Name = "txtDtoEfectivo";
             txtDtoEfectivo.ReadOnly = true;
@@ -342,7 +343,7 @@
             label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("EngraversGothic BT", 10F);
-            label7.ForeColor = Color.FromArgb(224, 224, 224);
+            label7.ForeColor = Color.Silver;
             label7.Location = new Point(14, 37);
             label7.Name = "label7";
             label7.Size = new Size(63, 15);
@@ -363,10 +364,10 @@
             // txtSubTotal
             // 
             txtSubTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSubTotal.BackColor = Color.FromArgb(130, 149, 169);
+            txtSubTotal.BackColor = Color.FromArgb(4, 41, 68);
             txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
             txtSubTotal.Font = new Font("Square721 BT", 12F);
-            txtSubTotal.ForeColor = Color.FromArgb(4, 41, 68);
+            txtSubTotal.ForeColor = Color.White;
             txtSubTotal.Location = new Point(14, 55);
             txtSubTotal.Name = "txtSubTotal";
             txtSubTotal.ReadOnly = true;
@@ -464,7 +465,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("EngraversGothic BT", 10F);
-            label15.ForeColor = Color.FromArgb(224, 224, 224);
+            label15.ForeColor = Color.Silver;
             label15.Location = new Point(15, 256);
             label15.Name = "label15";
             label15.Size = new Size(80, 15);
@@ -473,9 +474,10 @@
             // 
             // txtMontoFinal
             // 
-            txtMontoFinal.BackColor = Color.FromArgb(130, 149, 169);
+            txtMontoFinal.BackColor = Color.FromArgb(4, 41, 68);
             txtMontoFinal.BorderStyle = BorderStyle.FixedSingle;
             txtMontoFinal.Font = new Font("Square721 BT", 12F);
+            txtMontoFinal.ForeColor = Color.White;
             txtMontoFinal.Location = new Point(14, 274);
             txtMontoFinal.Name = "txtMontoFinal";
             txtMontoFinal.ReadOnly = true;
@@ -595,17 +597,18 @@
             cmbLista.BackColor = Color.Gainsboro;
             cmbLista.Font = new Font("Square721 BT", 12F);
             cmbLista.FormattingEnabled = true;
-            cmbLista.Location = new Point(345, 422);
+            cmbLista.Location = new Point(409, 423);
             cmbLista.Name = "cmbLista";
             cmbLista.Size = new Size(220, 28);
             cmbLista.TabIndex = 64;
+            cmbLista.SelectedIndexChanged += cmbLista_SelectedIndexChanged;
             // 
             // label20
             // 
             label20.AutoSize = true;
             label20.Font = new Font("EngraversGothic BT", 10F);
             label20.ForeColor = Color.FromArgb(224, 224, 224);
-            label20.Location = new Point(345, 404);
+            label20.Location = new Point(294, 428);
             label20.Name = "label20";
             label20.Size = new Size(109, 15);
             label20.TabIndex = 63;
@@ -616,7 +619,7 @@
             cmbTipo.BackColor = Color.Gainsboro;
             cmbTipo.Font = new Font("Square721 BT", 12F);
             cmbTipo.FormattingEnabled = true;
-            cmbTipo.Location = new Point(77, 422);
+            cmbTipo.Location = new Point(55, 423);
             cmbTipo.Name = "cmbTipo";
             cmbTipo.Size = new Size(220, 28);
             cmbTipo.TabIndex = 44;
@@ -626,7 +629,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("EngraversGothic BT", 10F);
             label10.ForeColor = Color.FromArgb(224, 224, 224);
-            label10.Location = new Point(77, 404);
+            label10.Location = new Point(16, 428);
             label10.Name = "label10";
             label10.Size = new Size(31, 15);
             label10.TabIndex = 43;
@@ -657,9 +660,10 @@
             // 
             // txtFecha
             // 
-            txtFecha.BackColor = Color.FromArgb(130, 149, 169);
+            txtFecha.BackColor = Color.FromArgb(45, 66, 91);
             txtFecha.BorderStyle = BorderStyle.FixedSingle;
             txtFecha.Font = new Font("Square721 BT", 12F);
+            txtFecha.ForeColor = Color.White;
             txtFecha.Location = new Point(13, 59);
             txtFecha.Name = "txtFecha";
             txtFecha.ReadOnly = true;
@@ -732,7 +736,7 @@
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(13, 92);
             dgvListado.Name = "dgvListado";
-            dgvListado.Size = new Size(616, 304);
+            dgvListado.Size = new Size(616, 313);
             dgvListado.TabIndex = 16;
             dgvListado.CellContentClick += dgvListado_CellContentClick;
             // 
@@ -749,9 +753,10 @@
             // 
             // txtBuscarCliente
             // 
-            txtBuscarCliente.BackColor = Color.FromArgb(130, 149, 169);
+            txtBuscarCliente.BackColor = Color.FromArgb(45, 66, 91);
             txtBuscarCliente.BorderStyle = BorderStyle.FixedSingle;
             txtBuscarCliente.Font = new Font("Square721 BT", 12F);
+            txtBuscarCliente.ForeColor = Color.White;
             txtBuscarCliente.Location = new Point(77, 15);
             txtBuscarCliente.Name = "txtBuscarCliente";
             txtBuscarCliente.ReadOnly = true;
@@ -785,6 +790,8 @@
             Controls.Add(pnListado);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(968, 512);
+            MinimumSize = new Size(968, 512);
             Name = "Frm_Ventas";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Ventas";

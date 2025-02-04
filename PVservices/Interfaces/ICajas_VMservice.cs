@@ -1,4 +1,4 @@
-﻿using PVrepository.Entities;
+﻿using PVrepository.Entities.ViewModels;
 
 namespace PVservices.Interfaces
 {

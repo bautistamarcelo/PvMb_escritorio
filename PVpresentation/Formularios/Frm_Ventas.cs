@@ -17,20 +17,20 @@ namespace PVpresentation.Formularios
 {
     public partial class Frm_Ventas : Form
     {
+
+        #region METODOS PARA ARRASTRAR y MINIMIZAR/RESTAURAR EL FORMULARIO
         //Variables para maximizar y minimizar formulario
         private int lx;
         private int ly;
         private int sw;
         private int sh;
 
-        #region METODOS PARA ARRASTRAR EL FORMULARIO
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
         #endregion
-
 
         #region SERVICIOS REQUERIDOAS Y CONSTRUCTOR
         private readonly IServiceProvider _serviceProvider;
@@ -214,9 +214,21 @@ namespace PVpresentation.Formularios
 
         public void ActualizaMontos()
         {
-            int _SubTotal = _VentaDetalle.Sum(x => x.pTotalVenta);
-            int _Bruto = _VentaDetalle.Sum(x => x.pTotalOferta);
-            int _TotalFinal;
+            int _SubTotal = 0; // 
+            int _Bruto = 0; // 
+            int _TotalFinal = 0;
+
+            if (cmbLista.SelectedIndex == 0)
+            {
+                _SubTotal = _VentaDetalle.Sum(x => x.pTotalVenta);
+                _Bruto = _VentaDetalle.Sum(x => x.pTotalOferta);
+            }
+            else if (cmbLista.SelectedIndex == 1)
+            {
+                _SubTotal = _VentaDetalle.Sum(x => x.pTotalVenta);
+                _Bruto = _VentaDetalle.Sum(x => x.pTotalVenta);
+            }
+
             if (txtDtoGral.Text.Trim() == "0")
             {
                 _TotalFinal = _Bruto;
@@ -225,7 +237,7 @@ namespace PVpresentation.Formularios
             {
                 _TotalFinal = _Bruto - Convert.ToInt32(txtDtoGral.Text);
             }
-            //int _TotalFinal = _Bruto - Convert.ToInt32(txtDtoGral.Text);
+
             int _SumaPagos = Convert.ToInt32(txtTefectivo.Text.Trim()) + Convert.ToInt32(txtTdebito.Text.Trim()) + Convert.ToInt32(txtTtarjeta.Text.Trim()) + Convert.ToInt32(txtTctaCte.Text.Trim());
             int _Diferencia = _TotalFinal - _SumaPagos;
             txtSubTotal.Text = _SubTotal.ToString();
@@ -296,11 +308,6 @@ namespace PVpresentation.Formularios
                 return;
             }
 
-            #endregion
-
-            int _tipo = cmbTipo.SelectedIndex + 1;
-            int _lista = cmbLista.SelectedIndex + 1;
-
             #region VALIDAR LOS DATOS DEL CLIENTE SEGÚN LA INSTANCIA DEL FORMULARIO DE VENTAS ABIERTO
             string _ClienteNombre = "";
             int _ClienteID = 0;
@@ -311,20 +318,47 @@ namespace PVpresentation.Formularios
                 _ClienteID = VariablesGlobales.Venta01_ClienteID;
                 _ClienteNombre = VariablesGlobales.Venta01_ClienteNombre;
                 _ClienteDomicilio = VariablesGlobales.Venta01_ClienteDomicilio;
+
+                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
+                {
+                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
             }
             if (txtInstancia.Text == "2")
             {
                 _ClienteID = VariablesGlobales.Venta02_ClienteID;
                 _ClienteNombre = VariablesGlobales.Venta02_ClienteNombre;
                 _ClienteDomicilio = VariablesGlobales.Venta02_ClienteDomicilio;
+
+                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
+                {
+                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             if (txtInstancia.Text == "3")
             {
                 _ClienteID = VariablesGlobales.Venta03_ClienteID;
                 _ClienteNombre = VariablesGlobales.Venta03_ClienteNombre;
                 _ClienteDomicilio = VariablesGlobales.Venta03_ClienteDomicilio;
+
+                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
+                {
+                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             #endregion
+
+
+
+            #endregion
+
+            int _tipo = cmbTipo.SelectedIndex + 1;
+            int _lista = cmbLista.SelectedIndex + 1;
+
 
             XElement Venta = new XElement("Venta",
                 new XElement("Fecha", txtFecha.Text.Trim()),
@@ -447,10 +481,10 @@ namespace PVpresentation.Formularios
 
                 if (txtInstancia.Text == "1")
                 {
-                    VariablesGlobales.Venta01_ClienteID=_clienteSeleccionado.ID;
+                    VariablesGlobales.Venta01_ClienteID = _clienteSeleccionado.ID;
                     VariablesGlobales.Venta01_ClienteNombre = _clienteSeleccionado.Nombre;
                     VariablesGlobales.Venta01_ClienteDomicilio = _clienteSeleccionado.Domicilio;
-                    
+
                 }
                 if (txtInstancia.Text == "2")
                 {
@@ -466,8 +500,11 @@ namespace PVpresentation.Formularios
                 }
                 #endregion
             }
+        }
 
-
+        private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActualizaMontos();
         }
     }
 }

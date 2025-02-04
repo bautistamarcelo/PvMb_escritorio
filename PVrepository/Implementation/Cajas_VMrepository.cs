@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using PVrepository.DB;
-using PVrepository.Entities;
+using PVrepository.Entities.ViewModels;
 using PVrepository.Interfaces;
 using System.Data;
 

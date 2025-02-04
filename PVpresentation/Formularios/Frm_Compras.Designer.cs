@@ -6,7 +6,7 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
- 
+
 
         #region Windows Form Designer generated code
 
@@ -16,7 +16,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Ventas));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Compras));
             pnTituloFormulario = new Panel();
             btnMaximizar = new PictureBox();
             btnRestaurar = new PictureBox();
@@ -160,11 +160,11 @@
             lblTituloForm.Enabled = false;
             lblTituloForm.Font = new Font("EngraversGothic BT", 20F);
             lblTituloForm.ForeColor = Color.White;
-            lblTituloForm.Location = new Point(326, 9);
+            lblTituloForm.Location = new Point(374, 9);
             lblTituloForm.Name = "lblTituloForm";
-            lblTituloForm.Size = new Size(289, 28);
+            lblTituloForm.Size = new Size(181, 28);
             lblTituloForm.TabIndex = 4;
-            lblTituloForm.Text = "Instancia de Venta N° 0";
+            lblTituloForm.Text = "Nueva Compra";
             // 
             // pnMantenimiento
             // 
@@ -505,7 +505,7 @@
             btnBuscar.TabIndex = 13;
             btnBuscar.UseVisualStyleBackColor = true;
             // 
-            // Frm_Ventas
+            // Frm_Compras
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -515,9 +515,9 @@
             Controls.Add(pnListado);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Frm_Ventas";
+            Name = "Frm_Compras";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Frm_Ventas";
+            Text = "Frm_Compras";
             FormClosing += Frm_Ventas_FormClosing;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();

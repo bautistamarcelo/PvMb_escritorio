@@ -5,7 +5,7 @@ namespace PVrepository.Entities
     {
         public int ID {get; set;}
         public DateTime Fecha {get; set;}
-        public int Tipo {get; set;}
+        public int Tipo {get; set;} //Values: 1;"Contado";2;"Cuenta Corriente"
         public string Numero {get; set;}
         public int SubTotal {get; set;}
         public int DtoEfectivo {get; set;}

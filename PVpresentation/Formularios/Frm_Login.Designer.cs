@@ -75,9 +75,9 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 4);
+            pictureBox1.Location = new Point(11, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(67, 43);
+            pictureBox1.Size = new Size(86, 50);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -138,7 +138,7 @@
             // pictureBox2
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox2.Image = Properties.Resources.Logo_PV_SinFondo;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(24, 37);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(232, 211);
@@ -175,6 +175,7 @@
             LnkOlvideClave.TabIndex = 39;
             LnkOlvideClave.TabStop = true;
             LnkOlvideClave.Text = "Olvié mi Contraseña";
+            LnkOlvideClave.Visible = false;
             // 
             // LnkCambiarClave
             // 

@@ -47,6 +47,7 @@
             btnCancelar = new Button();
             btnGrabar = new Button();
             pnListado = new Panel();
+            btnDetalles = new Button();
             btnEditar = new Button();
             btnNuevo = new Button();
             dgvListado = new DataGridView();
@@ -55,7 +56,6 @@
             btnBuscar = new Button();
             tabNuevo = new TabPage();
             tabEditar = new TabPage();
-            btnDetalles = new Button();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             pnlContenedorPrincipal.SuspendLayout();
@@ -127,7 +127,7 @@
             lblTituloForm.AutoSize = true;
             lblTituloForm.Font = new Font("EngraversGothic BT", 20F);
             lblTituloForm.ForeColor = Color.White;
-            lblTituloForm.Location = new Point(279, 9);
+            lblTituloForm.Location = new Point(247, 12);
             lblTituloForm.Name = "lblTituloForm";
             lblTituloForm.Size = new Size(424, 28);
             lblTituloForm.TabIndex = 4;
@@ -296,6 +296,24 @@
             pnListado.Size = new Size(660, 458);
             pnListado.TabIndex = 0;
             // 
+            // btnDetalles
+            // 
+            btnDetalles.BackColor = Color.SteelBlue;
+            btnDetalles.Cursor = Cursors.Hand;
+            btnDetalles.Enabled = false;
+            btnDetalles.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnDetalles.FlatStyle = FlatStyle.Flat;
+            btnDetalles.ForeColor = Color.WhiteSmoke;
+            btnDetalles.Location = new Point(116, 411);
+            btnDetalles.Name = "btnDetalles";
+            btnDetalles.Size = new Size(86, 32);
+            btnDetalles.TabIndex = 20;
+            btnDetalles.Text = "Detalles";
+            btnDetalles.UseVisualStyleBackColor = false;
+            btnDetalles.Visible = false;
+            // 
             // btnEditar
             // 
             btnEditar.BackColor = Color.SteelBlue;
@@ -393,24 +411,6 @@
             tabEditar.Size = new Size(972, 464);
             tabEditar.TabIndex = 2;
             tabEditar.Text = "Editar";
-            // 
-            // btnDetalles
-            // 
-            btnDetalles.BackColor = Color.SteelBlue;
-            btnDetalles.Cursor = Cursors.Hand;
-            btnDetalles.Enabled = false;
-            btnDetalles.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
-            btnDetalles.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
-            btnDetalles.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnDetalles.FlatStyle = FlatStyle.Flat;
-            btnDetalles.ForeColor = Color.WhiteSmoke;
-            btnDetalles.Location = new Point(116, 411);
-            btnDetalles.Name = "btnDetalles";
-            btnDetalles.Size = new Size(86, 32);
-            btnDetalles.TabIndex = 20;
-            btnDetalles.Text = "Detalles";
-            btnDetalles.UseVisualStyleBackColor = false;
-            btnDetalles.Visible = false;
             // 
             // FrmModeloCRUD
             // 

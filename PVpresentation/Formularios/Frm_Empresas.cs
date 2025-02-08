@@ -2,6 +2,7 @@
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVrepository.Entities;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
 
@@ -19,6 +20,31 @@ namespace PVpresentation.Formularios
             InitializeComponent();
             _empresaService = empresaService;
             _caracterService = caracterService;
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
+        }
+
+        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var EmpresaSeleccionada = (EmpresaVM)dgvListado.CurrentRow.DataBoundItem;
+                txtNombre.Text = EmpresaSeleccionada.Nombre.ToString();
+                txtDomicilio.Text = EmpresaSeleccionada.Direccion.ToString();
+                txtCuit.Text = EmpresaSeleccionada.Cuit.ToString();
+                txtLogoUrl.Text = EmpresaSeleccionada.LogoUrl.ToString();
+                txtLogoNombre.Text = EmpresaSeleccionada.LogoNombre.ToString();
+                txtTelefono.Text = EmpresaSeleccionada.Telefono.ToString();
+                txtID.Text = EmpresaSeleccionada.ID.ToString();
+                cmbCaracter.EstablecerValor(EmpresaSeleccionada.CaracterID);
+                txtMoneda.Text = EmpresaSeleccionada.SimboloMoneda.ToString();
+                txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+                txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
+                MostrarTabs(tabNuevo.Name);
+
+                if (txtLogoUrl.Text != "")
+                    ImagenLogo.ImageLocation = txtLogoUrl.Text;
+
+            }
         }
 
         public void MostrarTabs(string tabName)
@@ -89,12 +115,13 @@ namespace PVpresentation.Formularios
         private async void Frm_Empresas_Load(object sender, EventArgs e)
         {
 
-            dgvListado.ImplementarConfiguracion("");
+            dgvListado.ImplementarConfiguracion("Editar");
             MostrarTabs(tabListado.Name);
             await MostrarEmpresas();
             _openFileDialog.Filter = "Escoger Imagen Logo (*.JPG;*.PNG)|*.jpg;*.png";
             ImagenLogo.SizeMode = PictureBoxSizeMode.StretchImage;
-
+            btnEditar.Enabled = false;
+            btnEditar.Visible = false;
 
             //Completo los datos de los comboBox no enlazados con otras tablas
 
@@ -108,29 +135,6 @@ namespace PVpresentation.Formularios
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
             await MostrarEmpresas(txtBuscar.Text.Trim());
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            var EmpresaSeleccionada = (EmpresaVM)dgvListado.CurrentRow.DataBoundItem;
-            txtNombre.Text = EmpresaSeleccionada.Nombre.ToString();
-            txtDomicilio.Text = EmpresaSeleccionada.Direccion.ToString();
-            txtCuit.Text = EmpresaSeleccionada.Cuit.ToString();
-            txtLogoUrl.Text = EmpresaSeleccionada.LogoUrl.ToString();
-            txtLogoNombre.Text = EmpresaSeleccionada.LogoNombre.ToString();
-            txtTelefono.Text = EmpresaSeleccionada.Telefono.ToString();
-            txtID.Text = EmpresaSeleccionada.ID.ToString();
-            cmbCaracter.EstablecerValor(EmpresaSeleccionada.CaracterID);
-            txtMoneda.Text = EmpresaSeleccionada.SimboloMoneda.ToString();
-            txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
-            txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
-            MostrarTabs(tabNuevo.Name);
-
-            if (txtLogoUrl.Text != "")
-                ImagenLogo.ImageLocation = txtLogoUrl.Text;
-
-
-
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -150,7 +154,9 @@ namespace PVpresentation.Formularios
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
-            Close();
+            if (tabControlMain.SelectedTab != tabListado) {MostrarTabs(tabListado.Name);}
+            else {Close();}
+
         }
 
         private async void btnGrabar_Click(object sender, EventArgs e)

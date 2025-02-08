@@ -27,6 +27,7 @@ namespace PVrepository
             services.AddTransient<ICaracterRepository, CaracterRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IClientesRepository, ClientesRepository>();
+            services.AddTransient<ICompras_repository, Compras_Repository>();
             services.AddTransient<IEmpresaRepository, EmpresaRepository>();
             services.AddTransient<IImpuestosRepository, ImpuestosRepository>();
             services.AddTransient<IListasRepository, ListasRepository>();

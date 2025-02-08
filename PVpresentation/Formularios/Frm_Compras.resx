@@ -118,7 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnEditarProducto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAXJJREFUWEft
+        ltGVgyAQRS0lpWwpKSWdpJQtJaWYd+XJIgJRg/nZ3HPmRGBm3oAEHL6czTiOF9mPm58DUVnKQ3bz8LlI
+        KBdPudvtHCSQi99srADwe7F7X5R4Je4hxihipv+eIGnIvSDOVr/3qSfQXgE5kOx3cg2QqFo1Y5PXH6nY
+        tPnC48TDYWXkUJoJFDeP+nP/q4y/Xiqa0l5+OcybBXhmNiRbLZv6VuIeYowi0lWE1+9eTrEAdxXRcFUc
+        aIfuyLaNZ2eo/l81lifvIw4OgNo7P08cHASrAtR3rjg4EEoFpPQXBwfDogC1U4HFpaJ2H3FwAmgVEGfP
+        c+iKHBcHJ4FWAZwNtPPDZvFaDuFE0CqgxPvi4GSQF8DJVqOPODghLAoA9VEEK5Fa6Yie74L9hSloZlXA
+        VogNKV7cfCUcCD0KaN4nRRwH+6s3xIYUxwrIP0SYzR5Lr/P9q6ig2gfJEQ4fx+zu/GNiK6wA9t6J+OWf
+        MAxPmpWdhRZ0MgwAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnNuevoProducto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAItJREFUSEvt
+        lDEKwCAMRT2EV+j9b9K9nRzbOxTTH8yQQevQGgrmwQeJ8h+IGJzfQ0RRlnZAuiJMkpENEF7FS1lGNkDo
+        YhsgdLENEH4vRhl/Dlz8FE1tX2eX6jY4FJERLKJog0MJyZ1oavs6p1S/B2V8hYy/6rFA6GIbIJxPvBUv
+        HTKyA9L+N+hMTAg3LjTdCu8se3MAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnBuscarProducto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAfCAYAAAD9cg1AAAAABGdBTUEAALGPC/xhBQAAAoxJREFUSEvd
         lUFrE0EUxzeKtdWDB+3Bz+DBQkVIobhqyDbUoB5SqbTQo3jwoIISeggEq0JpqA1FqCCVCpqCoJSqhXpL
@@ -135,7 +155,7 @@
         RK5CYII=
 </value>
   </data>
-  <data name="btnBuscar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnBuscarProveedor.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAfCAYAAAD9cg1AAAAABGdBTUEAALGPC/xhBQAAAoxJREFUSEvd
         lUFrE0EUxzeKtdWDB+3Bz+DBQkVIobhqyDbUoB5SqbTQo3jwoIISeggEq0JpqA1FqCCVCpqCoJSqhXpL

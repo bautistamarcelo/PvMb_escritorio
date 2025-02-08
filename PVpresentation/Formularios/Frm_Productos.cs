@@ -3,6 +3,7 @@ using PVpresentation.Formularios.Modelos;
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVrepository.Entities;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
 using Application = System.Windows.Forms.Application;
@@ -47,8 +48,43 @@ namespace PVpresentation.Formularios
             }
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(OnKeyDownHandler);
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
 
         }
+
+        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var ProductoSeleccionado = (ProductosVM)dgvListado.CurrentRow.DataBoundItem;
+                txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+                txtID.Text = ProductoSeleccionado.ID.ToString();
+                txtNombre.Text = ProductoSeleccionado.Nombre.ToString();
+                cmbSituacion.EstablecerValor(ProductoSeleccionado.Situacion);
+                txtBarCode.Text = ProductoSeleccionado.BarCode.ToString();
+                txtStock.Text = ProductoSeleccionado.Stock.ToString();
+                txtStock.ReadOnly = true;
+                txtCosto.Text = ProductoSeleccionado.Costo.ToString();
+                txtpOferta.Text = ProductoSeleccionado.pOferta.ToString();
+                txtpVenta.Text = ProductoSeleccionado.pVenta.ToString();
+                cmbImpuesto.EstablecerValor(ProductoSeleccionado.ImpuestoID);
+                cmbCategoria.EstablecerValor(ProductoSeleccionado.CategoriaID);
+                cmbMarca.EstablecerValor(ProductoSeleccionado.MarcaID);
+                cmbProveedor.EstablecerValor(ProductoSeleccionado.ProveedorID);
+                txtTalle.Text = ProductoSeleccionado.Talle.ToString();
+                txtColor.Text = ProductoSeleccionado.Color.ToString();
+                txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
+                txtNombre.Select();
+                MostrarTabs(tabNuevo.Name);
+                btnAgregarImpuesto.Enabled = true;
+                btnAgregarCategoria.Enabled = true;
+                btnAgregarMarca.Enabled = true;
+                btnAgregarProveedor.Enabled = true;
+                btnGrabar.Enabled = true;
+                btnEditar.Enabled = false;
+            }
+        }
+
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
@@ -159,6 +195,7 @@ namespace PVpresentation.Formularios
             dgvListado.Columns["ProveedorN"].Visible = false;
             dgvListado.Columns["Talle"].Visible = false;
             dgvListado.Columns["Color"].Visible = false;
+            dgvListado.Columns["Nombre"].FillWeight = 350;
         }
 
         public void MostrarTabs(string tabName)
@@ -347,7 +384,8 @@ namespace PVpresentation.Formularios
 
             //Completar los datos de los comboBox
             await llenarComboBox();
-
+            btnEditar.Enabled = false;
+            btnEditar.Visible = false;
         }
 
         private async void btnBuscar_Click(object sender, EventArgs e)
@@ -367,35 +405,6 @@ namespace PVpresentation.Formularios
             btnAgregarMarca.Enabled = true;
             btnAgregarProveedor.Enabled = true;
             btnGrabar.Enabled = true;
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            var ProductoSeleccionado = (ProductosVM)dgvListado.CurrentRow.DataBoundItem;
-            txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
-            txtID.Text = ProductoSeleccionado.ID.ToString();
-            txtNombre.Text = ProductoSeleccionado.Nombre.ToString();
-            cmbSituacion.EstablecerValor(ProductoSeleccionado.Situacion);
-            txtBarCode.Text = ProductoSeleccionado.BarCode.ToString();
-            txtStock.Text = ProductoSeleccionado.Stock.ToString();
-            txtCosto.Text = ProductoSeleccionado.Costo.ToString();
-            txtpOferta.Text = ProductoSeleccionado.pOferta.ToString();
-            txtpVenta.Text = ProductoSeleccionado.pVenta.ToString();
-            cmbImpuesto.EstablecerValor(ProductoSeleccionado.ImpuestoID);
-            cmbCategoria.EstablecerValor(ProductoSeleccionado.CategoriaID);
-            cmbMarca.EstablecerValor(ProductoSeleccionado.MarcaID);
-            cmbProveedor.EstablecerValor(ProductoSeleccionado.ProveedorID);
-            txtTalle.Text = ProductoSeleccionado.Talle.ToString();
-            txtColor.Text = ProductoSeleccionado.Color.ToString();
-            txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
-            txtNombre.Select();
-            MostrarTabs(tabNuevo.Name);
-            btnAgregarImpuesto.Enabled = true;
-            btnAgregarCategoria.Enabled = true;
-            btnAgregarMarca.Enabled = true;
-            btnAgregarProveedor.Enabled = true;
-            btnGrabar.Enabled = true;
-            btnEditar.Enabled = false;
         }
 
         private async void btnCancelar_Click(object sender, EventArgs e)
@@ -522,7 +531,8 @@ namespace PVpresentation.Formularios
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
-            Close();
+            if (tabControlMain.SelectedTab != tabListado) {MostrarTabs(tabListado.Name);}
+            else {Close();}
         }
 
         private void btnAgregarImpuesto_Click(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using PVpresentation.ViewModels;
 using PVrepository.Entities;
 using PVservices.Interfaces;
 using System.Data;
+using System.Windows.Controls;
 
 namespace PVpresentation.Formularios
 {
@@ -19,6 +20,7 @@ namespace PVpresentation.Formularios
             InitializeComponent();
             _proveedoresService = proveedoresService;
             _caracterService = caracterService;
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
         }
 
         public void MostrarTabs(string tabName)
@@ -35,6 +37,25 @@ namespace PVpresentation.Formularios
                     tab.Parent = tabControlMain;
                 }
 
+            }
+        }
+
+        private void CustomCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+                var ProveedorSeleccionado = (ProveedorVM)dgvListado.CurrentRow.DataBoundItem;
+                txtNombre.Text = ProveedorSeleccionado.Nombre.ToString();
+                txtDomicilio.Text = ProveedorSeleccionado.Direccion.ToString();
+                txtCuit.Text = ProveedorSeleccionado.Cuit.ToString();
+                txtEmail.Text = ProveedorSeleccionado.Email.ToString();
+                txtTelefono.Text = ProveedorSeleccionado.Telefono.ToString();
+                txtID.Text = ProveedorSeleccionado.ID.ToString();
+                txtRenta.Text = ProveedorSeleccionado.Renta.ToString();
+                cmbCaracter.EstablecerValor(ProveedorSeleccionado.CaracterID);
+
+                btnGrabar.Enabled = true;
             }
         }
 
@@ -61,7 +82,8 @@ namespace PVpresentation.Formularios
             dgvListado.Columns["Renta"].Visible = false;
             dgvListado.Columns["CaracterID"].Visible = false;
             dgvListado.Columns["Caracter"].Visible = false;
-
+            btnDetalles.Visible = false;
+            btnEditar.Visible = false;
             dgvListado.Columns["Nombre"].Width = 80;
         }
 
@@ -121,24 +143,6 @@ namespace PVpresentation.Formularios
             btnGrabar.Enabled = true;
             //MostrarTabs(tabNuevo.Name);
             txtNombre.Select();
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
-            var ProveedorSeleccionado = (ProveedorVM)dgvListado.CurrentRow.DataBoundItem;
-            txtNombre.Text = ProveedorSeleccionado.Nombre.ToString();
-            txtDomicilio.Text = ProveedorSeleccionado.Direccion.ToString();
-            txtCuit.Text = ProveedorSeleccionado.Cuit.ToString();
-            txtEmail.Text = ProveedorSeleccionado.Email.ToString();
-            txtTelefono.Text = ProveedorSeleccionado.Telefono.ToString();
-            txtID.Text = ProveedorSeleccionado.ID.ToString();
-            txtRenta.Text = ProveedorSeleccionado.Renta.ToString();
-            cmbCaracter.EstablecerValor(ProveedorSeleccionado.CaracterID);
-
-            //txtIDEditar.Visible = true; //Desabilitar cuando compruebe funcionamiento
-            //MostrarTabs(tabNuevo.Name);
-            btnGrabar.Enabled = true;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

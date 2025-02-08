@@ -51,11 +51,6 @@
             pnListado.SuspendLayout();
             SuspendLayout();
             // 
-            // pnGral
-            // 
-            pnGral.Location = new Point(0, 0);
-            pnGral.Size = new Size(984, 561);
-            // 
             // btnCierreVolver
             // 
             btnCierreVolver.Click += btnCierreVolver_Click;
@@ -77,7 +72,6 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
             // 
@@ -126,7 +120,6 @@
             // 
             // pnMantenimiento
             // 
-            pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnMantenimiento.Controls.Add(label7);
             pnMantenimiento.Controls.Add(cmbEsActivo);
             pnMantenimiento.Controls.Add(label10);
@@ -141,7 +134,6 @@
             pnMantenimiento.Controls.Add(label5);
             pnMantenimiento.Controls.Add(txtCorreo);
             pnMantenimiento.Controls.Add(label3);
-            pnMantenimiento.Dock = DockStyle.None;
             pnMantenimiento.Controls.SetChildIndex(btnGrabar, 0);
             pnMantenimiento.Controls.SetChildIndex(btnCancelar, 0);
             pnMantenimiento.Controls.SetChildIndex(btnEliminar, 0);
@@ -164,10 +156,11 @@
             pnMantenimiento.Controls.SetChildIndex(cmbEsActivo, 0);
             pnMantenimiento.Controls.SetChildIndex(label7, 0);
             // 
-            // pnListado
+            // btnDetalles
             // 
-            pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnListado.Dock = DockStyle.None;
+            btnDetalles.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             // 
             // label7
             // 

@@ -11,8 +11,9 @@ namespace PVpresentation.Formularios
         private readonly IServiceProvider _serviceProvider;
         private readonly IUsuariosService _usuariosService;
         private readonly ISucursalesService _sucursalesService;
+        private readonly IEmpresaService _empresaService;
 
-        public Frm_Login(IServiceProvider serviceProvider, ISucursalesService sucursalesService, IUsuariosService usuariosService)
+        public Frm_Login(IServiceProvider serviceProvider, ISucursalesService sucursalesService, IUsuariosService usuariosService, IEmpresaService empresaService)
         {
             InitializeComponent();
             //Estas lineas eliminan los parpadeos del formulario o controles en la interfaz grafica (Pero no en un 100%)
@@ -21,6 +22,7 @@ namespace PVpresentation.Formularios
             _serviceProvider = serviceProvider;
             _sucursalesService = sucursalesService;
             _usuariosService = usuariosService;
+            _empresaService = empresaService;
         }
         #endregion
 
@@ -41,9 +43,14 @@ namespace PVpresentation.Formularios
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
             //Llenar el combobox de sucursales
+            var ListaEmpresas = await _empresaService.Lista();
+            var itemsEmpresas = ListaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            cmbEmpresa.InsertarItems(itemsEmpresas);
+
             var ListaSucursales = await _sucursalesService.Lista();
             var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbSucursales.InsertarItems(itemsSucursal);
+
             txtUsuario.Focus();
         }
 
@@ -55,7 +62,7 @@ namespace PVpresentation.Formularios
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             //Validamos que los campos no esten vacios
-            if (txtUsuario.Text == string.Empty || txtClave.Text == string.Empty || cmbSucursales.SelectedIndex == -1)
+            if (txtUsuario.Text == string.Empty || txtClave.Text == string.Empty || cmbSucursales.SelectedIndex == -1 || cmbEmpresa.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor, complete todos los campos.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -70,6 +77,10 @@ namespace PVpresentation.Formularios
             }
             else
             {
+                OpcionesComboBox miEmpresa = (OpcionesComboBox)cmbEmpresa.SelectedItem;
+                int idSeleccionado = miEmpresa.Valor;
+                var empresaSeleccionada = await _empresaService.Obtener(idSeleccionado);
+
                 var cajaAbierta = await _usuariosService.BuscaCajaUsuario(usuarioEncontrado.IDUsuario);
                 if (cajaAbierta == 0)
                 {
@@ -82,17 +93,26 @@ namespace PVpresentation.Formularios
                 VariablesGlobales.UsuarioID = usuarioEncontrado.IDUsuario;
                 VariablesGlobales.UsuarioIDrol = usuarioEncontrado.IDRol.IDRol;
                 VariablesGlobales.RolNombre = usuarioEncontrado.IDRol.descripcion;
+                VariablesGlobales.EmpresaID = empresaSeleccionada.ID;
+                VariablesGlobales.EmpresaNombre = empresaSeleccionada.Nombre;
+                VariablesGlobales.EmpresaLogo = empresaSeleccionada.LogoUrl;
                 VariablesGlobales.SucursalID = cmbSucursales.SelectedIndex + 1;
                 VariablesGlobales.CajaID = cajaAbierta;
                 //Abrir el siguiente formulario
                 Frm_Main mainForm = (Frm_Main)_serviceProvider.GetService(typeof(Frm_Main));
                 this.Hide();
-
+                
                 mainForm.Show();
                 if (mainForm != null)
                 {
                     mainForm.txtNombreUsuario.Text = VariablesGlobales.UsuarioNombre;
                     mainForm.txtCategoria.Text = VariablesGlobales.RolNombre;
+                    if (VariablesGlobales.EmpresaLogo != null)
+                    {
+                        //mainForm.pctLogoCentral.ImageLocation = VariablesGlobales.EmpresaLogo.ToString();
+                        mainForm.pctLogoCentral.Image = Image.FromFile(VariablesGlobales.EmpresaLogo.ToString());
+
+                    }
                 }
             }
 

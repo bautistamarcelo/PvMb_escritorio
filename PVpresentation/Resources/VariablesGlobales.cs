@@ -9,7 +9,12 @@ namespace PVpresentation.Resources
         public static int UsuarioIDrol { get; set; }
         public static string RolNombre { get; set; } = string.Empty;
 
+
         public static int SucursalID { get; set; }
+        public static int EmpresaID { get; set; }
+        public static string EmpresaNombre {get; set;}= string.Empty;
+        public static string EmpresaLogo {get; set;}= string.Empty;
+
 
         public static int CajaID { get; set; }
         public static string CajaNombre { get; set; } = string.Empty;

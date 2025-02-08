@@ -49,11 +49,6 @@
             pnListado.SuspendLayout();
             SuspendLayout();
             // 
-            // pnGral
-            // 
-            pnGral.Location = new Point(0, 0);
-            pnGral.Size = new Size(984, 561);
-            // 
             // btnCierreVolver
             // 
             btnCierreVolver.Click += btnCierreVolver_Click;
@@ -79,7 +74,6 @@
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnEditar.TabIndex = 2;
-            btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
             // 
@@ -166,6 +160,12 @@
             pnMantenimiento.Controls.SetChildIndex(txtTelefono, 0);
             pnMantenimiento.Controls.SetChildIndex(cmbCaracter, 0);
             pnMantenimiento.Controls.SetChildIndex(label8, 0);
+            // 
+            // btnDetalles
+            // 
+            btnDetalles.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnDetalles.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             // 
             // txtRenta
             // 

@@ -36,6 +36,45 @@ namespace PVpresentation.Formularios
             _cajas_Detalle_VMservice = cajas_Detalle_VMservice;
             _cajasMovimientosService = cajasMovimientosService;
             _cajasMonedaMservice = cajasMonedaMservice;
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
+        }
+
+        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var CajaSeleccionada = (CajasVM)dgvListado.CurrentRow.DataBoundItem;
+                if (CajaSeleccionada == null)
+                {
+                    MessageBox.Show("Debe seleccionar una caja para editar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                txtID.Text = CajaSeleccionada.ID.ToString();
+                txtNombre.Text = CajaSeleccionada.Nombre;
+                txtFechaApertura.Text = CajaSeleccionada.Apertura.ToString();
+                txtSaldoInicial.Text = CajaSeleccionada.SaldoInicial.ToString();
+                txtFechaCierre.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                txtSaldoFinal.Text = CajaSeleccionada.SaldoFinal.ToString();
+                cmbCondicion.SelectedIndex = CajaSeleccionada.Condicion == "Abierta" ? 0 : 1;
+                txtResultado.Text = "";
+
+                var SaldoActual = await _cajasMovimientosService.ObtenerSaldo(CajaSeleccionada.ID);
+                var SaldoMonedas = await _cajasMonedaMservice.ObtenerSaldo(CajaSeleccionada.ID);
+
+                txtSaldoFinal.Text = SaldoActual.Monto.ToString();
+                txtEfectivo.Text = SaldoMonedas.Efectivo.ToString();
+                txtDebito.Text = SaldoMonedas.Debito.ToString();
+                txtTarjeta.Text = SaldoMonedas.Tarjeta.ToString();
+                txtResultado.Text = (Convert.ToInt32(txtSaldoFinal.Text.Trim()) - Convert.ToInt32(txtSaldoInicial.Text.Trim())).ToString();
+
+                if (Convert.ToInt32(txtResultado.Text.Trim()) > 0)
+                    txtResultado.ForeColor = Color.Green;
+                else if (Convert.ToInt32(txtResultado.Text.Trim()) < 0)
+                    txtResultado.ForeColor = Color.Red;
+
+                cmbCondicion.Enabled = true;
+                btnGrabar.Enabled = true;
+            }
         }
 
         public void LimpiarMantenimiento()
@@ -83,6 +122,8 @@ namespace PVpresentation.Formularios
             dgvListado.Columns["Cierre"].Visible = false;
             dgvListado.Columns["SucursalID"].Visible = false;
             dgvListado.Columns["Sucursal"].Visible = false;
+            btnEditar.Enabled = false;
+            btnEditar.Visible = false;
         }
 
         public async Task MostrarDetalleCajas(int cajaID = 0)
@@ -127,7 +168,7 @@ namespace PVpresentation.Formularios
         {
             var fechaIn = DateTime.Parse("2001/01/01");
             var fechaFi = DateTime.Parse("2925/12/31");
-            dgvListado.ImplementarConfiguracion("");
+            dgvListado.ImplementarConfiguracion("Editar");
             dgvDetalle.ImplementarConfiguracion("");
             MostrarTabs(tabListado.Name);
             btnDetalles.Visible = true;
@@ -157,44 +198,6 @@ namespace PVpresentation.Formularios
 
             Frm_Cajas_Abrir frmCajasAbrir = (Frm_Cajas_Abrir)_serviceProvider.GetService(typeof(Frm_Cajas_Abrir))!;
             frmCajasAbrir.ShowDialog();
-        }
-
-        private async void btnEditar_Click(object sender, EventArgs e)
-        {
-            var CajaSeleccionada = (CajasVM)dgvListado.CurrentRow.DataBoundItem;
-            if (CajaSeleccionada == null)
-            {
-                MessageBox.Show("Debe seleccionar una caja para editar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            txtID.Text = CajaSeleccionada.ID.ToString();
-            txtNombre.Text = CajaSeleccionada.Nombre;
-            txtFechaApertura.Text = CajaSeleccionada.Apertura.ToString();
-            txtSaldoInicial.Text = CajaSeleccionada.SaldoInicial.ToString();
-            txtFechaCierre.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-            txtSaldoFinal.Text = CajaSeleccionada.SaldoFinal.ToString();
-            cmbCondicion.SelectedIndex = CajaSeleccionada.Condicion == "Abierta" ? 0 : 1;
-            txtResultado.Text = "";
-
-
-
-            var SaldoActual = await _cajasMovimientosService.ObtenerSaldo(CajaSeleccionada.ID);
-            var SaldoMonedas = await _cajasMonedaMservice.ObtenerSaldo(CajaSeleccionada.ID);
-
-            txtSaldoFinal.Text = SaldoActual.Monto.ToString();
-            txtEfectivo.Text = SaldoMonedas.Efectivo.ToString();
-            txtDebito.Text = SaldoMonedas.Debito.ToString();
-            txtTarjeta.Text = SaldoMonedas.Tarjeta.ToString();
-            txtResultado.Text = (Convert.ToInt32(txtSaldoFinal.Text.Trim()) - Convert.ToInt32(txtSaldoInicial.Text.Trim())).ToString();
-
-            if (Convert.ToInt32(txtResultado.Text.Trim()) > 0)
-                txtResultado.ForeColor = Color.Green;
-            else if (Convert.ToInt32(txtResultado.Text.Trim()) < 0)
-                txtResultado.ForeColor = Color.Red;
-
-
-            cmbCondicion.Enabled = true;
-            btnGrabar.Enabled = true;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

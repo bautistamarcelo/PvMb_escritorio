@@ -1,16 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Identity.Client;
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
-using PVrepository.Entities;
-using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
-using System.IO;
 
 
 namespace PVpresentation.Formularios

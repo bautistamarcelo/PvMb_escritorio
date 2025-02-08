@@ -2,6 +2,7 @@
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVrepository.Entities;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
 
@@ -17,22 +18,47 @@ namespace PVpresentation.Formularios
             InitializeComponent();
             _usuariosService = usuariosService;
             _rolService = rolService;
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
         }
-        public void MostrarTabs(string tabName)
+
+        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var tabsMenu = new TabPage[] { tabListado, tabNuevo }; //, tabEditar
-            foreach (var tab in tabsMenu)
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
             {
-                if (tab.Name != tabName)
-                {
-                    tab.Parent = null;
-                }
-                else
-                {
-                    tab.Parent = tabControlMain;
-                }
+                txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+                txtID.Enabled = false;
+                btnGrabar.Enabled = true;
+                var UsuarioSeleccionado = (UsuariosVM)dgvListado.CurrentRow.DataBoundItem;
+                txtID.Text = UsuarioSeleccionado.IDUsuario.ToString();
+                txtNombre.Text = UsuarioSeleccionado.nombre.ToString();
+                txtCorreo.Text = UsuarioSeleccionado.correo.ToString();
+                txtTelefono.Text = UsuarioSeleccionado.telefono.ToString();
+                cmbEsActivo.EstablecerValor(UsuarioSeleccionado.esActivo);
+                cmbRol.EstablecerValor(UsuarioSeleccionado.IDRol);
+                txtUrlFoto.Text = UsuarioSeleccionado.urlFoto.ToString();
+                txtNombreFoto.Text = UsuarioSeleccionado.nombreFoto.ToString();
+                txtClave.Text = UsuarioSeleccionado.clave.ToString();
+                //txtIDEditar.Visible = true; //Desabilitar cuando compruebe funcionamiento
+                //MostrarTabs(tabEditar.Name);
             }
         }
+
+
+        //public void MostrarTabs(string tabName)
+        //{
+        //    var tabsMenu = new TabPage[] { tabListado, tabNuevo }; //, tabEditar
+        //    foreach (var tab in tabsMenu)
+        //    {
+        //        if (tab.Name != tabName)
+        //        {
+        //            tab.Parent = null;
+        //        }
+        //        else
+        //        {
+        //            tab.Parent = tabControlMain;
+        //        }
+        //    }
+        //}
 
         private async Task MostrarUsuarios(string Buscar = "")
         {
@@ -53,7 +79,6 @@ namespace PVpresentation.Formularios
                 fechaRegistro = item.fechaRegistro
             }).ToList();
             dgvListado.DataSource = VMListaUsuarios;
-            dgvListado.ImplementarConfiguracion("Editar");
             //Selecciono las columnas que no deseo mostrar en el formulario
             dgvListado.Columns["clave"].Visible = false;
             dgvListado.Columns["esActivo"].Visible = false;
@@ -89,7 +114,7 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Usuarios_Load(object sender, EventArgs e)
         {
-            //dgvListado.ImplementarConfiguracion("Editar");
+            dgvListado.ImplementarConfiguracion("Editar");
             MostrarTabs(tabListado.Name);
 
             //Completo los datos de los comboBox no enlazados con otras tablas
@@ -106,6 +131,10 @@ namespace PVpresentation.Formularios
             cmbRol.InsertarItems(items);
 
             LimpiarMantenimiento();
+            btnEditar.Enabled = false;
+            btnEditar.Visible = false;
+            btnDetalles.Enabled = false;
+            btnDetalles.Visible = false;
         }
 
         private async void btnBuscar_Click(object sender, EventArgs e)
@@ -126,25 +155,6 @@ namespace PVpresentation.Formularios
             btnGrabar.Enabled = true;
             //MostrarTabs(tabNuevo.Name);
             txtNombre.Select();
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
-            txtID.Enabled = false;
-            btnGrabar.Enabled = true;
-            var UsuarioSeleccionado = (UsuariosVM)dgvListado.CurrentRow.DataBoundItem;
-            txtID.Text = UsuarioSeleccionado.IDUsuario.ToString();
-            txtNombre.Text = UsuarioSeleccionado.nombre.ToString();
-            txtCorreo.Text = UsuarioSeleccionado.correo.ToString();
-            txtTelefono.Text = UsuarioSeleccionado.telefono.ToString();
-            cmbEsActivo.EstablecerValor(UsuarioSeleccionado.esActivo);
-            cmbRol.EstablecerValor(UsuarioSeleccionado.IDRol);
-            txtUrlFoto.Text = UsuarioSeleccionado.urlFoto.ToString();
-            txtNombreFoto.Text = UsuarioSeleccionado.nombreFoto.ToString();
-            txtClave.Text = UsuarioSeleccionado.clave.ToString();
-            //txtIDEditar.Visible = true; //Desabilitar cuando compruebe funcionamiento
-            //MostrarTabs(tabEditar.Name);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

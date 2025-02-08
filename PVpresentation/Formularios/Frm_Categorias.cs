@@ -1,5 +1,8 @@
 ﻿using PVpresentation.Formularios.Modelos;
+using PVpresentation.Resources;
+using PVpresentation.ViewModels;
 using PVrepository.Entities;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
 
@@ -13,8 +16,17 @@ namespace PVpresentation.Formularios
         {
             InitializeComponent();
             _categoriasService = categoriaService;
-
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
         }
+
+        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                
+            }
+        }
+
 
         private Frm_Productos ObtenerFormularioAbierto()
         {
@@ -59,7 +71,7 @@ namespace PVpresentation.Formularios
 
         private async void FrmCategorias_Load(object sender, EventArgs e)
         {
-            //dgvListado.ImplementarConfiguracion("Editar");
+            dgvListado.ImplementarConfiguracion("Editar");
             await MostrarCategorias();
         }
 

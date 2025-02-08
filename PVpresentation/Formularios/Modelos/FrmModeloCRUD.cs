@@ -34,7 +34,7 @@ namespace PVpresentation.Formularios.Modelos
         {
             InitializeComponent();
             dgvListado.ImplementarConfiguracion("");
-            MostrarTabs(tabListado.Name);
+            //MostrarTabs(tabListado.Name);
         }
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
@@ -45,8 +45,7 @@ namespace PVpresentation.Formularios.Modelos
         private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEditar.Enabled = true;
-            if (btnDetalles.Visible=true)btnDetalles.Enabled=true;
-
+            if (btnDetalles.Visible == true) btnDetalles.Enabled = true;
         }
     }
 }

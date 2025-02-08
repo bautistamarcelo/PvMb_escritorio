@@ -38,8 +38,9 @@ namespace PVservices.Implementation
             return await _EmpresaRepository.editar(objeto);
         }
 
-       
-
-        
+        public async Task<Empresa> Obtener(int EmpresaID)
+        {
+            return await _EmpresaRepository.Obtener(EmpresaID);
+        }
     }
 }

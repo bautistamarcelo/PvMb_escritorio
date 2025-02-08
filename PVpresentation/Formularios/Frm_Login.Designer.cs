@@ -38,6 +38,8 @@
             pnListado = new Panel();
             pictureBox2 = new PictureBox();
             pnMantenimiento = new Panel();
+            label4 = new Label();
+            cmbEmpresa = new ComboBox();
             LnkOlvideClave = new LinkLabel();
             LnkCambiarClave = new LinkLabel();
             label3 = new Label();
@@ -150,6 +152,8 @@
             // 
             pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
+            pnMantenimiento.Controls.Add(label4);
+            pnMantenimiento.Controls.Add(cmbEmpresa);
             pnMantenimiento.Controls.Add(LnkOlvideClave);
             pnMantenimiento.Controls.Add(LnkCambiarClave);
             pnMantenimiento.Controls.Add(label3);
@@ -164,6 +168,30 @@
             pnMantenimiento.Name = "pnMantenimiento";
             pnMantenimiento.Size = new Size(325, 309);
             pnMantenimiento.TabIndex = 2;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("EngraversGothic BT", 10F);
+            label4.ForeColor = Color.FromArgb(224, 224, 224);
+            label4.Location = new Point(22, 122);
+            label4.Name = "label4";
+            label4.Size = new Size(63, 15);
+            label4.TabIndex = 41;
+            label4.Text = "Empresa:";
+            // 
+            // cmbEmpresa
+            // 
+            cmbEmpresa.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cmbEmpresa.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbEmpresa.BackColor = Color.Gainsboro;
+            cmbEmpresa.DropDownWidth = 269;
+            cmbEmpresa.Font = new Font("Square721 BT", 12F);
+            cmbEmpresa.FormattingEnabled = true;
+            cmbEmpresa.Location = new Point(22, 140);
+            cmbEmpresa.Name = "cmbEmpresa";
+            cmbEmpresa.Size = new Size(281, 28);
+            cmbEmpresa.TabIndex = 2;
             // 
             // LnkOlvideClave
             // 
@@ -184,7 +212,7 @@
             LnkCambiarClave.Location = new Point(22, 224);
             LnkCambiarClave.Name = "LnkCambiarClave";
             LnkCambiarClave.Size = new Size(84, 15);
-            LnkCambiarClave.TabIndex = 38;
+            LnkCambiarClave.TabIndex = 5;
             LnkCambiarClave.TabStop = true;
             LnkCambiarClave.Text = "Cambiar Clave";
             LnkCambiarClave.LinkClicked += LnkCambiarClave_LinkClicked;
@@ -194,7 +222,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("EngraversGothic BT", 10F);
             label3.ForeColor = Color.FromArgb(224, 224, 224);
-            label3.Location = new Point(22, 158);
+            label3.Location = new Point(22, 175);
             label3.Name = "label3";
             label3.Size = new Size(71, 15);
             label3.TabIndex = 37;
@@ -208,10 +236,10 @@
             cmbSucursales.DropDownWidth = 269;
             cmbSucursales.Font = new Font("Square721 BT", 12F);
             cmbSucursales.FormattingEnabled = true;
-            cmbSucursales.Location = new Point(22, 176);
+            cmbSucursales.Location = new Point(22, 193);
             cmbSucursales.Name = "cmbSucursales";
             cmbSucursales.Size = new Size(281, 28);
-            cmbSucursales.TabIndex = 2;
+            cmbSucursales.TabIndex = 3;
             cmbSucursales.KeyDown += cmbSucursales_KeyDown;
             // 
             // label2
@@ -219,7 +247,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("EngraversGothic BT", 10F);
             label2.ForeColor = Color.FromArgb(224, 224, 224);
-            label2.Location = new Point(22, 92);
+            label2.Location = new Point(22, 67);
             label2.Name = "label2";
             label2.Size = new Size(82, 15);
             label2.TabIndex = 26;
@@ -230,7 +258,7 @@
             txtClave.BackColor = Color.Gainsboro;
             txtClave.BorderStyle = BorderStyle.FixedSingle;
             txtClave.Font = new Font("Square721 BT", 12F);
-            txtClave.Location = new Point(22, 110);
+            txtClave.Location = new Point(22, 85);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '*';
             txtClave.Size = new Size(281, 27);
@@ -243,7 +271,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("EngraversGothic BT", 10F);
             label1.ForeColor = Color.FromArgb(224, 224, 224);
-            label1.Location = new Point(22, 37);
+            label1.Location = new Point(22, 13);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
             label1.TabIndex = 24;
@@ -254,7 +282,7 @@
             txtUsuario.BackColor = Color.Gainsboro;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
             txtUsuario.Font = new Font("Square721 BT", 12F);
-            txtUsuario.Location = new Point(22, 55);
+            txtUsuario.Location = new Point(22, 31);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(281, 27);
             txtUsuario.TabIndex = 0;
@@ -272,7 +300,7 @@
             btnCancelar.Location = new Point(189, 262);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
-            btnCancelar.TabIndex = 4;
+            btnCancelar.TabIndex = 6;
             btnCancelar.TabStop = false;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -290,7 +318,7 @@
             btnLogin.Location = new Point(45, 262);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(86, 32);
-            btnLogin.TabIndex = 3;
+            btnLogin.TabIndex = 4;
             btnLogin.Text = "Ingresar";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
@@ -339,5 +367,7 @@
         public ComboBox cmbSucursales;
         private LinkLabel LnkCambiarClave;
         private LinkLabel LnkOlvideClave;
+        public Label label4;
+        public ComboBox cmbEmpresa;
     }
 }

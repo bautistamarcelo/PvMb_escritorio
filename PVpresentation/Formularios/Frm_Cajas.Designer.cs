@@ -114,7 +114,6 @@
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnEditar.TabIndex = 2;
             btnEditar.TabStop = false;
-            btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
             // 

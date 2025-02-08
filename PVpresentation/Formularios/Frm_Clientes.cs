@@ -156,7 +156,9 @@ namespace PVpresentation.Formularios
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
-            Close();
+            if (tabControlMain.SelectedTab != tabListado) {MostrarTabs(tabListado.Name);}
+            else {Close();}
+
         }
 
         private async void btnGrabar_Click(object sender, EventArgs e)

@@ -173,7 +173,6 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
             // 
@@ -317,7 +316,6 @@
             txtStock.BorderStyle = BorderStyle.FixedSingle;
             txtStock.Location = new Point(807, 88);
             txtStock.Name = "txtStock";
-            txtStock.ReadOnly = true;
             txtStock.Size = new Size(117, 22);
             txtStock.TabIndex = 41;
             txtStock.Text = "9";

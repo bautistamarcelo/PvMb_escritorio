@@ -32,8 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
             panelContenedor = new Panel();
             pnMain = new Panel();
-            pictureBox1 = new PictureBox();
+            pctLogoCentral = new PictureBox();
             pnInferior = new Panel();
+            pictureBox3 = new PictureBox();
             txtFecha = new TextBox();
             txtHoraActual = new TextBox();
             txtNombreUsuario = new TextBox();
@@ -87,8 +88,9 @@
             timerFechaHora = new System.Windows.Forms.Timer(components);
             panelContenedor.SuspendLayout();
             pnMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pctLogoCentral).BeginInit();
             pnInferior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             pnSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)IconoFormularioActual).BeginInit();
@@ -123,27 +125,28 @@
             // pnMain
             // 
             pnMain.BackColor = Color.FromArgb(74, 134, 160);
-            pnMain.Controls.Add(pictureBox1);
+            pnMain.Controls.Add(pctLogoCentral);
             pnMain.Dock = DockStyle.Fill;
             pnMain.Location = new Point(250, 45);
             pnMain.Name = "pnMain";
             pnMain.Size = new Size(1000, 587);
             pnMain.TabIndex = 13;
             // 
-            // pictureBox1
+            // pctLogoCentral
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(184, 141);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(641, 317);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pctLogoCentral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pctLogoCentral.Image = (Image)resources.GetObject("pctLogoCentral.Image");
+            pctLogoCentral.Location = new Point(189, 119);
+            pctLogoCentral.Name = "pctLogoCentral";
+            pctLogoCentral.Size = new Size(641, 350);
+            pctLogoCentral.SizeMode = PictureBoxSizeMode.Zoom;
+            pctLogoCentral.TabIndex = 0;
+            pctLogoCentral.TabStop = false;
             // 
             // pnInferior
             // 
             pnInferior.BackColor = Color.FromArgb(74, 134, 160);
+            pnInferior.Controls.Add(pictureBox3);
             pnInferior.Controls.Add(txtFecha);
             pnInferior.Controls.Add(txtHoraActual);
             pnInferior.Controls.Add(txtNombreUsuario);
@@ -154,6 +157,16 @@
             pnInferior.Name = "pnInferior";
             pnInferior.Size = new Size(1000, 88);
             pnInferior.TabIndex = 12;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(447, 6);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(149, 82);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 10;
+            pictureBox3.TabStop = false;
             // 
             // txtFecha
             // 
@@ -1260,6 +1273,7 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
+            pictureBox2.DoubleClick += pictureBox2_DoubleClick;
             // 
             // timerFechaHora
             // 
@@ -1280,9 +1294,10 @@
             Text = "FrmMain";
             panelContenedor.ResumeLayout(false);
             pnMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pctLogoCentral).EndInit();
             pnInferior.ResumeLayout(false);
             pnInferior.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             pnSuperior.ResumeLayout(false);
             pnSuperior.PerformLayout();
@@ -1313,7 +1328,6 @@
         private Panel pnMenuPrincipal;
         private Panel pnLogo;
         private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
         private Panel pnInferior;
         private TextBox txtFecha;
         private TextBox txtHoraActual;
@@ -1365,5 +1379,7 @@
         public TextBox txtNombreUsuario;
         public TextBox txtCategoria;
         private FontAwesome.Sharp.IconButton btnAdmInventario;
+        private PictureBox pictureBox3;
+        public PictureBox pctLogoCentral;
     }
 }

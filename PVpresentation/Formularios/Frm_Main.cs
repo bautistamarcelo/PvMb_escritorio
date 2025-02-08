@@ -3,6 +3,7 @@ using PVpresentation.Resources;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -226,6 +227,7 @@ namespace PVpresentation.Formularios
         private void btnCmpCompras_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            AbrirFormulario<Frm_Compras>();
         }
 
         private async void btnCmpVentas_Click(object sender, EventArgs e)
@@ -274,7 +276,7 @@ namespace PVpresentation.Formularios
                     return;
                 }
             }
-            
+
         }
 
         private void btnCmpCierresZ_Click(object sender, EventArgs e)
@@ -418,6 +420,17 @@ namespace PVpresentation.Formularios
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Empresas>();
+        }
+
+        private void pictureBox2_DoubleClick(object sender, EventArgs e)
+        {
+            
+            MessageBox.Show("Empresa: " + VariablesGlobales.EmpresaNombre + " | Url: " + VariablesGlobales.EmpresaLogo);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -166,7 +166,6 @@
             tabListado.Controls.Add(label4);
             tabListado.Controls.Add(txtBuscar);
             tabListado.Controls.Add(btnBuscar);
-            tabListado.Cursor = Cursors.Arrow;
             tabListado.Location = new Point(4, 34);
             tabListado.Name = "tabListado";
             tabListado.Padding = new Padding(3);
@@ -261,7 +260,6 @@
             tabNuevo.Controls.Add(btnEliminar);
             tabNuevo.Controls.Add(btnCancelar);
             tabNuevo.Controls.Add(btnGrabar);
-            tabNuevo.Cursor = Cursors.Arrow;
             tabNuevo.Location = new Point(4, 34);
             tabNuevo.Name = "tabNuevo";
             tabNuevo.Padding = new Padding(3);

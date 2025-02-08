@@ -3,7 +3,9 @@ using Microsoft.Identity.Client;
 using PVrepository.DB;
 using PVrepository.Entities;
 using PVrepository.Interfaces;
+using System;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PVrepository.Implementation
 {
@@ -145,8 +147,28 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
-        
-
-        
+        public async Task<Empresa> Obtener(int EmpresaID)
+        {
+            Empresa oBjeto = new Empresa();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Empresa_Obtener", con);
+                cmd.Parameters.AddWithValue("@EmpresaID", EmpresaID);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        oBjeto.ID = Convert.ToInt32(dr["ID"]);
+                        oBjeto.Nombre = dr["Nombre"].ToString()!;
+                        oBjeto.Cuit = dr["Cuit"].ToString()!;
+                        oBjeto.Direccion = dr["Direccion"].ToString()!;
+                        oBjeto.LogoUrl = dr["LogoUrl"].ToString()!;
+                    }
+                }
+            }
+            return oBjeto;
+        }
     }
 }

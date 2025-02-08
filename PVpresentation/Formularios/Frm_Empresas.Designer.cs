@@ -131,7 +131,6 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
             // 

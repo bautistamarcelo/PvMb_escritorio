@@ -12,6 +12,8 @@ namespace PVpresentation.Formularios
 {
     public partial class Frm_Ventas : Form
     {
+        // Diccionario para almacenar los colores originales de los controles
+        private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
 
         #region METODOS PARA ARRASTRAR y MINIMIZAR/RESTAURAR EL FORMULARIO
         //Variables para maximizar y minimizar formulario
@@ -50,9 +52,55 @@ namespace PVpresentation.Formularios
             _empresaService = empresaService;
             _clienteService = clientesService;
             _productoService = productosService;
+            // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
+            AssignFocusEvents(this);
         }
 
         #endregion
+
+        #region Métodos para asignar los eventos Enter y Leave solo a TextBox y ComboBox
+        private void AssignFocusEvents(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                // Verificar si el control es un TextBox o ComboBox
+                if (control is TextBox || control is ComboBox)
+                {
+                    // Guardar el color original del control
+                    originalColors[control] = control.BackColor;
+
+                    // Asignar los eventos Enter y Leave
+                    control.Enter += Control_Enter;
+                    control.Leave += Control_Leave;
+                }
+
+                // Si el control tiene controles hijos (por ejemplo, un Panel), aplicar recursivamente
+                if (control.HasChildren)
+                {
+                    AssignFocusEvents(control);
+                }
+            }
+        }
+
+        // Evento Enter: Cambia el BackColor cuando el control recibe el foco
+        private void Control_Enter(object sender, EventArgs e)
+        {
+            if (sender is Control control)
+            {
+                control.BackColor = Color.YellowGreen; // Color cuando recibe el foco
+            }
+        }
+
+        // Evento Leave: Restaura el BackColor original cuando el control pierde el foco
+        private void Control_Leave(object sender, EventArgs e)
+        {
+            if (sender is Control control && originalColors.ContainsKey(control))
+            {
+                control.BackColor = originalColors[control]; // Restaurar el color original
+            }
+        }
+        #endregion
+
 
         private async Task AgregarProducto(int ProductoID)
         {
@@ -66,7 +114,7 @@ namespace PVpresentation.Formularios
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Producto: " + producto.Nombre);
             sb.AppendLine("OfertaCdo: " + producto.pOferta);
-            sb.AppendLine("OfertaCdo: " + producto.pVenta);
+            sb.AppendLine("VentaCdo: " + producto.pVenta);
             sb.AppendLine("Cantidad: " + txtCantidad.Text.Trim());
 
             var encontrado = _VentaDetalle.FirstOrDefault(x => x.ProductoID == ProductoID);
@@ -242,13 +290,13 @@ namespace PVpresentation.Formularios
             txtSaldoPago.Text = _Diferencia.ToString();
         }
 
-        private void txtBuscarProducto_KeyDown(object sender, KeyEventArgs e)
+        private async void txtBuscarProducto_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 if (txtBuscarProducto.Text.Trim() != "")
                 {
-                    AgregarProducto(Convert.ToInt32(txtBuscarProducto.Text.Trim()));
+                     await AgregarProducto(Convert.ToInt32(txtBuscarProducto.Text.Trim()));
                     txtBuscarProducto.Text = "";
                 }
             }

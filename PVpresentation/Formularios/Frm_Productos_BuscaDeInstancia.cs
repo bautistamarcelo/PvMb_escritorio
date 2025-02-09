@@ -15,6 +15,7 @@ namespace PVpresentation.Formularios
             InitializeComponent();
             _productosService = productoService;
         }
+
         private async Task MostrarProductos(string Buscar = "")
         {
 
@@ -72,6 +73,11 @@ namespace PVpresentation.Formularios
         private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             _ProductoSeleccionado = (ProductosVM)dgvListado.CurrentRow.DataBoundItem;
+            VariablesGlobales.vProductoID = _ProductoSeleccionado.ID;
+            VariablesGlobales.vProductoNombre = _ProductoSeleccionado.Nombre;
+            VariablesGlobales.vProductoPcosto = _ProductoSeleccionado.Costo;
+            VariablesGlobales.vProductoPoferta = _ProductoSeleccionado.pOferta;
+            VariablesGlobales.vProductoPventa = _ProductoSeleccionado.pVenta;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

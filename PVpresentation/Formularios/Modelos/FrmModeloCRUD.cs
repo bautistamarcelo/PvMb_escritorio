@@ -13,6 +13,7 @@ namespace PVpresentation.Formularios.Modelos
 {
     public partial class FrmModeloCRUD : Form
     {
+       
         public void MostrarTabs(string tabName)
         {
             var tabsMenu = new TabPage[] { tabListado, tabNuevo, tabEditar };
@@ -35,8 +36,10 @@ namespace PVpresentation.Formularios.Modelos
             InitializeComponent();
             dgvListado.ImplementarConfiguracion("");
             //MostrarTabs(tabListado.Name);
+           
         }
 
+       
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
             Close();

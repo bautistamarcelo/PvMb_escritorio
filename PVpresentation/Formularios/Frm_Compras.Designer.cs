@@ -18,6 +18,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Compras));
             pnTituloFormulario = new Panel();
+            txtPorcentualImpuesto = new TextBox();
+            txtProveedorID = new TextBox();
             btnMaximizar = new PictureBox();
             btnRestaurar = new PictureBox();
             btnCerrar = new PictureBox();
@@ -26,6 +28,12 @@
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
             pnMantenimiento = new Panel();
+            label9 = new Label();
+            txtImpuestosGral = new TextBox();
+            label8 = new Label();
+            txtSubTotal = new TextBox();
+            cmbFormaPago = new ComboBox();
+            label6 = new Label();
             cmbTipo = new ComboBox();
             label15 = new Label();
             label2 = new Label();
@@ -37,6 +45,7 @@
             txtMontoTotal = new TextBox();
             label7 = new Label();
             pnListado = new Panel();
+            btnAgregarItem = new Button();
             label17 = new Label();
             txtImpuestoMonto = new TextBox();
             label16 = new Label();
@@ -61,15 +70,6 @@
             txtProveedorNombre = new TextBox();
             btnBuscarProveedor = new Button();
             label14 = new Label();
-            btnAgregarItem = new Button();
-            txtProveedorID = new TextBox();
-            txtPorcentualImpuesto = new TextBox();
-            cmbFormaPago = new ComboBox();
-            label6 = new Label();
-            label8 = new Label();
-            txtSubTotal = new TextBox();
-            label9 = new Label();
-            txtImpuestosGral = new TextBox();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnRestaurar).BeginInit();
@@ -100,12 +100,32 @@
             pnTituloFormulario.TabIndex = 50;
             pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
             // 
+            // txtPorcentualImpuesto
+            // 
+            txtPorcentualImpuesto.BorderStyle = BorderStyle.FixedSingle;
+            txtPorcentualImpuesto.Location = new Point(648, 12);
+            txtPorcentualImpuesto.Name = "txtPorcentualImpuesto";
+            txtPorcentualImpuesto.Size = new Size(34, 23);
+            txtPorcentualImpuesto.TabIndex = 53;
+            txtPorcentualImpuesto.Text = "0";
+            txtPorcentualImpuesto.Visible = false;
+            // 
+            // txtProveedorID
+            // 
+            txtProveedorID.BorderStyle = BorderStyle.FixedSingle;
+            txtProveedorID.Location = new Point(688, 12);
+            txtProveedorID.Name = "txtProveedorID";
+            txtProveedorID.Size = new Size(34, 23);
+            txtProveedorID.TabIndex = 52;
+            txtProveedorID.Text = "0";
+            txtProveedorID.Visible = false;
+            // 
             // btnMaximizar
             // 
             btnMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMaximizar.Cursor = Cursors.Hand;
             btnMaximizar.Image = Properties.Resources.maximize3;
-            btnMaximizar.Location = new Point(878, 12);
+            btnMaximizar.Location = new Point(878, 14);
             btnMaximizar.Name = "btnMaximizar";
             btnMaximizar.Size = new Size(20, 21);
             btnMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -211,6 +231,74 @@
             pnMantenimiento.Size = new Size(229, 467);
             pnMantenimiento.TabIndex = 52;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("EngraversGothic BT", 10F);
+            label9.ForeColor = Color.FromArgb(224, 224, 224);
+            label9.Location = new Point(21, 268);
+            label9.Name = "label9";
+            label9.Size = new Size(73, 15);
+            label9.TabIndex = 52;
+            label9.Text = "Impuestos:";
+            // 
+            // txtImpuestosGral
+            // 
+            txtImpuestosGral.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtImpuestosGral.BackColor = Color.Silver;
+            txtImpuestosGral.BorderStyle = BorderStyle.FixedSingle;
+            txtImpuestosGral.Font = new Font("Square721 BT", 14.25F);
+            txtImpuestosGral.Location = new Point(21, 286);
+            txtImpuestosGral.Name = "txtImpuestosGral";
+            txtImpuestosGral.Size = new Size(186, 31);
+            txtImpuestosGral.TabIndex = 51;
+            txtImpuestosGral.TextAlign = HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("EngraversGothic BT", 10F);
+            label8.ForeColor = Color.FromArgb(224, 224, 224);
+            label8.Location = new Point(21, 218);
+            label8.Name = "label8";
+            label8.Size = new Size(73, 15);
+            label8.TabIndex = 50;
+            label8.Text = "Sub Total:";
+            // 
+            // txtSubTotal
+            // 
+            txtSubTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtSubTotal.BackColor = Color.Silver;
+            txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
+            txtSubTotal.Font = new Font("Square721 BT", 14.25F);
+            txtSubTotal.Location = new Point(21, 236);
+            txtSubTotal.Name = "txtSubTotal";
+            txtSubTotal.Size = new Size(186, 31);
+            txtSubTotal.TabIndex = 49;
+            txtSubTotal.TextAlign = HorizontalAlignment.Right;
+            // 
+            // cmbFormaPago
+            // 
+            cmbFormaPago.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cmbFormaPago.BackColor = Color.Gainsboro;
+            cmbFormaPago.Font = new Font("Square721 BT", 12F);
+            cmbFormaPago.FormattingEnabled = true;
+            cmbFormaPago.Location = new Point(21, 134);
+            cmbFormaPago.Name = "cmbFormaPago";
+            cmbFormaPago.Size = new Size(186, 28);
+            cmbFormaPago.TabIndex = 48;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("EngraversGothic BT", 10F);
+            label6.ForeColor = Color.FromArgb(224, 224, 224);
+            label6.Location = new Point(21, 117);
+            label6.Name = "label6";
+            label6.Size = new Size(103, 15);
+            label6.TabIndex = 47;
+            label6.Text = "Forma de Pago:";
+            // 
             // cmbTipo
             // 
             cmbTipo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -255,6 +343,7 @@
             txtFecha.ReadOnly = true;
             txtFecha.Size = new Size(186, 27);
             txtFecha.TabIndex = 25;
+            txtFecha.TextAlign = HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -277,6 +366,7 @@
             txtID.Name = "txtID";
             txtID.Size = new Size(186, 27);
             txtID.TabIndex = 23;
+            txtID.TextAlign = HorizontalAlignment.Center;
             // 
             // btnCancelar
             // 
@@ -318,17 +408,15 @@
             txtMontoTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtMontoTotal.BackColor = Color.Silver;
             txtMontoTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtMontoTotal.Enabled = false;
             txtMontoTotal.Font = new Font("Square721 BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtMontoTotal.ForeColor = Color.FromArgb(4, 41, 68);
-            txtMontoTotal.Location = new Point(19, 336);
+            txtMontoTotal.Location = new Point(19, 339);
             txtMontoTotal.Name = "txtMontoTotal";
             txtMontoTotal.ReadOnly = true;
-            txtMontoTotal.Size = new Size(185, 37);
+            txtMontoTotal.Size = new Size(188, 37);
             txtMontoTotal.TabIndex = 29;
             txtMontoTotal.TabStop = false;
-            txtMontoTotal.Text = "1500";
-            txtMontoTotal.TextAlign = HorizontalAlignment.Center;
+            txtMontoTotal.TextAlign = HorizontalAlignment.Right;
             // 
             // label7
             // 
@@ -336,7 +424,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("EngraversGothic BT", 10F);
             label7.ForeColor = Color.FromArgb(224, 224, 224);
-            label7.Location = new Point(19, 318);
+            label7.Location = new Point(19, 321);
             label7.Name = "label7";
             label7.Size = new Size(88, 15);
             label7.TabIndex = 30;
@@ -376,6 +464,24 @@
             pnListado.Size = new Size(710, 467);
             pnListado.TabIndex = 51;
             // 
+            // btnAgregarItem
+            // 
+            btnAgregarItem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAgregarItem.BackColor = Color.SteelBlue;
+            btnAgregarItem.Cursor = Cursors.Hand;
+            btnAgregarItem.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnAgregarItem.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnAgregarItem.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnAgregarItem.FlatStyle = FlatStyle.Flat;
+            btnAgregarItem.ForeColor = Color.WhiteSmoke;
+            btnAgregarItem.Location = new Point(602, 122);
+            btnAgregarItem.Name = "btnAgregarItem";
+            btnAgregarItem.Size = new Size(86, 32);
+            btnAgregarItem.TabIndex = 7;
+            btnAgregarItem.Text = "Agregar";
+            btnAgregarItem.UseVisualStyleBackColor = false;
+            btnAgregarItem.Click += btnAgregarItem_Click;
+            // 
             // label17
             // 
             label17.AutoSize = true;
@@ -391,10 +497,11 @@
             // 
             txtImpuestoMonto.BackColor = Color.Gainsboro;
             txtImpuestoMonto.BorderStyle = BorderStyle.FixedSingle;
+            txtImpuestoMonto.Font = new Font("Square721 BT", 12F);
             txtImpuestoMonto.Location = new Point(212, 129);
             txtImpuestoMonto.Name = "txtImpuestoMonto";
-            txtImpuestoMonto.Size = new Size(81, 23);
-            txtImpuestoMonto.TabIndex = 48;
+            txtImpuestoMonto.Size = new Size(81, 27);
+            txtImpuestoMonto.TabIndex = 3;
             txtImpuestoMonto.Text = "1";
             txtImpuestoMonto.TextAlign = HorizontalAlignment.Center;
             // 
@@ -413,10 +520,11 @@
             // 
             txtpCompra.BackColor = Color.Gainsboro;
             txtpCompra.BorderStyle = BorderStyle.FixedSingle;
+            txtpCompra.Font = new Font("Square721 BT", 12F);
             txtpCompra.Location = new Point(113, 129);
             txtpCompra.Name = "txtpCompra";
-            txtpCompra.Size = new Size(81, 23);
-            txtpCompra.TabIndex = 46;
+            txtpCompra.Size = new Size(81, 27);
+            txtpCompra.TabIndex = 2;
             txtpCompra.Text = "1";
             txtpCompra.TextAlign = HorizontalAlignment.Center;
             // 
@@ -435,6 +543,7 @@
             btnEditarProducto.Size = new Size(30, 30);
             btnEditarProducto.TabIndex = 44;
             btnEditarProducto.UseVisualStyleBackColor = true;
+            btnEditarProducto.Click += btnEditarProducto_Click;
             // 
             // label12
             // 
@@ -451,10 +560,11 @@
             // 
             txtCantidad.BackColor = Color.Gainsboro;
             txtCantidad.BorderStyle = BorderStyle.FixedSingle;
+            txtCantidad.Font = new Font("Square721 BT", 12F);
             txtCantidad.Location = new Point(14, 129);
             txtCantidad.Name = "txtCantidad";
-            txtCantidad.Size = new Size(81, 23);
-            txtCantidad.TabIndex = 42;
+            txtCantidad.Size = new Size(81, 27);
+            txtCantidad.TabIndex = 1;
             txtCantidad.Text = "1";
             txtCantidad.TextAlign = HorizontalAlignment.Center;
             // 
@@ -473,10 +583,11 @@
             // 
             txtpCosto.BackColor = Color.Gainsboro;
             txtpCosto.BorderStyle = BorderStyle.FixedSingle;
+            txtpCosto.Font = new Font("Square721 BT", 12F);
             txtpCosto.Location = new Point(311, 129);
             txtpCosto.Name = "txtpCosto";
-            txtpCosto.Size = new Size(81, 23);
-            txtpCosto.TabIndex = 40;
+            txtpCosto.Size = new Size(81, 27);
+            txtpCosto.TabIndex = 4;
             txtpCosto.Text = "1";
             txtpCosto.TextAlign = HorizontalAlignment.Center;
             // 
@@ -493,11 +604,13 @@
             // 
             // txtProductoNombre
             // 
-            txtProductoNombre.BackColor = Color.Gainsboro;
+            txtProductoNombre.BackColor = Color.Silver;
             txtProductoNombre.BorderStyle = BorderStyle.FixedSingle;
+            txtProductoNombre.Font = new Font("Square721 BT", 10F);
             txtProductoNombre.Location = new Point(184, 76);
             txtProductoNombre.Name = "txtProductoNombre";
-            txtProductoNombre.Size = new Size(431, 23);
+            txtProductoNombre.ReadOnly = true;
+            txtProductoNombre.Size = new Size(431, 24);
             txtProductoNombre.TabIndex = 38;
             // 
             // btnNuevoProducto
@@ -516,6 +629,7 @@
             btnNuevoProducto.Size = new Size(31, 32);
             btnNuevoProducto.TabIndex = 37;
             btnNuevoProducto.UseVisualStyleBackColor = true;
+            btnNuevoProducto.Click += btnNuevoProducto_Click;
             // 
             // label10
             // 
@@ -532,10 +646,11 @@
             // 
             txtpOferta.BackColor = Color.Gainsboro;
             txtpOferta.BorderStyle = BorderStyle.FixedSingle;
+            txtpOferta.Font = new Font("Square721 BT", 12F);
             txtpOferta.Location = new Point(410, 129);
             txtpOferta.Name = "txtpOferta";
-            txtpOferta.Size = new Size(81, 23);
-            txtpOferta.TabIndex = 35;
+            txtpOferta.Size = new Size(81, 27);
+            txtpOferta.TabIndex = 5;
             txtpOferta.Text = "1";
             txtpOferta.TextAlign = HorizontalAlignment.Center;
             // 
@@ -554,10 +669,11 @@
             // 
             txtpVenta.BackColor = Color.Gainsboro;
             txtpVenta.BorderStyle = BorderStyle.FixedSingle;
+            txtpVenta.Font = new Font("Square721 BT", 12F);
             txtpVenta.Location = new Point(509, 129);
             txtpVenta.Name = "txtpVenta";
-            txtpVenta.Size = new Size(81, 23);
-            txtpVenta.TabIndex = 22;
+            txtpVenta.Size = new Size(81, 27);
+            txtpVenta.TabIndex = 6;
             txtpVenta.Text = "1";
             txtpVenta.TextAlign = HorizontalAlignment.Center;
             // 
@@ -576,10 +692,12 @@
             // 
             txtProductoID.BackColor = Color.Gainsboro;
             txtProductoID.BorderStyle = BorderStyle.FixedSingle;
+            txtProductoID.Font = new Font("Square721 BT", 12F);
             txtProductoID.Location = new Point(16, 76);
             txtProductoID.Name = "txtProductoID";
-            txtProductoID.Size = new Size(136, 23);
-            txtProductoID.TabIndex = 20;
+            txtProductoID.Size = new Size(136, 27);
+            txtProductoID.TabIndex = 0;
+            txtProductoID.KeyDown += txtProductoID_KeyDown;
             // 
             // btnBuscarProducto
             // 
@@ -596,6 +714,7 @@
             btnBuscarProducto.Size = new Size(24, 22);
             btnBuscarProducto.TabIndex = 19;
             btnBuscarProducto.UseVisualStyleBackColor = true;
+            btnBuscarProducto.Click += btnBuscarProducto_Click;
             // 
             // dgvListado
             // 
@@ -621,9 +740,10 @@
             // 
             txtProveedorNombre.BackColor = Color.Gainsboro;
             txtProveedorNombre.BorderStyle = BorderStyle.FixedSingle;
+            txtProveedorNombre.Font = new Font("Square721 BT", 12F);
             txtProveedorNombre.Location = new Point(99, 15);
             txtProveedorNombre.Name = "txtProveedorNombre";
-            txtProveedorNombre.Size = new Size(553, 23);
+            txtProveedorNombre.Size = new Size(553, 27);
             txtProveedorNombre.TabIndex = 14;
             // 
             // btnBuscarProveedor
@@ -641,6 +761,7 @@
             btnBuscarProveedor.Size = new Size(24, 22);
             btnBuscarProveedor.TabIndex = 13;
             btnBuscarProveedor.UseVisualStyleBackColor = true;
+            btnBuscarProveedor.Click += btnBuscarProveedor_Click;
             // 
             // label14
             // 
@@ -652,109 +773,6 @@
             label14.Size = new Size(679, 15);
             label14.TabIndex = 45;
             label14.Text = "________________________________________________________________________________________________";
-            // 
-            // btnAgregarItem
-            // 
-            btnAgregarItem.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAgregarItem.BackColor = Color.SteelBlue;
-            btnAgregarItem.Cursor = Cursors.Hand;
-            btnAgregarItem.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
-            btnAgregarItem.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
-            btnAgregarItem.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnAgregarItem.FlatStyle = FlatStyle.Flat;
-            btnAgregarItem.ForeColor = Color.WhiteSmoke;
-            btnAgregarItem.Location = new Point(602, 122);
-            btnAgregarItem.Name = "btnAgregarItem";
-            btnAgregarItem.Size = new Size(86, 32);
-            btnAgregarItem.TabIndex = 50;
-            btnAgregarItem.Text = "Agregar";
-            btnAgregarItem.UseVisualStyleBackColor = false;
-            // 
-            // txtProveedorID
-            // 
-            txtProveedorID.BorderStyle = BorderStyle.FixedSingle;
-            txtProveedorID.Location = new Point(688, 12);
-            txtProveedorID.Name = "txtProveedorID";
-            txtProveedorID.Size = new Size(34, 23);
-            txtProveedorID.TabIndex = 52;
-            txtProveedorID.Text = "0";
-            txtProveedorID.Visible = false;
-            // 
-            // txtPorcentualImpuesto
-            // 
-            txtPorcentualImpuesto.BorderStyle = BorderStyle.FixedSingle;
-            txtPorcentualImpuesto.Location = new Point(648, 12);
-            txtPorcentualImpuesto.Name = "txtPorcentualImpuesto";
-            txtPorcentualImpuesto.Size = new Size(34, 23);
-            txtPorcentualImpuesto.TabIndex = 53;
-            txtPorcentualImpuesto.Text = "0";
-            txtPorcentualImpuesto.Visible = false;
-            // 
-            // cmbFormaPago
-            // 
-            cmbFormaPago.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            cmbFormaPago.BackColor = Color.Gainsboro;
-            cmbFormaPago.Font = new Font("Square721 BT", 12F);
-            cmbFormaPago.FormattingEnabled = true;
-            cmbFormaPago.Location = new Point(21, 134);
-            cmbFormaPago.Name = "cmbFormaPago";
-            cmbFormaPago.Size = new Size(186, 28);
-            cmbFormaPago.TabIndex = 48;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("EngraversGothic BT", 10F);
-            label6.ForeColor = Color.FromArgb(224, 224, 224);
-            label6.Location = new Point(21, 117);
-            label6.Name = "label6";
-            label6.Size = new Size(103, 15);
-            label6.TabIndex = 47;
-            label6.Text = "Forma de Pago:";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("EngraversGothic BT", 10F);
-            label8.ForeColor = Color.FromArgb(224, 224, 224);
-            label8.Location = new Point(21, 220);
-            label8.Name = "label8";
-            label8.Size = new Size(73, 15);
-            label8.TabIndex = 50;
-            label8.Text = "Sub Total:";
-            // 
-            // txtSubTotal
-            // 
-            txtSubTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSubTotal.BackColor = Color.Gainsboro;
-            txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtSubTotal.Font = new Font("Square721 BT", 12F);
-            txtSubTotal.Location = new Point(21, 238);
-            txtSubTotal.Name = "txtSubTotal";
-            txtSubTotal.Size = new Size(186, 27);
-            txtSubTotal.TabIndex = 49;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("EngraversGothic BT", 10F);
-            label9.ForeColor = Color.FromArgb(224, 224, 224);
-            label9.Location = new Point(21, 266);
-            label9.Name = "label9";
-            label9.Size = new Size(73, 15);
-            label9.TabIndex = 52;
-            label9.Text = "Impuestos:";
-            // 
-            // txtImpuestosGral
-            // 
-            txtImpuestosGral.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtImpuestosGral.BackColor = Color.Gainsboro;
-            txtImpuestosGral.BorderStyle = BorderStyle.FixedSingle;
-            txtImpuestosGral.Font = new Font("Square721 BT", 12F);
-            txtImpuestosGral.Location = new Point(21, 284);
-            txtImpuestosGral.Name = "txtImpuestosGral";
-            txtImpuestosGral.Size = new Size(186, 27);
-            txtImpuestosGral.TabIndex = 51;
             // 
             // Frm_Compras
             // 
@@ -771,6 +789,7 @@
             Name = "Frm_Compras";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Compras";
+            Load += Frm_Compras_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).EndInit();

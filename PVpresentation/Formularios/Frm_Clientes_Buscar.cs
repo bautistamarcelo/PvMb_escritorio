@@ -17,6 +17,9 @@ namespace PVpresentation.Formularios
 {
     public partial class Frm_Clientes_Buscar : Form
     {
+        // Diccionario para almacenar los colores originales de los controles
+        private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
+
         private readonly IClientesService _clientesService;
         private readonly ICaracterService _caracterService;
         public ClienteVM _ClienteSeleccionado { get; set; } = null!;
@@ -26,7 +29,52 @@ namespace PVpresentation.Formularios
             InitializeComponent();
             _clientesService = clientesService;
             _caracterService = caracterService;
+            // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
+            AssignFocusEvents(this);
         }
+
+        #region Métodos para asignar los eventos Enter y Leave solo a TextBox y ComboBox
+        private void AssignFocusEvents(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                // Verificar si el control es un TextBox o ComboBox
+                if (control is TextBox || control is ComboBox)
+                {
+                    // Guardar el color original del control
+                    originalColors[control] = control.BackColor;
+
+                    // Asignar los eventos Enter y Leave
+                    control.Enter += Control_Enter;
+                    control.Leave += Control_Leave;
+                }
+
+                // Si el control tiene controles hijos (por ejemplo, un Panel), aplicar recursivamente
+                if (control.HasChildren)
+                {
+                    AssignFocusEvents(control);
+                }
+            }
+        }
+
+        // Evento Enter: Cambia el BackColor cuando el control recibe el foco
+        private void Control_Enter(object sender, EventArgs e)
+        {
+            if (sender is Control control)
+            {
+                control.BackColor = Color.YellowGreen; // Color cuando recibe el foco
+            }
+        }
+
+        // Evento Leave: Restaura el BackColor original cuando el control pierde el foco
+        private void Control_Leave(object sender, EventArgs e)
+        {
+            if (sender is Control control && originalColors.ContainsKey(control))
+            {
+                control.BackColor = originalColors[control]; // Restaurar el color original
+            }
+        }
+        #endregion
 
         public void MostrarTabs(string tabName)
         {

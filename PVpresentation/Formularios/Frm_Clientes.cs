@@ -9,6 +9,9 @@ namespace PVpresentation.Formularios
 {
     public partial class Frm_Clientes : FrmModeloTransaccion
     {
+        // Diccionario para almacenar los colores originales de los controles
+        private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
+
         #region Funcionalidades y Constructor del formulario
         private readonly IClientesService _clientesService;
         private readonly ICaracterService _caracterService;
@@ -18,7 +21,74 @@ namespace PVpresentation.Formularios
             InitializeComponent();
             _clientesService = clientesService;
             _caracterService = caracterService;
+            dgvListado.CellClick += CustomCellClick; // Evento adicional
+            // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
+            AssignFocusEvents(this);
         }
+        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var ClienteSeleccionado = (ClienteVM)dgvListado.CurrentRow.DataBoundItem;
+                txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+                txtNombre.Text = ClienteSeleccionado.Nombre.ToString();
+                txtDomicilio.Text = ClienteSeleccionado.Domicilio.ToString();
+                txtCuit.Text = ClienteSeleccionado.Cuit.ToString();
+                txtEmail.Text = ClienteSeleccionado.Email.ToString();
+                txtTelefono.Text = ClienteSeleccionado.Telefono.ToString();
+                txtID.Text = ClienteSeleccionado.ID.ToString();
+                cmbCaracter.EstablecerValor(ClienteSeleccionado.CaracterID);
+                cmbEstado.EstablecerValor(ClienteSeleccionado.EstadoID);
+                cmbHabilitadoCta.EstablecerValor(ClienteSeleccionado.CtaCte);
+
+                //txtIDEditar.Visible = true; //Desabilitar cuando compruebe funcionamiento
+                MostrarTabs(tabNuevo.Name);
+            }
+        }
+
+
+        #region Métodos para asignar los eventos Enter y Leave solo a TextBox y ComboBox
+        private void AssignFocusEvents(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                // Verificar si el control es un TextBox o ComboBox
+                if (control is TextBox || control is ComboBox)
+                {
+                    // Guardar el color original del control
+                    originalColors[control] = control.BackColor;
+
+                    // Asignar los eventos Enter y Leave
+                    control.Enter += Control_Enter;
+                    control.Leave += Control_Leave;
+                }
+
+                // Si el control tiene controles hijos (por ejemplo, un Panel), aplicar recursivamente
+                if (control.HasChildren)
+                {
+                    AssignFocusEvents(control);
+                }
+            }
+        }
+
+        // Evento Enter: Cambia el BackColor cuando el control recibe el foco
+        private void Control_Enter(object sender, EventArgs e)
+        {
+            if (sender is Control control)
+            {
+                control.BackColor = Color.YellowGreen; // Color cuando recibe el foco
+            }
+        }
+
+        // Evento Leave: Restaura el BackColor original cuando el control pierde el foco
+        private void Control_Leave(object sender, EventArgs e)
+        {
+            if (sender is Control control && originalColors.ContainsKey(control))
+            {
+                control.BackColor = originalColors[control]; // Restaurar el color original
+            }
+        }
+        #endregion
 
         public void MostrarTabs(string tabName)
         {
@@ -119,24 +189,6 @@ namespace PVpresentation.Formularios
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
             await MostrarClientes(txtBuscar.Text.Trim());
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            var ClienteSeleccionado = (ClienteVM)dgvListado.CurrentRow.DataBoundItem;
-            txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
-            txtNombre.Text = ClienteSeleccionado.Nombre.ToString();
-            txtDomicilio.Text = ClienteSeleccionado.Domicilio.ToString();
-            txtCuit.Text = ClienteSeleccionado.Cuit.ToString();
-            txtEmail.Text = ClienteSeleccionado.Email.ToString();
-            txtTelefono.Text = ClienteSeleccionado.Telefono.ToString();
-            txtID.Text = ClienteSeleccionado.ID.ToString();
-            cmbCaracter.EstablecerValor(ClienteSeleccionado.CaracterID);
-            cmbEstado.EstablecerValor(ClienteSeleccionado.EstadoID);
-            cmbHabilitadoCta.EstablecerValor(ClienteSeleccionado.CtaCte);
-
-            //txtIDEditar.Visible = true; //Desabilitar cuando compruebe funcionamiento
-            MostrarTabs(tabNuevo.Name);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

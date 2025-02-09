@@ -8,5 +8,7 @@ namespace PVrepository.Interfaces
         Task<string> crear(Productos objeto);
         Task<string> editar(Productos objeto);
         Task<Productos>Obtener(int IDproducto);
+        Task<Productos>ObtenerXnombre(string productoNombre);
+
     }
 }

@@ -16,17 +16,8 @@ namespace PVpresentation.Formularios
         {
             InitializeComponent();
             _categoriasService = categoriaService;
-            dgvListado.CellClick += CustomCellClick; // Evento adicional
+            
         }
-
-        private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
-            {
-                
-            }
-        }
-
 
         private Frm_Productos ObtenerFormularioAbierto()
         {
@@ -75,8 +66,6 @@ namespace PVpresentation.Formularios
             await MostrarCategorias();
         }
 
-
-
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
             await MostrarCategorias(txtBuscar.Text.Trim()!);
@@ -99,6 +88,9 @@ namespace PVpresentation.Formularios
                 var CategoriaSeleccionada = (Categorias)dgvListado.CurrentRow.DataBoundItem;
                 txtNombre.Text = CategoriaSeleccionada.Nombre.ToString();
                 txtID.Text = CategoriaSeleccionada.ID.ToString();
+                txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+                txtNombre.Enabled = true;
+                txtNombre.ReadOnly = false;
                 txtNombre.Select();
                 btnGrabar.Enabled = true;
                 btnCancelar.Enabled = true;
@@ -107,15 +99,15 @@ namespace PVpresentation.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            var CategoriaSeleccionada = (Categorias)dgvListado.CurrentRow.DataBoundItem;
-            txtNombre.Text = CategoriaSeleccionada.Nombre.ToString();
-            txtID.Text = CategoriaSeleccionada.ID.ToString();
-            txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
-            txtNombre.Enabled = true;
-            txtNombre.ReadOnly = false;
-            txtNombre.Select();
-            btnGrabar.Enabled = true;
-            btnCancelar.Enabled = true;
+            //var CategoriaSeleccionada = (Categorias)dgvListado.CurrentRow.DataBoundItem;
+            //txtNombre.Text = CategoriaSeleccionada.Nombre.ToString();
+            //txtID.Text = CategoriaSeleccionada.ID.ToString();
+            //txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
+            //txtNombre.Enabled = true;
+            //txtNombre.ReadOnly = false;
+            //txtNombre.Select();
+            //btnGrabar.Enabled = true;
+            //btnCancelar.Enabled = true;
         }
 
         private async void btnCancelar_Click(object sender, EventArgs e)

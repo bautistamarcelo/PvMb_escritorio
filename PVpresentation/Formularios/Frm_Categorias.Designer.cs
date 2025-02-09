@@ -75,6 +75,10 @@
             // 
             tabEditar.Size = new Size(973, 476);
             // 
+            // txtBuscar
+            // 
+            txtBuscar.TabIndex = 0;
+            // 
             // btnBuscar
             // 
             btnBuscar.FlatAppearance.BorderSize = 0;
@@ -118,7 +122,16 @@
             btnGrabar.FlatAppearance.BorderSize = 0;
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
+            btnGrabar.TabIndex = 4;
             btnGrabar.Click += btnGrabar_Click;
+            // 
+            // txtNombre
+            // 
+            txtNombre.TabIndex = 3;
+            // 
+            // txtID
+            // 
+            txtID.TabIndex = 2;
             // 
             // pnMantenimiento
             // 

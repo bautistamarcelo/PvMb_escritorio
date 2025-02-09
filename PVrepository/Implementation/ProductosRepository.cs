@@ -203,5 +203,34 @@ namespace PVrepository.Implementation
             }
             return oBjeto;
         }
+
+        public async Task<Productos> ObtenerXnombre(string productoNombre)
+        {
+            Productos oBjeto = new Productos();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Productos_ObtenerXnombre", con);
+                cmd.Parameters.AddWithValue("@ProductoNombre", productoNombre);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        oBjeto = new Productos
+                        {
+                            ID = Convert.ToInt32(dr["ID"]),
+                            BarCode = dr["BarCode"].ToString()!,
+                            Nombre = dr["Nombre"].ToString()!,
+                            pOferta = Convert.ToInt32(dr["pOferta"]),
+                            pVenta = Convert.ToInt32(dr["pVenta"]),
+                            Stock = Convert.ToInt32(dr["Stock"]),
+                            Situacion = Convert.ToInt32(dr["Situacion"]),
+                        };
+                    }
+                }
+            }
+            return oBjeto;
+        }
     }
 }

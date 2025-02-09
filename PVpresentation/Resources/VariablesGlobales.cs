@@ -24,6 +24,12 @@ namespace PVpresentation.Resources
         public static int cajaSeleccionadaSaldoInicial { get; set; }
 
 
+        public static int vProductoID { get; set; }
+        public static string vProductoNombre{get;set;}
+        public static int vProductoPcosto { get; set; }
+        public static int vProductoPoferta { get; set; }
+        public static int vProductoPventa { get; set; }
+
         //Instancias de Formularios Ventas
         public static int Frm_Venta01 { get; set; } //values: 0 Cerrado / 1 Abierto
         public static int Frm_Venta02 { get; set; } //values: 0 Cerrado / 1 Abierto

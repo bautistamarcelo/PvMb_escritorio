@@ -43,5 +43,10 @@ namespace PVservices.Implementation
         {
             return await _productosRepository.obtenerId(objeto, id);
         }
+
+        public async Task<Productos> ObtenerXnombre(string productoNombre)
+        {
+            return await _productosRepository.ObtenerXnombre(productoNombre);
+        }
     }
 }

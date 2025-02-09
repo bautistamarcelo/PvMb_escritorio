@@ -125,7 +125,6 @@
             btnEditar.FlatAppearance.BorderSize = 0;
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
-            btnEditar.Click += btnEditar_Click;
             // 
             // btnNuevo
             // 
@@ -149,6 +148,7 @@
             // 
             txtNombre.Location = new Point(36, 108);
             txtNombre.Size = new Size(423, 22);
+            txtNombre.TabIndex = 31;
             // 
             // label1
             // 
@@ -174,6 +174,7 @@
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
             btnCancelar.Location = new Point(201, 376);
+            btnCancelar.TabIndex = 40;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGrabar
@@ -183,6 +184,7 @@
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(13, 93, 142);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(74, 134, 160);
             btnGrabar.Location = new Point(52, 376);
+            btnGrabar.TabIndex = 39;
             btnGrabar.Click += btnGrabar_Click;
             // 
             // label7
@@ -269,7 +271,7 @@
             cmbHabilitadoCta.Location = new Point(516, 216);
             cmbHabilitadoCta.Name = "cmbHabilitadoCta";
             cmbHabilitadoCta.Size = new Size(413, 22);
-            cmbHabilitadoCta.TabIndex = 43;
+            cmbHabilitadoCta.TabIndex = 38;
             // 
             // cmbCaracter
             // 
@@ -278,7 +280,7 @@
             cmbCaracter.Location = new Point(516, 163);
             cmbCaracter.Name = "cmbCaracter";
             cmbCaracter.Size = new Size(413, 22);
-            cmbCaracter.TabIndex = 42;
+            cmbCaracter.TabIndex = 37;
             // 
             // cmbEstado
             // 
@@ -287,7 +289,7 @@
             cmbEstado.Location = new Point(516, 113);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(413, 22);
-            cmbEstado.TabIndex = 41;
+            cmbEstado.TabIndex = 36;
             // 
             // txtTelefono
             // 
@@ -296,7 +298,7 @@
             txtTelefono.Location = new Point(516, 53);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(414, 22);
-            txtTelefono.TabIndex = 47;
+            txtTelefono.TabIndex = 35;
             // 
             // txtEmail
             // 
@@ -305,7 +307,7 @@
             txtEmail.Location = new Point(38, 271);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(421, 22);
-            txtEmail.TabIndex = 46;
+            txtEmail.TabIndex = 34;
             // 
             // txtCuit
             // 
@@ -314,7 +316,7 @@
             txtCuit.Location = new Point(38, 217);
             txtCuit.Name = "txtCuit";
             txtCuit.Size = new Size(421, 22);
-            txtCuit.TabIndex = 45;
+            txtCuit.TabIndex = 33;
             // 
             // txtDomicilio
             // 
@@ -323,7 +325,7 @@
             txtDomicilio.Location = new Point(38, 163);
             txtDomicilio.Name = "txtDomicilio";
             txtDomicilio.Size = new Size(421, 22);
-            txtDomicilio.TabIndex = 44;
+            txtDomicilio.TabIndex = 32;
             // 
             // Frm_Clientes
             // 

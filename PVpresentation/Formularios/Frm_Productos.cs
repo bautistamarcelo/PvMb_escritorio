@@ -12,11 +12,13 @@ using Control = System.Windows.Forms.Control;
 using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
-
 namespace PVpresentation.Formularios
 {
     public partial class Frm_Productos : FrmModeloTransaccion
     {
+        // Diccionario para almacenar los colores originales de los controles
+        private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
+
         #region Funcionalidades y Constructor del formulario
         private readonly IProductosService _productosService;
         private readonly IImpuestosService _impuestosService;
@@ -49,8 +51,53 @@ namespace PVpresentation.Formularios
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(OnKeyDownHandler);
             dgvListado.CellClick += CustomCellClick; // Evento adicional
+            // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
+            AssignFocusEvents(this);
 
         }
+
+        #region Métodos para asignar los eventos Enter y Leave solo a TextBox y ComboBox
+        private void AssignFocusEvents(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                // Verificar si el control es un TextBox o ComboBox
+                if (control is TextBox || control is ComboBox)
+                {
+                    // Guardar el color original del control
+                    originalColors[control] = control.BackColor;
+
+                    // Asignar los eventos Enter y Leave
+                    control.Enter += Control_Enter;
+                    control.Leave += Control_Leave;
+                }
+
+                // Si el control tiene controles hijos (por ejemplo, un Panel), aplicar recursivamente
+                if (control.HasChildren)
+                {
+                    AssignFocusEvents(control);
+                }
+            }
+        }
+
+        // Evento Enter: Cambia el BackColor cuando el control recibe el foco
+        private void Control_Enter(object sender, EventArgs e)
+        {
+            if (sender is Control control)
+            {
+                control.BackColor = Color.YellowGreen; // Color cuando recibe el foco
+            }
+        }
+
+        // Evento Leave: Restaura el BackColor original cuando el control pierde el foco
+        private void Control_Leave(object sender, EventArgs e)
+        {
+            if (sender is Control control && originalColors.ContainsKey(control))
+            {
+                control.BackColor = originalColors[control]; // Restaurar el color original
+            }
+        }
+        #endregion
 
         private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -84,7 +131,6 @@ namespace PVpresentation.Formularios
                 btnEditar.Enabled = false;
             }
         }
-
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {

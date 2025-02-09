@@ -16,6 +16,10 @@ namespace PVpresentation.ViewModels
         public int pCompra {get; set;}
         public int Impuesto {get; set;}
         public int Costo {get; set;}
-        public int TotalLinea {get; set;}
+        public int TotalCompra {get; set;}
+        public int TotalCosto {get; set;}
+        public int pOferta {get; set;}
+        public int pVenta {get; set;}
+
     }
 }

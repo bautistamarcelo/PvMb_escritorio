@@ -17,7 +17,6 @@ namespace PVrepository.Implementation
             _conexion = conexion;
         }
 
-
         public async Task<int> obtenerId(Productos objeto, int id)
         {
             string respuesta = "";
@@ -190,13 +189,34 @@ namespace PVrepository.Implementation
                     {
                         oBjeto = new Productos
                         {
-                             ID = Convert.ToInt32(dr["ID"]),
-                             BarCode = dr["BarCode"].ToString()!,
-                             Nombre = dr["Nombre"].ToString()!,
-                             pOferta = Convert.ToInt32(dr["pOferta"]),
-                             pVenta = Convert.ToInt32(dr["pVenta"]),
-                             Stock = Convert.ToInt32(dr["Stock"]),
-                             Situacion = Convert.ToInt32(dr["Situacion"]),
+                            ID = Convert.ToInt32(dr["ID"]),
+                            BarCode = dr["BarCode"].ToString()!,
+                            Nombre = dr["Nombre"].ToString()!,
+                            Impuesto = new Impuestos
+                            {
+                                ID = Convert.ToInt32(dr["ImpuestoID"]),
+                                Nombre = dr["ImpuestoN"].ToString()!
+                            },
+                            Categoria = new Categorias
+                            {
+                                ID = Convert.ToInt32(dr["CategoriaID"]),
+                                Nombre = dr["CategoriaN"].ToString()!
+                            },
+                            Marca = new Marcas
+                            {
+                                ID = Convert.ToInt32(dr["MarcaID"]),
+                                Nombre = dr["MarcaN"].ToString()!
+                            },
+                            Proveedor = new Proveedores
+                            {
+                                ID = Convert.ToInt32(dr["ProveedorID"]),
+                                Nombre = dr["ProveedorN"].ToString()!
+                            },
+                            Costo = Convert.ToInt32(dr["Costo"]),
+                            pOferta = Convert.ToInt32(dr["pOferta"]),
+                            pVenta = Convert.ToInt32(dr["pVenta"]),
+                            Stock = Convert.ToInt32(dr["Stock"]),
+                            Situacion = Convert.ToInt32(dr["Situacion"]),
                         };
                     }
                 }

@@ -1,17 +1,9 @@
 ﻿using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVrepository.Entities;
-using PVservices.Implementation;
 using PVservices.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PVpresentation.Formularios
 {
@@ -110,6 +102,20 @@ namespace PVpresentation.Formularios
             cmbProveedor.Sorted = true;
         }
 
+        #endregion
+
+        #region METODOS PARA ARRASTRAR y MINIMIZAR/RESTAURAR EL FORMULARIO
+        //Variables para maximizar y minimizar formulario
+        private int lx;
+        private int ly;
+        private int sw;
+        private int sh;
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
         #endregion
 
         #region Métodos para asignar los eventos Enter y Leave solo a TextBox y ComboBox
@@ -218,8 +224,48 @@ namespace PVpresentation.Formularios
         private async void Frm_Productos_Compras_Load(object sender, EventArgs e)
         {
             await llenarComboBox();
-            dgvListado.ImplementarConfiguracion("Editar");
-            await MostrarProductos();
+            if (tabControlMain.SelectedTab == tabListado)
+            {
+                dgvListado.ImplementarConfiguracion("Editar");
+                await MostrarProductos();
+            }
+            else
+            {
+                if (txtInstancia.Text == "CompraEditar")
+                {
+                    cmbImpuesto.EstablecerValor(Convert.ToInt32(txtImpuesto.Text));
+                    cmbCategoria.EstablecerValor(Convert.ToInt32(txtCategoria.Text));
+                    cmbMarca.EstablecerValor(Convert.ToInt32(txtMarca.Text));
+                    cmbProveedor.EstablecerValor(Convert.ToInt32(txtProveedorID.Text));
+                }
+                if (txtInstancia.Text == "CompraNuevo")
+                {
+                    txtID.Text = "0";
+                    txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
+                    txtNombre.Text = "";
+                    cmbSituacion.SelectedIndex = 0;
+                    txtBarCode.Text = "";
+                    txtStock.Text = "0";
+                    txtStock.ReadOnly = true;
+                    txtCosto.Text = "0";
+                    txtpOferta.Text = "0";
+                    txtpVenta.Text = "0";
+                    cmbImpuesto.SelectedIndex = 0;
+                    cmbCategoria.SelectedIndex = 0;
+                    cmbMarca.SelectedIndex = 0;
+                    cmbProveedor.SelectedIndex = 0;
+                    txtTalle.Text = "";
+                    txtColor.Text = "";
+                    txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
+                    txtNombre.Select();
+                    btnAgregarImpuesto.Enabled = true;
+                    btnAgregarCategoria.Enabled = true;
+                    btnAgregarMarca.Enabled = true;
+                    btnAgregarProveedor.Enabled = true;
+                    btnGrabar.Enabled = true;
+                }
+            }
+
         }
 
         private void tabNuevo_Click(object sender, EventArgs e)
@@ -331,11 +377,12 @@ namespace PVpresentation.Formularios
             if (txtOpcion.Text.Trim() == "2") // Si la opcion es 2: Editar
             {
                 respuesta = await _productosService.editar(objeTo);
-                VariablesGlobales.vProductoID = _ProductoSeleccionado.ID;
-                VariablesGlobales.vProductoNombre = _ProductoSeleccionado.Nombre;
-                VariablesGlobales.vProductoPcosto = _ProductoSeleccionado.Costo;
-                VariablesGlobales.vProductoPoferta = _ProductoSeleccionado.pOferta;
-                VariablesGlobales.vProductoPventa = _ProductoSeleccionado.pVenta;
+                
+                VariablesGlobales.vProductoID = objeTo.ID;
+                VariablesGlobales.vProductoNombre = objeTo.Nombre;
+                VariablesGlobales.vProductoPcosto = objeTo.Costo;
+                VariablesGlobales.vProductoPoferta = objeTo.pOferta;
+                VariablesGlobales.vProductoPventa = objeTo.pVenta;
             }
             else //Si la opcion es 1: Nueva
             {
@@ -362,7 +409,7 @@ namespace PVpresentation.Formularios
                 //MostrarTabs(tabListado.Name);
             }
         }
-       
+
         private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
@@ -424,8 +471,8 @@ namespace PVpresentation.Formularios
             txtID.Text = "0";
             txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
             txtNombre.Text = "";
-            cmbSituacion.SelectedIndex=0;
-            txtBarCode.Text ="";
+            cmbSituacion.SelectedIndex = 0;
+            txtBarCode.Text = "";
             txtStock.Text = "0";
             txtStock.ReadOnly = true;
             txtCosto.Text = "0";
@@ -436,7 +483,7 @@ namespace PVpresentation.Formularios
             cmbMarca.SelectedIndex = 0;
             cmbProveedor.SelectedIndex = 0;
             txtTalle.Text = "";
-            txtColor.Text ="";
+            txtColor.Text = "";
             txtID.Visible = true; //Desabilitar cuando compruebe funcionamiento
             txtNombre.Select();
             MostrarTabs(tabNuevo.Name);
@@ -445,6 +492,18 @@ namespace PVpresentation.Formularios
             btnAgregarMarca.Enabled = true;
             btnAgregarProveedor.Enabled = true;
             btnGrabar.Enabled = true;
+        }
+
+        private void pnTituloFormulario_MouseMove(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

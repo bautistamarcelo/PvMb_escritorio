@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Productos_Compras));
             pnTituloFormulario = new Panel();
+            txtImpuesto = new TextBox();
+            txtMarca = new TextBox();
+            txtCategoria = new TextBox();
+            txtProveedorID = new TextBox();
             txtFecha = new TextBox();
             pictureBox1 = new PictureBox();
             label1 = new Label();
@@ -91,6 +95,10 @@
             // pnTituloFormulario
             // 
             pnTituloFormulario.BackColor = Color.FromArgb(74, 134, 160);
+            pnTituloFormulario.Controls.Add(txtImpuesto);
+            pnTituloFormulario.Controls.Add(txtMarca);
+            pnTituloFormulario.Controls.Add(txtCategoria);
+            pnTituloFormulario.Controls.Add(txtProveedorID);
             pnTituloFormulario.Controls.Add(txtFecha);
             pnTituloFormulario.Controls.Add(pictureBox1);
             pnTituloFormulario.Controls.Add(label1);
@@ -104,6 +112,47 @@
             pnTituloFormulario.Name = "pnTituloFormulario";
             pnTituloFormulario.Size = new Size(850, 45);
             pnTituloFormulario.TabIndex = 55;
+            pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
+            // 
+            // txtImpuesto
+            // 
+            txtImpuesto.BorderStyle = BorderStyle.FixedSingle;
+            txtImpuesto.Location = new Point(233, 12);
+            txtImpuesto.Name = "txtImpuesto";
+            txtImpuesto.Size = new Size(34, 23);
+            txtImpuesto.TabIndex = 60;
+            txtImpuesto.Text = "0";
+            txtImpuesto.Visible = false;
+            // 
+            // txtMarca
+            // 
+            txtMarca.BorderStyle = BorderStyle.FixedSingle;
+            txtMarca.Location = new Point(193, 12);
+            txtMarca.Name = "txtMarca";
+            txtMarca.Size = new Size(34, 23);
+            txtMarca.TabIndex = 59;
+            txtMarca.Text = "0";
+            txtMarca.Visible = false;
+            // 
+            // txtCategoria
+            // 
+            txtCategoria.BorderStyle = BorderStyle.FixedSingle;
+            txtCategoria.Location = new Point(153, 12);
+            txtCategoria.Name = "txtCategoria";
+            txtCategoria.Size = new Size(34, 23);
+            txtCategoria.TabIndex = 58;
+            txtCategoria.Text = "0";
+            txtCategoria.Visible = false;
+            // 
+            // txtProveedorID
+            // 
+            txtProveedorID.BorderStyle = BorderStyle.FixedSingle;
+            txtProveedorID.Location = new Point(113, 12);
+            txtProveedorID.Name = "txtProveedorID";
+            txtProveedorID.Size = new Size(34, 23);
+            txtProveedorID.TabIndex = 57;
+            txtProveedorID.Text = "0";
+            txtProveedorID.Visible = false;
             // 
             // txtFecha
             // 
@@ -738,6 +787,7 @@
             btnCancelar.TabIndex = 177;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGrabar
             // 
@@ -838,5 +888,9 @@
         public ComboBox cmbSituacion;
         public TextBox txtID;
         public TextBox txtNombre;
+        public TextBox txtImpuesto;
+        public TextBox txtMarca;
+        public TextBox txtCategoria;
+        public TextBox txtProveedorID;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
+using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.ComponentModel;
@@ -73,7 +74,7 @@ namespace PVpresentation.Formularios
         private readonly IImpuestosService _impuestosService;
         // Diccionario para almacenar los colores originales de los controles
         private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
-
+        public Productos vProducTo { get; set; } = null!;
         private BindingList<Compra_D_VM> _CompraDetalle = new BindingList<Compra_D_VM>();
 
         public Frm_Compras(IServiceProvider serviceProvider,
@@ -196,22 +197,26 @@ namespace PVpresentation.Formularios
             dgvListado.Refresh();
         }
 
-        private async Task ObtenerProducto(int ProductoID)
+        public async Task ObtenerProducto(int ProductoID)
         {
 
-            var producto = await _productoService.Obtener(ProductoID);
-            if (producto.ID == 0)
+            vProducTo = await _productoService.Obtener(ProductoID);
+            if (vProducTo.ID == 0)
             {
                 txtProductoID.BackColor = Color.FromArgb(255, 227, 227);
                 return;
             }
             txtProductoID.BackColor = Color.FromArgb(220, 220, 220);
 
-            txtProductoID.Text = producto.ID.ToString();
-            txtProductoNombre.Text = producto.Nombre.ToString();
-            txtpOferta.Text = producto.pOferta.ToString();
-            txtpVenta.Text = producto.pVenta.ToString();
-            txtpCosto.Text = producto.Costo.ToString();
+            txtProductoID.Text = vProducTo.ID.ToString();
+            txtProductoNombre.Text = vProducTo.Nombre.ToString();
+            txtpOferta.Text = vProducTo.pOferta.ToString();
+            txtpVenta.Text = vProducTo.pVenta.ToString();
+            txtpCosto.Text = vProducTo.Costo.ToString();
+            txtProveedor.Text = vProducTo.Proveedor.ID.ToString();
+            txtCategoria.Text = vProducTo.Categoria.ID.ToString();
+            txtMarca.Text = vProducTo.Marca.ID.ToString();
+            txtImpuesto.Text = vProducTo.Impuesto.ID.ToString();
             txtCantidad.Select();
         }
 
@@ -292,18 +297,32 @@ namespace PVpresentation.Formularios
 
         private async void btnEditarProducto_Click(object sender, EventArgs e)
         {
+            if (txtProductoID.Text.Trim() == "")
+            {
+                return;
+            }
+            await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
             var frmBuscarProducto = _serviceProvider.GetRequiredService<Frm_Productos_Compras>();
             frmBuscarProducto.MostrarTabs(frmBuscarProducto.tabNuevo.Name);
-            frmBuscarProducto.txtID.Text = txtProductoID.Text;
-            frmBuscarProducto.txtNombre.Text = txtProductoNombre.Text;
-
+            frmBuscarProducto.txtID.Text = vProducTo.ID.ToString();
+            frmBuscarProducto.txtNombre.Text = vProducTo.Nombre.ToString();
+            frmBuscarProducto.txtBarCode.Text = vProducTo.BarCode.ToString();
+            frmBuscarProducto.txtStock.Text = vProducTo.Stock.ToString();
+            frmBuscarProducto.txtCosto.Text = vProducTo.Costo.ToString();
+            frmBuscarProducto.txtpOferta.Text = vProducTo.pOferta.ToString();
+            frmBuscarProducto.txtpVenta.Text = vProducTo.pVenta.ToString();
             frmBuscarProducto.txtOpcion.Text = "2"; // 1 Nuevo | 2 Edicion
+            frmBuscarProducto.txtInstancia.Text = "CompraEditar";
+            frmBuscarProducto.txtProveedorID.Text = vProducTo.Proveedor.ID.ToString();
+            frmBuscarProducto.txtImpuesto.Text = vProducTo.Impuesto.ID.ToString();
+            frmBuscarProducto.txtCategoria.Text = vProducTo.Categoria.ID.ToString();
+            frmBuscarProducto.txtMarca.Text = vProducTo.Marca.ID.ToString();
 
             var resultadobusqueda = frmBuscarProducto.ShowDialog();
             if (resultadobusqueda == DialogResult.OK)
             {
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
-                txtProductoID.Text = _ProductoSeleccionado.ID.ToString();
+                txtProductoID.Text = VariablesGlobales.vProductoID.ToString();
                 await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
             }
         }
@@ -313,12 +332,12 @@ namespace PVpresentation.Formularios
             var frmBuscarProducto = _serviceProvider.GetRequiredService<Frm_Productos_Compras>();
             frmBuscarProducto.MostrarTabs(frmBuscarProducto.tabNuevo.Name);
             frmBuscarProducto.txtOpcion.Text = "1"; // 1 Nuevo | 2 Edicion
-
+            frmBuscarProducto.txtInstancia.Text = "CompraNuevo";
             var resultadobusqueda = frmBuscarProducto.ShowDialog();
             if (resultadobusqueda == DialogResult.OK)
             {
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
-                txtProductoID.Text = _ProductoSeleccionado.ID.ToString();
+                txtProductoID.Text = VariablesGlobales.vProductoID.ToString();
                 await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
             }
         }

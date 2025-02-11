@@ -1,4 +1,6 @@
 ﻿
+using PVrepository.Entities;
+
 namespace PVpresentation.Resources
 {
     public static class VariablesGlobales
@@ -29,6 +31,10 @@ namespace PVpresentation.Resources
         public static int vProductoPcosto { get; set; }
         public static int vProductoPoferta { get; set; }
         public static int vProductoPventa { get; set; }
+
+         public static int vProveedorID { get; set; }
+        public static string vProveedorNombre{get;set;}= string.Empty;
+
 
         //Instancias de Formularios Ventas
         public static int Frm_Venta01 { get; set; } //values: 0 Cerrado / 1 Abierto
@@ -70,6 +76,12 @@ namespace PVpresentation.Resources
         public static int Venta03_Bruto {get; set;}
         public static int Venta03_DtoAdicional {get; set;}
         public static int Venta03_Monto {get; set;}
+
+
+        public static Ventas_E oVentaE {get; set;}
+        public static List<Ventas_D> oVentaD {get; set;}
+        public static Empresa oEmpresa {get; set;}
+        public static int oIDventa {get; set;}
 
     }
 

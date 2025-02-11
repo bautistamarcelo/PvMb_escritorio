@@ -4,6 +4,7 @@ using PVpresentation.ViewModels;
 using PVrepository.Entities;
 using PVservices.Interfaces;
 using System.Data;
+using System.Runtime.InteropServices;
 
 namespace PVpresentation.Formularios
 {
@@ -25,6 +26,21 @@ namespace PVpresentation.Formularios
             // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
             AssignFocusEvents(this);
         }
+
+        #region METODOS PARA ARRASTRAR y MINIMIZAR/RESTAURAR EL FORMULARIO
+        //Variables para maximizar y minimizar formulario
+        private int lx;
+        private int ly;
+        private int sw;
+        private int sh;
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        #endregion
+
 
         #region Métodos para asignar los eventos Enter y Leave solo a TextBox y ComboBox
         private void AssignFocusEvents(Control parent)
@@ -93,16 +109,33 @@ namespace PVpresentation.Formularios
             {
                 txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
                 var ProveedorSeleccionado = (ProveedorVM)dgvListado.CurrentRow.DataBoundItem;
-                txtNombre.Text = ProveedorSeleccionado.Nombre.ToString();
-                txtDomicilio.Text = ProveedorSeleccionado.Direccion.ToString();
-                txtCuit.Text = ProveedorSeleccionado.Cuit.ToString();
-                txtEmail.Text = ProveedorSeleccionado.Email.ToString();
-                txtTelefono.Text = ProveedorSeleccionado.Telefono.ToString();
-                txtID.Text = ProveedorSeleccionado.ID.ToString();
-                txtRenta.Text = ProveedorSeleccionado.Renta.ToString();
-                cmbCaracter.EstablecerValor(ProveedorSeleccionado.CaracterID);
 
-                btnGrabar.Enabled = true;
+                if (txtInstancia.Text == "CompraBuscar")
+                {
+                    VariablesGlobales.vProveedorID = ProveedorSeleccionado.ID;
+                    VariablesGlobales.vProveedorNombre = ProveedorSeleccionado.Nombre.ToString();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    
+                    txtNombre.Text = ProveedorSeleccionado.Nombre.ToString();
+                    txtDomicilio.Text = ProveedorSeleccionado.Direccion.ToString();
+                    txtCuit.Text = ProveedorSeleccionado.Cuit.ToString();
+                    txtEmail.Text = ProveedorSeleccionado.Email.ToString();
+                    txtTelefono.Text = ProveedorSeleccionado.Telefono.ToString();
+                    txtID.Text = ProveedorSeleccionado.ID.ToString();
+                    VariablesGlobales.vProveedorID = ProveedorSeleccionado.ID;
+                    VariablesGlobales.vProveedorNombre = ProveedorSeleccionado.Nombre.ToString();
+                    txtRenta.Text = ProveedorSeleccionado.Renta.ToString();
+                    cmbCaracter.EstablecerValor(ProveedorSeleccionado.CaracterID);
+
+                    btnGrabar.Enabled = true;
+                }
+
+
+                
             }
         }
 
@@ -131,7 +164,8 @@ namespace PVpresentation.Formularios
             dgvListado.Columns["Caracter"].Visible = false;
             btnDetalles.Visible = false;
             btnEditar.Visible = false;
-            dgvListado.Columns["Nombre"].Width = 80;
+            dgvListado.Columns["Nombre"].FillWeight = 350;
+            
         }
 
         private Frm_Productos ObtenerFormularioAbierto()
@@ -166,7 +200,15 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Proveedores_Load(object sender, EventArgs e)
         {
-            dgvListado.ImplementarConfiguracion("Editar");
+            if (txtInstancia.Text != "CompraBuscar")
+            {
+                dgvListado.ImplementarConfiguracion("Editar");
+            }
+            else
+            {
+                dgvListado.ImplementarConfiguracion("Seleccionar");
+            }
+            
             MostrarTabs(tabListado.Name);
             await MostrarProveedores();
 
@@ -272,6 +314,12 @@ namespace PVpresentation.Formularios
                 await fProd.agregarProveedorComboBox(txtNombre.Text.Trim());
                 fProd.cmbProveedor.SelectedItem = txtNombre.Text.Trim();
             }
+        }
+
+        private void pnTituloFormulario_MouseMove(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

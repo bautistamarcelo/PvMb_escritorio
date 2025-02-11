@@ -49,12 +49,17 @@
             pnListado.SuspendLayout();
             SuspendLayout();
             // 
+            // pnTituloFormulario
+            // 
+            pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
+            // 
             // btnCierreVolver
             // 
             btnCierreVolver.Click += btnCierreVolver_Click;
             // 
             // lblTituloForm
             // 
+            lblTituloForm.Location = new Point(306, 12);
             lblTituloForm.Size = new Size(365, 28);
             lblTituloForm.Text = "Mantenimiento / Proveedores";
             // 

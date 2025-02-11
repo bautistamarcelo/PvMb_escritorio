@@ -72,6 +72,7 @@ namespace PVpresentation.Formularios
         private readonly IProductosService _productoService;
         private readonly IProveedoresService _proveedoresService;
         private readonly IImpuestosService _impuestosService;
+        private readonly IComprasService _comprasService;
         // Diccionario para almacenar los colores originales de los controles
         private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
         public Productos vProducTo { get; set; } = null!;
@@ -80,7 +81,8 @@ namespace PVpresentation.Formularios
         public Frm_Compras(IServiceProvider serviceProvider,
                                        IProductosService productosService,
                                        IProveedoresService proveedoresService,
-                                       IImpuestosService impuestosService)
+                                       IImpuestosService impuestosService,
+                                       IComprasService comprasService)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
@@ -89,6 +91,7 @@ namespace PVpresentation.Formularios
             _impuestosService = impuestosService;
             // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
             AssignFocusEvents(this);
+            _comprasService = comprasService;
         }
 
         #endregion
@@ -293,6 +296,7 @@ namespace PVpresentation.Formularios
             txtpCosto.Text = "";
             txtpOferta.Text = "";
             txtpVenta.Text = "";
+            txtProductoID.Select();
         }
 
         private async void btnEditarProducto_Click(object sender, EventArgs e)
@@ -344,58 +348,17 @@ namespace PVpresentation.Formularios
 
         private void btnBuscarProveedor_Click(object sender, EventArgs e)
         {
+            var frmBuscarProveedor = _serviceProvider.GetRequiredService<Frm_Proveedores>();
 
-        }
-
-        private void btnGrabar_Click(object sender, EventArgs e)
-        {
-            //    XElement Venta = new XElement("Venta",
-            //        new XElement("Fecha", txtFecha.Text.Trim()),
-            //        new XElement("Tipo", _tipo.ToString()), //Values: 1 Contado | 2 Cuenta Corriente
-            //        new XElement("Numero", "001-1025"),
-            //        new XElement("pCompra", Convert.ToInt32(txtSubTotal.Text.Trim())),
-            //        new XElement("ImpuestoID", Convert.ToInt32(txtDtoEfectivo.Text.Trim())),
-            //        new XElement("ImpuestoMonto", Convert.ToInt32(txtBruto.Text.Trim())),
-            //        new XElement("Situación", Convert.ToInt32(txtDtoGral.Text.Trim())), //Values: 1 Grabada | 2 Anulada | 3 Pendiente
-            //        new XElement("ProveedorID", Convert.ToInt32(txtMontoFinal.Text.Trim())),
-            //        new XElement("Comprobante", Convert.ToInt32(txtTefectivo.Text.Trim())),
-            //        new XElement("Estado", Convert.ToInt32(txtTdebito.Text.Trim())), //Values: 1 Habilitado | 2 Deshabilitado
-            //        new XElement("Costo", txtTtarjeta.Text.Trim()),
-            //        new XElement("Tefectivo", Convert.ToInt32(txtTctaCte.Text.Trim())),
-            //        new XElement("Tdebito", Convert.ToInt32(txtTctaCte.Text.Trim())),
-            //        new XElement("Ttarjeta", Convert.ToInt32(txtTctaCte.Text.Trim())),
-            //        new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Trim())),
-            //        new XElement("Situacion", 0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
-            //        new XElement("ClienteID", _ClienteID),
-            //        new XElement("ClienteNombre", _ClienteNombre),
-            //        new XElement("ClienteDomicilio", _ClienteDomicilio),
-            //        new XElement("VendedorID", VariablesGlobales.UsuarioID),
-            //        new XElement("SucursalID", VariablesGlobales.SucursalID),
-            //        new XElement("CajaID", VariablesGlobales.CajaID),
-            //        new XElement("ListaID", _lista.ToString())
-            //        );
-            //    XElement VentaDetalle = new XElement("VentaDetalle");
-            //    foreach (Venta_D_VM item in _VentaDetalle)
-            //    {
-            //        VentaDetalle.Add(new XElement("Item",
-            //            new XElement("ProductoID", item.ProductoID),
-            //            new XElement("Cantidad", item.Cantidad),
-            //            new XElement("pCosto", item.pOferta),
-            //            new XElement("pTotalLinea", item.pTotalVenta),
-            //            new XElement("TramiteID", VariablesGlobales.SucursalID) //Values: 2 Salida por Compra
-            //            )
-            //         );
-            //    }
-            //    Venta.Add(VentaDetalle);
-
-            //    #region Guardar XML
-            //    string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
-            //    string fileName = "venta.xml"; // Nombre del archivo
-            //    string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
-
-            //    File.WriteAllText(fullPath, Venta.ToString());
-
-            //    #endregion
+            frmBuscarProveedor.txtOpcion.Text = "1"; // 1 Nuevo | 2 Edicion
+            frmBuscarProveedor.txtInstancia.Text = "CompraBuscar";
+            var resultadobusqueda = frmBuscarProveedor.ShowDialog();
+            if (resultadobusqueda == DialogResult.OK)
+            {
+                txtProveedorID.Text = VariablesGlobales.vProveedorID.ToString();
+                txtProveedorNombre.Text = VariablesGlobales.vProveedorNombre.ToString();
+                txtProductoID.Select();
+            }
         }
 
         private async void btnBuscarProducto_Click(object sender, EventArgs e)
@@ -407,6 +370,101 @@ namespace PVpresentation.Formularios
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
                 txtProductoID.Text = _ProductoSeleccionado.ID.ToString();
                 await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+            }
+        }
+
+        private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvListado.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var filaSeleccionada = (Compra_D_VM)dgvListado.CurrentRow.DataBoundItem;
+                var index = _CompraDetalle.IndexOf(filaSeleccionada);
+                _CompraDetalle.RemoveAt(index);
+
+                ActualizaMontos();
+            }
+        }
+
+        private async void btnGrabar_Click(object sender, EventArgs e)
+        {
+            #region CREAR Y GUARDAR EL ARCHIVO COMPRAS XML
+            //Variables según lo seleccionado para incorporar al archivo xml
+            int _Tipo = cmbTipo.SelectedIndex + 1;
+            int _Pago = cmbFormaPago.SelectedIndex + 1;
+            int _Efectivo=0;
+            int _Debito=0;
+            int _Tarjeta=0;
+            int _Credito=0;
+
+            if (_Pago == 1)
+            {
+                _Efectivo = Convert.ToInt32(txtMontoTotal.Text.Trim());
+            }
+            else
+            {
+                _Credito = Convert.ToInt32(txtMontoTotal.Text.Trim());
+            }
+
+            XElement Compra = new XElement("Compra",
+                new XElement("Fecha", txtFecha.Text.Trim()),
+                new XElement("Tipo", _Pago.ToString()), //Values: 1 Contado | 2 Cuenta Corriente
+                new XElement("Numero", "001-1025"),
+                new XElement("pCompra", Convert.ToInt32(txtSubTotal.Text.Trim())),
+                new XElement("ImpuestoMonto", Convert.ToInt32(txtImpuestosGral.Text.Trim())),
+                new XElement("Costo", txtMontoTotal.Text.Trim()),
+                new XElement("ImpuestoID", 1), //Convert.ToInt32(txtImpuestoMonto.Text.Trim())
+                new XElement("Situacion", Convert.ToInt32(3)), //Values: 1 Grabada | 2 Anulada | 3 Pendiente
+                new XElement("ProveedorID", Convert.ToInt32(txtProveedorID.Text.Trim())),
+                new XElement("Comprobante", Convert.ToInt32(_Tipo)), //Values: 1;"Remito";2;"Presupuesto";3;"Factura B";4;"Factura A"
+                new XElement("Estado", Convert.ToInt32(1)), //Values: 1 Habilitado | 2 Deshabilitado
+                new XElement("Tefectivo", _Efectivo),
+                new XElement("Tdebito", _Debito),
+                new XElement("Ttarjeta", _Tarjeta),
+                new XElement("Tcredito", _Credito),
+                new XElement("VendedorID", VariablesGlobales.UsuarioID),
+                new XElement("SucursalID", VariablesGlobales.SucursalID),
+                new XElement("CajaID", VariablesGlobales.CajaID)
+                );
+            XElement CompraDetalle = new XElement("CompraDetalle");
+            foreach (Compra_D_VM item in _CompraDetalle)
+            {
+                CompraDetalle.Add(new XElement("Item",
+                    new XElement("ProductoID", item.ProductoID),
+                    new XElement("Cantidad", item.Cantidad),
+                    new XElement("pCompra", item.pCompra),
+                    new XElement("Costo", item.Costo),
+                    new XElement("pOferta", item.pOferta),
+                    new XElement("pVenta", item.pVenta), 
+                    new XElement("Impuesto", item.Impuesto),
+                    new XElement("pTotalLinea", item.TotalCosto),
+                    new XElement("TramiteID", VariablesGlobales.SucursalID) //Values: 2 Salida por Compra
+                    )
+                 );
+            }
+            Compra.Add(CompraDetalle);
+
+            #region Guardar XML
+            string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
+            string fileName = "Compra.xml"; // Nombre del archivo
+            string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
+
+            File.WriteAllText(fullPath, Compra.ToString());
+
+            #endregion
+            #endregion
+
+            var CompraNumero = await _comprasService.Registrar(Compra.ToString());
+            if (CompraNumero != "" || CompraNumero != null)
+            {
+
+                MessageBox.Show("Compra registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _CompraDetalle.Clear();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar la Compra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
     }

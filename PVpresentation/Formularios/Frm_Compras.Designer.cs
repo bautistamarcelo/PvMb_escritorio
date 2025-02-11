@@ -293,11 +293,13 @@
             // txtImpuestosGral
             // 
             txtImpuestosGral.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtImpuestosGral.BackColor = Color.Silver;
+            txtImpuestosGral.BackColor = Color.FromArgb(4, 41, 68);
             txtImpuestosGral.BorderStyle = BorderStyle.FixedSingle;
             txtImpuestosGral.Font = new Font("Square721 BT", 14.25F);
+            txtImpuestosGral.ForeColor = Color.White;
             txtImpuestosGral.Location = new Point(21, 286);
             txtImpuestosGral.Name = "txtImpuestosGral";
+            txtImpuestosGral.ReadOnly = true;
             txtImpuestosGral.Size = new Size(186, 31);
             txtImpuestosGral.TabIndex = 51;
             txtImpuestosGral.TextAlign = HorizontalAlignment.Right;
@@ -316,11 +318,13 @@
             // txtSubTotal
             // 
             txtSubTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSubTotal.BackColor = Color.Silver;
+            txtSubTotal.BackColor = Color.FromArgb(4, 41, 68);
             txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
             txtSubTotal.Font = new Font("Square721 BT", 14.25F);
+            txtSubTotal.ForeColor = Color.White;
             txtSubTotal.Location = new Point(21, 236);
             txtSubTotal.Name = "txtSubTotal";
+            txtSubTotal.ReadOnly = true;
             txtSubTotal.Size = new Size(186, 31);
             txtSubTotal.TabIndex = 49;
             txtSubTotal.TextAlign = HorizontalAlignment.Right;
@@ -383,9 +387,10 @@
             // txtFecha
             // 
             txtFecha.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtFecha.BackColor = Color.Silver;
+            txtFecha.BackColor = Color.FromArgb(4, 41, 68);
             txtFecha.BorderStyle = BorderStyle.FixedSingle;
             txtFecha.Font = new Font("Square721 BT", 12F);
+            txtFecha.ForeColor = Color.White;
             txtFecha.Location = new Point(18, 35);
             txtFecha.Name = "txtFecha";
             txtFecha.ReadOnly = true;
@@ -447,17 +452,17 @@
             btnGrabar.Name = "btnGrabar";
             btnGrabar.Size = new Size(86, 32);
             btnGrabar.TabIndex = 20;
-            btnGrabar.Text = "Grabar";
+            btnGrabar.Text = "Registrar";
             btnGrabar.UseVisualStyleBackColor = false;
             btnGrabar.Click += btnGrabar_Click;
             // 
             // txtMontoTotal
             // 
             txtMontoTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtMontoTotal.BackColor = Color.Silver;
+            txtMontoTotal.BackColor = Color.FromArgb(4, 41, 68);
             txtMontoTotal.BorderStyle = BorderStyle.FixedSingle;
             txtMontoTotal.Font = new Font("Square721 BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtMontoTotal.ForeColor = Color.FromArgb(4, 41, 68);
+            txtMontoTotal.ForeColor = Color.White;
             txtMontoTotal.Location = new Point(19, 339);
             txtMontoTotal.Name = "txtMontoTotal";
             txtMontoTotal.ReadOnly = true;
@@ -522,7 +527,7 @@
             btnAgregarItem.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnAgregarItem.FlatStyle = FlatStyle.Flat;
             btnAgregarItem.ForeColor = Color.WhiteSmoke;
-            btnAgregarItem.Location = new Point(602, 122);
+            btnAgregarItem.Location = new Point(602, 124);
             btnAgregarItem.Name = "btnAgregarItem";
             btnAgregarItem.Size = new Size(86, 32);
             btnAgregarItem.TabIndex = 7;
@@ -550,7 +555,6 @@
             txtImpuestoMonto.Name = "txtImpuestoMonto";
             txtImpuestoMonto.Size = new Size(81, 27);
             txtImpuestoMonto.TabIndex = 3;
-            txtImpuestoMonto.Text = "1";
             txtImpuestoMonto.TextAlign = HorizontalAlignment.Center;
             // 
             // label16
@@ -573,7 +577,6 @@
             txtpCompra.Name = "txtpCompra";
             txtpCompra.Size = new Size(81, 27);
             txtpCompra.TabIndex = 2;
-            txtpCompra.Text = "1";
             txtpCompra.TextAlign = HorizontalAlignment.Center;
             // 
             // btnEditarProducto
@@ -636,7 +639,6 @@
             txtpCosto.Name = "txtpCosto";
             txtpCosto.Size = new Size(81, 27);
             txtpCosto.TabIndex = 4;
-            txtpCosto.Text = "1";
             txtpCosto.TextAlign = HorizontalAlignment.Center;
             // 
             // label11
@@ -652,9 +654,10 @@
             // 
             // txtProductoNombre
             // 
-            txtProductoNombre.BackColor = Color.Silver;
+            txtProductoNombre.BackColor = Color.FromArgb(45, 66, 91);
             txtProductoNombre.BorderStyle = BorderStyle.FixedSingle;
             txtProductoNombre.Font = new Font("Square721 BT", 10F);
+            txtProductoNombre.ForeColor = Color.White;
             txtProductoNombre.Location = new Point(184, 76);
             txtProductoNombre.Name = "txtProductoNombre";
             txtProductoNombre.ReadOnly = true;
@@ -699,7 +702,6 @@
             txtpOferta.Name = "txtpOferta";
             txtpOferta.Size = new Size(81, 27);
             txtpOferta.TabIndex = 5;
-            txtpOferta.Text = "1";
             txtpOferta.TextAlign = HorizontalAlignment.Center;
             // 
             // label5
@@ -722,7 +724,6 @@
             txtpVenta.Name = "txtpVenta";
             txtpVenta.Size = new Size(81, 27);
             txtpVenta.TabIndex = 6;
-            txtpVenta.Text = "1";
             txtpVenta.TextAlign = HorizontalAlignment.Center;
             // 
             // label3
@@ -730,7 +731,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("EngraversGothic BT", 10F);
             label3.ForeColor = Color.FromArgb(224, 224, 224);
-            label3.Location = new Point(17, 58);
+            label3.Location = new Point(17, 56);
             label3.Name = "label3";
             label3.Size = new Size(114, 15);
             label3.TabIndex = 21;
@@ -741,9 +742,9 @@
             txtProductoID.BackColor = Color.Gainsboro;
             txtProductoID.BorderStyle = BorderStyle.FixedSingle;
             txtProductoID.Font = new Font("Square721 BT", 12F);
-            txtProductoID.Location = new Point(16, 76);
+            txtProductoID.Location = new Point(16, 74);
             txtProductoID.Name = "txtProductoID";
-            txtProductoID.Size = new Size(136, 27);
+            txtProductoID.Size = new Size(120, 27);
             txtProductoID.TabIndex = 0;
             txtProductoID.KeyDown += txtProductoID_KeyDown;
             // 
@@ -757,7 +758,7 @@
             btnBuscarProducto.FlatStyle = FlatStyle.Flat;
             btnBuscarProducto.ForeColor = Color.FromArgb(23, 54, 93);
             btnBuscarProducto.Image = (Image)resources.GetObject("btnBuscarProducto.Image");
-            btnBuscarProducto.Location = new Point(154, 76);
+            btnBuscarProducto.Location = new Point(146, 77);
             btnBuscarProducto.Name = "btnBuscarProducto";
             btnBuscarProducto.Size = new Size(24, 22);
             btnBuscarProducto.TabIndex = 19;
@@ -772,6 +773,7 @@
             dgvListado.Name = "dgvListado";
             dgvListado.Size = new Size(682, 291);
             dgvListado.TabIndex = 16;
+            dgvListado.CellContentClick += dgvListado_CellContentClick;
             // 
             // label4
             // 
@@ -786,9 +788,10 @@
             // 
             // txtProveedorNombre
             // 
-            txtProveedorNombre.BackColor = Color.Gainsboro;
+            txtProveedorNombre.BackColor = Color.FromArgb(45, 66, 91);
             txtProveedorNombre.BorderStyle = BorderStyle.FixedSingle;
             txtProveedorNombre.Font = new Font("Square721 BT", 12F);
+            txtProveedorNombre.ForeColor = Color.White;
             txtProveedorNombre.Location = new Point(99, 15);
             txtProveedorNombre.Name = "txtProveedorNombre";
             txtProveedorNombre.Size = new Size(553, 27);

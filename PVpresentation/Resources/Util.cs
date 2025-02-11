@@ -20,7 +20,7 @@ namespace PVpresentation.Resources
             return sb.ToString();
         }
 
-        public static byte[] GeneratePDFventa(Empresa oEmpresa, Sucursales oSucursales, Ventas_E oVenta_E, Stream ImagenLogo)
+        public static byte[] GeneratePDFventa(Empresa oEmpresa, Ventas_E oVenta_E, Stream ImagenLogo)
         {
             QuestPDF.Settings.License= LicenseType.Community;
             var arrayPDF = Document.Create(document =>
@@ -98,14 +98,12 @@ namespace PVpresentation.Resources
                                 .Text(item.Cantidad.ToString()).FontSize(10);
                                 table.Cell().BorderBottom(0.5f).BorderColor("#2d425b").Padding(2)
                                 .Text(item.pTotalVenta.ToString()).FontSize(10);
-
                             }
-
 
                         });
 
                         column.Item().LineHorizontal(0.5f);
-                        column.Item().AlignRight().Text($"Total: {oVenta_E.Monto}").FontSize(12).Bold();
+                        column.Item().AlignRight().Text($"Total $: {oVenta_E.Monto}").FontSize(12).Bold();
                     });
 
                     page.Footer().AlignRight().Text(txt =>

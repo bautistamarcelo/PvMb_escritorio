@@ -72,13 +72,12 @@ namespace PVrepository.Implementation
                             Tdebito = Convert.ToInt32(dr["Tdebito"]),
                             Ttarjeta = Convert.ToInt32(dr["Ttarjeta"]),
                             Tcredito = Convert.ToInt32(dr["Tcredito"]),
-                            VendedorID = new Usuarios
-                            {
-                                IDUsuario = Convert.ToInt32(dr["VendedorID"])
-                            },
                             ClienteID = new Clientes
                             {
-                                ID = Convert.ToInt32(dr["ClienteID"])
+                                ID = Convert.ToInt32(dr["ClienteID"]),
+                                Nombre = dr["ClienteN"].ToString()!,
+                                Domicilio = dr["ClienteDom"].ToString()!,
+                                Cuit = dr["ClienteCuit"].ToString()!
                             },
                             SucursalID = new Sucursales
                             {

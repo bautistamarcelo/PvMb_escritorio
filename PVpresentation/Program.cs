@@ -25,7 +25,7 @@ namespace PVpresentation
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             var host = CreateHostBuilder().Build();
-            var FormServices = host.Services.GetRequiredService<Frm_Compras>();
+            var FormServices = host.Services.GetRequiredService<Frm_Login>();
             Application.Run(FormServices);
         }
 

@@ -81,6 +81,7 @@
             label4 = new Label();
             txtBuscarCliente = new TextBox();
             btnBuscarCliente = new Button();
+            printVenta = new System.Drawing.Printing.PrintDocument();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnRestaurar).BeginInit();
@@ -574,6 +575,7 @@
             btnCancelar.TabIndex = 21;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGrabar
             // 
@@ -865,5 +867,6 @@
         private Label label20;
         public Label label6;
         public TextBox txtSaldoPago;
+        private System.Drawing.Printing.PrintDocument printVenta;
     }
 }

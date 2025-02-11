@@ -3,9 +3,11 @@ using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVservices.Interfaces;
 using System.ComponentModel;
+using System.Drawing.Printing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
+
 
 
 namespace PVpresentation.Formularios
@@ -101,6 +103,189 @@ namespace PVpresentation.Formularios
         }
         #endregion
 
+        private int detalleIndex = 0; // Para controlar la posición en la lista
+
+        public void ImprimirPresupuesto(object sender, PrintPageEventArgs e)
+        {
+
+            #region FUNCIONES PARA NORMALIZAR EL TEXTO A MOSTRAR
+            Graphics g = e.Graphics;
+            Font fontTitulo = new Font("Arial Narrow", 14, FontStyle.Bold);
+            Font fontNormal = new Font("Arial Narrow", 10);
+            Font fontNegrita = new Font("Arial Narrow", 10, FontStyle.Bold);
+            float y = 20;
+
+            int anchoPagina = 300;
+            int margenIzquierdo = 20;
+            int margenDerecho = 300;
+
+            // Función para centrar texto
+            float CentrarTexto(string texto, Font fuente)
+            {
+                float anchoTexto = g.MeasureString(texto, fuente).Width;
+                return margenIzquierdo + (anchoPagina - anchoTexto) / 2;
+            }
+
+            // Función para alinear texto a la derecha
+            float AlinearDerecha(string texto, Font fuente)
+            {
+                float anchoTexto = g.MeasureString(texto, fuente).Width;
+                return margenIzquierdo + anchoPagina - anchoTexto;
+            }
+
+            // Función para dividir el texto en varias líneas dentro de un ancho máximo
+            List<string> DividirTexto(string texto, Font fuente, float anchoMaximo)
+            {
+                List<string> lineas = new List<string>();
+                string[] palabras = texto.Split(' ');
+                string lineaActual = "";
+
+                using (Graphics g = Graphics.FromImage(new Bitmap(1, 1))) // Objeto gráfico temporal
+                {
+                    foreach (string palabra in palabras)
+                    {
+                        string pruebaLinea = lineaActual.Length == 0 ? palabra : lineaActual + " " + palabra;
+                        float anchoTexto = g.MeasureString(pruebaLinea, fuente).Width;
+
+                        if (anchoTexto > anchoMaximo)
+                        {
+                            lineas.Add(lineaActual); // Agrega la línea actual a la lista
+                            lineaActual = palabra;   // Inicia una nueva línea con la palabra actual
+                        }
+                        else
+                        {
+                            lineaActual = pruebaLinea;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(lineaActual))
+                    {
+                        lineas.Add(lineaActual); // Agrega la última línea
+                    }
+                }
+                return lineas;
+            }
+            #endregion
+
+            #region ENCABEZADO DEL COMPROBANTE 
+            //Imprimir encabezado de la empresa centrado
+            g.DrawString(VariablesGlobales.EmpresaNombre, fontTitulo, Brushes.Black, CentrarTexto(VariablesGlobales.EmpresaNombre, fontTitulo), y);
+            y += 25;
+            g.DrawString(VariablesGlobales.oEmpresa.Direccion, fontNormal, Brushes.Black, CentrarTexto(VariablesGlobales.oEmpresa.Direccion, fontNormal), y);
+            y += 20;
+            g.DrawString(VariablesGlobales.oEmpresa.Telefono, fontNormal, Brushes.Black, CentrarTexto(VariablesGlobales.oEmpresa.Telefono, fontNormal), y);
+            y += 30;
+
+            // Línea separadora
+            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+            y += 10;
+
+            // Datos del Comprobante
+            g.DrawString("Comprobante N°: " + VariablesGlobales.oVentaE.ID, fontNegrita, Brushes.Black, CentrarTexto("Comprobante N°: " + VariablesGlobales.oVentaE.ID, fontNegrita), y);
+            y += 30;
+
+            // Línea separadora
+            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+            y += 10;
+
+            // Datos del cliente
+            g.DrawString("Cliente: " + VariablesGlobales.oVentaE.ClienteID.Nombre, fontNegrita, Brushes.Black, margenIzquierdo, y);
+            y += 20;
+            g.DrawString("Domicilio: " + VariablesGlobales.oVentaE.ClienteID.Domicilio, fontNormal, Brushes.Black, margenIzquierdo, y);
+            y += 20;
+            g.DrawString("CUIT: " + VariablesGlobales.oVentaE.ClienteID.Cuit, fontNormal, Brushes.Black, margenIzquierdo, y);
+            y += 30;
+
+            // Línea separadora
+            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+            y += 10;
+            #endregion
+
+            #region DETALLE DEL COMPROBANTE
+            // Encabezado de la tabla
+            g.DrawString("Código", fontNegrita, Brushes.Black, margenIzquierdo, y);
+            g.DrawString("Descripción", fontNegrita, Brushes.Black, 70, y);
+            g.DrawString("Uds", fontNegrita, Brushes.Black, 160, y);
+            g.DrawString("$Unit", fontNegrita, Brushes.Black, 200, y);
+            g.DrawString("$Total", fontNegrita, Brushes.Black, 260, y);
+            y += 20;
+
+            // **Impresión del detalle de la venta con manejo de paginación**
+            int itemsPorPagina = 20;
+            int itemsImpresos = 0;
+
+            while (detalleIndex < VariablesGlobales.oVentaE.VentaDetalle.Count)
+            {
+                var ventaDetalle = VariablesGlobales.oVentaE.VentaDetalle[detalleIndex];
+
+                float alturaLinea = 15; // Espaciado entre líneas
+                float anchoDescripcion = 250; // Ancho máximo permitido para la descripción
+
+                // Dividimos la descripción en varias líneas si es necesario
+                List<string> lineasDescripcion = DividirTexto(ventaDetalle.ProductoID.Nombre, fontNormal, anchoDescripcion);
+
+                // Determinamos la altura que ocupará el item más alto (descripción más larga)
+                int lineasUsadas = lineasDescripcion.Count;
+                float alturaItem = lineasUsadas * alturaLinea;
+
+                // Dibujamos el código del producto
+                g.DrawString(ventaDetalle.ProductoID.ID.ToString(), fontNormal, Brushes.Black, margenIzquierdo, y + 5);
+
+                // Dibujamos la descripción en múltiples líneas
+                float yDescripcion = y + 5;
+                foreach (string linea in lineasDescripcion)
+                {
+                    g.DrawString(linea, fontNormal, Brushes.Black, 70, yDescripcion);
+                    yDescripcion += alturaLinea;
+                }
+                y += 5;
+
+                // Dibujamos los demás campos alineados con la primera línea de la descripción
+                g.DrawString(ventaDetalle.Cantidad.ToString(), fontNormal, Brushes.Black, 160, y += alturaItem);
+                g.DrawString(ventaDetalle.pVenta.ToString("0.00"), fontNormal, Brushes.Black, 200, y);
+                g.DrawString(ventaDetalle.pTotalVenta.ToString("0.00"), fontNormal, Brushes.Black, 260, y);
+
+                // Ajustamos `y` según la altura del item más alto (descripción más larga)
+                y += alturaItem + 5;
+
+                detalleIndex++;
+                itemsImpresos++;
+
+                // Si alcanzamos el límite de la página, indicamos que hay más páginas
+                if (itemsImpresos >= itemsPorPagina)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+            }
+
+            // **Línea separadora**
+            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+            y += 10;
+            #endregion
+
+            #region PIE DEL COMPROBANTE
+            // **Impresión de Totales**
+            g.DrawString("SubTotal: ", fontNegrita, Brushes.Black, 160, y);
+            g.DrawString("$" + VariablesGlobales.oVentaE.SubTotal.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.SubTotal.ToString("0.00"), fontNegrita), y);
+            y += 20;
+
+            g.DrawString("Descuento: ", fontNegrita, Brushes.Black, 160, y);
+            g.DrawString("$" + VariablesGlobales.oVentaE.DtoEfectivo.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.DtoEfectivo.ToString("0.00"), fontNegrita), y);
+            y += 20;
+
+            g.DrawString("Total: ", fontNegrita, Brushes.Black, 160, y);
+            g.DrawString("$" + VariablesGlobales.oVentaE.Monto.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.Monto.ToString("0.00"), fontNegrita), y);
+            y += 30;
+
+            // **Mensaje final**
+            g.DrawString("¡Gracias por su visita!", fontNormal, Brushes.Black, CentrarTexto("¡Gracias por su compra!", fontNormal), y);
+
+            // Si no hay más datos, indicar que no hay más páginas
+            e.HasMorePages = false;
+            detalleIndex = 0; // Resetear índice para futuras impresiones
+            #endregion
+
+        }
 
         private async Task AgregarProducto(int ProductoID)
         {
@@ -296,7 +481,7 @@ namespace PVpresentation.Formularios
             {
                 if (txtBuscarProducto.Text.Trim() != "")
                 {
-                     await AgregarProducto(Convert.ToInt32(txtBuscarProducto.Text.Trim()));
+                    await AgregarProducto(Convert.ToInt32(txtBuscarProducto.Text.Trim()));
                     txtBuscarProducto.Text = "";
                 }
             }
@@ -323,145 +508,6 @@ namespace PVpresentation.Formularios
                 _VentaDetalle.RemoveAt(index);
 
                 ActualizaMontos();
-            }
-        }
-
-        private async void btnGrabar_Click(object sender, EventArgs e)
-        {
-            #region VALIDACIONES PREVIAS
-
-            if (_VentaDetalle.Count == 0)
-            {
-                MessageBox.Show("No hay productos en la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (cmbTipo.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe seleccionar un tipo de venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (cmbLista.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe seleccionar una lista de precios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (txtTefectivo.Text.Trim() == "0" && txtTdebito.Text.Trim() == "0" && txtTtarjeta.Text.Trim() == "0" && txtTctaCte.Text.Trim() == "0")
-            {
-                MessageBox.Show("Debe ingresar al menos un medio de pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            #region VALIDAR LOS DATOS DEL CLIENTE SEGÚN LA INSTANCIA DEL FORMULARIO DE VENTAS ABIERTO
-            string _ClienteNombre = "";
-            int _ClienteID = 0;
-            string _ClienteDomicilio = "";
-
-            if (txtInstancia.Text == "1")
-            {
-                _ClienteID = VariablesGlobales.Venta01_ClienteID;
-                _ClienteNombre = VariablesGlobales.Venta01_ClienteNombre;
-                _ClienteDomicilio = VariablesGlobales.Venta01_ClienteDomicilio;
-
-                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
-                {
-                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-            }
-            if (txtInstancia.Text == "2")
-            {
-                _ClienteID = VariablesGlobales.Venta02_ClienteID;
-                _ClienteNombre = VariablesGlobales.Venta02_ClienteNombre;
-                _ClienteDomicilio = VariablesGlobales.Venta02_ClienteDomicilio;
-
-                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
-                {
-                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            if (txtInstancia.Text == "3")
-            {
-                _ClienteID = VariablesGlobales.Venta03_ClienteID;
-                _ClienteNombre = VariablesGlobales.Venta03_ClienteNombre;
-                _ClienteDomicilio = VariablesGlobales.Venta03_ClienteDomicilio;
-
-                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
-                {
-                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            #endregion
-
-
-
-            #endregion
-
-            int _tipo = cmbTipo.SelectedIndex + 1;
-            int _lista = cmbLista.SelectedIndex + 1;
-
-
-            XElement Venta = new XElement("Venta",
-                new XElement("Fecha", txtFecha.Text.Trim()),
-                new XElement("Tipo", _tipo.ToString()),
-                new XElement("Numero", "001-1025"),
-                new XElement("SubTotal", Convert.ToInt32(txtSubTotal.Text.Trim())),
-                new XElement("DtoEfectivo", Convert.ToInt32(txtDtoEfectivo.Text.Trim())),
-                new XElement("Bruto", Convert.ToInt32(txtBruto.Text.Trim())),
-                new XElement("DtoGeneral", Convert.ToInt32(txtDtoGral.Text.Trim())),
-                new XElement("Monto", Convert.ToInt32(txtMontoFinal.Text.Trim())),
-                new XElement("Tefectivo", Convert.ToInt32(txtTefectivo.Text.Trim())),
-                new XElement("Tdebito", Convert.ToInt32(txtTdebito.Text.Trim())),
-                new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
-                new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Trim())),
-                new XElement("Situacion", 0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
-                new XElement("ClienteID", _ClienteID),
-                new XElement("ClienteNombre", _ClienteNombre),
-                new XElement("ClienteDomicilio", _ClienteDomicilio),
-                new XElement("VendedorID", VariablesGlobales.UsuarioID),
-                new XElement("SucursalID", VariablesGlobales.SucursalID),
-                new XElement("CajaID", VariablesGlobales.CajaID),
-                new XElement("ListaID", _lista.ToString())
-                );
-            XElement VentaDetalle = new XElement("VentaDetalle");
-            foreach (Venta_D_VM item in _VentaDetalle)
-            {
-                VentaDetalle.Add(new XElement("Item",
-                    new XElement("ProductoID", item.ProductoID),
-                    new XElement("Cantidad", item.Cantidad),
-                    new XElement("pOferta", item.pOferta),
-                    new XElement("pVenta", item.pVenta),
-                    new XElement("pTotalOferta", item.pTotalOferta),
-                    new XElement("pTotalVenta", item.pTotalVenta),
-                    new XElement("SucursalID", VariablesGlobales.SucursalID)
-                    )
-                 );
-            }
-            Venta.Add(VentaDetalle);
-
-            #region Guardar XML
-            string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
-            string fileName = "venta.xml"; // Nombre del archivo
-            string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
-
-            File.WriteAllText(fullPath, Venta.ToString());
-
-            #endregion
-
-            var VentaNumero = await _venta_E_Service.Registrar(Venta.ToString());
-            if (VentaNumero != "" || VentaNumero != null)
-            {
-                MessageBox.Show("Venta registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LimpiarMantenimiento();
-                _VentaDetalle.Clear();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Error al registrar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
         }
 
@@ -548,6 +594,184 @@ namespace PVpresentation.Formularios
         private void cmbLista_SelectedIndexChanged(object sender, EventArgs e)
         {
             ActualizaMontos();
+        }
+
+        private async void btnGrabar_Click(object sender, EventArgs e)
+        {
+            #region VALIDACIONES PREVIAS
+
+            if (_VentaDetalle.Count == 0)
+            {
+                MessageBox.Show("No hay productos en la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cmbTipo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un tipo de venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cmbLista.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar una lista de precios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtTefectivo.Text.Trim() == "0" && txtTdebito.Text.Trim() == "0" && txtTtarjeta.Text.Trim() == "0" && txtTctaCte.Text.Trim() == "0")
+            {
+                MessageBox.Show("Debe ingresar al menos un medio de pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            #region VALIDAR LOS DATOS DEL CLIENTE SEGÚN LA INSTANCIA DEL FORMULARIO DE VENTAS ABIERTO
+            string _ClienteNombre = "";
+            int _ClienteID = 0;
+            string _ClienteDomicilio = "";
+
+            if (txtInstancia.Text == "1")
+            {
+                _ClienteID = VariablesGlobales.Venta01_ClienteID;
+                _ClienteNombre = VariablesGlobales.Venta01_ClienteNombre;
+                _ClienteDomicilio = VariablesGlobales.Venta01_ClienteDomicilio;
+
+                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
+                {
+                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+            }
+            if (txtInstancia.Text == "2")
+            {
+                _ClienteID = VariablesGlobales.Venta02_ClienteID;
+                _ClienteNombre = VariablesGlobales.Venta02_ClienteNombre;
+                _ClienteDomicilio = VariablesGlobales.Venta02_ClienteDomicilio;
+
+                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
+                {
+                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            if (txtInstancia.Text == "3")
+            {
+                _ClienteID = VariablesGlobales.Venta03_ClienteID;
+                _ClienteNombre = VariablesGlobales.Venta03_ClienteNombre;
+                _ClienteDomicilio = VariablesGlobales.Venta03_ClienteDomicilio;
+
+                if (cmbTipo.SelectedIndex == 1 && _ClienteID == 1) //Values: 0 Contado | 1 Cuenta Corriente
+                {
+                    MessageBox.Show("Debe seleccionar un cliente para generar una venta en Cuenta Corriente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            #endregion
+
+
+
+            #endregion
+
+            int _tipo = cmbTipo.SelectedIndex + 1;
+            int _lista = cmbLista.SelectedIndex + 1;
+
+            #region CREAR Y GUARDAR EL ARCHIVO XML 
+            XElement Venta = new XElement("Venta",
+                new XElement("Fecha", txtFecha.Text.Trim()),
+                new XElement("Tipo", _tipo.ToString()),
+                new XElement("Numero", "001-1025"),
+                new XElement("SubTotal", Convert.ToInt32(txtSubTotal.Text.Trim())),
+                new XElement("DtoEfectivo", Convert.ToInt32(txtDtoEfectivo.Text.Trim())),
+                new XElement("Bruto", Convert.ToInt32(txtBruto.Text.Trim())),
+                new XElement("DtoGeneral", Convert.ToInt32(txtDtoGral.Text.Trim())),
+                new XElement("Monto", Convert.ToInt32(txtMontoFinal.Text.Trim())),
+                new XElement("Tefectivo", Convert.ToInt32(txtTefectivo.Text.Trim())),
+                new XElement("Tdebito", Convert.ToInt32(txtTdebito.Text.Trim())),
+                new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
+                new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Trim())),
+                new XElement("Situacion", 0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
+                new XElement("ClienteID", _ClienteID),
+                new XElement("ClienteNombre", _ClienteNombre),
+                new XElement("ClienteDomicilio", _ClienteDomicilio),
+                new XElement("VendedorID", VariablesGlobales.UsuarioID),
+                new XElement("SucursalID", VariablesGlobales.SucursalID),
+                new XElement("CajaID", VariablesGlobales.CajaID),
+                new XElement("ListaID", _lista.ToString())
+                );
+            XElement VentaDetalle = new XElement("VentaDetalle");
+            foreach (Venta_D_VM item in _VentaDetalle)
+            {
+                VentaDetalle.Add(new XElement("Item",
+                    new XElement("ProductoID", item.ProductoID),
+                    new XElement("Cantidad", item.Cantidad),
+                    new XElement("pOferta", item.pOferta),
+                    new XElement("pVenta", item.pVenta),
+                    new XElement("pTotalOferta", item.pTotalOferta),
+                    new XElement("pTotalVenta", item.pTotalVenta),
+                    new XElement("SucursalID", VariablesGlobales.SucursalID)
+                    )
+                 );
+            }
+            Venta.Add(VentaDetalle);
+
+            #region Guardar XML
+            string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
+            string fileName = "venta.xml"; // Nombre del archivo
+            string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
+
+            File.WriteAllText(fullPath, Venta.ToString());
+
+            #endregion
+            #endregion
+
+            var VentaNumero = await _venta_E_Service.Registrar(Venta.ToString());
+            if (VentaNumero != "" || VentaNumero != null)
+            {
+                MessageBox.Show("Venta registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                #region Obtener los valores del comprobante de venta a impirmir y enviar la impresión
+                int _IDventa = Convert.ToInt32(VentaNumero);
+                VariablesGlobales.oEmpresa = await _empresaService.Obtener(VariablesGlobales.EmpresaID);
+                VariablesGlobales.oVentaE = await _venta_E_Service.Obtener(_IDventa);
+                VariablesGlobales.oVentaD = await _venta_E_Service.ObtenerDetalleVenta(_IDventa);
+                VariablesGlobales.oVentaE.VentaDetalle = VariablesGlobales.oVentaD;
+
+                #region Crear y enviar la impresión del comprobante
+                printVenta = new PrintDocument();
+                PrinterSettings ps = new PrinterSettings();
+                printVenta.PrinterSettings = ps;
+                printVenta.PrintPage += ImprimirPresupuesto;
+                printVenta.Print();
+                #endregion
+
+                #endregion
+
+                LimpiarMantenimiento();
+                _VentaDetalle.Clear();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private async void btnCancelar_Click(object sender, EventArgs e)
+        {
+            #region Obtener los valores del comprobante de venta a impirmir y enviar la impresión
+            int _IDventa = Convert.ToInt32(3355893);
+            VariablesGlobales.oEmpresa = await _empresaService.Obtener(VariablesGlobales.EmpresaID);
+            VariablesGlobales.oVentaE = await _venta_E_Service.Obtener(_IDventa);
+            VariablesGlobales.oVentaD = await _venta_E_Service.ObtenerDetalleVenta(_IDventa);
+            VariablesGlobales.oVentaE.VentaDetalle = VariablesGlobales.oVentaD;
+
+            #region Crear y enviar la impresión del comprobante
+            printVenta = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            printVenta.PrinterSettings = ps;
+            printVenta.PrintPage += ImprimirPresupuesto;
+            printVenta.Print();
+            #endregion
+
+            #endregion
         }
     }
 }

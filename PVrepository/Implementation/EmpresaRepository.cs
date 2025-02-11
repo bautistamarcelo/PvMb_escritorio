@@ -165,6 +165,7 @@ namespace PVrepository.Implementation
                         oBjeto.Cuit = dr["Cuit"].ToString()!;
                         oBjeto.Direccion = dr["Direccion"].ToString()!;
                         oBjeto.LogoUrl = dr["LogoUrl"].ToString()!;
+                        oBjeto.Telefono = dr["Telefono"].ToString()!;
                     }
                 }
             }

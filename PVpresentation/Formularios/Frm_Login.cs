@@ -91,80 +91,19 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
-            //Llenar el combobox de sucursales
+
             var ListaEmpresas = await _empresaService.Lista();
             var itemsEmpresas = ListaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            cmbEmpresa.Items.Add("Seleccione una Empresa");
             cmbEmpresa.InsertarItems(itemsEmpresas);
-
-            var ListaSucursales = await _sucursalesService.Lista();
-            var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
-            cmbSucursales.InsertarItems(itemsSucursal);
-
+            cmbSucursales.Items.Add("Seleccione una Sucursal");
+            cmbSucursales.SelectedIndex = 0;
             txtUsuario.Focus();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private async void btnLogin_Click(object sender, EventArgs e)
-        {
-            //Validamos que los campos no esten vacios
-            if (txtUsuario.Text == string.Empty || txtClave.Text == string.Empty || cmbSucursales.SelectedIndex == -1 || cmbEmpresa.SelectedIndex == -1)
-            {
-                MessageBox.Show("Por favor, complete todos los campos.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //Validamos que el usuario exista
-            var usuarioEncontrado = await _usuariosService.Login(txtUsuario.Text, txtClave.Text);
-            if (usuarioEncontrado == null || usuarioEncontrado.IDUsuario == 0)
-            {
-                MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                OpcionesComboBox miEmpresa = (OpcionesComboBox)cmbEmpresa.SelectedItem;
-                int idSeleccionado = miEmpresa.Valor;
-                var empresaSeleccionada = await _empresaService.Obtener(idSeleccionado);
-
-                var cajaAbierta = await _usuariosService.BuscaCajaUsuario(usuarioEncontrado.IDUsuario);
-                if (cajaAbierta == 0)
-                {
-                    MessageBox.Show("No tiene caja abierta, por favor abra una caja.", "Caja cerrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    //return;
-                }
-
-                //Asignar valores a variables globales
-                VariablesGlobales.UsuarioNombre = usuarioEncontrado.nombre;
-                VariablesGlobales.UsuarioID = usuarioEncontrado.IDUsuario;
-                VariablesGlobales.UsuarioIDrol = usuarioEncontrado.IDRol.IDRol;
-                VariablesGlobales.RolNombre = usuarioEncontrado.IDRol.descripcion;
-                VariablesGlobales.EmpresaID = empresaSeleccionada.ID;
-                VariablesGlobales.EmpresaNombre = empresaSeleccionada.Nombre;
-                VariablesGlobales.EmpresaLogo = empresaSeleccionada.LogoUrl;
-                VariablesGlobales.SucursalID = cmbSucursales.SelectedIndex + 1;
-                VariablesGlobales.CajaID = cajaAbierta;
-                //Abrir el siguiente formulario
-                Frm_Main mainForm = (Frm_Main)_serviceProvider.GetService(typeof(Frm_Main));
-                this.Hide();
-                
-                mainForm.Show();
-                if (mainForm != null)
-                {
-                    mainForm.txtNombreUsuario.Text = VariablesGlobales.UsuarioNombre;
-                    mainForm.txtCategoria.Text = VariablesGlobales.RolNombre;
-                    if (VariablesGlobales.EmpresaLogo != null)
-                    {
-                        //mainForm.pctLogoCentral.ImageLocation = VariablesGlobales.EmpresaLogo.ToString();
-                        mainForm.pctLogoCentral.Image = Image.FromFile(VariablesGlobales.EmpresaLogo.ToString());
-
-                    }
-                }
-            }
-
         }
 
         private async void LnkCambiarClave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -205,7 +144,7 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
-                cmbSucursales.Focus();
+                cmbEmpresa.Focus();
             }
         }
 
@@ -216,6 +155,96 @@ namespace PVpresentation.Formularios
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
                 btnLogin.Focus();
             }
+        }
+
+        private async void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbEmpresa.SelectedIndex > 0)
+            {
+                cmbSucursales.Items.Clear();
+                cmbSucursales.Items.Add("Seleccione una Sucursal");
+                var itemEmpresa = (OpcionesComboBox)cmbEmpresa.SelectedItem!;
+                var ListaSucursales = await _sucursalesService.Lista("", itemEmpresa.Valor);
+                var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+                cmbSucursales.InsertarItems(itemsSucursal);
+                cmbSucursales.SelectedIndex = 0;
+                cmbSucursales.Focus();
+
+            }
+            else
+            {
+                cmbSucursales.Items.Clear();
+                txtUsuario.Select();
+            }
+        }
+
+        private void cmbSucursales_Enter(object sender, EventArgs e)
+        {
+            if (cmbEmpresa.SelectedIndex == -1)
+            {
+                cmbSucursales.Items.Clear();
+                txtUsuario.Select();
+            }
+
+        }
+
+        private async void btnLogin_Click(object sender, EventArgs e)
+        {
+            //Validamos que los campos no esten vacios
+            if (txtUsuario.Text == string.Empty || txtClave.Text == string.Empty || cmbSucursales.SelectedIndex <=0 || cmbEmpresa.SelectedIndex <=0)
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //Validamos que el usuario exista
+            var usuarioEncontrado = await _usuariosService.Login(txtUsuario.Text, txtClave.Text);
+            if (usuarioEncontrado == null || usuarioEncontrado.IDUsuario == 0)
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                OpcionesComboBox miEmpresa = (OpcionesComboBox)cmbEmpresa.SelectedItem;
+                int idSeleccionado = miEmpresa.Valor;
+                var empresaSeleccionada = await _empresaService.Obtener(idSeleccionado);
+
+                var cajaAbierta = await _usuariosService.BuscaCajaUsuario(usuarioEncontrado.IDUsuario);
+                if (cajaAbierta == 0)
+                {
+                    MessageBox.Show("No tiene caja abierta, por favor abra una caja.", "Caja cerrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //return;
+                }
+
+                //Asignar valores a variables globales
+                VariablesGlobales.UsuarioNombre = usuarioEncontrado.nombre;
+                VariablesGlobales.UsuarioID = usuarioEncontrado.IDUsuario;
+                VariablesGlobales.UsuarioIDrol = usuarioEncontrado.IDRol.IDRol;
+                VariablesGlobales.RolNombre = usuarioEncontrado.IDRol.descripcion;
+                VariablesGlobales.EmpresaID = empresaSeleccionada.ID;
+                VariablesGlobales.EmpresaNombre = empresaSeleccionada.Nombre;
+                VariablesGlobales.EmpresaLogo = empresaSeleccionada.LogoUrl;
+                VariablesGlobales.SucursalID = cmbSucursales.SelectedIndex + 1;
+                VariablesGlobales.CajaID = cajaAbierta;
+                //Abrir el siguiente formulario
+                Frm_Main mainForm = (Frm_Main)_serviceProvider.GetService(typeof(Frm_Main));
+                this.Hide();
+
+                mainForm.Show();
+                if (mainForm != null)
+                {
+                    mainForm.txtNombreUsuario.Text = VariablesGlobales.UsuarioNombre;
+                    mainForm.txtCategoria.Text = VariablesGlobales.RolNombre;
+                    if (VariablesGlobales.EmpresaLogo != null)
+                    {
+                        //mainForm.pctLogoCentral.ImageLocation = VariablesGlobales.EmpresaLogo.ToString();
+                        mainForm.pctLogoCentral.Image = Image.FromFile(VariablesGlobales.EmpresaLogo.ToString());
+
+                    }
+                }
+            }
+
         }
     }
 }

@@ -23,9 +23,9 @@ namespace PVservices.Implementation
             return await _sucursalesRepository.obtenerId(objeto, id);
         }
 
-        public async Task<List<Sucursales>> Lista(string Buscar = "")
+        public async Task<List<Sucursales>> Lista(string Buscar = "", int EmpresaID=4)
         {
-            return await _sucursalesRepository.Lista(Buscar);
+            return await _sucursalesRepository.Lista(Buscar,EmpresaID);
         }
 
         public async Task<string> crear(Sucursales objeto)

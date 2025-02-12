@@ -192,6 +192,7 @@
             cmbEmpresa.Name = "cmbEmpresa";
             cmbEmpresa.Size = new Size(281, 28);
             cmbEmpresa.TabIndex = 2;
+            cmbEmpresa.SelectedIndexChanged += cmbEmpresa_SelectedIndexChanged;
             // 
             // LnkOlvideClave
             // 
@@ -240,6 +241,7 @@
             cmbSucursales.Name = "cmbSucursales";
             cmbSucursales.Size = new Size(281, 28);
             cmbSucursales.TabIndex = 3;
+            cmbSucursales.Enter += cmbSucursales_Enter;
             cmbSucursales.KeyDown += cmbSucursales_KeyDown;
             // 
             // label2

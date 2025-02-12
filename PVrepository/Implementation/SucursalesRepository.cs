@@ -41,7 +41,7 @@ namespace PVrepository.Implementation
             return resultado;
         }
 
-        public async Task<List<Sucursales>> Lista(string Buscar = "")
+        public async Task<List<Sucursales>> Lista(string Buscar = "", int EmpresaID=4)
         {
             List<Sucursales> list = new List<Sucursales>();
             using (var con = _conexion.ObtenerSqLconexion())
@@ -49,6 +49,7 @@ namespace PVrepository.Implementation
                 con.Open();
                 var cmd = new SqlCommand("SP_Sucursales_Listado", con);
                 cmd.Parameters.AddWithValue("@Buscar", Buscar);
+                cmd.Parameters.AddWithValue("@EmpresaID", EmpresaID);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = await cmd.ExecuteReaderAsync())
                 {

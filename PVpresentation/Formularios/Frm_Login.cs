@@ -1,6 +1,9 @@
-﻿using PVpresentation.Resources;
+﻿using FiscalPrinterLib;
+using PVpresentation.Resources;
+using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
 namespace PVpresentation.Formularios
@@ -15,8 +18,9 @@ namespace PVpresentation.Formularios
         private readonly IUsuariosService _usuariosService;
         private readonly ISucursalesService _sucursalesService;
         private readonly IEmpresaService _empresaService;
-
-        public Frm_Login(IServiceProvider serviceProvider, ISucursalesService sucursalesService, IUsuariosService usuariosService, IEmpresaService empresaService)
+        private readonly IPredeterminadasService _predeterminadasService;
+        private Empresa vEmpresa = new Empresa();
+        public Frm_Login(IServiceProvider serviceProvider, ISucursalesService sucursalesService, IUsuariosService usuariosService, IEmpresaService empresaService, IPredeterminadasService predeterminadasService)
         {
             InitializeComponent();
             //Estas lineas eliminan los parpadeos del formulario o controles en la interfaz grafica (Pero no en un 100%)
@@ -26,9 +30,10 @@ namespace PVpresentation.Formularios
             _sucursalesService = sucursalesService;
             _usuariosService = usuariosService;
             _empresaService = empresaService;
+            _predeterminadasService = predeterminadasService;
             // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
             AssignFocusEvents(this);
-
+            
         }
         #endregion
 
@@ -91,14 +96,25 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
-
+            var predeterMinadas = await _predeterminadasService.Obtener();
             var ListaEmpresas = await _empresaService.Lista();
             var itemsEmpresas = ListaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
-            cmbEmpresa.Items.Add("Seleccione una Empresa");
+
+            cmbEmpresa.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Empresa", Valor = 0});
             cmbEmpresa.InsertarItems(itemsEmpresas);
-            cmbSucursales.Items.Add("Seleccione una Sucursal");
-            cmbSucursales.SelectedIndex = 0;
+            cmbEmpresa.EstablecerValor(predeterMinadas.EmpresaID);
+
+            var ListaSucursales = await _sucursalesService.Lista("", predeterMinadas.EmpresaID);
+            var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+
+            cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0});
+            cmbSucursales.InsertarItems(itemsSucursal);
+            cmbSucursales.EstablecerValor(predeterMinadas.SucursalID);
+
             txtUsuario.Focus();
+           
+            
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -162,12 +178,21 @@ namespace PVpresentation.Formularios
             if (cmbEmpresa.SelectedIndex > 0)
             {
                 cmbSucursales.Items.Clear();
-                cmbSucursales.Items.Add("Seleccione una Sucursal");
+                cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0});
                 var itemEmpresa = (OpcionesComboBox)cmbEmpresa.SelectedItem!;
+                vEmpresa = await _empresaService.Obtener(Convert.ToInt32(itemEmpresa.Valor));
+                if (vEmpresa.Predeterminada != 0)
+                {
+                    chkEmpresa.Checked = false;
+                }
+                else
+                {
+                    chkEmpresa.Checked = true;
+                }
                 var ListaSucursales = await _sucursalesService.Lista("", itemEmpresa.Valor);
                 var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
                 cmbSucursales.InsertarItems(itemsSucursal);
-                cmbSucursales.SelectedIndex = 0;
+                
                 cmbSucursales.Focus();
 
             }
@@ -191,7 +216,7 @@ namespace PVpresentation.Formularios
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             //Validamos que los campos no esten vacios
-            if (txtUsuario.Text == string.Empty || txtClave.Text == string.Empty || cmbSucursales.SelectedIndex <=0 || cmbEmpresa.SelectedIndex <=0)
+            if (txtUsuario.Text == string.Empty || txtClave.Text == string.Empty || cmbSucursales.SelectedIndex <= 0 || cmbEmpresa.SelectedIndex <= 0)
             {
                 MessageBox.Show("Por favor, complete todos los campos.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -243,8 +268,35 @@ namespace PVpresentation.Formularios
 
                     }
                 }
+                
+
             }
 
         }
+
+        private async void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private async void chkEmpresa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cmbEmpresa.SelectedIndex > 0)
+            {
+                if (chkEmpresa.Checked == true)  //Values: 0 Predeterminada | 1 No Predeterminada
+                {
+                    vEmpresa.Predeterminada = 0;
+                }
+                if (chkEmpresa.Checked == false)
+                {
+                    vEmpresa.Predeterminada = 1;
+                }
+            }
+
+            var _configura = await _empresaService.editar(vEmpresa);
+
+        }
+       
     }
 }

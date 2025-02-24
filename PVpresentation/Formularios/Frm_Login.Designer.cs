@@ -35,27 +35,29 @@
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
             pnl_Contenedor = new Panel();
-            pnListado = new Panel();
-            pictureBox2 = new PictureBox();
             pnMantenimiento = new Panel();
+            chkSucursal = new CheckBox();
+            cmbSucursales = new ComboBox();
             label4 = new Label();
             cmbEmpresa = new ComboBox();
             LnkOlvideClave = new LinkLabel();
             LnkCambiarClave = new LinkLabel();
             label3 = new Label();
-            cmbSucursales = new ComboBox();
             label2 = new Label();
             txtClave = new TextBox();
             label1 = new Label();
             txtUsuario = new TextBox();
             btnCancelar = new Button();
             btnLogin = new Button();
+            chkEmpresa = new CheckBox();
+            pnListado = new Panel();
+            pictureBox2 = new PictureBox();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnl_Contenedor.SuspendLayout();
+            pnMantenimiento.SuspendLayout();
             pnListado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            pnMantenimiento.SuspendLayout();
             SuspendLayout();
             // 
             // pnTituloFormulario
@@ -119,62 +121,75 @@
             // 
             // pnl_Contenedor
             // 
-            pnl_Contenedor.Controls.Add(pnListado);
             pnl_Contenedor.Controls.Add(pnMantenimiento);
+            pnl_Contenedor.Controls.Add(pnListado);
             pnl_Contenedor.Dock = DockStyle.Top;
             pnl_Contenedor.Location = new Point(0, 50);
             pnl_Contenedor.Name = "pnl_Contenedor";
-            pnl_Contenedor.Size = new Size(605, 309);
+            pnl_Contenedor.Size = new Size(605, 340);
             pnl_Contenedor.TabIndex = 51;
-            // 
-            // pnListado
-            // 
-            pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnListado.BackColor = Color.FromArgb(45, 66, 91);
-            pnListado.Controls.Add(pictureBox2);
-            pnListado.Location = new Point(-2, 0);
-            pnListado.Name = "pnListado";
-            pnListado.Size = new Size(284, 309);
-            pnListado.TabIndex = 3;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(24, 37);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(232, 211);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
             // 
             // pnMantenimiento
             // 
             pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
+            pnMantenimiento.Controls.Add(chkSucursal);
+            pnMantenimiento.Controls.Add(cmbSucursales);
             pnMantenimiento.Controls.Add(label4);
             pnMantenimiento.Controls.Add(cmbEmpresa);
             pnMantenimiento.Controls.Add(LnkOlvideClave);
             pnMantenimiento.Controls.Add(LnkCambiarClave);
             pnMantenimiento.Controls.Add(label3);
-            pnMantenimiento.Controls.Add(cmbSucursales);
             pnMantenimiento.Controls.Add(label2);
             pnMantenimiento.Controls.Add(txtClave);
             pnMantenimiento.Controls.Add(label1);
             pnMantenimiento.Controls.Add(txtUsuario);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnLogin);
+            pnMantenimiento.Controls.Add(chkEmpresa);
             pnMantenimiento.Location = new Point(280, 0);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(325, 309);
+            pnMantenimiento.Size = new Size(325, 340);
             pnMantenimiento.TabIndex = 2;
+            // 
+            // chkSucursal
+            // 
+            chkSucursal.AutoSize = true;
+            chkSucursal.CheckAlign = ContentAlignment.MiddleRight;
+            chkSucursal.ForeColor = Color.SteelBlue;
+            chkSucursal.ImageAlign = ContentAlignment.MiddleRight;
+            chkSucursal.Location = new Point(137, 202);
+            chkSucursal.Name = "chkSucursal";
+            chkSucursal.Size = new Size(166, 19);
+            chkSucursal.TabIndex = 43;
+            chkSucursal.TabStop = false;
+            chkSucursal.Text = "Establecer Predeterminada";
+            chkSucursal.TextAlign = ContentAlignment.MiddleRight;
+            chkSucursal.UseVisualStyleBackColor = true;
+            chkSucursal.Visible = false;
+            chkSucursal.CheckedChanged += checkBox2_CheckedChanged;
+            // 
+            // cmbSucursales
+            // 
+            cmbSucursales.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cmbSucursales.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbSucursales.BackColor = Color.Gainsboro;
+            cmbSucursales.DropDownWidth = 269;
+            cmbSucursales.Font = new Font("Square721 BT", 12F);
+            cmbSucursales.FormattingEnabled = true;
+            cmbSucursales.Location = new Point(22, 220);
+            cmbSucursales.Name = "cmbSucursales";
+            cmbSucursales.Size = new Size(281, 28);
+            cmbSucursales.TabIndex = 3;
+            cmbSucursales.Enter += cmbSucursales_Enter;
+            cmbSucursales.KeyDown += cmbSucursales_KeyDown;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("EngraversGothic BT", 10F);
             label4.ForeColor = Color.FromArgb(224, 224, 224);
-            label4.Location = new Point(22, 122);
+            label4.Location = new Point(22, 139);
             label4.Name = "label4";
             label4.Size = new Size(63, 15);
             label4.TabIndex = 41;
@@ -188,7 +203,7 @@
             cmbEmpresa.DropDownWidth = 269;
             cmbEmpresa.Font = new Font("Square721 BT", 12F);
             cmbEmpresa.FormattingEnabled = true;
-            cmbEmpresa.Location = new Point(22, 140);
+            cmbEmpresa.Location = new Point(22, 157);
             cmbEmpresa.Name = "cmbEmpresa";
             cmbEmpresa.Size = new Size(281, 28);
             cmbEmpresa.TabIndex = 2;
@@ -198,7 +213,7 @@
             // 
             LnkOlvideClave.AutoSize = true;
             LnkOlvideClave.LinkColor = Color.SteelBlue;
-            LnkOlvideClave.Location = new Point(189, 224);
+            LnkOlvideClave.Location = new Point(22, 271);
             LnkOlvideClave.Name = "LnkOlvideClave";
             LnkOlvideClave.Size = new Size(114, 15);
             LnkOlvideClave.TabIndex = 39;
@@ -210,7 +225,7 @@
             // 
             LnkCambiarClave.AutoSize = true;
             LnkCambiarClave.LinkColor = Color.SteelBlue;
-            LnkCambiarClave.Location = new Point(22, 224);
+            LnkCambiarClave.Location = new Point(22, 251);
             LnkCambiarClave.Name = "LnkCambiarClave";
             LnkCambiarClave.Size = new Size(84, 15);
             LnkCambiarClave.TabIndex = 5;
@@ -223,26 +238,11 @@
             label3.AutoSize = true;
             label3.Font = new Font("EngraversGothic BT", 10F);
             label3.ForeColor = Color.FromArgb(224, 224, 224);
-            label3.Location = new Point(22, 175);
+            label3.Location = new Point(22, 202);
             label3.Name = "label3";
             label3.Size = new Size(71, 15);
             label3.TabIndex = 37;
             label3.Text = "Sucursal:";
-            // 
-            // cmbSucursales
-            // 
-            cmbSucursales.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cmbSucursales.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cmbSucursales.BackColor = Color.Gainsboro;
-            cmbSucursales.DropDownWidth = 269;
-            cmbSucursales.Font = new Font("Square721 BT", 12F);
-            cmbSucursales.FormattingEnabled = true;
-            cmbSucursales.Location = new Point(22, 193);
-            cmbSucursales.Name = "cmbSucursales";
-            cmbSucursales.Size = new Size(281, 28);
-            cmbSucursales.TabIndex = 3;
-            cmbSucursales.Enter += cmbSucursales_Enter;
-            cmbSucursales.KeyDown += cmbSucursales_KeyDown;
             // 
             // label2
             // 
@@ -299,7 +299,7 @@
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(189, 262);
+            btnCancelar.Location = new Point(189, 289);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
             btnCancelar.TabIndex = 6;
@@ -317,7 +317,7 @@
             btnLogin.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.ForeColor = Color.WhiteSmoke;
-            btnLogin.Location = new Point(45, 262);
+            btnLogin.Location = new Point(45, 289);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(86, 32);
             btnLogin.TabIndex = 4;
@@ -325,11 +325,50 @@
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
             // 
+            // chkEmpresa
+            // 
+            chkEmpresa.AutoSize = true;
+            chkEmpresa.CheckAlign = ContentAlignment.MiddleRight;
+            chkEmpresa.ForeColor = Color.SteelBlue;
+            chkEmpresa.ImageAlign = ContentAlignment.MiddleRight;
+            chkEmpresa.Location = new Point(137, 137);
+            chkEmpresa.Name = "chkEmpresa";
+            chkEmpresa.Size = new Size(166, 19);
+            chkEmpresa.TabIndex = 42;
+            chkEmpresa.TabStop = false;
+            chkEmpresa.Text = "Establecer Predeterminada";
+            chkEmpresa.TextAlign = ContentAlignment.MiddleRight;
+            chkEmpresa.UseVisualStyleBackColor = true;
+            chkEmpresa.Visible = false;
+            chkEmpresa.CheckedChanged += chkEmpresa_CheckedChanged;
+            // 
+            // pnListado
+            // 
+            pnListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnListado.BackColor = Color.FromArgb(45, 66, 91);
+            pnListado.Controls.Add(pictureBox2);
+            pnListado.Location = new Point(-2, 0);
+            pnListado.Name = "pnListado";
+            pnListado.Size = new Size(284, 344);
+            pnListado.TabIndex = 3;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(14, 31);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(263, 282);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
+            // 
             // Frm_Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(605, 359);
+            BackColor = Color.FromArgb(74, 134, 160);
+            ClientSize = new Size(605, 390);
             Controls.Add(pnl_Contenedor);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
@@ -341,10 +380,10 @@
             pnTituloFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnl_Contenedor.ResumeLayout(false);
-            pnListado.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             pnMantenimiento.ResumeLayout(false);
             pnMantenimiento.PerformLayout();
+            pnListado.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -371,5 +410,7 @@
         private LinkLabel LnkOlvideClave;
         public Label label4;
         public ComboBox cmbEmpresa;
+        private CheckBox chkEmpresa;
+        private CheckBox chkSucursal;
     }
 }

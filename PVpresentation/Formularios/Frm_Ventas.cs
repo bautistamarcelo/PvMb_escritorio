@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
+using FiscalPrinterLib;
 using PVservices.Interfaces;
 using System.ComponentModel;
 using System.Drawing.Printing;
@@ -14,6 +15,7 @@ namespace PVpresentation.Formularios
 {
     public partial class Frm_Ventas : Form
     {
+       
         // Diccionario para almacenar los colores originales de los controles
         private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
 
@@ -105,187 +107,187 @@ namespace PVpresentation.Formularios
 
         private int detalleIndex = 0; // Para controlar la posición en la lista
 
-        public void ImprimirPresupuesto(object sender, PrintPageEventArgs e)
-        {
+        //public void ImprimirPresupuesto(object sender, PrintPageEventArgs e)
+        //{
 
-            #region FUNCIONES PARA NORMALIZAR EL TEXTO A MOSTRAR
-            Graphics g = e.Graphics;
-            Font fontTitulo = new Font("Arial Narrow", 14, FontStyle.Bold);
-            Font fontNormal = new Font("Arial Narrow", 10);
-            Font fontNegrita = new Font("Arial Narrow", 10, FontStyle.Bold);
-            float y = 20;
+        //    #region FUNCIONES PARA NORMALIZAR EL TEXTO A MOSTRAR
+        //    Graphics g = e.Graphics;
+        //    Font fontTitulo = new Font("Arial Narrow", 14, FontStyle.Bold);
+        //    Font fontNormal = new Font("Arial Narrow", 10);
+        //    Font fontNegrita = new Font("Arial Narrow", 10, FontStyle.Bold);
+        //    float y = 20;
 
-            int anchoPagina = 300;
-            int margenIzquierdo = 20;
-            int margenDerecho = 300;
+        //    int anchoPagina = 300;
+        //    int margenIzquierdo = 20;
+        //    int margenDerecho = 300;
 
-            // Función para centrar texto
-            float CentrarTexto(string texto, Font fuente)
-            {
-                float anchoTexto = g.MeasureString(texto, fuente).Width;
-                return margenIzquierdo + (anchoPagina - anchoTexto) / 2;
-            }
+        //    // Función para centrar texto
+        //    float CentrarTexto(string texto, Font fuente)
+        //    {
+        //        float anchoTexto = g.MeasureString(texto, fuente).Width;
+        //        return margenIzquierdo + (anchoPagina - anchoTexto) / 2;
+        //    }
 
-            // Función para alinear texto a la derecha
-            float AlinearDerecha(string texto, Font fuente)
-            {
-                float anchoTexto = g.MeasureString(texto, fuente).Width;
-                return margenIzquierdo + anchoPagina - anchoTexto;
-            }
+        //    // Función para alinear texto a la derecha
+        //    float AlinearDerecha(string texto, Font fuente)
+        //    {
+        //        float anchoTexto = g.MeasureString(texto, fuente).Width;
+        //        return margenIzquierdo + anchoPagina - anchoTexto;
+        //    }
 
-            // Función para dividir el texto en varias líneas dentro de un ancho máximo
-            List<string> DividirTexto(string texto, Font fuente, float anchoMaximo)
-            {
-                List<string> lineas = new List<string>();
-                string[] palabras = texto.Split(' ');
-                string lineaActual = "";
+        //    // Función para dividir el texto en varias líneas dentro de un ancho máximo
+        //    List<string> DividirTexto(string texto, Font fuente, float anchoMaximo)
+        //    {
+        //        List<string> lineas = new List<string>();
+        //        string[] palabras = texto.Split(' ');
+        //        string lineaActual = "";
 
-                using (Graphics g = Graphics.FromImage(new Bitmap(1, 1))) // Objeto gráfico temporal
-                {
-                    foreach (string palabra in palabras)
-                    {
-                        string pruebaLinea = lineaActual.Length == 0 ? palabra : lineaActual + " " + palabra;
-                        float anchoTexto = g.MeasureString(pruebaLinea, fuente).Width;
+        //        using (Graphics g = Graphics.FromImage(new Bitmap(1, 1))) // Objeto gráfico temporal
+        //        {
+        //            foreach (string palabra in palabras)
+        //            {
+        //                string pruebaLinea = lineaActual.Length == 0 ? palabra : lineaActual + " " + palabra;
+        //                float anchoTexto = g.MeasureString(pruebaLinea, fuente).Width;
 
-                        if (anchoTexto > anchoMaximo)
-                        {
-                            lineas.Add(lineaActual); // Agrega la línea actual a la lista
-                            lineaActual = palabra;   // Inicia una nueva línea con la palabra actual
-                        }
-                        else
-                        {
-                            lineaActual = pruebaLinea;
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(lineaActual))
-                    {
-                        lineas.Add(lineaActual); // Agrega la última línea
-                    }
-                }
-                return lineas;
-            }
-            #endregion
+        //                if (anchoTexto > anchoMaximo)
+        //                {
+        //                    lineas.Add(lineaActual); // Agrega la línea actual a la lista
+        //                    lineaActual = palabra;   // Inicia una nueva línea con la palabra actual
+        //                }
+        //                else
+        //                {
+        //                    lineaActual = pruebaLinea;
+        //                }
+        //            }
+        //            if (!string.IsNullOrEmpty(lineaActual))
+        //            {
+        //                lineas.Add(lineaActual); // Agrega la última línea
+        //            }
+        //        }
+        //        return lineas;
+        //    }
+        //    #endregion
 
-            #region ENCABEZADO DEL COMPROBANTE 
-            //Imprimir encabezado de la empresa centrado
-            g.DrawString(VariablesGlobales.EmpresaNombre, fontTitulo, Brushes.Black, CentrarTexto(VariablesGlobales.EmpresaNombre, fontTitulo), y);
-            y += 25;
-            g.DrawString(VariablesGlobales.oEmpresa.Direccion, fontNormal, Brushes.Black, CentrarTexto(VariablesGlobales.oEmpresa.Direccion, fontNormal), y);
-            y += 20;
-            g.DrawString(VariablesGlobales.oEmpresa.Telefono, fontNormal, Brushes.Black, CentrarTexto(VariablesGlobales.oEmpresa.Telefono, fontNormal), y);
-            y += 30;
+        //    #region ENCABEZADO DEL COMPROBANTE 
+        //    //Imprimir encabezado de la empresa centrado
+        //    g.DrawString(VariablesGlobales.EmpresaNombre, fontTitulo, Brushes.Black, CentrarTexto(VariablesGlobales.EmpresaNombre, fontTitulo), y);
+        //    y += 25;
+        //    g.DrawString(VariablesGlobales.oEmpresa.Direccion, fontNormal, Brushes.Black, CentrarTexto(VariablesGlobales.oEmpresa.Direccion, fontNormal), y);
+        //    y += 20;
+        //    g.DrawString(VariablesGlobales.oEmpresa.Telefono, fontNormal, Brushes.Black, CentrarTexto(VariablesGlobales.oEmpresa.Telefono, fontNormal), y);
+        //    y += 30;
 
-            // Línea separadora
-            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
-            y += 10;
+        //    // Línea separadora
+        //    g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+        //    y += 10;
 
-            // Datos del Comprobante
-            g.DrawString("Comprobante N°: " + VariablesGlobales.oVentaE.ID, fontNegrita, Brushes.Black, CentrarTexto("Comprobante N°: " + VariablesGlobales.oVentaE.ID, fontNegrita), y);
-            y += 30;
+        //    // Datos del Comprobante
+        //    g.DrawString("Comprobante N°: " + VariablesGlobales.oVentaE.ID, fontNegrita, Brushes.Black, CentrarTexto("Comprobante N°: " + VariablesGlobales.oVentaE.ID, fontNegrita), y);
+        //    y += 30;
 
-            // Línea separadora
-            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
-            y += 10;
+        //    // Línea separadora
+        //    g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+        //    y += 10;
 
-            // Datos del cliente
-            g.DrawString("Cliente: " + VariablesGlobales.oVentaE.ClienteID.Nombre, fontNegrita, Brushes.Black, margenIzquierdo, y);
-            y += 20;
-            g.DrawString("Domicilio: " + VariablesGlobales.oVentaE.ClienteID.Domicilio, fontNormal, Brushes.Black, margenIzquierdo, y);
-            y += 20;
-            g.DrawString("CUIT: " + VariablesGlobales.oVentaE.ClienteID.Cuit, fontNormal, Brushes.Black, margenIzquierdo, y);
-            y += 30;
+        //    // Datos del cliente
+        //    g.DrawString("Cliente: " + VariablesGlobales.oVentaE.ClienteID.Nombre, fontNegrita, Brushes.Black, margenIzquierdo, y);
+        //    y += 20;
+        //    g.DrawString("Domicilio: " + VariablesGlobales.oVentaE.ClienteID.Domicilio, fontNormal, Brushes.Black, margenIzquierdo, y);
+        //    y += 20;
+        //    g.DrawString("CUIT: " + VariablesGlobales.oVentaE.ClienteID.Cuit, fontNormal, Brushes.Black, margenIzquierdo, y);
+        //    y += 30;
 
-            // Línea separadora
-            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
-            y += 10;
-            #endregion
+        //    // Línea separadora
+        //    g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+        //    y += 10;
+        //    #endregion
 
-            #region DETALLE DEL COMPROBANTE
-            // Encabezado de la tabla
-            g.DrawString("Código", fontNegrita, Brushes.Black, margenIzquierdo, y);
-            g.DrawString("Descripción", fontNegrita, Brushes.Black, 70, y);
-            g.DrawString("Uds", fontNegrita, Brushes.Black, 160, y);
-            g.DrawString("$Unit", fontNegrita, Brushes.Black, 200, y);
-            g.DrawString("$Total", fontNegrita, Brushes.Black, 260, y);
-            y += 20;
+        //    #region DETALLE DEL COMPROBANTE
+        //    // Encabezado de la tabla
+        //    g.DrawString("Código", fontNegrita, Brushes.Black, margenIzquierdo, y);
+        //    g.DrawString("Descripción", fontNegrita, Brushes.Black, 70, y);
+        //    g.DrawString("Uds", fontNegrita, Brushes.Black, 160, y);
+        //    g.DrawString("$Unit", fontNegrita, Brushes.Black, 200, y);
+        //    g.DrawString("$Total", fontNegrita, Brushes.Black, 260, y);
+        //    y += 20;
 
-            // **Impresión del detalle de la venta con manejo de paginación**
-            int itemsPorPagina = 20;
-            int itemsImpresos = 0;
+        //    // **Impresión del detalle de la venta con manejo de paginación**
+        //    int itemsPorPagina = 20;
+        //    int itemsImpresos = 0;
 
-            while (detalleIndex < VariablesGlobales.oVentaE.VentaDetalle.Count)
-            {
-                var ventaDetalle = VariablesGlobales.oVentaE.VentaDetalle[detalleIndex];
+        //    while (detalleIndex < VariablesGlobales.oVentaE.VentaDetalle.Count)
+        //    {
+        //        var ventaDetalle = VariablesGlobales.oVentaE.VentaDetalle[detalleIndex];
 
-                float alturaLinea = 15; // Espaciado entre líneas
-                float anchoDescripcion = 250; // Ancho máximo permitido para la descripción
+        //        float alturaLinea = 15; // Espaciado entre líneas
+        //        float anchoDescripcion = 250; // Ancho máximo permitido para la descripción
 
-                // Dividimos la descripción en varias líneas si es necesario
-                List<string> lineasDescripcion = DividirTexto(ventaDetalle.ProductoID.Nombre, fontNormal, anchoDescripcion);
+        //        // Dividimos la descripción en varias líneas si es necesario
+        //        List<string> lineasDescripcion = DividirTexto(ventaDetalle.ProductoID.Nombre, fontNormal, anchoDescripcion);
 
-                // Determinamos la altura que ocupará el item más alto (descripción más larga)
-                int lineasUsadas = lineasDescripcion.Count;
-                float alturaItem = lineasUsadas * alturaLinea;
+        //        // Determinamos la altura que ocupará el item más alto (descripción más larga)
+        //        int lineasUsadas = lineasDescripcion.Count;
+        //        float alturaItem = lineasUsadas * alturaLinea;
 
-                // Dibujamos el código del producto
-                g.DrawString(ventaDetalle.ProductoID.ID.ToString(), fontNormal, Brushes.Black, margenIzquierdo, y + 5);
+        //        // Dibujamos el código del producto
+        //        g.DrawString(ventaDetalle.ProductoID.ID.ToString(), fontNormal, Brushes.Black, margenIzquierdo, y + 5);
 
-                // Dibujamos la descripción en múltiples líneas
-                float yDescripcion = y + 5;
-                foreach (string linea in lineasDescripcion)
-                {
-                    g.DrawString(linea, fontNormal, Brushes.Black, 70, yDescripcion);
-                    yDescripcion += alturaLinea;
-                }
-                y += 5;
+        //        // Dibujamos la descripción en múltiples líneas
+        //        float yDescripcion = y + 5;
+        //        foreach (string linea in lineasDescripcion)
+        //        {
+        //            g.DrawString(linea, fontNormal, Brushes.Black, 70, yDescripcion);
+        //            yDescripcion += alturaLinea;
+        //        }
+        //        y += 5;
 
-                // Dibujamos los demás campos alineados con la primera línea de la descripción
-                g.DrawString(ventaDetalle.Cantidad.ToString(), fontNormal, Brushes.Black, 160, y += alturaItem);
-                g.DrawString(ventaDetalle.pVenta.ToString("0.00"), fontNormal, Brushes.Black, 200, y);
-                g.DrawString(ventaDetalle.pTotalVenta.ToString("0.00"), fontNormal, Brushes.Black, 260, y);
+        //        // Dibujamos los demás campos alineados con la primera línea de la descripción
+        //        g.DrawString(ventaDetalle.Cantidad.ToString(), fontNormal, Brushes.Black, 160, y += alturaItem);
+        //        g.DrawString(ventaDetalle.pVenta.ToString("0.00"), fontNormal, Brushes.Black, 200, y);
+        //        g.DrawString(ventaDetalle.pTotalVenta.ToString("0.00"), fontNormal, Brushes.Black, 260, y);
 
-                // Ajustamos `y` según la altura del item más alto (descripción más larga)
-                y += alturaItem + 5;
+        //        // Ajustamos `y` según la altura del item más alto (descripción más larga)
+        //        y += alturaItem + 5;
 
-                detalleIndex++;
-                itemsImpresos++;
+        //        detalleIndex++;
+        //        itemsImpresos++;
 
-                // Si alcanzamos el límite de la página, indicamos que hay más páginas
-                if (itemsImpresos >= itemsPorPagina)
-                {
-                    e.HasMorePages = true;
-                    return;
-                }
-            }
+        //        // Si alcanzamos el límite de la página, indicamos que hay más páginas
+        //        if (itemsImpresos >= itemsPorPagina)
+        //        {
+        //            e.HasMorePages = true;
+        //            return;
+        //        }
+        //    }
 
-            // **Línea separadora**
-            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
-            y += 10;
-            #endregion
+        //    // **Línea separadora**
+        //    g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+        //    y += 10;
+        //    #endregion
 
-            #region PIE DEL COMPROBANTE
-            // **Impresión de Totales**
-            g.DrawString("SubTotal: ", fontNegrita, Brushes.Black, 160, y);
-            g.DrawString("$" + VariablesGlobales.oVentaE.SubTotal.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.SubTotal.ToString("0.00"), fontNegrita), y);
-            y += 20;
+        //    #region PIE DEL COMPROBANTE
+        //    // **Impresión de Totales**
+        //    g.DrawString("SubTotal: ", fontNegrita, Brushes.Black, 160, y);
+        //    g.DrawString("$" + VariablesGlobales.oVentaE.SubTotal.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.SubTotal.ToString("0.00"), fontNegrita), y);
+        //    y += 20;
 
-            g.DrawString("Descuento: ", fontNegrita, Brushes.Black, 160, y);
-            g.DrawString("$" + VariablesGlobales.oVentaE.DtoEfectivo.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.DtoEfectivo.ToString("0.00"), fontNegrita), y);
-            y += 20;
+        //    g.DrawString("Descuento: ", fontNegrita, Brushes.Black, 160, y);
+        //    g.DrawString("$" + VariablesGlobales.oVentaE.DtoEfectivo.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.DtoEfectivo.ToString("0.00"), fontNegrita), y);
+        //    y += 20;
 
-            g.DrawString("Total: ", fontNegrita, Brushes.Black, 160, y);
-            g.DrawString("$" + VariablesGlobales.oVentaE.Monto.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.Monto.ToString("0.00"), fontNegrita), y);
-            y += 30;
+        //    g.DrawString("Total: ", fontNegrita, Brushes.Black, 160, y);
+        //    g.DrawString("$" + VariablesGlobales.oVentaE.Monto.ToString("0.00"), fontNegrita, Brushes.Black, AlinearDerecha("$" + VariablesGlobales.oVentaE.Monto.ToString("0.00"), fontNegrita), y);
+        //    y += 30;
 
-            // **Mensaje final**
-            g.DrawString("¡Gracias por su visita!", fontNormal, Brushes.Black, CentrarTexto("¡Gracias por su compra!", fontNormal), y);
+        //    // **Mensaje final**
+        //    g.DrawString("¡Gracias por su visita!", fontNormal, Brushes.Black, CentrarTexto("¡Gracias por su compra!", fontNormal), y);
 
-            // Si no hay más datos, indicar que no hay más páginas
-            e.HasMorePages = false;
-            detalleIndex = 0; // Resetear índice para futuras impresiones
-            #endregion
+        //    // Si no hay más datos, indicar que no hay más páginas
+        //    e.HasMorePages = false;
+        //    detalleIndex = 0; // Resetear índice para futuras impresiones
+        //    #endregion
 
-        }
+        //}
 
         private async Task AgregarProducto(int ProductoID)
         {
@@ -369,7 +371,7 @@ namespace PVpresentation.Formularios
             VariablesGlobales.Venta01_ClienteCUIT = "";
 
             LimpiarMantenimiento();
-
+            
 
             #region PERSONALIZACION DEL DATAGRIDVIEW
             dgvListado.ImplementarConfiguracion("Eliminar");
@@ -725,7 +727,7 @@ namespace PVpresentation.Formularios
             if (VentaNumero != "" || VentaNumero != null)
             {
                 MessageBox.Show("Venta registrada con éxito", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                Impresiones imPresiones = new Impresiones();
                 #region Obtener los valores del comprobante de venta a impirmir y enviar la impresión
                 int _IDventa = Convert.ToInt32(VentaNumero);
                 VariablesGlobales.oEmpresa = await _empresaService.Obtener(VariablesGlobales.EmpresaID);
@@ -737,7 +739,7 @@ namespace PVpresentation.Formularios
                 printVenta = new PrintDocument();
                 PrinterSettings ps = new PrinterSettings();
                 printVenta.PrinterSettings = ps;
-                printVenta.PrintPage += ImprimirPresupuesto;
+                printVenta.PrintPage += imPresiones.ImprimirPresupuesto ;
                 printVenta.Print();
                 #endregion
 
@@ -764,10 +766,11 @@ namespace PVpresentation.Formularios
             VariablesGlobales.oVentaE.VentaDetalle = VariablesGlobales.oVentaD;
 
             #region Crear y enviar la impresión del comprobante
+            Impresiones imPresiones = new Impresiones();
             printVenta = new PrintDocument();
             PrinterSettings ps = new PrinterSettings();
             printVenta.PrinterSettings = ps;
-            printVenta.PrintPage += ImprimirPresupuesto;
+            printVenta.PrintPage += imPresiones.ImprimirPresupuesto;
             printVenta.Print();
             #endregion
 

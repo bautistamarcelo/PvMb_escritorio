@@ -7,7 +7,6 @@ using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Drawing;
 using System;
-//TODO: Implementar la lógica de acceso a datos de la entidad Ventas_E
 
 namespace PVrepository.Implementation
 {

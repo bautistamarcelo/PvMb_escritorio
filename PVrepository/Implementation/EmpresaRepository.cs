@@ -72,6 +72,7 @@ namespace PVrepository.Implementation
                                 Nombre = dr["Caracter"].ToString()!
                             },
                            SimboloMoneda= dr["SimboloMoneda"].ToString()!,
+                           Predeterminada= Convert.ToInt32(dr["Predeterminada"])
                         });
                     }
                 }
@@ -95,6 +96,7 @@ namespace PVrepository.Implementation
                 cmd.Parameters.AddWithValue("@LogoNombre", objeto.LogoNombre);
                 cmd.Parameters.AddWithValue("@Caracter", objeto.CaracterID.ID);
                 cmd.Parameters.AddWithValue("@Moneda", objeto.SimboloMoneda);
+                cmd.Parameters.AddWithValue("@Predeterminada", objeto.SimboloMoneda);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -130,6 +132,7 @@ namespace PVrepository.Implementation
                 cmd.Parameters.AddWithValue("@LogoNombre", objeto.LogoNombre);
                 cmd.Parameters.AddWithValue("@Caracter", objeto.CaracterID.ID);
                 cmd.Parameters.AddWithValue("@Moneda", objeto.SimboloMoneda);
+                cmd.Parameters.AddWithValue("@Predeterminada", objeto.Predeterminada);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -166,6 +169,11 @@ namespace PVrepository.Implementation
                         oBjeto.Direccion = dr["Direccion"].ToString()!;
                         oBjeto.LogoUrl = dr["LogoUrl"].ToString()!;
                         oBjeto.Telefono = dr["Telefono"].ToString()!;
+                        oBjeto.CaracterID = new Caracter
+                        {
+                            ID = Convert.ToInt32(dr["CaracterID"]),
+                        };
+                        oBjeto.Predeterminada = Convert.ToInt32(dr["Predeterminada"]);
                     }
                 }
             }

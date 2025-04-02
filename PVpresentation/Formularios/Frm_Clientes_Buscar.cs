@@ -112,8 +112,10 @@ namespace PVpresentation.Formularios
                 Habilitado = item.HabilitadoCtaCte == 1 ? "Habilitado" : "Suspendido"
             }).ToList();
             dgvListado.DataSource = VMListaClientes; //Llenar el DG con los datos armados de la listaVM
-
+            
+            dgvListado.Columns["Nombre"].FillWeight = 350;
             //Selecciono las columnas que no deseo mostrar en el formulario
+            dgvListado.Columns["ID"].Visible = false;
             dgvListado.Columns["EstadoID"].Visible = false;
             dgvListado.Columns["Estado"].Visible = false;
             dgvListado.Columns["CaracterID"].Visible = false;
@@ -146,6 +148,11 @@ namespace PVpresentation.Formularios
             var items = ListaCaracter.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
             cmbCaracter.InsertarItems(items);
 
+            if (txtInstancia.Text == "5")// Llamado desde Formulario Recibos
+            {
+                btnNuevo.Enabled=false;
+            }
+
         }
 
         private async void txtBuscar_KeyDown(object sender, KeyEventArgs e)
@@ -173,6 +180,10 @@ namespace PVpresentation.Formularios
 
         private void dgvListado_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (txtInstancia.Text == "5")// Llamado desde Formulario Recibos
+            {
+                return;
+            }
             _ClienteSeleccionado = (ClienteVM)dgvListado.CurrentRow.DataBoundItem;
             txtOpcion.Text = "2"; // 1 Nuevo / 2 Edición
             txtNombre.Text = _ClienteSeleccionado.Nombre.ToString();
@@ -191,6 +202,10 @@ namespace PVpresentation.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            if (txtInstancia.Text == "5")// Llamado desde Formulario Recibos
+            {
+                return;
+            }
             txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
             MostrarTabs(tabNuevo.Name);
             txtNombre.Select();

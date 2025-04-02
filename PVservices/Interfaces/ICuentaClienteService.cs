@@ -1,9 +1,9 @@
 ﻿using PVrepository.Entities;
 using PVrepository.Entities.ViewModels;
 
-namespace PVrepository.Interfaces
+namespace PVservices.Interfaces
 {
-    public interface IcuentaClienteErepository
+    public interface ICuentaClienteService
     {
         Task<List<Cuenta_Cliente_E>> Lista(DateTime FechaIni, DateTime FechaFin, int Buscar = 0);
         Task<List<Cuenta_Cliente_VM>> ListaDetalle(int Buscar = 0);

@@ -39,25 +39,22 @@
             tabIngresos = new TabPage();
             pnMantenimiento = new Panel();
             label13 = new Label();
-            textBox7 = new TextBox();
-            label8 = new Label();
-            textBox6 = new TextBox();
-            txtSaldoInicial = new TextBox();
+            txtDescripcion = new TextBox();
+            txtImporteRecibo = new TextBox();
             label6 = new Label();
-            txtFechaApertura = new TextBox();
+            txtFechaRecibo = new TextBox();
             label3 = new Label();
             label2 = new Label();
             txtNombre = new TextBox();
             label1 = new Label();
             txtSaldoActual = new TextBox();
-            btnEliminar = new Button();
             btnCancelar = new Button();
             btnGrabar = new Button();
             pnListado = new Panel();
             dgvCuentaD = new DataGridView();
             dgvCuentaE = new DataGridView();
             label4 = new Label();
-            txtBuscar = new TextBox();
+            txtBuscarCliente = new TextBox();
             btnBuscar = new Button();
             tabEgresos = new TabPage();
             panel1 = new Panel();
@@ -65,7 +62,7 @@
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
             label7 = new Label();
-            textBox2 = new TextBox();
+            txtFechaGasto = new TextBox();
             label9 = new Label();
             label10 = new Label();
             textBox3 = new TextBox();
@@ -151,6 +148,7 @@
             btnCierreVolver.SizeMode = PictureBoxSizeMode.Zoom;
             btnCierreVolver.TabIndex = 6;
             btnCierreVolver.TabStop = false;
+            btnCierreVolver.Click += btnCierreVolver_Click;
             // 
             // lblTituloForm
             // 
@@ -202,18 +200,15 @@
             pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
             pnMantenimiento.Controls.Add(label13);
-            pnMantenimiento.Controls.Add(textBox7);
-            pnMantenimiento.Controls.Add(label8);
-            pnMantenimiento.Controls.Add(textBox6);
-            pnMantenimiento.Controls.Add(txtSaldoInicial);
+            pnMantenimiento.Controls.Add(txtDescripcion);
+            pnMantenimiento.Controls.Add(txtImporteRecibo);
             pnMantenimiento.Controls.Add(label6);
-            pnMantenimiento.Controls.Add(txtFechaApertura);
+            pnMantenimiento.Controls.Add(txtFechaRecibo);
             pnMantenimiento.Controls.Add(label3);
             pnMantenimiento.Controls.Add(label2);
             pnMantenimiento.Controls.Add(txtNombre);
             pnMantenimiento.Controls.Add(label1);
             pnMantenimiento.Controls.Add(txtSaldoActual);
-            pnMantenimiento.Controls.Add(btnEliminar);
             pnMantenimiento.Controls.Add(btnCancelar);
             pnMantenimiento.Controls.Add(btnGrabar);
             pnMantenimiento.Location = new Point(661, 6);
@@ -228,78 +223,57 @@
             label13.ForeColor = Color.FromArgb(224, 224, 224);
             label13.Location = new Point(11, 238);
             label13.Name = "label13";
-            label13.Size = new Size(94, 15);
+            label13.Size = new Size(87, 15);
             label13.TabIndex = 82;
-            label13.Text = "Saldo Actual:";
+            label13.Text = "Descripción:";
             // 
-            // textBox7
+            // txtDescripcion
             // 
-            textBox7.BackColor = Color.FromArgb(4, 41, 68);
-            textBox7.BorderStyle = BorderStyle.FixedSingle;
-            textBox7.Font = new Font("Square721 BT", 12F);
-            textBox7.ForeColor = Color.White;
-            textBox7.Location = new Point(11, 256);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(288, 27);
-            textBox7.TabIndex = 81;
-            textBox7.TextAlign = HorizontalAlignment.Center;
+            txtDescripcion.BackColor = Color.FromArgb(224, 224, 224);
+            txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
+            txtDescripcion.Font = new Font("Square721 BT", 12F);
+            txtDescripcion.ForeColor = Color.White;
+            txtDescripcion.Location = new Point(11, 256);
+            txtDescripcion.Multiline = true;
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(288, 109);
+            txtDescripcion.TabIndex = 81;
+            txtDescripcion.TextAlign = HorizontalAlignment.Center;
             // 
-            // label8
+            // txtImporteRecibo
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("EngraversGothic BT", 10F);
-            label8.ForeColor = Color.FromArgb(224, 224, 224);
-            label8.Location = new Point(10, 179);
-            label8.Name = "label8";
-            label8.Size = new Size(94, 15);
-            label8.TabIndex = 80;
-            label8.Text = "Saldo Actual:";
-            // 
-            // textBox6
-            // 
-            textBox6.BackColor = Color.FromArgb(4, 41, 68);
-            textBox6.BorderStyle = BorderStyle.FixedSingle;
-            textBox6.Font = new Font("Square721 BT", 12F);
-            textBox6.ForeColor = Color.White;
-            textBox6.Location = new Point(10, 197);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(288, 27);
-            textBox6.TabIndex = 79;
-            textBox6.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtSaldoInicial
-            // 
-            txtSaldoInicial.BackColor = Color.FromArgb(224, 224, 224);
-            txtSaldoInicial.BorderStyle = BorderStyle.FixedSingle;
-            txtSaldoInicial.Font = new Font("Copperplate Gothic Light", 12F);
-            txtSaldoInicial.ForeColor = Color.Black;
-            txtSaldoInicial.Location = new Point(14, 309);
-            txtSaldoInicial.Name = "txtSaldoInicial";
-            txtSaldoInicial.Size = new Size(285, 25);
-            txtSaldoInicial.TabIndex = 75;
+            txtImporteRecibo.BackColor = Color.FromArgb(224, 224, 224);
+            txtImporteRecibo.BorderStyle = BorderStyle.FixedSingle;
+            txtImporteRecibo.Font = new Font("Copperplate Gothic Light", 12F);
+            txtImporteRecibo.ForeColor = Color.Black;
+            txtImporteRecibo.Location = new Point(10, 200);
+            txtImporteRecibo.Name = "txtImporteRecibo";
+            txtImporteRecibo.Size = new Size(285, 25);
+            txtImporteRecibo.TabIndex = 75;
+            txtImporteRecibo.KeyPress += txtImporteRecibo_KeyPress;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("EngraversGothic BT", 10F);
+            label6.Font = new Font("EngraversGothic BT", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.FromArgb(224, 224, 224);
-            label6.Location = new Point(14, 291);
+            label6.Location = new Point(10, 182);
             label6.Name = "label6";
-            label6.Size = new Size(83, 15);
+            label6.Size = new Size(67, 17);
             label6.TabIndex = 78;
-            label6.Text = "Saldo Inicial";
+            label6.Text = "Importe:";
             // 
-            // txtFechaApertura
+            // txtFechaRecibo
             // 
-            txtFechaApertura.BackColor = Color.FromArgb(4, 41, 68);
-            txtFechaApertura.BorderStyle = BorderStyle.FixedSingle;
-            txtFechaApertura.Font = new Font("Copperplate Gothic Light", 12F);
-            txtFechaApertura.ForeColor = Color.White;
-            txtFechaApertura.Location = new Point(10, 32);
-            txtFechaApertura.Name = "txtFechaApertura";
-            txtFechaApertura.Size = new Size(285, 25);
-            txtFechaApertura.TabIndex = 74;
-            txtFechaApertura.TabStop = false;
+            txtFechaRecibo.BackColor = Color.FromArgb(4, 41, 68);
+            txtFechaRecibo.BorderStyle = BorderStyle.FixedSingle;
+            txtFechaRecibo.Font = new Font("Copperplate Gothic Light", 12F);
+            txtFechaRecibo.ForeColor = Color.White;
+            txtFechaRecibo.Location = new Point(10, 32);
+            txtFechaRecibo.Name = "txtFechaRecibo";
+            txtFechaRecibo.Size = new Size(285, 25);
+            txtFechaRecibo.TabIndex = 74;
+            txtFechaRecibo.TabStop = false;
             // 
             // label3
             // 
@@ -308,9 +282,9 @@
             label3.ForeColor = Color.FromArgb(224, 224, 224);
             label3.Location = new Point(10, 14);
             label3.Name = "label3";
-            label3.Size = new Size(106, 15);
+            label3.Size = new Size(48, 15);
             label3.TabIndex = 77;
-            label3.Text = "Fecha Apertura";
+            label3.Text = "Fecha:";
             // 
             // label2
             // 
@@ -349,40 +323,24 @@
             // 
             txtSaldoActual.BackColor = Color.FromArgb(4, 41, 68);
             txtSaldoActual.BorderStyle = BorderStyle.FixedSingle;
-            txtSaldoActual.Font = new Font("Square721 BT", 12F);
+            txtSaldoActual.Font = new Font("Square721 BT", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSaldoActual.ForeColor = Color.White;
             txtSaldoActual.Location = new Point(10, 140);
             txtSaldoActual.Name = "txtSaldoActual";
-            txtSaldoActual.Size = new Size(288, 27);
+            txtSaldoActual.Size = new Size(288, 31);
             txtSaldoActual.TabIndex = 23;
             txtSaldoActual.TextAlign = HorizontalAlignment.Center;
             // 
-            // btnEliminar
-            // 
-            btnEliminar.BackColor = Color.Red;
-            btnEliminar.Cursor = Cursors.Hand;
-            btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
-            btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
-            btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
-            btnEliminar.FlatStyle = FlatStyle.Flat;
-            btnEliminar.ForeColor = Color.WhiteSmoke;
-            btnEliminar.Location = new Point(216, 411);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(86, 32);
-            btnEliminar.TabIndex = 22;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = false;
-            // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = Color.SteelBlue;
+            btnCancelar.BackColor = Color.Red;
             btnCancelar.Cursor = Cursors.Hand;
             btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(114, 411);
+            btnCancelar.Location = new Point(209, 411);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
             btnCancelar.TabIndex = 21;
@@ -412,7 +370,7 @@
             pnListado.Controls.Add(dgvCuentaD);
             pnListado.Controls.Add(dgvCuentaE);
             pnListado.Controls.Add(label4);
-            pnListado.Controls.Add(txtBuscar);
+            pnListado.Controls.Add(txtBuscarCliente);
             pnListado.Controls.Add(btnBuscar);
             pnListado.Location = new Point(6, 6);
             pnListado.Name = "pnListado";
@@ -422,6 +380,7 @@
             // dgvCuentaD
             // 
             dgvCuentaD.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvCuentaD.BackgroundColor = Color.FromArgb(4, 41, 68);
             dgvCuentaD.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCuentaD.Location = new Point(14, 225);
             dgvCuentaD.Name = "dgvCuentaD";
@@ -431,6 +390,7 @@
             // dgvCuentaE
             // 
             dgvCuentaE.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvCuentaE.BackgroundColor = Color.FromArgb(4, 41, 68);
             dgvCuentaE.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCuentaE.Location = new Point(14, 55);
             dgvCuentaE.Name = "dgvCuentaE";
@@ -448,14 +408,14 @@
             label4.TabIndex = 15;
             label4.Text = "Buscar:";
             // 
-            // txtBuscar
+            // txtBuscarCliente
             // 
-            txtBuscar.BackColor = Color.Gainsboro;
-            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
-            txtBuscar.Location = new Point(85, 19);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(511, 22);
-            txtBuscar.TabIndex = 14;
+            txtBuscarCliente.BackColor = Color.Gainsboro;
+            txtBuscarCliente.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscarCliente.Location = new Point(85, 19);
+            txtBuscarCliente.Name = "txtBuscarCliente";
+            txtBuscarCliente.Size = new Size(511, 22);
+            txtBuscarCliente.TabIndex = 14;
             // 
             // btnBuscar
             // 
@@ -471,6 +431,7 @@
             btnBuscar.Size = new Size(37, 32);
             btnBuscar.TabIndex = 13;
             btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // tabEgresos
             // 
@@ -492,7 +453,7 @@
             panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(textBox1);
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(textBox2);
+            panel1.Controls.Add(txtFechaGasto);
             panel1.Controls.Add(label9);
             panel1.Controls.Add(label10);
             panel1.Controls.Add(textBox3);
@@ -542,6 +503,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(285, 25);
             textBox1.TabIndex = 75;
+            textBox1.KeyPress += textBox1_KeyPress;
             // 
             // label7
             // 
@@ -554,35 +516,35 @@
             label7.TabIndex = 78;
             label7.Text = "Saldo Inicial";
             // 
-            // textBox2
+            // txtFechaGasto
             // 
-            textBox2.BackColor = Color.FromArgb(4, 41, 68);
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Font = new Font("Copperplate Gothic Light", 12F);
-            textBox2.ForeColor = Color.White;
-            textBox2.Location = new Point(14, 170);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(285, 25);
-            textBox2.TabIndex = 74;
-            textBox2.TabStop = false;
+            txtFechaGasto.BackColor = Color.FromArgb(4, 41, 68);
+            txtFechaGasto.BorderStyle = BorderStyle.FixedSingle;
+            txtFechaGasto.Font = new Font("Copperplate Gothic Light", 12F);
+            txtFechaGasto.ForeColor = Color.White;
+            txtFechaGasto.Location = new Point(12, 36);
+            txtFechaGasto.Name = "txtFechaGasto";
+            txtFechaGasto.Size = new Size(285, 25);
+            txtFechaGasto.TabIndex = 74;
+            txtFechaGasto.TabStop = false;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("EngraversGothic BT", 10F);
             label9.ForeColor = Color.FromArgb(224, 224, 224);
-            label9.Location = new Point(14, 152);
+            label9.Location = new Point(12, 18);
             label9.Name = "label9";
-            label9.Size = new Size(106, 15);
+            label9.Size = new Size(48, 15);
             label9.TabIndex = 77;
-            label9.Text = "Fecha Apertura";
+            label9.Text = "Fecha:";
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("EngraversGothic BT", 10F);
             label10.ForeColor = Color.FromArgb(224, 224, 224);
-            label10.Location = new Point(14, 92);
+            label10.Location = new Point(9, 125);
             label10.Name = "label10";
             label10.Size = new Size(60, 15);
             label10.TabIndex = 26;
@@ -594,7 +556,7 @@
             textBox3.BorderStyle = BorderStyle.FixedSingle;
             textBox3.Font = new Font("Copperplate Gothic Light", 12F);
             textBox3.ForeColor = Color.White;
-            textBox3.Location = new Point(14, 110);
+            textBox3.Location = new Point(9, 143);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(288, 25);
             textBox3.TabIndex = 25;
@@ -604,7 +566,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("EngraversGothic BT", 10F);
             label11.ForeColor = Color.FromArgb(224, 224, 224);
-            label11.Location = new Point(14, 37);
+            label11.Location = new Point(9, 70);
             label11.Name = "label11";
             label11.Size = new Size(24, 15);
             label11.TabIndex = 24;
@@ -616,7 +578,7 @@
             textBox4.BorderStyle = BorderStyle.FixedSingle;
             textBox4.Font = new Font("Copperplate Gothic Light", 12F);
             textBox4.ForeColor = Color.White;
-            textBox4.Location = new Point(14, 55);
+            textBox4.Location = new Point(9, 88);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(288, 25);
             textBox4.TabIndex = 23;
@@ -739,6 +701,7 @@
             // dgvListado
             // 
             dgvListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvListado.BackgroundColor = Color.FromArgb(4, 41, 68);
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(14, 55);
             dgvListado.Name = "dgvListado";
@@ -790,6 +753,7 @@
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Frm_Cajas_Movimientos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Cajas_Movimientos";
             Load += Frm_Cajas_Movimientos_Load;
             pnTituloFormulario.ResumeLayout(false);
@@ -826,25 +790,24 @@
         public TextBox txtNombre;
         public Label label1;
         public TextBox txtSaldoActual;
-        public Button btnEliminar;
         public Button btnCancelar;
         public Button btnGrabar;
         public Panel pnListado;
         public DataGridView dgvCuentaE;
         public Label label4;
-        public TextBox txtBuscar;
+        public TextBox txtBuscarCliente;
         public Button btnBuscar;
         public TabPage tabEgresos;
-        public TextBox txtSaldoInicial;
+        public TextBox txtImporteRecibo;
         public Label label6;
-        public TextBox txtFechaApertura;
+        public TextBox txtFechaRecibo;
         public Label label3;
         public Panel panel1;
         public Label label5;
         public ComboBox comboBox1;
         public TextBox textBox1;
         public Label label7;
-        public TextBox textBox2;
+        public TextBox txtFechaGasto;
         public Label label9;
         public Label label10;
         public TextBox textBox3;
@@ -864,8 +827,6 @@
         public TextBox txtID;
         public DataGridView dgvCuentaD;
         public Label label13;
-        public TextBox textBox7;
-        public Label label8;
-        public TextBox textBox6;
+        public TextBox txtDescripcion;
     }
 }

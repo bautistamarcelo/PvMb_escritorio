@@ -140,8 +140,29 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
-       
+        public async Task<string> Eliminar(int IDproveedor)
+        {
+            string Resultado;
 
-        
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Proveedor_Eliminar", con);
+                cmd.Parameters.AddWithValue("@ID", IDproveedor);
+                cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    Resultado = Convert.ToString(cmd.Parameters["@MsjError"].Value)!;
+                }
+                catch (Exception ex)
+                {
+                    Resultado = ex.Message;
+                }
+            }
+
+            return Resultado;
+        }
     }
 }

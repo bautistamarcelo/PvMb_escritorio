@@ -18,6 +18,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Compras));
             pnTituloFormulario = new Panel();
+            btnCierreVolver = new PictureBox();
             txtProveedor = new TextBox();
             txtImpuesto = new TextBox();
             txtMarca = new TextBox();
@@ -75,6 +76,7 @@
             btnBuscarProveedor = new Button();
             label14 = new Label();
             pnTituloFormulario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnRestaurar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnCerrar).BeginInit();
@@ -87,6 +89,7 @@
             // pnTituloFormulario
             // 
             pnTituloFormulario.BackColor = Color.FromArgb(74, 134, 160);
+            pnTituloFormulario.Controls.Add(btnCierreVolver);
             pnTituloFormulario.Controls.Add(txtProveedor);
             pnTituloFormulario.Controls.Add(txtImpuesto);
             pnTituloFormulario.Controls.Add(txtMarca);
@@ -104,14 +107,26 @@
             pnTituloFormulario.Location = new Point(0, 0);
             pnTituloFormulario.Margin = new Padding(0);
             pnTituloFormulario.Name = "pnTituloFormulario";
-            pnTituloFormulario.Size = new Size(935, 45);
+            pnTituloFormulario.Size = new Size(984, 45);
             pnTituloFormulario.TabIndex = 50;
             pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
+            // 
+            // btnCierreVolver
+            // 
+            btnCierreVolver.Cursor = Cursors.Hand;
+            btnCierreVolver.Image = Properties.Resources.left_arrow__1_;
+            btnCierreVolver.Location = new Point(12, 3);
+            btnCierreVolver.Name = "btnCierreVolver";
+            btnCierreVolver.Size = new Size(31, 35);
+            btnCierreVolver.SizeMode = PictureBoxSizeMode.Zoom;
+            btnCierreVolver.TabIndex = 58;
+            btnCierreVolver.TabStop = false;
+            btnCierreVolver.Click += btnCierreVolver_Click;
             // 
             // txtProveedor
             // 
             txtProveedor.BorderStyle = BorderStyle.FixedSingle;
-            txtProveedor.Location = new Point(172, 12);
+            txtProveedor.Location = new Point(296, 12);
             txtProveedor.Name = "txtProveedor";
             txtProveedor.Size = new Size(34, 23);
             txtProveedor.TabIndex = 57;
@@ -121,7 +136,7 @@
             // txtImpuesto
             // 
             txtImpuesto.BorderStyle = BorderStyle.FixedSingle;
-            txtImpuesto.Location = new Point(132, 12);
+            txtImpuesto.Location = new Point(256, 12);
             txtImpuesto.Name = "txtImpuesto";
             txtImpuesto.Size = new Size(34, 23);
             txtImpuesto.TabIndex = 56;
@@ -131,7 +146,7 @@
             // txtMarca
             // 
             txtMarca.BorderStyle = BorderStyle.FixedSingle;
-            txtMarca.Location = new Point(92, 12);
+            txtMarca.Location = new Point(216, 12);
             txtMarca.Name = "txtMarca";
             txtMarca.Size = new Size(34, 23);
             txtMarca.TabIndex = 55;
@@ -141,7 +156,7 @@
             // txtCategoria
             // 
             txtCategoria.BorderStyle = BorderStyle.FixedSingle;
-            txtCategoria.Location = new Point(52, 12);
+            txtCategoria.Location = new Point(176, 12);
             txtCategoria.Name = "txtCategoria";
             txtCategoria.Size = new Size(34, 23);
             txtCategoria.TabIndex = 54;
@@ -161,7 +176,7 @@
             // txtProveedorID
             // 
             txtProveedorID.BorderStyle = BorderStyle.FixedSingle;
-            txtProveedorID.Location = new Point(12, 12);
+            txtProveedorID.Location = new Point(136, 12);
             txtProveedorID.Name = "txtProveedorID";
             txtProveedorID.Size = new Size(34, 23);
             txtProveedorID.TabIndex = 52;
@@ -173,20 +188,20 @@
             btnMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMaximizar.Cursor = Cursors.Hand;
             btnMaximizar.Image = Properties.Resources.maximize3;
-            btnMaximizar.Location = new Point(878, 14);
+            btnMaximizar.Location = new Point(927, 14);
             btnMaximizar.Name = "btnMaximizar";
             btnMaximizar.Size = new Size(20, 21);
             btnMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
             btnMaximizar.TabIndex = 50;
             btnMaximizar.TabStop = false;
-            btnMaximizar.Click += btnMaximizar_Click;
+            btnMaximizar.Visible = false;
             // 
             // btnRestaurar
             // 
             btnRestaurar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnRestaurar.Cursor = Cursors.Hand;
             btnRestaurar.Image = Properties.Resources.Normal;
-            btnRestaurar.Location = new Point(878, 14);
+            btnRestaurar.Location = new Point(927, 14);
             btnRestaurar.Name = "btnRestaurar";
             btnRestaurar.Size = new Size(20, 21);
             btnRestaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -200,26 +215,26 @@
             btnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.Image = Properties.Resources.Close;
-            btnCerrar.Location = new Point(904, 14);
+            btnCerrar.Location = new Point(953, 14);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(20, 21);
             btnCerrar.SizeMode = PictureBoxSizeMode.Zoom;
             btnCerrar.TabIndex = 49;
             btnCerrar.TabStop = false;
-            btnCerrar.Click += btnCerrar_Click;
+            btnCerrar.Visible = false;
             // 
             // btnMinimizar
             // 
             btnMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMinimizar.Cursor = Cursors.Hand;
             btnMinimizar.Image = Properties.Resources.Minimize;
-            btnMinimizar.Location = new Point(852, 14);
+            btnMinimizar.Location = new Point(901, 14);
             btnMinimizar.Name = "btnMinimizar";
             btnMinimizar.Size = new Size(20, 21);
             btnMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
             btnMinimizar.TabIndex = 48;
             btnMinimizar.TabStop = false;
-            btnMinimizar.Click += btnMinimizar_Click;
+            btnMinimizar.Visible = false;
             // 
             // txtInstancia
             // 
@@ -248,7 +263,7 @@
             lblTituloForm.Enabled = false;
             lblTituloForm.Font = new Font("EngraversGothic BT", 20F);
             lblTituloForm.ForeColor = Color.White;
-            lblTituloForm.Location = new Point(339, 9);
+            lblTituloForm.Location = new Point(388, 9);
             lblTituloForm.Name = "lblTituloForm";
             lblTituloForm.Size = new Size(181, 28);
             lblTituloForm.TabIndex = 4;
@@ -274,9 +289,9 @@
             pnMantenimiento.Controls.Add(txtMontoTotal);
             pnMantenimiento.Controls.Add(label7);
             pnMantenimiento.Dock = DockStyle.Right;
-            pnMantenimiento.Location = new Point(706, 45);
+            pnMantenimiento.Location = new Point(755, 45);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(229, 467);
+            pnMantenimiento.Size = new Size(229, 487);
             pnMantenimiento.TabIndex = 52;
             // 
             // label9
@@ -514,7 +529,7 @@
             pnListado.Controls.Add(label14);
             pnListado.Location = new Point(0, 45);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(710, 467);
+            pnListado.Size = new Size(759, 487);
             pnListado.TabIndex = 51;
             // 
             // btnAgregarItem
@@ -527,7 +542,7 @@
             btnAgregarItem.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnAgregarItem.FlatStyle = FlatStyle.Flat;
             btnAgregarItem.ForeColor = Color.WhiteSmoke;
-            btnAgregarItem.Location = new Point(602, 124);
+            btnAgregarItem.Location = new Point(658, 124);
             btnAgregarItem.Name = "btnAgregarItem";
             btnAgregarItem.Size = new Size(86, 32);
             btnAgregarItem.TabIndex = 7;
@@ -540,7 +555,7 @@
             label17.AutoSize = true;
             label17.Font = new Font("EngraversGothic BT", 10F);
             label17.ForeColor = Color.FromArgb(224, 224, 224);
-            label17.Location = new Point(211, 111);
+            label17.Location = new Point(222, 109);
             label17.Name = "label17";
             label17.Size = new Size(73, 15);
             label17.TabIndex = 49;
@@ -551,18 +566,20 @@
             txtImpuestoMonto.BackColor = Color.Gainsboro;
             txtImpuestoMonto.BorderStyle = BorderStyle.FixedSingle;
             txtImpuestoMonto.Font = new Font("Square721 BT", 12F);
-            txtImpuestoMonto.Location = new Point(212, 129);
+            txtImpuestoMonto.Location = new Point(223, 127);
             txtImpuestoMonto.Name = "txtImpuestoMonto";
-            txtImpuestoMonto.Size = new Size(81, 27);
+            txtImpuestoMonto.Size = new Size(91, 27);
             txtImpuestoMonto.TabIndex = 3;
             txtImpuestoMonto.TextAlign = HorizontalAlignment.Center;
+            txtImpuestoMonto.KeyDown += txtImpuestoMonto_KeyDown;
+            txtImpuestoMonto.KeyPress += txtImpuestoMonto_KeyPress;
             // 
             // label16
             // 
             label16.AutoSize = true;
             label16.Font = new Font("EngraversGothic BT", 10F);
             label16.ForeColor = Color.FromArgb(224, 224, 224);
-            label16.Location = new Point(110, 111);
+            label16.Location = new Point(116, 109);
             label16.Name = "label16";
             label16.Size = new Size(71, 15);
             label16.TabIndex = 47;
@@ -573,11 +590,13 @@
             txtpCompra.BackColor = Color.Gainsboro;
             txtpCompra.BorderStyle = BorderStyle.FixedSingle;
             txtpCompra.Font = new Font("Square721 BT", 12F);
-            txtpCompra.Location = new Point(113, 129);
+            txtpCompra.Location = new Point(119, 127);
             txtpCompra.Name = "txtpCompra";
-            txtpCompra.Size = new Size(81, 27);
+            txtpCompra.Size = new Size(91, 27);
             txtpCompra.TabIndex = 2;
             txtpCompra.TextAlign = HorizontalAlignment.Center;
+            txtpCompra.KeyDown += txtpCompra_KeyDown;
+            txtpCompra.KeyPress += txtpCompra_KeyPress;
             // 
             // btnEditarProducto
             // 
@@ -589,7 +608,7 @@
             btnEditarProducto.FlatStyle = FlatStyle.Flat;
             btnEditarProducto.ForeColor = Color.FromArgb(23, 54, 93);
             btnEditarProducto.Image = (Image)resources.GetObject("btnEditarProducto.Image");
-            btnEditarProducto.Location = new Point(622, 72);
+            btnEditarProducto.Location = new Point(677, 72);
             btnEditarProducto.Name = "btnEditarProducto";
             btnEditarProducto.Size = new Size(30, 30);
             btnEditarProducto.TabIndex = 44;
@@ -601,7 +620,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("EngraversGothic BT", 10F);
             label12.ForeColor = Color.FromArgb(224, 224, 224);
-            label12.Location = new Point(12, 111);
+            label12.Location = new Point(13, 109);
             label12.Name = "label12";
             label12.Size = new Size(62, 15);
             label12.TabIndex = 43;
@@ -612,19 +631,21 @@
             txtCantidad.BackColor = Color.Gainsboro;
             txtCantidad.BorderStyle = BorderStyle.FixedSingle;
             txtCantidad.Font = new Font("Square721 BT", 12F);
-            txtCantidad.Location = new Point(14, 129);
+            txtCantidad.Location = new Point(15, 127);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(81, 27);
             txtCantidad.TabIndex = 1;
             txtCantidad.Text = "1";
             txtCantidad.TextAlign = HorizontalAlignment.Center;
+            txtCantidad.KeyDown += txtCantidad_KeyDown;
+            txtCantidad.KeyPress += txtCantidad_KeyPress;
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("EngraversGothic BT", 10F);
             label13.ForeColor = Color.FromArgb(224, 224, 224);
-            label13.Location = new Point(312, 111);
+            label13.Location = new Point(328, 109);
             label13.Name = "label13";
             label13.Size = new Size(49, 15);
             label13.TabIndex = 41;
@@ -635,11 +656,13 @@
             txtpCosto.BackColor = Color.Gainsboro;
             txtpCosto.BorderStyle = BorderStyle.FixedSingle;
             txtpCosto.Font = new Font("Square721 BT", 12F);
-            txtpCosto.Location = new Point(311, 129);
+            txtpCosto.Location = new Point(327, 127);
             txtpCosto.Name = "txtpCosto";
-            txtpCosto.Size = new Size(81, 27);
+            txtpCosto.Size = new Size(91, 27);
             txtpCosto.TabIndex = 4;
             txtpCosto.TextAlign = HorizontalAlignment.Center;
+            txtpCosto.KeyDown += txtpCosto_KeyDown;
+            txtpCosto.KeyPress += txtpCosto_KeyPress;
             // 
             // label11
             // 
@@ -661,7 +684,7 @@
             txtProductoNombre.Location = new Point(184, 76);
             txtProductoNombre.Name = "txtProductoNombre";
             txtProductoNombre.ReadOnly = true;
-            txtProductoNombre.Size = new Size(431, 24);
+            txtProductoNombre.Size = new Size(487, 24);
             txtProductoNombre.TabIndex = 38;
             // 
             // btnNuevoProducto
@@ -675,7 +698,7 @@
             btnNuevoProducto.FlatStyle = FlatStyle.Flat;
             btnNuevoProducto.ForeColor = Color.FromArgb(23, 54, 93);
             btnNuevoProducto.Image = (Image)resources.GetObject("btnNuevoProducto.Image");
-            btnNuevoProducto.Location = new Point(664, 71);
+            btnNuevoProducto.Location = new Point(713, 70);
             btnNuevoProducto.Name = "btnNuevoProducto";
             btnNuevoProducto.Size = new Size(31, 32);
             btnNuevoProducto.TabIndex = 37;
@@ -687,7 +710,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("EngraversGothic BT", 10F);
             label10.ForeColor = Color.FromArgb(224, 224, 224);
-            label10.Location = new Point(409, 111);
+            label10.Location = new Point(428, 109);
             label10.Name = "label10";
             label10.Size = new Size(69, 15);
             label10.TabIndex = 36;
@@ -698,18 +721,20 @@
             txtpOferta.BackColor = Color.Gainsboro;
             txtpOferta.BorderStyle = BorderStyle.FixedSingle;
             txtpOferta.Font = new Font("Square721 BT", 12F);
-            txtpOferta.Location = new Point(410, 129);
+            txtpOferta.Location = new Point(429, 127);
             txtpOferta.Name = "txtpOferta";
-            txtpOferta.Size = new Size(81, 27);
+            txtpOferta.Size = new Size(91, 27);
             txtpOferta.TabIndex = 5;
             txtpOferta.TextAlign = HorizontalAlignment.Center;
+            txtpOferta.KeyDown += txtpOferta_KeyDown;
+            txtpOferta.KeyPress += txtpOferta_KeyPress;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("EngraversGothic BT", 10F);
             label5.ForeColor = Color.FromArgb(224, 224, 224);
-            label5.Location = new Point(510, 111);
+            label5.Location = new Point(531, 109);
             label5.Name = "label5";
             label5.Size = new Size(60, 15);
             label5.TabIndex = 23;
@@ -720,11 +745,13 @@
             txtpVenta.BackColor = Color.Gainsboro;
             txtpVenta.BorderStyle = BorderStyle.FixedSingle;
             txtpVenta.Font = new Font("Square721 BT", 12F);
-            txtpVenta.Location = new Point(509, 129);
+            txtpVenta.Location = new Point(531, 127);
             txtpVenta.Name = "txtpVenta";
-            txtpVenta.Size = new Size(81, 27);
+            txtpVenta.Size = new Size(91, 27);
             txtpVenta.TabIndex = 6;
             txtpVenta.TextAlign = HorizontalAlignment.Center;
+            txtpVenta.KeyDown += txtpVenta_KeyDown;
+            txtpVenta.KeyPress += txtpVenta_KeyPress;
             // 
             // label3
             // 
@@ -746,6 +773,7 @@
             txtProductoID.Name = "txtProductoID";
             txtProductoID.Size = new Size(120, 27);
             txtProductoID.TabIndex = 0;
+            txtProductoID.TextChanged += txtProductoID_TextChanged;
             txtProductoID.KeyDown += txtProductoID_KeyDown;
             // 
             // btnBuscarProducto
@@ -771,7 +799,7 @@
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(13, 164);
             dgvListado.Name = "dgvListado";
-            dgvListado.Size = new Size(682, 291);
+            dgvListado.Size = new Size(731, 311);
             dgvListado.TabIndex = 16;
             dgvListado.CellContentClick += dgvListado_CellContentClick;
             // 
@@ -792,9 +820,9 @@
             txtProveedorNombre.BorderStyle = BorderStyle.FixedSingle;
             txtProveedorNombre.Font = new Font("Square721 BT", 12F);
             txtProveedorNombre.ForeColor = Color.White;
-            txtProveedorNombre.Location = new Point(99, 15);
+            txtProveedorNombre.Location = new Point(99, 11);
             txtProveedorNombre.Name = "txtProveedorNombre";
-            txtProveedorNombre.Size = new Size(553, 27);
+            txtProveedorNombre.Size = new Size(592, 27);
             txtProveedorNombre.TabIndex = 14;
             // 
             // btnBuscarProveedor
@@ -807,7 +835,7 @@
             btnBuscarProveedor.FlatStyle = FlatStyle.Flat;
             btnBuscarProveedor.ForeColor = Color.FromArgb(23, 54, 93);
             btnBuscarProveedor.Image = (Image)resources.GetObject("btnBuscarProveedor.Image");
-            btnBuscarProveedor.Location = new Point(664, 16);
+            btnBuscarProveedor.Location = new Point(706, 18);
             btnBuscarProveedor.Name = "btnBuscarProveedor";
             btnBuscarProveedor.Size = new Size(24, 22);
             btnBuscarProveedor.TabIndex = 13;
@@ -830,19 +858,20 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(74, 134, 160);
-            ClientSize = new Size(935, 512);
+            ClientSize = new Size(984, 532);
             Controls.Add(pnMantenimiento);
             Controls.Add(pnListado);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
-            MaximumSize = new Size(968, 512);
-            MinimumSize = new Size(868, 512);
+            MaximumSize = new Size(984, 532);
+            MinimumSize = new Size(984, 532);
             Name = "Frm_Compras";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Frm_Compras";
             Load += Frm_Compras_Load;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)btnCierreVolver).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnRestaurar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnCerrar).EndInit();
@@ -914,5 +943,6 @@
         public TextBox txtMarca;
         public TextBox txtCategoria;
         public TextBox txtProveedor;
+        public PictureBox btnCierreVolver;
     }
 }

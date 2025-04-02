@@ -36,16 +36,47 @@ namespace PVrepository.Implementation
                             ID = dr["ID"] != DBNull.Value ? Convert.ToInt32(dr["ID"]) : 0, // Si es DBNull, asigna 0
                             ComprobanteID = dr["ComprobanteID"] != DBNull.Value ? Convert.ToInt32(dr["ComprobanteID"]) : 0, // Si es DBNull, asigna 0
                             TipoID = dr["TipoID"] != DBNull.Value ? Convert.ToInt32(dr["TipoID"]) : 0, // Si es DBNull, asigna 0
-                            ClienteID = new Clientes
-                            {
-                                ID = Convert.ToInt32(dr["ClienteID"]),
-                                Nombre = dr["ClienteNombre"].ToString()!,
-                            },
-                            Fecha = dr["Fecha"] != DBNull.Value ? Convert.ToDateTime(dr["Fecha"]) : DateTime.MinValue, // Si es DBNull, asigna la fecha mínima
+                            Fecha = Convert.ToDateTime(dr["Fecha"]),
                             Descripcion = dr["Descripcion"] != DBNull.Value ? dr["Descripcion"].ToString() : string.Empty, // Si es DBNull, asigna cadena vacía
                             Credito = dr["Credito"] != DBNull.Value ? Convert.ToInt32(dr["Credito"]) : 0, // Si es DBNull, asigna 0
                             Pagos = dr["Pagos"] != DBNull.Value ? Convert.ToInt32(dr["Pagos"]) : 0, // Si es DBNull, asigna 0
                             Estado = dr["Estado"] != DBNull.Value ? Convert.ToInt32(dr["Estado"]) : 0, // Si es DBNull, asigna 0
+                            ClienteID = new Clientes
+                            { 
+                                ID = Convert.ToInt32(dr["ClienteID"]),
+                            },
+                        });
+                    }
+                }
+            }
+            return list;
+        }
+
+        public async Task<List<Cuenta_Cliente_VM>> ListaDetalle(int Buscar = 0)
+        {
+            List<Cuenta_Cliente_VM> list = new List<Cuenta_Cliente_VM>();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("[SP_Cuenta_Cliente_Listado_Detalle]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ClienteID", Buscar));
+
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    while (await dr.ReadAsync())
+                    {
+                        list.Add(new Cuenta_Cliente_VM
+                        {
+                            ID = dr["ID"] != DBNull.Value ? Convert.ToInt32(dr["ID"]) : 0, // Si es DBNull, asigna 0
+                            CuentaID = dr["CuentaID"] != DBNull.Value ? Convert.ToInt32(dr["CuentaID"]) : 0, // Si es DBNull, asigna 0
+                            FechaD = Convert.ToDateTime(dr["Fecha"]),
+                            ComprobanteNumero = dr["ComprobanteNumero"] != DBNull.Value ? Convert.ToInt32(dr["ComprobanteNumero"]) : 0, // Si es DBNull, asigna 0
+                            DescripcionD = dr["Descripcion"] != DBNull.Value ? dr["Descripcion"].ToString() : string.Empty, // Si es DBNull, asigna cadena vacía
+                            TipoD = dr["Tipo"] != DBNull.Value ? Convert.ToInt32(dr["Tipo"]) : 0, // Si es DBNull, asigna 0
+                            Ingreso = dr["Ingreso"] != DBNull.Value ? Convert.ToInt32(dr["Ingreso"]) : 0, // Si es DBNull, asigna 0
+                            Salida = dr["Salida"] != DBNull.Value ? Convert.ToInt32(dr["Salida"]) : 0, // Si es DBNull, asigna 0
+                            
                         });
                     }
                 }
@@ -99,7 +130,7 @@ namespace PVrepository.Implementation
             {
                 con.Open();
                 var cmd = new SqlCommand("SP_Cuenta_Cliente_Saldo", con);
-                cmd.Parameters.AddWithValue("@Cliente", ClienteID);
+                cmd.Parameters.AddWithValue("@ClienteID", ClienteID);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = await cmd.ExecuteReaderAsync())
                 {
@@ -130,6 +161,6 @@ namespace PVrepository.Implementation
         {
             throw new NotImplementedException();
         }
-
+        
     }
 }

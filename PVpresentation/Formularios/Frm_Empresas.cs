@@ -204,8 +204,14 @@ namespace PVpresentation.Formularios
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
-            if (tabControlMain.SelectedTab != tabListado) {MostrarTabs(tabListado.Name);}
-            else {Close();}
+            if (tabControlMain.SelectedTab != tabListado)
+            {
+                MostrarTabs(tabListado.Name);
+            }
+            else
+            {
+                Close();
+            }
 
         }
 
@@ -275,6 +281,84 @@ namespace PVpresentation.Formularios
                 _openFileDialog.OpenFile();
                 ImagenLogo.Image = Image.FromFile(_openFileDialog.FileName);
                 txtLogoUrl.Text = _openFileDialog.FileName;
+            }
+        }
+
+        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtDomicilio.Text = string.Empty;
+                txtDomicilio.Focus();
+            }
+        }
+
+        private void txtDomicilio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtCuit.Text = string.Empty;
+                txtCuit.Focus();
+            }
+        }
+
+        private void txtCuit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtTelefono.Text = string.Empty;
+                txtTelefono.Focus();
+            }
+        }
+
+        private void txtTelefono_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbCaracter.Focus();
+            }
+        }
+
+        private void cmbCaracter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtMoneda.Text = string.Empty;
+                txtMoneda.Focus();
+            }
+        }
+
+        private void txtMoneda_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtLogoNombre.Text = string.Empty;
+                txtLogoNombre.Focus();
+            }
+        }
+
+        private void txtLogoNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtLogoUrl.Text = string.Empty;
+                txtLogoUrl.Focus();
+            }
+        }
+
+        private void txtLogoUrl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                btnAgregarLogo.Focus();
             }
         }
     }

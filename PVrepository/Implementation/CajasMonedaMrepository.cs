@@ -91,9 +91,9 @@ namespace PVrepository.Implementation
                     {
                         oBjeto = new Cajas_Moneda_M
                         {
-                            Efectivo = Convert.ToInt32(dr["Efectivo"]),
-                            Debito = Convert.ToInt32(dr["Debito"]),
-                            Tarjeta = Convert.ToInt32(dr["Tarjeta"])
+                            Efectivo = dr["Efectivo"] != DBNull.Value ? Convert.ToInt32(dr["Efectivo"]) : 0, // Si es DBNull, asigna 0
+                            Debito = dr["Debito"] != DBNull.Value ? Convert.ToInt32(dr["Debito"]) : 0, // Si es DBNull, asigna  0
+                            Tarjeta = dr["Tarjeta"] != DBNull.Value ? Convert.ToInt32(dr["Tarjeta"]) : 0, // Si es DBNull, asigna  0
                         };
                     }
                 }

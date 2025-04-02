@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PVpresentation.Resources;
-using PVservices.Implementation;
 using PVservices.Interfaces;
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace PVpresentation.Formularios
 {
@@ -13,7 +9,8 @@ namespace PVpresentation.Formularios
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IUsuariosService _usuariosService;
-        public Frm_Main(IServiceProvider serviceProvider, IUsuariosService usuariosService)
+        private readonly IEmpresaService _empresaService;
+        public Frm_Main(IServiceProvider serviceProvider, IUsuariosService usuariosService, IEmpresaService empresaService)
         {
             InitializeComponent();
             CustomizeMenu();
@@ -22,7 +19,9 @@ namespace PVpresentation.Formularios
             this.DoubleBuffered = true;
             _serviceProvider = serviceProvider;
             _usuariosService = usuariosService;
+            _empresaService = empresaService;
         }
+
         #region FUNCIONALIDADES DEL FORMULARIO
 
         //METODOS PARA ARRASTRAR EL FORMULARIO------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -144,19 +143,27 @@ namespace PVpresentation.Formularios
             }
         }
 
+        //private void label1_Click(object sender, EventArgs e)
+        //{
 
-
-
+        //}
+        private int lx;
+        private int ly;
+        private int sw;
+        private int sh;
 
         #endregion
+
         private void btnMenuAdministracion_Click(object sender, EventArgs e)
         {
             ShowSubMenu(pnSubAdministracion);
         }
 
-        private void btnSubRespaldarDatos_Click(object sender, EventArgs e)
+        private async void btnSubRespaldarDatos_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            string Respaldo =  await _empresaService.RespaldarDB();
+            MessageBox.Show(Respaldo, "Respaldar Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -308,6 +315,19 @@ namespace PVpresentation.Formularios
         private void btnCjaSalidas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            Frm_Cajas_Movimientos frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
+
+            //currentFormChild = formulario;
+            frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
+            frmIngresos.TopLevel = false;
+            frmIngresos.TopMost = false;
+            pnMain.Controls.Add(frmIngresos);
+            pnMain.Tag = frmIngresos;
+            frmIngresos.Dock = DockStyle.Fill;
+            frmIngresos.txtOpcion.Text = "2";
+            frmIngresos.Show();
+            frmIngresos.tabEgresos.Select();
+            frmIngresos.BringToFront();
         }
 
         private void btnCnsCajas_Click(object sender, EventArgs e)
@@ -339,15 +359,6 @@ namespace PVpresentation.Formularios
         {
 
         }
-
-        //private void label1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-        private int lx;
-        private int ly;
-        private int sw;
-        private int sh;
 
         private void btnMaximizar_Click(object sender, EventArgs e)
         {
@@ -403,6 +414,20 @@ namespace PVpresentation.Formularios
         private void btnCjaIngresos_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
+            Frm_Cajas_Movimientos frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
+
+            //currentFormChild = formulario;
+            frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
+            frmIngresos.TopLevel = false;
+            frmIngresos.TopMost = false;
+            pnMain.Controls.Add(frmIngresos);
+            pnMain.Tag = frmIngresos;
+            frmIngresos.Dock = DockStyle.Fill;
+            frmIngresos.txtOpcion.Text = "1";
+            frmIngresos.Show();
+            frmIngresos.tabIngresos.Select();
+            frmIngresos.BringToFront();
+
         }
 
         private void pnSuperior_Paint(object sender, PaintEventArgs e)
@@ -424,7 +449,7 @@ namespace PVpresentation.Formularios
 
         private void pictureBox2_DoubleClick(object sender, EventArgs e)
         {
-            
+
             MessageBox.Show("Empresa: " + VariablesGlobales.EmpresaNombre + " | Url: " + VariablesGlobales.EmpresaLogo);
         }
 

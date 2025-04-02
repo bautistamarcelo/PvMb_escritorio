@@ -131,6 +131,7 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnEditar.Visible = false;
             // 
             // btnNuevo
             // 
@@ -154,6 +155,7 @@
             txtNombre.Location = new Point(35, 117);
             txtNombre.Size = new Size(421, 22);
             txtNombre.TabIndex = 31;
+            txtNombre.KeyDown += txtNombre_KeyDown;
             // 
             // label1
             // 
@@ -196,6 +198,7 @@
             cmbCaracter.Name = "cmbCaracter";
             cmbCaracter.Size = new Size(421, 22);
             cmbCaracter.TabIndex = 35;
+            cmbCaracter.KeyDown += cmbCaracter_KeyDown;
             // 
             // label8
             // 
@@ -216,6 +219,7 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(421, 22);
             txtTelefono.TabIndex = 34;
+            txtTelefono.KeyDown += txtTelefono_KeyDown;
             // 
             // txtCuit
             // 
@@ -225,6 +229,7 @@
             txtCuit.Name = "txtCuit";
             txtCuit.Size = new Size(421, 22);
             txtCuit.TabIndex = 33;
+            txtCuit.KeyDown += txtCuit_KeyDown;
             // 
             // txtDomicilio
             // 
@@ -234,6 +239,7 @@
             txtDomicilio.Name = "txtDomicilio";
             txtDomicilio.Size = new Size(421, 22);
             txtDomicilio.TabIndex = 32;
+            txtDomicilio.KeyDown += txtDomicilio_KeyDown;
             // 
             // label9
             // 
@@ -278,6 +284,7 @@
             txtLogoUrl.ReadOnly = true;
             txtLogoUrl.Size = new Size(382, 22);
             txtLogoUrl.TabIndex = 38;
+            txtLogoUrl.KeyDown += txtLogoUrl_KeyDown;
             // 
             // label6
             // 
@@ -298,6 +305,7 @@
             txtLogoNombre.Name = "txtLogoNombre";
             txtLogoNombre.Size = new Size(421, 22);
             txtLogoNombre.TabIndex = 37;
+            txtLogoNombre.KeyDown += txtLogoNombre_KeyDown;
             // 
             // label7
             // 
@@ -318,6 +326,7 @@
             txtMoneda.Name = "txtMoneda";
             txtMoneda.Size = new Size(421, 22);
             txtMoneda.TabIndex = 36;
+            txtMoneda.KeyDown += txtMoneda_KeyDown;
             // 
             // label10
             // 

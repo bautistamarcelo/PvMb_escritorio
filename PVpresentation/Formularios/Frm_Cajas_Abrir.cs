@@ -32,9 +32,9 @@ namespace PVpresentation.Formularios
         private readonly ICajasMonedaMservice _cajasMonedaMservice;
         public CajasVM _CajaSeleccionada { get; set; } = null!;
 
-        public Frm_Cajas_Abrir(IServiceProvider serviceProvider, 
-                               ISucursalesService sucursalesService, 
-                               ICajasService cajasService, 
+        public Frm_Cajas_Abrir(IServiceProvider serviceProvider,
+                               ISucursalesService sucursalesService,
+                               ICajasService cajasService,
                                IUsuariosService usuariosService,
                                ICajasTransaccionesService cajasTransaccionesService,
                                ICajasMonedaTservice cajasMonedaTservice,
@@ -76,8 +76,8 @@ namespace PVpresentation.Formularios
                 Nombre = VariablesGlobales.UsuarioNombre + DateTime.Now.ToString(" yyyy-MM-dd HH:mm"),
                 Condicion = "Abierta",
                 Apertura = DateTime.Now,
-                SaldoInicial=0,
-                SaldoFinal=0,
+                SaldoInicial = 0,
+                SaldoFinal = 0,
                 UsuarioID = VariablesGlobales.UsuarioID,
                 Usuario = VariablesGlobales.UsuarioNombre,
                 SucursalID = VariablesGlobales.SucursalID,
@@ -152,14 +152,14 @@ namespace PVpresentation.Formularios
                     new XElement("CtaCte", Convert.ToInt32(0))
              );
 
-                    #region Guardar XML
-                    string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
-                    string fileName = "CajaNueva.xml"; // Nombre del archivo
-                    string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
+            #region Guardar XML
+            string folderPath = @"D:\Base de Datos\"; // Ruta de la carpeta
+            string fileName = "CajaNueva.xml"; // Nombre del archivo
+            string fullPath = Path.Combine(folderPath, fileName); // Ruta completa del archivo
 
-                    File.WriteAllText(fullPath, Caja.ToString());
+            File.WriteAllText(fullPath, Caja.ToString());
 
-                    #endregion
+            #endregion
             #endregion
 
             respuesta = await _cajasService.crear(Caja.ToString());
@@ -176,6 +176,14 @@ namespace PVpresentation.Formularios
             {
                 MessageBox.Show(respuesta);
                 this.Close();
+            }
+        }
+
+        private void txtSaldoInicial_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
             }
         }
     }

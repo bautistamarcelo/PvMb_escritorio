@@ -6,10 +6,11 @@ using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
+using System.Threading.Tasks;
 using Application = System.Windows.Forms.Application;
 using ComboBox = System.Windows.Forms.ComboBox;
 using Control = System.Windows.Forms.Control;
-using MessageBox = System.Windows.MessageBox;
+//using MessageBox = System.Windows.MessageBox;
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace PVpresentation.Formularios
@@ -205,8 +206,18 @@ namespace PVpresentation.Formularios
 
         private async Task MostrarProductos(string Buscar = "")
         {
+            // Crear una lista vacía de productos
+            List<Productos> listaProductos = new List<Productos>();
 
-            var listaProductos = await _productosService.Lista(Buscar);
+            if (txtInstancia.Text == "1")
+            {
+                listaProductos = await _productosService.ListaSF();
+            }
+            else
+            {
+                listaProductos = await _productosService.Lista(Buscar);
+            }
+
             var VMListaProductos = listaProductos.Select(item => new ProductosVM //Genero una lista con la estructura de la vista modelo para mostrar en el DG
             {
                 ID = item.ID,
@@ -426,6 +437,7 @@ namespace PVpresentation.Formularios
         {
             dgvListado.ImplementarConfiguracion("Editar");
             MostrarTabs(tabListado.Name);
+            txtInstancia.Text = "1";
             await MostrarProductos();
 
             //Completar los datos de los comboBox
@@ -436,6 +448,7 @@ namespace PVpresentation.Formularios
 
         private async void btnBuscar_Click(object sender, EventArgs e)
         {
+            txtInstancia.Text = "2";
             await MostrarProductos(txtBuscar.Text.Trim());
         }
 
@@ -577,8 +590,14 @@ namespace PVpresentation.Formularios
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
-            if (tabControlMain.SelectedTab != tabListado) {MostrarTabs(tabListado.Name);}
-            else {Close();}
+            if (tabControlMain.SelectedTab != tabListado)
+            {
+                MostrarTabs(tabListado.Name);
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void btnAgregarImpuesto_Click(object sender, EventArgs e)
@@ -614,11 +633,13 @@ namespace PVpresentation.Formularios
 
                 evaluarComboBox(cmbCategoria, "Frm_Categorias");
                 e.Handled = true; // Para evitar que el evento se propague
+                cmbMarca.Focus();
             }
             if (e.KeyCode == Keys.F3)
             { // Código para abrir el formulario deseado
                 MostrarFormularioEmergente<Frm_Categorias>();
             }
+
         }
 
         private void cmbMarca_KeyDown(object sender, KeyEventArgs e)
@@ -627,6 +648,11 @@ namespace PVpresentation.Formularios
             { // Código para abrir el formulario deseado
                 MostrarFormularioEmergente<Frm_Marcas>();
             }
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbProveedor.Focus();
+            }
         }
 
         private void cmbProveedor_KeyDown(object sender, KeyEventArgs e)
@@ -634,6 +660,147 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.F3)
             { // Código para abrir el formulario deseado
                 MostrarFormularioEmergente<Frm_Proveedores>();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtCosto.Focus();
+            }
+        }
+
+        private async void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var respuesta = "";
+
+            if (MessageBox.Show("¿Está seguro de eliminar el registro?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                respuesta = await _productosService.eliminar(Convert.ToInt32(txtID.Text.Trim()), 2);
+                if (respuesta != "")
+                {
+                    MessageBox.Show(respuesta);
+                }
+                else
+                {
+                    txtInstancia.Text = "1";
+                    await MostrarProductos();
+                    MostrarTabs(tabListado.Name);
+                }
+            }
+        }
+
+        private void txtStock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpOferta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbSituacion.Focus();
+            }
+        }
+
+        private void cmbSituacion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtBarCode.Text = string.Empty;
+                txtBarCode.Focus();
+            }
+        }
+
+        private void txtBarCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtTalle.Text = string.Empty;
+                txtTalle.Focus();
+            }
+        }
+
+        private void txtTalle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtColor.Text = string.Empty;
+                txtColor.Focus();
+            }
+        }
+
+        private void txtColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbImpuesto.Focus();
+            }
+        }
+
+        private void cmbImpuesto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbCategoria.Focus();
+            }
+        }
+
+        private void txtCosto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtpOferta.Focus();
+            }
+        }
+
+        private void txtpOferta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtpVenta.Focus();
+            }
+        }
+
+        private void txtpVenta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                btnGrabar.Focus();
             }
         }
     }

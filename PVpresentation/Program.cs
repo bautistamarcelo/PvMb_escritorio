@@ -41,6 +41,7 @@ namespace PVpresentation
                 services.AddTransient<FrmModeloCRUD>();
                 services.AddTransient<Frm_Cajas>();
                 services.AddTransient<Frm_Cajas_Abrir>();
+                services.AddTransient<Frm_Cajas_Movimientos>();
                 services.AddTransient<Frm_Categorias>();
                 services.AddTransient<Frm_Clientes>();
                 services.AddTransient<Frm_Clientes_Buscar>();

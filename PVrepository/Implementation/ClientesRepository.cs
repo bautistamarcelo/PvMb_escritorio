@@ -118,6 +118,30 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
+        public async Task<string> eliminar(int IDcliente, int Estado)
+        {
+            string respuesta = "";
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Cliente_Eliminar", con);
+                cmd.Parameters.AddWithValue("@IDcliente", IDcliente);
+                cmd.Parameters.AddWithValue("@Estado", Estado);
+                cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    respuesta = Convert.ToString(cmd.Parameters["@MsjError"].Value)!;
+                }
+                catch (Exception ex)
+                {
+                    respuesta = ex.Message;
+                }
+            }
+            return respuesta;
+        }
+
         public async Task<int> obtenerId(Clientes objeto, int id)
         {
             string respuesta = "";

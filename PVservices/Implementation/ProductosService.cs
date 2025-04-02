@@ -29,9 +29,19 @@ namespace PVservices.Implementation
             return await _productosRepository.editar(objeto);
         }
 
+        public async Task<string> eliminar(int IDproducto, int Situacion)
+        {
+            return await _productosRepository.eliminar(IDproducto, Situacion);
+        }
+
         public async Task<List<Productos>> Lista(string Buscar = "")
         {
             return await _productosRepository.Lista(Buscar);
+        }
+
+        public async Task<List<Productos>> ListaSF()
+        {
+            return await _productosRepository.ListaSF();
         }
 
         public async Task<Productos> Obtener(int IDproducto)

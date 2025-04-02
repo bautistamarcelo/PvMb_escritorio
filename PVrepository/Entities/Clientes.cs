@@ -10,7 +10,7 @@ namespace PVrepository.Entities
         public string Cuit {get; set;}
         public string Email {get; set;} 
         public string Telefono {get; set;}
-        public int Estado {get; set;}
+        public int Estado {get; set;} //Values: 1 'Habilitado' / 2 'Deshabilitado'
         public Caracter CaracterID {get; set;}
         public int HabilitadoCtaCte {get; set;}
     }

@@ -7,6 +7,7 @@ namespace PVservices.Interfaces
         Task<List<Usuarios>> Lista(string Buscar = "");
         Task<string> crear(Usuarios objeto);
         Task<string> editar(Usuarios objeto);
+        Task<string> eliminar(int UsuarioID);
         Task<Usuarios> Login(string nombre, string clave);
         Task<Usuarios> Buscar(string vNombre);
         Task<int> VerificarCorreo(string correo);

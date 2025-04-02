@@ -394,6 +394,7 @@
             txtID.Size = new Size(287, 25);
             txtID.TabIndex = 2;
             txtID.TabStop = false;
+            txtID.KeyDown += txtID_KeyDown;
             // 
             // label3
             // 
@@ -416,6 +417,7 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(287, 82);
             txtNombre.TabIndex = 3;
+            txtNombre.KeyDown += txtNombre_KeyDown;
             // 
             // label2
             // 
@@ -460,6 +462,7 @@
             cmbSituacion.Name = "cmbSituacion";
             cmbSituacion.Size = new Size(286, 27);
             cmbSituacion.TabIndex = 4;
+            cmbSituacion.KeyDown += cmbSituacion_KeyDown;
             // 
             // label26
             // 
@@ -551,11 +554,11 @@
             txtStock.Font = new Font("Square721 BT", 12F);
             txtStock.Location = new Point(675, 67);
             txtStock.Name = "txtStock";
-            txtStock.ReadOnly = true;
             txtStock.Size = new Size(136, 27);
             txtStock.TabIndex = 12;
-            txtStock.TabStop = false;
             txtStock.TextAlign = HorizontalAlignment.Center;
+            txtStock.KeyDown += txtStock_KeyDown;
+            txtStock.KeyPress += txtStock_KeyPress;
             // 
             // txtColor
             // 
@@ -566,6 +569,7 @@
             txtColor.Name = "txtColor";
             txtColor.Size = new Size(146, 25);
             txtColor.TabIndex = 11;
+            txtColor.KeyDown += txtColor_KeyDown;
             // 
             // txtpVenta
             // 
@@ -577,6 +581,8 @@
             txtpVenta.Size = new Size(136, 27);
             txtpVenta.TabIndex = 15;
             txtpVenta.TextAlign = HorizontalAlignment.Right;
+            txtpVenta.KeyDown += txtpVenta_KeyDown;
+            txtpVenta.KeyPress += txtpVenta_KeyPress;
             // 
             // txtpOferta
             // 
@@ -588,6 +594,8 @@
             txtpOferta.Size = new Size(136, 27);
             txtpOferta.TabIndex = 14;
             txtpOferta.TextAlign = HorizontalAlignment.Right;
+            txtpOferta.KeyDown += txtpOferta_KeyDown;
+            txtpOferta.KeyPress += txtpOferta_KeyPress;
             // 
             // txtCosto
             // 
@@ -599,6 +607,8 @@
             txtCosto.Size = new Size(136, 27);
             txtCosto.TabIndex = 13;
             txtCosto.TextAlign = HorizontalAlignment.Right;
+            txtCosto.KeyDown += txtCosto_KeyDown;
+            txtCosto.KeyPress += txtCosto_KeyPress;
             // 
             // txtTalle
             // 
@@ -609,6 +619,7 @@
             txtTalle.Name = "txtTalle";
             txtTalle.Size = new Size(114, 25);
             txtTalle.TabIndex = 10;
+            txtTalle.KeyDown += txtTalle_KeyDown;
             // 
             // label27
             // 
@@ -677,6 +688,7 @@
             cmbProveedor.Name = "cmbProveedor";
             cmbProveedor.Size = new Size(276, 27);
             cmbProveedor.TabIndex = 9;
+            cmbProveedor.KeyDown += cmbProveedor_KeyDown;
             // 
             // label16
             // 
@@ -723,6 +735,7 @@
             cmbMarca.Name = "cmbMarca";
             cmbMarca.Size = new Size(276, 27);
             cmbMarca.TabIndex = 8;
+            cmbMarca.KeyDown += cmbMarca_KeyDown;
             // 
             // label22
             // 
@@ -747,6 +760,7 @@
             cmbCategoria.Name = "cmbCategoria";
             cmbCategoria.Size = new Size(276, 27);
             cmbCategoria.TabIndex = 7;
+            cmbCategoria.KeyDown += cmbCategoria_KeyDown;
             // 
             // label23
             // 
@@ -771,6 +785,7 @@
             cmbImpuesto.Name = "cmbImpuesto";
             cmbImpuesto.Size = new Size(276, 27);
             cmbImpuesto.TabIndex = 6;
+            cmbImpuesto.KeyDown += cmbImpuesto_KeyDown;
             // 
             // btnCancelar
             // 

@@ -5,6 +5,7 @@ using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 
 namespace PVpresentation.Formularios
 {
@@ -68,7 +69,6 @@ namespace PVpresentation.Formularios
             }
         }
         #endregion
-
 
         private async void CustomCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -149,7 +149,7 @@ namespace PVpresentation.Formularios
             txtUrlFoto.Text = "";
             txtNombreFoto.Text = "";
             txtOpcion.Text = "0"; // 1 Nuevo / 2 Edición
-            cmbEsActivo.SelectedIndex = 1;
+            cmbEsActivo.SelectedIndex = 0;
             cmbRol.SelectedIndex = 3;
             txtID.Enabled = false;
             txtBuscar.Select();
@@ -200,6 +200,7 @@ namespace PVpresentation.Formularios
         {
             LimpiarMantenimiento();
             txtOpcion.Text = "1"; // 1 Nuevo / 2 Edición
+            txtID.Text = "0";
             txtID.Enabled = false;
             btnGrabar.Enabled = true;
             //MostrarTabs(tabNuevo.Name);
@@ -216,6 +217,7 @@ namespace PVpresentation.Formularios
         private async void btnGrabar_Click(object sender, EventArgs e)
         {
             string respuesta = "";
+            #region VALIDACIONES DE CAMPOS
             //Validamos que los campos no se encuentren vacíos
             if (txtNombre.Text.Trim() == "")
             {
@@ -242,6 +244,7 @@ namespace PVpresentation.Formularios
                 MessageBox.Show("La selección de la Situación es obligatoria");
                 return;
             }
+            #endregion
 
             //Creo las variables con los valores de los comboBox
             var itemRol = (OpcionesComboBox)cmbRol.SelectedItem!;
@@ -251,6 +254,7 @@ namespace PVpresentation.Formularios
             var objeTo = new Usuarios
             {
                 IDUsuario = Convert.ToInt32(txtID.Text.Trim()),
+                nombreUsuario = txtNombre.Text.Trim(),
                 nombre = txtNombre.Text.Trim(),
                 correo = txtCorreo.Text.Trim(),
                 telefono = txtTelefono.Text.Trim(),
@@ -259,6 +263,7 @@ namespace PVpresentation.Formularios
                 nombreFoto = txtNombreFoto.Text.Trim(),
                 clave = txtClave.Text.Trim(),
                 esActivo = itemActivo.Valor,
+                fechaRegistro = DateTime.Now
             };
 
             //Evalúo si es nuevo o edición
@@ -282,6 +287,26 @@ namespace PVpresentation.Formularios
                 LimpiarMantenimiento();
                 btnGrabar.Enabled = false;
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (txtID.Text.Trim() == "" || txtID.Text.Trim() == "0" || txtID.Text.Trim() =="1")
+            {
+                MessageBox.Show("Debe seleccionar un usuario diferente a la selección actual para eliminar");
+                return;
+            }
+            else
+            {
+                if (MessageBox.Show("¿Está seguro de eliminar el registro?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    _usuariosService.eliminar(Convert.ToInt32(txtID.Text.Trim()));
+                    LimpiarMantenimiento();
+                    MostrarUsuarios();
+                }
+            }
+
+            
         }
     }
 }

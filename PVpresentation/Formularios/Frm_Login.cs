@@ -33,7 +33,7 @@ namespace PVpresentation.Formularios
             _predeterminadasService = predeterminadasService;
             // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
             AssignFocusEvents(this);
-            
+
         }
         #endregion
 
@@ -96,25 +96,25 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
-            var predeterMinadas = await _predeterminadasService.Obtener();
+            VariablesGlobales.oPredeterminadas = await _predeterminadasService.Obtener();
             var ListaEmpresas = await _empresaService.Lista();
             var itemsEmpresas = ListaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
 
-            cmbEmpresa.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Empresa", Valor = 0});
+            cmbEmpresa.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Empresa", Valor = 0 });
             cmbEmpresa.InsertarItems(itemsEmpresas);
-            cmbEmpresa.EstablecerValor(predeterMinadas.EmpresaID);
+            cmbEmpresa.EstablecerValor(VariablesGlobales.oPredeterminadas.EmpresaID);
 
-            var ListaSucursales = await _sucursalesService.Lista("", predeterMinadas.EmpresaID);
-            var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            //var ListaSucursales = await _sucursalesService.Lista("", predeterMinadas.EmpresaID);
+            //var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
 
-            cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0});
-            cmbSucursales.InsertarItems(itemsSucursal);
-            cmbSucursales.EstablecerValor(predeterMinadas.SucursalID);
+            //cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0 });
+            //cmbSucursales.InsertarItems(itemsSucursal);
+            //cmbSucursales.EstablecerValor(predeterMinadas.SucursalID);
 
             txtUsuario.Focus();
-           
-            
-            
+
+
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -178,7 +178,7 @@ namespace PVpresentation.Formularios
             if (cmbEmpresa.SelectedIndex > 0)
             {
                 cmbSucursales.Items.Clear();
-                cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0});
+                cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0 });
                 var itemEmpresa = (OpcionesComboBox)cmbEmpresa.SelectedItem!;
                 vEmpresa = await _empresaService.Obtener(Convert.ToInt32(itemEmpresa.Valor));
                 if (vEmpresa.Predeterminada != 0)
@@ -192,8 +192,7 @@ namespace PVpresentation.Formularios
                 var ListaSucursales = await _sucursalesService.Lista("", itemEmpresa.Valor);
                 var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
                 cmbSucursales.InsertarItems(itemsSucursal);
-                
-                cmbSucursales.Focus();
+                cmbSucursales.EstablecerValor(VariablesGlobales.oPredeterminadas.SucursalID);
 
             }
             else
@@ -268,7 +267,7 @@ namespace PVpresentation.Formularios
 
                     }
                 }
-                
+
 
             }
 
@@ -297,6 +296,28 @@ namespace PVpresentation.Formularios
             var _configura = await _empresaService.editar(vEmpresa);
 
         }
-       
+
+        private void cmbSucursales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text== string.Empty)
+            {
+                txtUsuario.Focus();
+                return;
+            }
+
+            if (cmbSucursales.SelectedIndex > 0)
+            {
+                btnLogin.Focus();
+            }
+        }
+
+        private void cmbEmpresa_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                cmbSucursales.Focus();
+            }
+        }
     }
 }

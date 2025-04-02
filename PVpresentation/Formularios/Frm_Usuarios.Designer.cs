@@ -72,6 +72,7 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnEditar.Visible = false;
             // 
             // btnNuevo
             // 
@@ -85,6 +86,7 @@
             btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnCancelar
             // 
@@ -102,21 +104,27 @@
             // 
             // label2
             // 
-            label2.Location = new Point(14, 58);
+            label2.Location = new Point(14, 18);
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(14, 76);
-            txtNombre.Size = new Size(287, 22);
+            txtNombre.Font = new Font("EngraversGothic BT", 12F);
+            txtNombre.Location = new Point(14, 36);
+            txtNombre.Size = new Size(287, 25);
             // 
             // label1
             // 
-            label1.Location = new Point(14, 13);
+            label1.Location = new Point(143, 3);
+            label1.Visible = false;
             // 
             // txtID
             // 
-            txtID.Location = new Point(14, 31);
-            txtID.Size = new Size(287, 22);
+            txtID.Font = new Font("EngraversGothic BT", 12F);
+            txtID.Location = new Point(173, 3);
+            txtID.ReadOnly = true;
+            txtID.Size = new Size(60, 25);
+            txtID.Text = "0";
+            txtID.Visible = false;
             // 
             // pnMantenimiento
             // 
@@ -167,7 +175,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("EngraversGothic BT", 10F);
             label7.ForeColor = Color.WhiteSmoke;
-            label7.Location = new Point(15, 315);
+            label7.Location = new Point(15, 294);
             label7.Name = "label7";
             label7.Size = new Size(64, 15);
             label7.TabIndex = 49;
@@ -175,11 +183,14 @@
             // 
             // cmbEsActivo
             // 
+            cmbEsActivo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbEsActivo.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbEsActivo.BackColor = Color.Gainsboro;
+            cmbEsActivo.Font = new Font("EngraversGothic BT", 12F);
             cmbEsActivo.FormattingEnabled = true;
-            cmbEsActivo.Location = new Point(15, 333);
+            cmbEsActivo.Location = new Point(15, 312);
             cmbEsActivo.Name = "cmbEsActivo";
-            cmbEsActivo.Size = new Size(287, 22);
+            cmbEsActivo.Size = new Size(287, 25);
             cmbEsActivo.TabIndex = 41;
             // 
             // label10
@@ -187,7 +198,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("EngraversGothic BT", 10F);
             label10.ForeColor = Color.WhiteSmoke;
-            label10.Location = new Point(15, 357);
+            label10.Location = new Point(15, 340);
             label10.Name = "label10";
             label10.Size = new Size(29, 15);
             label10.TabIndex = 48;
@@ -195,20 +206,24 @@
             // 
             // cmbRol
             // 
+            cmbRol.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbRol.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbRol.BackColor = Color.Gainsboro;
+            cmbRol.Font = new Font("EngraversGothic BT", 12F);
             cmbRol.FormattingEnabled = true;
-            cmbRol.Location = new Point(15, 374);
+            cmbRol.Location = new Point(15, 358);
             cmbRol.Name = "cmbRol";
-            cmbRol.Size = new Size(287, 22);
+            cmbRol.Size = new Size(287, 25);
             cmbRol.TabIndex = 42;
             // 
             // txtNombreFoto
             // 
             txtNombreFoto.BackColor = Color.Gainsboro;
             txtNombreFoto.BorderStyle = BorderStyle.FixedSingle;
-            txtNombreFoto.Location = new Point(14, 293);
+            txtNombreFoto.Font = new Font("EngraversGothic BT", 12F);
+            txtNombreFoto.Location = new Point(14, 266);
             txtNombreFoto.Name = "txtNombreFoto";
-            txtNombreFoto.Size = new Size(287, 22);
+            txtNombreFoto.Size = new Size(287, 25);
             txtNombreFoto.TabIndex = 40;
             // 
             // label8
@@ -216,7 +231,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("EngraversGothic BT", 10F);
             label8.ForeColor = Color.WhiteSmoke;
-            label8.Location = new Point(14, 275);
+            label8.Location = new Point(14, 248);
             label8.Name = "label8";
             label8.Size = new Size(89, 15);
             label8.TabIndex = 47;
@@ -226,9 +241,10 @@
             // 
             txtUrlFoto.BackColor = Color.Gainsboro;
             txtUrlFoto.BorderStyle = BorderStyle.FixedSingle;
-            txtUrlFoto.Location = new Point(14, 250);
+            txtUrlFoto.Font = new Font("EngraversGothic BT", 12F);
+            txtUrlFoto.Location = new Point(14, 220);
             txtUrlFoto.Name = "txtUrlFoto";
-            txtUrlFoto.Size = new Size(287, 22);
+            txtUrlFoto.Size = new Size(287, 25);
             txtUrlFoto.TabIndex = 39;
             // 
             // label9
@@ -236,7 +252,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("EngraversGothic BT", 10F);
             label9.ForeColor = Color.WhiteSmoke;
-            label9.Location = new Point(14, 232);
+            label9.Location = new Point(14, 202);
             label9.Name = "label9";
             label9.Size = new Size(64, 15);
             label9.TabIndex = 46;
@@ -246,10 +262,11 @@
             // 
             txtClave.BackColor = Color.Gainsboro;
             txtClave.BorderStyle = BorderStyle.FixedSingle;
-            txtClave.Location = new Point(14, 208);
+            txtClave.Font = new Font("EngraversGothic BT", 12F);
+            txtClave.Location = new Point(14, 174);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '*';
-            txtClave.Size = new Size(287, 22);
+            txtClave.Size = new Size(287, 25);
             txtClave.TabIndex = 38;
             // 
             // label6
@@ -257,7 +274,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("EngraversGothic BT", 10F);
             label6.ForeColor = Color.WhiteSmoke;
-            label6.Location = new Point(14, 190);
+            label6.Location = new Point(14, 156);
             label6.Name = "label6";
             label6.Size = new Size(41, 15);
             label6.TabIndex = 45;
@@ -267,9 +284,10 @@
             // 
             txtTelefono.BackColor = Color.Gainsboro;
             txtTelefono.BorderStyle = BorderStyle.FixedSingle;
-            txtTelefono.Location = new Point(14, 166);
+            txtTelefono.Font = new Font("EngraversGothic BT", 12F);
+            txtTelefono.Location = new Point(14, 128);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(287, 22);
+            txtTelefono.Size = new Size(287, 25);
             txtTelefono.TabIndex = 37;
             // 
             // label5
@@ -277,7 +295,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("EngraversGothic BT", 10F);
             label5.ForeColor = Color.WhiteSmoke;
-            label5.Location = new Point(14, 148);
+            label5.Location = new Point(14, 110);
             label5.Name = "label5";
             label5.Size = new Size(63, 15);
             label5.TabIndex = 44;
@@ -287,9 +305,10 @@
             // 
             txtCorreo.BackColor = Color.Gainsboro;
             txtCorreo.BorderStyle = BorderStyle.FixedSingle;
-            txtCorreo.Location = new Point(14, 123);
+            txtCorreo.Font = new Font("EngraversGothic BT", 12F);
+            txtCorreo.Location = new Point(14, 82);
             txtCorreo.Name = "txtCorreo";
-            txtCorreo.Size = new Size(287, 22);
+            txtCorreo.Size = new Size(287, 25);
             txtCorreo.TabIndex = 36;
             // 
             // label3
@@ -297,7 +316,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("EngraversGothic BT", 10F);
             label3.ForeColor = Color.WhiteSmoke;
-            label3.Location = new Point(14, 105);
+            label3.Location = new Point(14, 64);
             label3.Name = "label3";
             label3.Size = new Size(54, 15);
             label3.TabIndex = 43;

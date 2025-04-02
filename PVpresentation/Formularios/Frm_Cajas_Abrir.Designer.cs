@@ -239,6 +239,7 @@
             txtSaldoInicial.Name = "txtSaldoInicial";
             txtSaldoInicial.Size = new Size(285, 25);
             txtSaldoInicial.TabIndex = 67;
+            txtSaldoInicial.KeyPress += txtSaldoInicial_KeyPress;
             // 
             // label6
             // 

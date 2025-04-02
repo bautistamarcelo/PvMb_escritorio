@@ -149,6 +149,7 @@
             txtNombre.Location = new Point(36, 108);
             txtNombre.Size = new Size(423, 22);
             txtNombre.TabIndex = 31;
+            txtNombre.KeyDown += txtNombre_KeyDown;
             // 
             // label1
             // 
@@ -166,6 +167,7 @@
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
             btnEliminar.Location = new Point(355, 376);
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnCancelar
             // 
@@ -281,6 +283,7 @@
             cmbCaracter.Name = "cmbCaracter";
             cmbCaracter.Size = new Size(413, 22);
             cmbCaracter.TabIndex = 37;
+            cmbCaracter.KeyDown += cmbCaracter_KeyDown;
             // 
             // cmbEstado
             // 
@@ -290,6 +293,7 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(413, 22);
             cmbEstado.TabIndex = 36;
+            cmbEstado.KeyDown += cmbEstado_KeyDown;
             // 
             // txtTelefono
             // 
@@ -299,6 +303,7 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(414, 22);
             txtTelefono.TabIndex = 35;
+            txtTelefono.KeyDown += txtTelefono_KeyDown;
             // 
             // txtEmail
             // 
@@ -308,6 +313,7 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(421, 22);
             txtEmail.TabIndex = 34;
+            txtEmail.KeyDown += txtEmail_KeyDown;
             // 
             // txtCuit
             // 
@@ -317,6 +323,7 @@
             txtCuit.Name = "txtCuit";
             txtCuit.Size = new Size(421, 22);
             txtCuit.TabIndex = 33;
+            txtCuit.KeyDown += txtCuit_KeyDown;
             // 
             // txtDomicilio
             // 
@@ -326,6 +333,7 @@
             txtDomicilio.Name = "txtDomicilio";
             txtDomicilio.Size = new Size(421, 22);
             txtDomicilio.TabIndex = 32;
+            txtDomicilio.KeyDown += txtDomicilio_KeyDown;
             // 
             // Frm_Clientes
             // 

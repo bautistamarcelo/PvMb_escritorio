@@ -16,7 +16,7 @@ namespace PVpresentation.Resources
         public static int EmpresaID { get; set; }
         public static string EmpresaNombre {get; set;}= string.Empty;
         public static string EmpresaLogo {get; set;}= string.Empty;
-
+        public static Predeterminadas oPredeterminadas {get; set;}
 
         public static int CajaID { get; set; }
         public static string CajaNombre { get; set; } = string.Empty;
@@ -31,6 +31,7 @@ namespace PVpresentation.Resources
         public static int vProductoPcosto { get; set; }
         public static int vProductoPoferta { get; set; }
         public static int vProductoPventa { get; set; }
+        public static int vProductoStock { get; set; }
 
          public static int vProveedorID { get; set; }
         public static string vProveedorNombre{get;set;}= string.Empty;

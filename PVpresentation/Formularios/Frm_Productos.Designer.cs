@@ -1,4 +1,6 @@
-﻿namespace PVpresentation.Formularios
+﻿using System.Threading.Tasks;
+
+namespace PVpresentation.Formularios
 {
     partial class Frm_Productos
     {
@@ -26,7 +28,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private async Task InitializeComponent()
         {
             btnAgregarProveedor = new Button();
             btnAgregarMarca = new Button();
@@ -173,12 +175,14 @@
             btnEditar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnEditar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnEditar.Font = new Font("Square721 BT", 11F);
             // 
             // btnNuevo
             // 
             btnNuevo.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnNuevo.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnNuevo.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnNuevo.Font = new Font("Square721 BT", 11F);
             btnNuevo.Click += btnNuevo_Click;
             // 
             // btnBuscar
@@ -194,7 +198,8 @@
             // txtNombre
             // 
             txtNombre.Location = new Point(36, 143);
-            txtNombre.Size = new Size(357, 22);
+            txtNombre.Size = new Size(397, 22);
+            txtNombre.KeyDown += txtNombre_KeyDown;
             // 
             // label1
             // 
@@ -203,7 +208,7 @@
             // txtID
             // 
             txtID.Location = new Point(36, 88);
-            txtID.Size = new Size(357, 22);
+            txtID.Size = new Size(397, 22);
             txtID.TabStop = false;
             // 
             // btnEliminar
@@ -211,15 +216,18 @@
             btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
-            btnEliminar.Location = new Point(862, 382);
+            btnEliminar.Font = new Font("Square721 BT", 11F);
+            btnEliminar.Location = new Point(838, 382);
             btnEliminar.TabStop = false;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnCancelar
             // 
             btnCancelar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnCancelar.Location = new Point(708, 382);
+            btnCancelar.Font = new Font("Square721 BT", 11F);
+            btnCancelar.Location = new Point(684, 382);
             btnCancelar.TabIndex = 46;
             btnCancelar.TabStop = false;
             btnCancelar.Click += btnCancelar_Click;
@@ -230,7 +238,8 @@
             btnGrabar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
-            btnGrabar.Location = new Point(559, 382);
+            btnGrabar.Font = new Font("Square721 BT", 11F);
+            btnGrabar.Location = new Point(535, 382);
             btnGrabar.TabIndex = 45;
             btnGrabar.Click += btnGrabar_Click;
             // 
@@ -243,7 +252,7 @@
             btnAgregarProveedor.FlatStyle = FlatStyle.Flat;
             btnAgregarProveedor.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAgregarProveedor.ForeColor = Color.WhiteSmoke;
-            btnAgregarProveedor.Location = new Point(417, 249);
+            btnAgregarProveedor.Location = new Point(456, 250);
             btnAgregarProveedor.Margin = new Padding(0);
             btnAgregarProveedor.Name = "btnAgregarProveedor";
             btnAgregarProveedor.Size = new Size(31, 23);
@@ -262,7 +271,7 @@
             btnAgregarMarca.FlatStyle = FlatStyle.Flat;
             btnAgregarMarca.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAgregarMarca.ForeColor = Color.WhiteSmoke;
-            btnAgregarMarca.Location = new Point(417, 196);
+            btnAgregarMarca.Location = new Point(456, 197);
             btnAgregarMarca.Margin = new Padding(0);
             btnAgregarMarca.Name = "btnAgregarMarca";
             btnAgregarMarca.Size = new Size(31, 23);
@@ -281,7 +290,7 @@
             btnAgregarCategoria.FlatStyle = FlatStyle.Flat;
             btnAgregarCategoria.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAgregarCategoria.ForeColor = Color.WhiteSmoke;
-            btnAgregarCategoria.Location = new Point(417, 138);
+            btnAgregarCategoria.Location = new Point(456, 139);
             btnAgregarCategoria.Margin = new Padding(0);
             btnAgregarCategoria.Name = "btnAgregarCategoria";
             btnAgregarCategoria.Size = new Size(31, 23);
@@ -300,7 +309,7 @@
             btnAgregarImpuesto.FlatStyle = FlatStyle.Flat;
             btnAgregarImpuesto.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAgregarImpuesto.ForeColor = Color.WhiteSmoke;
-            btnAgregarImpuesto.Location = new Point(417, 86);
+            btnAgregarImpuesto.Location = new Point(456, 87);
             btnAgregarImpuesto.Margin = new Padding(0);
             btnAgregarImpuesto.Name = "btnAgregarImpuesto";
             btnAgregarImpuesto.Size = new Size(31, 23);
@@ -318,16 +327,17 @@
             txtStock.Name = "txtStock";
             txtStock.Size = new Size(117, 22);
             txtStock.TabIndex = 41;
-            txtStock.Text = "9";
+            txtStock.KeyPress += txtStock_KeyPress;
             // 
             // txtColor
             // 
             txtColor.BackColor = Color.Gainsboro;
             txtColor.BorderStyle = BorderStyle.FixedSingle;
-            txtColor.Location = new Point(609, 302);
+            txtColor.Location = new Point(277, 303);
             txtColor.Name = "txtColor";
-            txtColor.Size = new Size(173, 22);
+            txtColor.Size = new Size(155, 22);
             txtColor.TabIndex = 40;
+            txtColor.KeyDown += txtColor_KeyDown;
             // 
             // txtpVenta
             // 
@@ -337,7 +347,8 @@
             txtpVenta.Name = "txtpVenta";
             txtpVenta.Size = new Size(117, 22);
             txtpVenta.TabIndex = 44;
-            txtpVenta.Text = "12";
+            txtpVenta.KeyDown += txtpVenta_KeyDown;
+            txtpVenta.KeyPress += txtpVenta_KeyPress;
             // 
             // txtpOferta
             // 
@@ -347,7 +358,8 @@
             txtpOferta.Name = "txtpOferta";
             txtpOferta.Size = new Size(117, 22);
             txtpOferta.TabIndex = 43;
-            txtpOferta.Text = "11";
+            txtpOferta.KeyDown += txtpOferta_KeyDown;
+            txtpOferta.KeyPress += txtpOferta_KeyPress;
             // 
             // txtCosto
             // 
@@ -357,16 +369,18 @@
             txtCosto.Name = "txtCosto";
             txtCosto.Size = new Size(117, 22);
             txtCosto.TabIndex = 42;
-            txtCosto.Text = "10";
+            txtCosto.KeyDown += txtCosto_KeyDown;
+            txtCosto.KeyPress += txtCosto_KeyPress;
             // 
             // txtTalle
             // 
             txtTalle.BackColor = Color.Gainsboro;
             txtTalle.BorderStyle = BorderStyle.FixedSingle;
-            txtTalle.Location = new Point(417, 302);
+            txtTalle.Location = new Point(34, 303);
             txtTalle.Name = "txtTalle";
-            txtTalle.Size = new Size(163, 22);
+            txtTalle.Size = new Size(145, 22);
             txtTalle.TabIndex = 39;
+            txtTalle.KeyDown += txtTalle_KeyDown;
             // 
             // txtBarCode
             // 
@@ -374,8 +388,9 @@
             txtBarCode.BorderStyle = BorderStyle.FixedSingle;
             txtBarCode.Location = new Point(34, 245);
             txtBarCode.Name = "txtBarCode";
-            txtBarCode.Size = new Size(359, 22);
+            txtBarCode.Size = new Size(399, 22);
             txtBarCode.TabIndex = 34;
+            txtBarCode.KeyDown += txtBarCode_KeyDown;
             // 
             // label27
             // 
@@ -426,7 +441,7 @@
             label28.AutoSize = true;
             label28.Font = new Font("EngraversGothic BT", 10F);
             label28.ForeColor = Color.FromArgb(224, 224, 224);
-            label28.Location = new Point(414, 230);
+            label28.Location = new Point(453, 231);
             label28.Name = "label28";
             label28.Size = new Size(75, 15);
             label28.TabIndex = 125;
@@ -439,9 +454,9 @@
             cmbProveedor.BackColor = Color.Gainsboro;
             cmbProveedor.DropDownWidth = 335;
             cmbProveedor.FormattingEnabled = true;
-            cmbProveedor.Location = new Point(451, 248);
+            cmbProveedor.Location = new Point(490, 249);
             cmbProveedor.Name = "cmbProveedor";
-            cmbProveedor.Size = new Size(331, 22);
+            cmbProveedor.Size = new Size(292, 22);
             cmbProveedor.TabIndex = 38;
             cmbProveedor.KeyDown += cmbProveedor_KeyDown;
             // 
@@ -450,7 +465,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("EngraversGothic BT", 10F);
             label16.ForeColor = Color.FromArgb(224, 224, 224);
-            label16.Location = new Point(609, 285);
+            label16.Location = new Point(277, 286);
             label16.Name = "label16";
             label16.Size = new Size(45, 15);
             label16.TabIndex = 124;
@@ -461,7 +476,7 @@
             label17.AutoSize = true;
             label17.Font = new Font("EngraversGothic BT", 10F);
             label17.ForeColor = Color.FromArgb(224, 224, 224);
-            label17.Location = new Point(417, 284);
+            label17.Location = new Point(34, 285);
             label17.Name = "label17";
             label17.Size = new Size(38, 15);
             label17.TabIndex = 123;
@@ -472,7 +487,7 @@
             label21.AutoSize = true;
             label21.Font = new Font("EngraversGothic BT", 10F);
             label21.ForeColor = Color.FromArgb(224, 224, 224);
-            label21.Location = new Point(414, 178);
+            label21.Location = new Point(453, 179);
             label21.Name = "label21";
             label21.Size = new Size(45, 15);
             label21.TabIndex = 122;
@@ -485,9 +500,9 @@
             cmbMarca.BackColor = Color.Gainsboro;
             cmbMarca.DropDownWidth = 335;
             cmbMarca.FormattingEnabled = true;
-            cmbMarca.Location = new Point(451, 196);
+            cmbMarca.Location = new Point(490, 197);
             cmbMarca.Name = "cmbMarca";
-            cmbMarca.Size = new Size(331, 22);
+            cmbMarca.Size = new Size(292, 22);
             cmbMarca.TabIndex = 37;
             cmbMarca.KeyDown += cmbMarca_KeyDown;
             cmbMarca.Leave += cmbMarca_Leave;
@@ -497,7 +512,7 @@
             label22.AutoSize = true;
             label22.Font = new Font("EngraversGothic BT", 10F);
             label22.ForeColor = Color.FromArgb(224, 224, 224);
-            label22.Location = new Point(414, 121);
+            label22.Location = new Point(453, 122);
             label22.Name = "label22";
             label22.Size = new Size(67, 15);
             label22.TabIndex = 121;
@@ -510,9 +525,9 @@
             cmbCategoria.BackColor = Color.Gainsboro;
             cmbCategoria.DropDownWidth = 335;
             cmbCategoria.FormattingEnabled = true;
-            cmbCategoria.Location = new Point(451, 139);
+            cmbCategoria.Location = new Point(490, 140);
             cmbCategoria.Name = "cmbCategoria";
-            cmbCategoria.Size = new Size(331, 22);
+            cmbCategoria.Size = new Size(292, 22);
             cmbCategoria.TabIndex = 36;
             cmbCategoria.KeyDown += cmbCategoria_KeyDown;
             // 
@@ -521,7 +536,7 @@
             label23.AutoSize = true;
             label23.Font = new Font("EngraversGothic BT", 10F);
             label23.ForeColor = Color.FromArgb(224, 224, 224);
-            label23.Location = new Point(414, 70);
+            label23.Location = new Point(453, 71);
             label23.Name = "label23";
             label23.Size = new Size(61, 15);
             label23.TabIndex = 120;
@@ -534,10 +549,11 @@
             cmbImpuesto.BackColor = Color.Gainsboro;
             cmbImpuesto.DropDownWidth = 335;
             cmbImpuesto.FormattingEnabled = true;
-            cmbImpuesto.Location = new Point(451, 86);
+            cmbImpuesto.Location = new Point(490, 87);
             cmbImpuesto.Name = "cmbImpuesto";
-            cmbImpuesto.Size = new Size(331, 22);
+            cmbImpuesto.Size = new Size(292, 22);
             cmbImpuesto.TabIndex = 35;
+            cmbImpuesto.KeyDown += cmbImpuesto_KeyDown;
             // 
             // label24
             // 
@@ -558,8 +574,9 @@
             cmbSituacion.FormattingEnabled = true;
             cmbSituacion.Location = new Point(34, 194);
             cmbSituacion.Name = "cmbSituacion";
-            cmbSituacion.Size = new Size(358, 22);
+            cmbSituacion.Size = new Size(398, 22);
             cmbSituacion.TabIndex = 33;
+            cmbSituacion.KeyDown += cmbSituacion_KeyDown;
             // 
             // label26
             // 

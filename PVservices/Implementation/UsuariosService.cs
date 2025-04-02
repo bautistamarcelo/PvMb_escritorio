@@ -27,6 +27,11 @@ namespace PVservices.Implementation
             return await _usuariosRepository.editar(objeto);
         }
 
+        public async Task<string> eliminar(int UsuarioID)
+        {
+            return await _usuariosRepository.eliminar(UsuarioID);
+        }
+
         public async Task<Usuarios> Login(string nombre, string clave)
         {
             return await _usuariosRepository.Login(nombre, clave);
@@ -57,6 +62,6 @@ namespace PVservices.Implementation
             await _usuariosRepository.ActualizarClave(UsuarioID, clave);
         }
 
-       
+        
     }
 }

@@ -32,6 +32,11 @@ namespace PVservices.Implementation
             return await _ClientesRepository.editar(objeto);
         }
 
+        public async Task<string> Eliminar(int IDcliente, int Estado)
+        {
+            return await _ClientesRepository.eliminar(IDcliente, Estado);
+        }
+
         public async Task<int> obtenerId(Clientes objeto, int id)
         {
             return await _ClientesRepository.obtenerId(objeto, id);
@@ -41,5 +46,7 @@ namespace PVservices.Implementation
         {
             return await _ClientesRepository.Buscar(Buscar);
         }
+
+        
     }
 }

@@ -96,7 +96,8 @@ namespace PVrepository.Implementation
                     {
                         oBjeto = new Cajas_Movimientos
                         {
-                            Monto = Convert.ToInt32(dr["Saldo"])
+                            //TODO: Check if this is THE MONTO or SALDO != NULL
+                            Monto = dr["Saldo"] != DBNull.Value ? Convert.ToInt32(dr["Saldo"]) : 0, // Si es DBNull, asigna 0
                         };
                     }
                 }

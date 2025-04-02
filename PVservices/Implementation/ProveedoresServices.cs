@@ -38,7 +38,9 @@ namespace PVservices.Implementation
             return await _proveedoresRepository.editar(objeto);
         }
 
-    
-       
+        public async Task<string> Eliminar(int IDproveedor)
+        {
+            return await _proveedoresRepository.Eliminar(IDproveedor);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVrepository.Entities;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
 using System.Runtime.InteropServices;
@@ -119,7 +120,7 @@ namespace PVpresentation.Formularios
                 }
                 else
                 {
-                    
+
                     txtNombre.Text = ProveedorSeleccionado.Nombre.ToString();
                     txtDomicilio.Text = ProveedorSeleccionado.Direccion.ToString();
                     txtCuit.Text = ProveedorSeleccionado.Cuit.ToString();
@@ -135,7 +136,7 @@ namespace PVpresentation.Formularios
                 }
 
 
-                
+
             }
         }
 
@@ -165,7 +166,7 @@ namespace PVpresentation.Formularios
             btnDetalles.Visible = false;
             btnEditar.Visible = false;
             dgvListado.Columns["Nombre"].FillWeight = 350;
-            
+
         }
 
         private Frm_Productos ObtenerFormularioAbierto()
@@ -208,7 +209,7 @@ namespace PVpresentation.Formularios
             {
                 dgvListado.ImplementarConfiguracion("Seleccionar");
             }
-            
+
             MostrarTabs(tabListado.Name);
             await MostrarProveedores();
 
@@ -320,6 +321,23 @@ namespace PVpresentation.Formularios
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (txtID.Text.Trim() == "" || txtID.Text.Trim() == "0" || txtID.Text.Trim() == "1")
+            {
+                MessageBox.Show("Debe seleccionar un proveedor diferente a la selección actual para eliminar");
+                return;
+            }
+            else
+            {
+                if (MessageBox.Show("¿Está seguro de eliminar el registro?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    _proveedoresService.Eliminar(Convert.ToInt32(txtID.Text.Trim()));
+                    LimpiarMantenimiento();
+                }
+            }
         }
     }
 }

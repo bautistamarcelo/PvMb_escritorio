@@ -179,5 +179,29 @@ namespace PVrepository.Implementation
             }
             return oBjeto;
         }
+
+        public async Task<string> RespaldarDB()
+        {
+            string respuesta = "";
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Backup_CleanUp_DB", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    respuesta = "Exito"!;
+                }
+                catch (Exception ex)
+                {
+                    respuesta = ex.Message;
+                }
+            }
+
+            return respuesta;
+        }
     }
 }

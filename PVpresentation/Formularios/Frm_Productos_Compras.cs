@@ -246,7 +246,7 @@ namespace PVpresentation.Formularios
                     cmbSituacion.SelectedIndex = 0;
                     txtBarCode.Text = "";
                     txtStock.Text = "0";
-                    txtStock.ReadOnly = true;
+                    //txtStock.ReadOnly = true;
                     txtCosto.Text = "0";
                     txtpOferta.Text = "0";
                     txtpVenta.Text = "0";
@@ -377,12 +377,13 @@ namespace PVpresentation.Formularios
             if (txtOpcion.Text.Trim() == "2") // Si la opcion es 2: Editar
             {
                 respuesta = await _productosService.editar(objeTo);
-                
+
                 VariablesGlobales.vProductoID = objeTo.ID;
                 VariablesGlobales.vProductoNombre = objeTo.Nombre;
                 VariablesGlobales.vProductoPcosto = objeTo.Costo;
                 VariablesGlobales.vProductoPoferta = objeTo.pOferta;
                 VariablesGlobales.vProductoPventa = objeTo.pVenta;
+
             }
             else //Si la opcion es 1: Nueva
             {
@@ -395,6 +396,7 @@ namespace PVpresentation.Formularios
                     VariablesGlobales.vProductoPcosto = _producto.Costo;
                     VariablesGlobales.vProductoPoferta = _producto.pOferta;
                     VariablesGlobales.vProductoPventa = _producto.pVenta;
+                    VariablesGlobales.vProductoStock = Convert.ToInt32(txtStock.Text.Trim());
                 }
             }
 
@@ -474,7 +476,7 @@ namespace PVpresentation.Formularios
             cmbSituacion.SelectedIndex = 0;
             txtBarCode.Text = "";
             txtStock.Text = "0";
-            txtStock.ReadOnly = true;
+            //txtStock.ReadOnly = true;
             txtCosto.Text = "0";
             txtpOferta.Text = "0";
             txtpVenta.Text = "0";
@@ -504,6 +506,162 @@ namespace PVpresentation.Formularios
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void txtID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtNombre.Text = string.Empty;
+                txtNombre.Focus();
+            }
+        }
+
+        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbSituacion.Focus();
+            }
+        }
+
+        private void cmbSituacion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbImpuesto.Focus();
+            }
+        }
+
+        private void cmbImpuesto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbCategoria.Focus();
+            }
+        }
+
+        private void cmbCategoria_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbMarca.Focus();
+            }
+        }
+
+        private void cmbMarca_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbProveedor.Focus();
+            }
+        }
+
+        private void cmbProveedor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtTalle.Text = string.Empty;
+                txtTalle.Focus();
+            }
+        }
+
+        private void txtTalle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtColor.Text = string.Empty;
+                txtColor.Focus();
+            }
+        }
+
+        private void txtColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtStock.Text = string.Empty;
+                txtStock.Focus();
+            }
+        }
+
+        private void txtStock_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtCosto.Text = string.Empty;
+                txtCosto.Focus();
+            }
+        }
+
+        private void txtCosto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtpOferta.Text = string.Empty;
+                txtpOferta.Focus();
+            }
+        }
+
+        private void txtpOferta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtpVenta.Text = string.Empty;
+                txtpVenta.Focus();
+            }
+        }
+
+        private void txtpVenta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                btnGrabar.Focus();
+            }
+        }
+
+        private void txtStock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpOferta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
         }
     }
 }

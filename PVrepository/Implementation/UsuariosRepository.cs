@@ -63,12 +63,12 @@ namespace PVrepository.Implementation
                 con.Open();
                 var cmd = new SqlCommand("SP_Usuarios_Crear", con);
                 cmd.Parameters.AddWithValue("@Nombre", objeto.nombre);
+                cmd.Parameters.AddWithValue("@NombreUsuario", objeto.nombre);
                 cmd.Parameters.AddWithValue("@Correo", objeto.correo);
                 cmd.Parameters.AddWithValue("@Telefono", objeto.telefono);
                 cmd.Parameters.AddWithValue("@IDRol", objeto.IDRol.IDRol);
                 cmd.Parameters.AddWithValue("@UrlFoto", objeto.urlFoto);
                 cmd.Parameters.AddWithValue("@NombreFoto", objeto.nombreFoto);
-                cmd.Parameters.AddWithValue("@nombreUsuario", objeto.nombreUsuario);
                 cmd.Parameters.AddWithValue("@Clave", objeto.clave);
                 cmd.Parameters.AddWithValue("@esActivo", objeto.esActivo);
                 cmd.Parameters.AddWithValue("@FechaRegistro", objeto.fechaRegistro);
@@ -293,6 +293,29 @@ namespace PVrepository.Implementation
             }
         }
 
-        
+        public async Task<string> eliminar(int UsuarioID)
+        {
+            string Resultado;
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Usuarios_Eliminar", con);
+                cmd.Parameters.AddWithValue("@UsuarioID", UsuarioID);
+                cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    Resultado = Convert.ToString(cmd.Parameters["@MsjError"].Value)!;
+                }
+                catch (Exception ex)
+                {
+                    Resultado = ex.Message;
+                }
+            }
+
+            return Resultado;
+        }
     }
 }

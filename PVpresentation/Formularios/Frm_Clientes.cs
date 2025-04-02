@@ -2,6 +2,7 @@
 using PVpresentation.Resources;
 using PVpresentation.ViewModels;
 using PVrepository.Entities;
+using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
 
@@ -208,8 +209,14 @@ namespace PVpresentation.Formularios
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
         {
-            if (tabControlMain.SelectedTab != tabListado) {MostrarTabs(tabListado.Name);}
-            else {Close();}
+            if (tabControlMain.SelectedTab != tabListado)
+            {
+                MostrarTabs(tabListado.Name);
+            }
+            else
+            {
+                Close();
+            }
 
         }
 
@@ -273,6 +280,92 @@ namespace PVpresentation.Formularios
 
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (txtID.Text.Trim() == "" || txtID.Text.Trim() == "0" || txtID.Text.Trim() == "1")
+            {
+                MessageBox.Show("Debe seleccionar un cliente diferente a la selección actual para eliminar");
+                return;
+            }
+            else
+            {
+                if (MessageBox.Show("¿Está seguro de eliminar el registro?", "Eliminar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    _clientesService.Eliminar(Convert.ToInt32(txtID.Text.Trim()), 2);
+                    MostrarClientes();
+                    MostrarTabs(tabListado.Name);
+                }
+            }
+        }
+
         #endregion|
+
+        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtDomicilio.Text = string.Empty;
+                txtDomicilio.Focus();
+            }
+        }
+
+        private void txtDomicilio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtCuit.Text = string.Empty;
+                txtCuit.Focus();
+            }
+        }
+
+        private void txtCuit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtEmail.Text = string.Empty;
+                txtEmail.Focus();
+            }
+        }
+
+        private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtTelefono.Text = string.Empty;
+                txtTelefono.Focus();
+            }
+        }
+
+        private void txtTelefono_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbEstado.Focus();
+            }
+        }
+
+        private void cmbEstado_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbCaracter.Focus();
+            }
+        }
+
+        private void cmbCaracter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                cmbHabilitadoCta.Focus();
+            }
+        }
     }
 }

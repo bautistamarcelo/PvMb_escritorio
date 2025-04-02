@@ -215,11 +215,21 @@ namespace PVpresentation.Formularios
             txtProductoNombre.Text = vProducTo.Nombre.ToString();
             txtpOferta.Text = vProducTo.pOferta.ToString();
             txtpVenta.Text = vProducTo.pVenta.ToString();
+
             txtpCosto.Text = vProducTo.Costo.ToString();
             txtProveedor.Text = vProducTo.Proveedor.ID.ToString();
             txtCategoria.Text = vProducTo.Categoria.ID.ToString();
             txtMarca.Text = vProducTo.Marca.ID.ToString();
             txtImpuesto.Text = vProducTo.Impuesto.ID.ToString();
+
+            if (vProducTo.ID == VariablesGlobales.vProductoID)
+            {
+                txtCantidad.Text = VariablesGlobales.vProductoStock.ToString();
+            }
+            else
+            {
+                txtCantidad.Text = "1";
+            }
             txtCantidad.Select();
         }
 
@@ -256,6 +266,7 @@ namespace PVpresentation.Formularios
             txtProveedorNombre.Text = "** Sin Asignar **";
             cmbFormaPago.SelectedIndex = 1;
             cmbTipo.SelectedIndex = 0;
+            txtProductoID.Select();
         }
 
         private void btnCierreVolver_Click(object sender, EventArgs e)
@@ -391,10 +402,10 @@ namespace PVpresentation.Formularios
             //Variables según lo seleccionado para incorporar al archivo xml
             int _Tipo = cmbTipo.SelectedIndex + 1;
             int _Pago = cmbFormaPago.SelectedIndex + 1;
-            int _Efectivo=0;
-            int _Debito=0;
-            int _Tarjeta=0;
-            int _Credito=0;
+            int _Efectivo = 0;
+            int _Debito = 0;
+            int _Tarjeta = 0;
+            int _Credito = 0;
 
             if (_Pago == 1)
             {
@@ -434,7 +445,7 @@ namespace PVpresentation.Formularios
                     new XElement("pCompra", item.pCompra),
                     new XElement("Costo", item.Costo),
                     new XElement("pOferta", item.pOferta),
-                    new XElement("pVenta", item.pVenta), 
+                    new XElement("pVenta", item.pVenta),
                     new XElement("Impuesto", item.Impuesto),
                     new XElement("pTotalLinea", item.TotalCosto),
                     new XElement("TramiteID", VariablesGlobales.SucursalID) //Values: 2 Salida por Compra
@@ -465,6 +476,123 @@ namespace PVpresentation.Formularios
             {
                 MessageBox.Show("Error al registrar la Compra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+        }
+
+        private void txtProductoID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                txtpCompra.Text = string.Empty;
+                txtpCompra.Focus();
+            }
+        }
+
+        private void txtpCompra_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                //txtImpuestoMonto.Text = string.Empty;
+                txtImpuestoMonto.Focus();
+            }
+        }
+
+        private void txtImpuestoMonto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                if (txtImpuestoMonto.Text.Trim() == "")
+                    txtpCosto.Text = string.Empty;
+                else if (txtpCompra.Text.Trim() != "" && txtImpuestoMonto.Text.Trim() != "") // && para "y" o || para "o"
+                {
+                    txtpCosto.Text = (Convert.ToInt32(txtpCompra.Text.Trim()) + Convert.ToInt32(txtImpuestoMonto.Text.Trim())).ToString();
+                }
+                txtpCosto.Focus();
+            }
+        }
+
+        private void txtpCosto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                //txtpOferta.Text = string.Empty;
+                txtpOferta.Focus();
+            }
+        }
+
+        private void txtpOferta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                //txtpVenta.Text = string.Empty;
+                txtpVenta.Focus();
+            }
+        }
+
+        private void txtpVenta_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
+                btnGrabar.Focus();
+            }
+        }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpCompra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtImpuestoMonto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpOferta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
+            }
+        }
+
+        private void txtpVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
             }
         }
     }

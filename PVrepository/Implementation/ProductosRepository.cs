@@ -6,6 +6,7 @@ using PVrepository.Interfaces;
 using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Drawing;
+using System;
 
 namespace PVrepository.Implementation
 {
@@ -95,6 +96,57 @@ namespace PVrepository.Implementation
             return list;
         }
 
+        public async Task<List<Productos>> ListaSF()
+        {
+            List<Productos> list = new List<Productos>();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Productos_ListadoSinFiltro", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    while (await dr.ReadAsync())
+                    {
+                        list.Add(new Productos
+                        {
+                            ID = Convert.ToInt32(dr["ID"]),
+                            Nombre = dr["Nombre"].ToString()!,
+                            Situacion = Convert.ToInt32(dr["Situacion"]),
+                            BarCode = dr["BarCode"].ToString()!,
+                            Stock = Convert.ToInt32(dr["Stock"]),
+                            Costo = Convert.ToInt32(dr["Costo"]),
+                            pOferta = Convert.ToInt32(dr["pOferta"]),
+                            pVenta = Convert.ToInt32(dr["pVenta"]),
+                            Impuesto = new Impuestos
+                            {
+                                ID = Convert.ToInt32(dr["Impuesto"]),
+                                Nombre = dr["ImpuestoN"].ToString()!
+                            },
+                            Categoria = new Categorias
+                            {
+                                ID = Convert.ToInt32(dr["Categoria"]),
+                                Nombre = dr["CategoriaN"].ToString()!
+                            },
+                            Marca = new Marcas
+                            {
+                                ID = Convert.ToInt32(dr["Marca"]),
+                                Nombre = dr["MarcaN"].ToString()!
+                            },
+                            Proveedor = new Proveedores
+                            {
+                                ID = Convert.ToInt32(dr["Proveedor"]),
+                                Nombre = dr["ProveedorN"].ToString()!
+                            },
+                            Talle = dr["Talle"].ToString()!,
+                            Color = dr["Color"].ToString()!
+                        });
+                    }
+                }
+            }
+            return list;
+        }
+
         public async Task<string> crear(Productos objeto)
         {
             string respuesta = "";
@@ -157,6 +209,33 @@ namespace PVrepository.Implementation
                 cmd.Parameters.AddWithValue("@ProveedorID", objeto.Proveedor.ID);
                 cmd.Parameters.AddWithValue("@Talle", objeto.Talle);
                 cmd.Parameters.AddWithValue("@Color", objeto.Color);
+                cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                    respuesta = Convert.ToString(cmd.Parameters["@MsjError"].Value)!;
+                }
+                catch (Exception ex)
+                {
+                    respuesta = ex.Message;
+                }
+            }
+
+            return respuesta;
+        }
+
+        public async Task<string> eliminar(int IDproducto, int Situacion)
+        {
+            string respuesta = "";
+
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Productos_Eliminar", con);
+                cmd.Parameters.AddWithValue("@ID", IDproducto);
+                cmd.Parameters.AddWithValue("@Situacion", Situacion);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -252,5 +331,7 @@ namespace PVrepository.Implementation
             }
             return oBjeto;
         }
+
+       
     }
 }

@@ -94,6 +94,7 @@
             btnEliminar.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnCancelar
             // 

@@ -59,6 +59,7 @@ namespace PVpresentation.Formularios
             cmbSituacion = new ComboBox();
             label26 = new Label();
             txtFecha = new TextBox();
+            btnEtiquetas = new FontAwesome.Sharp.IconButton();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             pnlContenedorPrincipal.SuspendLayout();
@@ -105,6 +106,7 @@ namespace PVpresentation.Formularios
             // 
             // tabNuevo
             // 
+            tabNuevo.Controls.Add(btnEtiquetas);
             tabNuevo.Controls.Add(btnAgregarProveedor);
             tabNuevo.Controls.Add(btnAgregarMarca);
             tabNuevo.Controls.Add(btnAgregarCategoria);
@@ -169,6 +171,7 @@ namespace PVpresentation.Formularios
             tabNuevo.Controls.SetChildIndex(btnAgregarCategoria, 0);
             tabNuevo.Controls.SetChildIndex(btnAgregarMarca, 0);
             tabNuevo.Controls.SetChildIndex(btnAgregarProveedor, 0);
+            tabNuevo.Controls.SetChildIndex(btnEtiquetas, 0);
             // 
             // btnEditar
             // 
@@ -599,6 +602,27 @@ namespace PVpresentation.Formularios
             txtFecha.TabIndex = 110;
             txtFecha.Visible = false;
             // 
+            // btnEtiquetas
+            // 
+            btnEtiquetas.BackColor = Color.SteelBlue;
+            btnEtiquetas.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnEtiquetas.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnEtiquetas.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnEtiquetas.FlatStyle = FlatStyle.Flat;
+            btnEtiquetas.Font = new Font("Square721 BT", 11F);
+            btnEtiquetas.ForeColor = Color.White;
+            btnEtiquetas.IconChar = FontAwesome.Sharp.IconChar.None;
+            btnEtiquetas.IconColor = Color.Black;
+            btnEtiquetas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnEtiquetas.Location = new Point(391, 382);
+            btnEtiquetas.Name = "btnEtiquetas";
+            btnEtiquetas.Size = new Size(96, 32);
+            btnEtiquetas.TabIndex = 134;
+            btnEtiquetas.TabStop = false;
+            btnEtiquetas.Text = "Etiquetas";
+            btnEtiquetas.UseVisualStyleBackColor = false;
+            btnEtiquetas.Click += btnEtiquetas_Click;
+            // 
             // Frm_Productos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -651,5 +675,6 @@ namespace PVpresentation.Formularios
         public ComboBox cmbMarca;
         public ComboBox cmbCategoria;
         public ComboBox cmbImpuesto;
+        private FontAwesome.Sharp.IconButton btnEtiquetas;
     }
 }

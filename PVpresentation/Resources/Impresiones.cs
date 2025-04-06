@@ -1,17 +1,19 @@
-﻿using System.Drawing.Printing;
-using FiscalPrinterLib;
+﻿using BarcodeStandard;
+using SkiaSharp;
+using System.Drawing.Printing;
+
 
 namespace PVpresentation.Resources
 {
     public class Impresiones
     {
-        
+
         public int detalleIndex = 0; // Para controlar la posición en la lista
-        FiscalPrinterLib.HASAR ofh = new FiscalPrinterLib.HASAR();
+        //FiscalPrinterLib.HASAR ofh = new FiscalPrinterLib.HASAR();
 
         public void ImprimirPresupuesto(object sender, PrintPageEventArgs e)
         {
-            string respuesta= string.Empty;
+            string respuesta = string.Empty;
 
             #region FUNCIONES PARA NORMALIZAR EL TEXTO A MOSTRAR
             Graphics g = e.Graphics;
@@ -161,7 +163,7 @@ namespace PVpresentation.Resources
                     e.HasMorePages = true;
                     return;
                 }
-                
+
             }
 
             // **Línea separadora**
@@ -193,128 +195,120 @@ namespace PVpresentation.Resources
 
         }
 
-       
-
-        public void MostrarOpcionesFiscales(object sender, EventArgs e)
+        public void ImprimirEtiqueta(object sender, PrintPageEventArgs e)
         {
-            string Salida ="";
+            string respuesta = string.Empty;
 
-            Int32 n;                    // Para mostrar números de comprobantes
-            Int32 monto;                // Para mostrar montos
+            #region FUNCIONES PARA NORMALIZAR EL TEXTO A MOSTRAR
+            Graphics g = e.Graphics;
+            Font fontBarCode = new Font("IDAHC39MCode39Barcode", 12, FontStyle.Bold);
+            Font fontTitulo = new Font("Arial Narrow", 14, FontStyle.Bold);
+            Font fontNormal = new Font("Arial Narrow", 10);
+            Font fontNegrita = new Font("Arial Narrow", 10, FontStyle.Bold);
+            float y = 10;
 
-            object nrocomp;             // Argumento de salida CerrarComprobanteFiscal() y CerrarDNFH()
+            int anchoPagina = 200;
+            int margenIzquierdo = 10;
+            int margenDerecho = 10;
 
-            object items;               // Argumento de salida Subtotal()
-            object ventas;              // Argumento de salida Subtotal(), ReporteX(), ReporteZ()
-            object iva;                 // Argumento de salida Subtotal()
-            object pagado;              // Argumento de salida Subtotal()
-            object ivanoi;              // Argumento de salida Subtotal()
-            object impint;              // Argumento de salida Subtotal()
-
-            object nrox;                // Argumento de salida ReporteX() / ReporteZ()
-            object dfcancel;            // Argumento de salida ReporteX() / ReporteZ()
-            object dnfhemit;            // Argumento de salida ReporteX() / ReporteZ()
-            object dnfemit;             // Argumento de salida ReporteX() / ReporteZ()
-            object dfemit;              // Argumento de salida ReporteX() / ReporteZ()
-            object ultdfbc;             // Argumento de salida ReporteX() / ReporteZ()
-            object ultdfa;              // Argumento de salida ReporteX() / ReporteZ()
-            object ivadf;               // Argumento de salida ReporteX() / ReporteZ()
-            object impintdf;            // Argumento de salida ReporteX() / ReporteZ()
-            object percepdf;            // Argumento de salida ReporteX() / ReporteZ()
-            object ivanoidf;            // Argumento de salida ReporteX() / ReporteZ()
-            object ultncbc;             // Argumento de salida ReporteX() / ReporteZ()
-            object ultnca;              // Argumento de salida ReporteX() / ReporteZ()
-            object ventasnc;            // Argumento de salida ReporteX() / ReporteZ()
-            object ivanc;               // Argumento de salida ReporteX() / ReporteZ()
-            object impintnc;            // Argumento de salida ReporteX() / ReporteZ()
-            object percepnc;            // Argumento de salida ReporteX() / ReporteZ()
-            object ivanoinc;            // Argumento de salida ReporteX() / ReporteZ()
-            object ultrto;              // Argumento de salida ReporteX() / ReporteZ()
-            object cantnccancel;        // Argumento de salida ReporteX() / ReporteZ()
-            object cantdfbcemit;        // Argumento de salida ReporteX() / ReporteZ()
-            object cantdfaemit;         // Argumento de salida ReporteX() / ReporteZ()
-            object cantncbcemit;        // Argumento de salida ReporteX() / ReporteZ()
-            object cantncaemit;         // Argumento de salida ReporteX() / ReporteZ()
-
-            // Se declaran todos los eventos posibles de ser disparados por el OCX Fiscal HASAR
-            //---------------------------------------------------------------------------------
-            //ofh.ErrorFiscal += new FiscalPrinterLib._FiscalEvents_ErrorFiscalEventHandler(ofh_ErrorFiscal);
-            //ofh.ErrorImpresora += new FiscalPrinterLib._FiscalEvents_ErrorImpresoraEventHandler(ofh_ErrorImpresora);
-            // ofh.EventoCajon += new FiscalPrinterLib._FiscalEvents_EventoCajonEventHandler(ofh_EventoCajon);
-            // ofh.EventoFiscal += new FiscalPrinterLib._FiscalEvents_EventoFiscalEventHandler(ofh_EventoFiscal);
-            // ofh.EventoImpresora += new FiscalPrinterLib._FiscalEvents_EventoImpresoraEventHandler(ofh_EventoImpresora);
-            //ofh.FaltaPapel += new FiscalPrinterLib._FiscalEvents_FaltaPapelEventHandler(ofh_FaltaPapel);
-            //ofh.ImpresoraNoResponde += new FiscalPrinterLib._FiscalEvents_ImpresoraNoRespondeEventHandler(ofh_ImpresoraNoResponde);
-            // ofh.ImpresoraOcupada += new FiscalPrinterLib._FiscalEvents_ImpresoraOcupadaEventHandler(ofh_ImpresoraOcupada);
-            // ofh.ImpresoraOK += new FiscalPrinterLib._FiscalEvents_ImpresoraOKEventHandler(ofh_ImpresoraOK);
-            //ofh.ProgresoDeteccion += new FiscalPrinterLib._FiscalEvents_ProgresoDeteccionEventHandler(ofh_ProgresoDeteccion);
-
-            try  // Porción de código para atrapar excepciones...
+            // Función para centrar texto
+            float CentrarTexto(string texto, Font fuente)
             {
-                ofh.Modelo = FiscalPrinterLib.ModelosDeImpresoras.MODELO_P441;
-                ofh.Puerto = 7;
-                ofh.Comenzar();
-                ofh.TratarDeCancelarTodo();
-
-                //-----------------------------------------------
-                // Ejemplo de impresión de un tique factura "A"
-                //-----------------------------------------------     
-                ofh.DatosCliente("Bautista Marcelo Ricardo...", "20-21159601-6", FiscalPrinterLib.TiposDeDocumento.TIPO_CUIT, FiscalPrinterLib.TiposDeResponsabilidades.RESPONSABLE_INSCRIPTO, "B° Privado Alto Verde 1 - Mz. L - Casa 30");
-                ofh.AbrirComprobanteFiscal(FiscalPrinterLib.DocumentosFiscales.TICKET_FACTURA_A);
-                ofh.ImprimirItem("Articulo N°1 de 3 a imprimir", 2.0, 30.0, 21.0, 0.0);
-                ofh.ImprimirItem("Articulo N°2 de 3 a imprimir", 1.0, 10.0, 21.0, 0.0);
-                ofh.ImprimirItem("Articulo N°3 de 3 a imprimir", 4.0, 15.0, 21.0, 0.0);
-                ofh.Subtotal(false, out items, out ventas, out iva, out pagado, out ivanoi, out impint);
-
-                monto = System.Int32.Parse(ventas.ToString());
-                MessageBox.Show("Subtotal Comprobante ::: $ " + monto.ToString());
-
-                ofh.CerrarComprobanteFiscal(1, out nrocomp);
-
-                n = System.Int32.Parse(nrocomp.ToString());
-                MessageBox.Show("Nro. de Comprobante ::: TFA" + " ::: " + n.ToString());
-
-                //-----------------------------------------------------
-                // Ejemplo de impresión de un tique nota de crédito "B"
-                //-----------------------------------------------------
-                ofh.DatosCliente("Razón social cliente...", "12345678", FiscalPrinterLib.TiposDeDocumento.TIPO_DNI, FiscalPrinterLib.TiposDeResponsabilidades.CONSUMIDOR_FINAL, "Domiclio Cliente...");
-                ofh.set_DocumentoDeReferencia(1, "TFA 0001-00000876");
-                ofh.AbrirDNFH(FiscalPrinterLib.DocumentosNoFiscales.TICKET_NOTA_CREDITO_B);
-                ofh.ImprimirItem("Art. Vendido...", 1.0, 10.0, 21.0, 0.0);
-                ofh.ImprimirItem("Art. Vendido...", 1.0, 10.0, 21.0, 0.0);
-                ofh.Subtotal(false, out items, out ventas, out iva, out pagado, out ivanoi, out impint);
-
-                monto = System.Int32.Parse(ventas.ToString());
-                MessageBox.Show("Subtotal Comprobante ::: $ " + monto.ToString());
-
-                ofh.CerrarDNFH(1, out nrocomp);
-
-                n = System.Int32.Parse(nrocomp.ToString());
-                MessageBox.Show("Nro. de Comprobante ::: TNCB" + " ::: " + n.ToString());
-
-                //-----------------------------------------------
-                // Ejemplo de impresión de un documento no fiscal
-                //-----------------------------------------------
-                ofh.AbrirComprobanteNoFiscal();
-                ofh.ImprimirTextoNoFiscal("Línea de texto no fiscal...");
-                ofh.CerrarComprobanteNoFiscal();
-
-                //------------------------------------------------
-                // Ejemplo de impresión de un reporte "X"
-                //------------------------------------------------
-                ofh.ReporteX(out nrox, out dfcancel, out dnfhemit, out dnfemit, out dfemit, out ultdfbc, out ultdfa, out ventas, out ivadf, out impintdf, out percepdf, out ivanoidf, out ultncbc, out ultnca, out ventasnc, out ivanc, out impintnc, out percepnc, out ivanoinc, out ultrto, out cantnccancel, out cantdfbcemit, out cantdfaemit, out cantncbcemit, out cantncaemit);
-
-                n = System.Int32.Parse(ventas.ToString());
-                MessageBox.Show("Parcial Ventas ::: Reporte X ::: $ " + n.ToString());
-
-                // Se cierra el puerto serie abierto con 'Comenzar()'...
-                ofh.Finalizar();
+                float anchoTexto = g.MeasureString(texto, fuente).Width;
+                return margenIzquierdo + (anchoPagina - anchoTexto) / 2;
             }
-            catch (SystemException exc)  // Tratamiento de las excepciones disparadas...
+
+            // Función para alinear texto a la derecha
+            float AlinearDerecha(string texto, Font fuente)
             {
-                MessageBox.Show(exc.Source + "  :::  " + exc.Message);
+                float anchoTexto = g.MeasureString(texto, fuente).Width;
+                return margenIzquierdo + anchoPagina - anchoTexto;
             }
-            
+
+            // Función para dividir el texto en varias líneas dentro de un ancho máximo
+            List<string> DividirTexto(string texto, Font fuente, float anchoMaximo)
+            {
+                List<string> lineas = new List<string>();
+                string[] palabras = texto.Split(' ');
+                string lineaActual = "";
+
+                using (Graphics g = Graphics.FromImage(new Bitmap(1, 1))) // Objeto gráfico temporal
+                {
+                    foreach (string palabra in palabras)
+                    {
+                        string pruebaLinea = lineaActual.Length == 0 ? palabra : lineaActual + " " + palabra;
+                        float anchoTexto = g.MeasureString(pruebaLinea, fuente).Width;
+
+                        if (anchoTexto > anchoMaximo)
+                        {
+                            lineas.Add(lineaActual); // Agrega la línea actual a la lista
+                            lineaActual = palabra;   // Inicia una nueva línea con la palabra actual
+                        }
+                        else
+                        {
+                            lineaActual = pruebaLinea;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(lineaActual))
+                    {
+                        lineas.Add(lineaActual); // Agrega la última línea
+                    }
+                }
+                return lineas;
+            }
+            #endregion
+
+            #region PRECIOS DE LA ETIQUETA 
+            //Imprimir precios del artículo
+            g.DrawString("Oferta Cdo.", fontNegrita, Brushes.Black, margenIzquierdo, y);
+            string precioOfertaFormateado = VariablesGlobales.vProductoPoferta.ToString("N2");
+            g.DrawString(precioOfertaFormateado, fontNegrita, Brushes.Black, 140, y);
+            y += 15;
+            g.DrawString("Mayorista", fontNormal, Brushes.Black, margenIzquierdo, y);
+            string precioVentaFormateado = VariablesGlobales.vProductoPventa.ToString("N2");
+            g.DrawString(precioVentaFormateado, fontNormal, Brushes.Black, 140, y);
+
+            // Línea separadora
+            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+            y += 10;
+
+            #endregion
+
+            #region DESCRIPCION DEL PRODUCTO
+            // Generar el código de barras
+
+            // 1. Generar el código de barras (usando BarcodeStandard)
+            var barcode = new Barcode();
+            barcode.IncludeLabel = false; // Mostrar el texto debajo del código
+            barcode.Alignment = BarcodeStandard.AlignmentPositions.Center;
+
+            // Configurar el tipo de código (CODE128 es común para productos)
+            SKImage skImage = barcode.Encode(
+                    BarcodeStandard.Type.Code128,
+                    VariablesGlobales.vProductoBarCode.ToString(),
+                    SKColors.Black, // Color del código de barras (SKColor)
+                    SKColors.White, // Color de fondo (SKColor)
+                    180, // Ancho
+                    40  // Alto
+                );
+
+            // Convertir SKImage a Bitmap (System.Drawing.Image)
+            using (SKData data = skImage.Encode(SKEncodedImageFormat.Png, 180))
+            using (MemoryStream ms = new MemoryStream(data.ToArray()))
+            {
+                Bitmap bitmap = new Bitmap(ms);
+                e.Graphics.DrawImage(bitmap, new Point(10, 50));
+            }
+            y += 60;
+            // Imprimir el código del producto
+            g.DrawString(VariablesGlobales.vProductoBarCode.ToString(), fontNormal, Brushes.Black, 70, y);
+
+
+            // Si no hay más datos, indicar que no hay más páginas
+            e.HasMorePages = false;
+            detalleIndex = 0; // Resetear índice para futuras impresiones
+            #endregion
+
         }
 
 

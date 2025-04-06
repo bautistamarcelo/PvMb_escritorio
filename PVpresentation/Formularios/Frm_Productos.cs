@@ -6,6 +6,7 @@ using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.Data;
+using System.Drawing.Printing;
 using System.Threading.Tasks;
 using Application = System.Windows.Forms.Application;
 using ComboBox = System.Windows.Forms.ComboBox;
@@ -664,7 +665,14 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
-                txtCosto.Focus();
+                if (txtOpcion.Text.Trim() == "1")
+                {
+                    txtStock.Focus();
+                }
+                else
+                {
+                    txtCosto.Focus();
+                }
             }
         }
 
@@ -802,6 +810,39 @@ namespace PVpresentation.Formularios
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
                 btnGrabar.Focus();
             }
+        }
+
+        private void btnEtiquetas_Click(object sender, EventArgs e)
+        {
+            if(txtID.Text == "")
+            {
+                MessageBox.Show("Seleccione un producto para imprimir la etiqueta");
+                return;
+            }
+
+            VariablesGlobales.vProductoID = Convert.ToInt32(txtID.Text.Trim());
+            VariablesGlobales.vProductoBarCode = txtBarCode.Text.ToString();
+            VariablesGlobales.vProductoNombre = txtNombre.Text.Trim();
+            VariablesGlobales.vProductoPoferta = Convert.ToInt32(txtpOferta.Text.Trim());
+            VariablesGlobales.vProductoPventa = Convert.ToInt32(txtpVenta.Text.Trim());
+            Impresiones imPresiones = new Impresiones();
+            PrintDocument printEtiqueta = new PrintDocument();
+
+            #region Crear y enviar la impresión del comprobante
+            var frmCantidadEtiquetas = _serviceProvider.GetRequiredService<Frm_EtiquetasCantidad>();
+            var resultadoCantidad = frmCantidadEtiquetas.ShowDialog();
+            if (resultadoCantidad == DialogResult.OK)
+            {
+                for (int i = 0; i < VariablesGlobales.vEtiquetasCantidad; i++)
+                {
+                    PrinterSettings ps = new PrinterSettings();
+                    printEtiqueta.PrinterSettings = ps;
+                    printEtiqueta.PrintPage += imPresiones.ImprimirEtiqueta;
+                    printEtiqueta.Print();
+                }
+            }
+            #endregion
+
         }
     }
 }

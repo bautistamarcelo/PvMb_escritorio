@@ -28,10 +28,12 @@ namespace PVpresentation.Resources
 
         public static int vProductoID { get; set; }
         public static string vProductoNombre{get;set;}
+        public static string vProductoBarCode{get;set;}
         public static int vProductoPcosto { get; set; }
         public static int vProductoPoferta { get; set; }
         public static int vProductoPventa { get; set; }
         public static int vProductoStock { get; set; }
+        public static int vEtiquetasCantidad { get; set; }
 
          public static int vProveedorID { get; set; }
         public static string vProveedorNombre{get;set;}= string.Empty;

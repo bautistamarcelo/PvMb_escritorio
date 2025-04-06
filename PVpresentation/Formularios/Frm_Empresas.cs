@@ -361,5 +361,10 @@ namespace PVpresentation.Formularios
                 btnAgregarLogo.Focus();
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

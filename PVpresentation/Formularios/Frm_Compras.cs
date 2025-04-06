@@ -5,6 +5,7 @@ using PVrepository.Entities;
 using PVservices.Implementation;
 using PVservices.Interfaces;
 using System.ComponentModel;
+using System.Drawing.Printing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
@@ -212,6 +213,7 @@ namespace PVpresentation.Formularios
             txtProductoID.BackColor = Color.FromArgb(220, 220, 220);
 
             txtProductoID.Text = vProducTo.ID.ToString();
+            txtBarCode.Text = vProducTo.BarCode.ToString();
             txtProductoNombre.Text = vProducTo.Nombre.ToString();
             txtpOferta.Text = vProducTo.pOferta.ToString();
             txtpVenta.Text = vProducTo.pVenta.ToString();
@@ -299,6 +301,29 @@ namespace PVpresentation.Formularios
         private async void btnAgregarItem_Click(object sender, EventArgs e)
         {
             await AgregarProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+
+            VariablesGlobales.vProductoID = Convert.ToInt32(txtProductoID.Text.Trim());
+            VariablesGlobales.vProductoBarCode = txtBarCode.Text.ToString();
+            VariablesGlobales.vProductoPoferta = Convert.ToInt32(txtpOferta.Text.Trim());
+            VariablesGlobales.vProductoPventa = Convert.ToInt32(txtpVenta.Text.Trim());
+            Impresiones imPresiones = new Impresiones();
+            PrintDocument printEtiqueta = new PrintDocument();
+
+            #region Crear y enviar la impresión del comprobante
+            var frmCantidadEtiquetas = _serviceProvider.GetRequiredService<Frm_EtiquetasCantidad>();
+            var resultadoCantidad = frmCantidadEtiquetas.ShowDialog();
+            if (resultadoCantidad == DialogResult.OK)
+            {
+                for (int i = 0; i < VariablesGlobales.vEtiquetasCantidad; i++)
+                {
+                    PrinterSettings ps = new PrinterSettings();
+                    printEtiqueta.PrinterSettings = ps;
+                    printEtiqueta.PrintPage += imPresiones.ImprimirEtiqueta;
+                    printEtiqueta.Print();
+                }
+            }
+            #endregion
+
             txtProductoID.Text = "";
             txtProductoNombre.Text = "";
             txtCantidad.Text = "1";
@@ -307,6 +332,7 @@ namespace PVpresentation.Formularios
             txtpCosto.Text = "";
             txtpOferta.Text = "";
             txtpVenta.Text = "";
+
             txtProductoID.Select();
         }
 
@@ -544,7 +570,7 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
-                btnGrabar.Focus();
+                btnAgregarItem.Focus();
             }
         }
 
@@ -594,6 +620,11 @@ namespace PVpresentation.Formularios
             {
                 e.Handled = true; // Bloquea la tecla si no es un número
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace PVpresentation
                 services.AddTransient<Frm_Clientes_Buscar>();
                 services.AddTransient<Frm_Compras>();
                 services.AddTransient<Frm_Empresas>();
+                services.AddTransient<Frm_EtiquetasCantidad>();
                 services.AddTransient<Frm_Login>();
                 services.AddTransient<Frm_Login_NuevaClave>();
                 services.AddTransient<Frm_Main>();

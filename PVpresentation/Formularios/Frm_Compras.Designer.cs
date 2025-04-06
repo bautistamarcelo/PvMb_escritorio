@@ -75,6 +75,7 @@
             txtProveedorNombre = new TextBox();
             btnBuscarProveedor = new Button();
             label14 = new Label();
+            txtBarCode = new TextBox();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
@@ -89,6 +90,7 @@
             // pnTituloFormulario
             // 
             pnTituloFormulario.BackColor = Color.FromArgb(74, 134, 160);
+            pnTituloFormulario.Controls.Add(txtBarCode);
             pnTituloFormulario.Controls.Add(btnCierreVolver);
             pnTituloFormulario.Controls.Add(txtProveedor);
             pnTituloFormulario.Controls.Add(txtImpuesto);
@@ -289,9 +291,9 @@
             pnMantenimiento.Controls.Add(txtMontoTotal);
             pnMantenimiento.Controls.Add(label7);
             pnMantenimiento.Dock = DockStyle.Right;
-            pnMantenimiento.Location = new Point(755, 45);
+            pnMantenimiento.Location = new Point(736, 45);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(229, 487);
+            pnMantenimiento.Size = new Size(248, 487);
             pnMantenimiento.TabIndex = 52;
             // 
             // label9
@@ -299,7 +301,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("EngraversGothic BT", 10F);
             label9.ForeColor = Color.FromArgb(224, 224, 224);
-            label9.Location = new Point(21, 268);
+            label9.Location = new Point(21, 284);
             label9.Name = "label9";
             label9.Size = new Size(73, 15);
             label9.TabIndex = 52;
@@ -312,10 +314,10 @@
             txtImpuestosGral.BorderStyle = BorderStyle.FixedSingle;
             txtImpuestosGral.Font = new Font("Square721 BT", 14.25F);
             txtImpuestosGral.ForeColor = Color.White;
-            txtImpuestosGral.Location = new Point(21, 286);
+            txtImpuestosGral.Location = new Point(24, 302);
             txtImpuestosGral.Name = "txtImpuestosGral";
             txtImpuestosGral.ReadOnly = true;
-            txtImpuestosGral.Size = new Size(186, 31);
+            txtImpuestosGral.Size = new Size(202, 31);
             txtImpuestosGral.TabIndex = 51;
             txtImpuestosGral.TextAlign = HorizontalAlignment.Right;
             // 
@@ -324,7 +326,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("EngraversGothic BT", 10F);
             label8.ForeColor = Color.FromArgb(224, 224, 224);
-            label8.Location = new Point(21, 218);
+            label8.Location = new Point(21, 234);
             label8.Name = "label8";
             label8.Size = new Size(73, 15);
             label8.TabIndex = 50;
@@ -337,10 +339,10 @@
             txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
             txtSubTotal.Font = new Font("Square721 BT", 14.25F);
             txtSubTotal.ForeColor = Color.White;
-            txtSubTotal.Location = new Point(21, 236);
+            txtSubTotal.Location = new Point(24, 252);
             txtSubTotal.Name = "txtSubTotal";
             txtSubTotal.ReadOnly = true;
-            txtSubTotal.Size = new Size(186, 31);
+            txtSubTotal.Size = new Size(202, 31);
             txtSubTotal.TabIndex = 49;
             txtSubTotal.TextAlign = HorizontalAlignment.Right;
             // 
@@ -350,9 +352,9 @@
             cmbFormaPago.BackColor = Color.Gainsboro;
             cmbFormaPago.Font = new Font("Square721 BT", 12F);
             cmbFormaPago.FormattingEnabled = true;
-            cmbFormaPago.Location = new Point(21, 134);
+            cmbFormaPago.Location = new Point(24, 141);
             cmbFormaPago.Name = "cmbFormaPago";
-            cmbFormaPago.Size = new Size(186, 28);
+            cmbFormaPago.Size = new Size(202, 28);
             cmbFormaPago.TabIndex = 48;
             // 
             // label6
@@ -360,7 +362,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("EngraversGothic BT", 10F);
             label6.ForeColor = Color.FromArgb(224, 224, 224);
-            label6.Location = new Point(21, 117);
+            label6.Location = new Point(21, 124);
             label6.Name = "label6";
             label6.Size = new Size(103, 15);
             label6.TabIndex = 47;
@@ -372,9 +374,9 @@
             cmbTipo.BackColor = Color.Gainsboro;
             cmbTipo.Font = new Font("Square721 BT", 12F);
             cmbTipo.FormattingEnabled = true;
-            cmbTipo.Location = new Point(21, 83);
+            cmbTipo.Location = new Point(24, 90);
             cmbTipo.Name = "cmbTipo";
-            cmbTipo.Size = new Size(186, 28);
+            cmbTipo.Size = new Size(202, 28);
             cmbTipo.TabIndex = 46;
             // 
             // label15
@@ -382,7 +384,7 @@
             label15.AutoSize = true;
             label15.Font = new Font("EngraversGothic BT", 10F);
             label15.ForeColor = Color.FromArgb(224, 224, 224);
-            label15.Location = new Point(21, 66);
+            label15.Location = new Point(21, 73);
             label15.Name = "label15";
             label15.Size = new Size(36, 15);
             label15.TabIndex = 45;
@@ -406,10 +408,10 @@
             txtFecha.BorderStyle = BorderStyle.FixedSingle;
             txtFecha.Font = new Font("Square721 BT", 12F);
             txtFecha.ForeColor = Color.White;
-            txtFecha.Location = new Point(18, 35);
+            txtFecha.Location = new Point(21, 35);
             txtFecha.Name = "txtFecha";
             txtFecha.ReadOnly = true;
-            txtFecha.Size = new Size(186, 27);
+            txtFecha.Size = new Size(202, 27);
             txtFecha.TabIndex = 25;
             txtFecha.TextAlign = HorizontalAlignment.Center;
             // 
@@ -418,7 +420,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("EngraversGothic BT", 10F);
             label1.ForeColor = Color.FromArgb(224, 224, 224);
-            label1.Location = new Point(21, 167);
+            label1.Location = new Point(21, 174);
             label1.Name = "label1";
             label1.Size = new Size(93, 15);
             label1.TabIndex = 24;
@@ -430,9 +432,9 @@
             txtID.BackColor = Color.Gainsboro;
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Font = new Font("Square721 BT", 12F);
-            txtID.Location = new Point(21, 185);
+            txtID.Location = new Point(24, 192);
             txtID.Name = "txtID";
-            txtID.Size = new Size(186, 27);
+            txtID.Size = new Size(202, 27);
             txtID.TabIndex = 23;
             txtID.TextAlign = HorizontalAlignment.Center;
             // 
@@ -446,12 +448,13 @@
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 192, 192);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(120, 406);
+            btnCancelar.Location = new Point(128, 423);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
             btnCancelar.TabIndex = 21;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGrabar
             // 
@@ -463,7 +466,7 @@
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnGrabar.FlatStyle = FlatStyle.Flat;
             btnGrabar.ForeColor = Color.WhiteSmoke;
-            btnGrabar.Location = new Point(20, 406);
+            btnGrabar.Location = new Point(28, 423);
             btnGrabar.Name = "btnGrabar";
             btnGrabar.Size = new Size(86, 32);
             btnGrabar.TabIndex = 20;
@@ -478,10 +481,10 @@
             txtMontoTotal.BorderStyle = BorderStyle.FixedSingle;
             txtMontoTotal.Font = new Font("Square721 BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtMontoTotal.ForeColor = Color.White;
-            txtMontoTotal.Location = new Point(19, 339);
+            txtMontoTotal.Location = new Point(22, 355);
             txtMontoTotal.Name = "txtMontoTotal";
             txtMontoTotal.ReadOnly = true;
-            txtMontoTotal.Size = new Size(188, 37);
+            txtMontoTotal.Size = new Size(204, 37);
             txtMontoTotal.TabIndex = 29;
             txtMontoTotal.TabStop = false;
             txtMontoTotal.TextAlign = HorizontalAlignment.Right;
@@ -492,7 +495,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("EngraversGothic BT", 10F);
             label7.ForeColor = Color.FromArgb(224, 224, 224);
-            label7.Location = new Point(19, 321);
+            label7.Location = new Point(22, 337);
             label7.Name = "label7";
             label7.Size = new Size(88, 15);
             label7.TabIndex = 30;
@@ -529,7 +532,7 @@
             pnListado.Controls.Add(label14);
             pnListado.Location = new Point(0, 45);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(759, 487);
+            pnListado.Size = new Size(742, 487);
             pnListado.TabIndex = 51;
             // 
             // btnAgregarItem
@@ -542,7 +545,7 @@
             btnAgregarItem.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnAgregarItem.FlatStyle = FlatStyle.Flat;
             btnAgregarItem.ForeColor = Color.WhiteSmoke;
-            btnAgregarItem.Location = new Point(658, 124);
+            btnAgregarItem.Location = new Point(641, 126);
             btnAgregarItem.Name = "btnAgregarItem";
             btnAgregarItem.Size = new Size(86, 32);
             btnAgregarItem.TabIndex = 7;
@@ -608,7 +611,7 @@
             btnEditarProducto.FlatStyle = FlatStyle.Flat;
             btnEditarProducto.ForeColor = Color.FromArgb(23, 54, 93);
             btnEditarProducto.Image = (Image)resources.GetObject("btnEditarProducto.Image");
-            btnEditarProducto.Location = new Point(677, 72);
+            btnEditarProducto.Location = new Point(663, 72);
             btnEditarProducto.Name = "btnEditarProducto";
             btnEditarProducto.Size = new Size(30, 30);
             btnEditarProducto.TabIndex = 44;
@@ -684,7 +687,7 @@
             txtProductoNombre.Location = new Point(184, 76);
             txtProductoNombre.Name = "txtProductoNombre";
             txtProductoNombre.ReadOnly = true;
-            txtProductoNombre.Size = new Size(487, 24);
+            txtProductoNombre.Size = new Size(462, 24);
             txtProductoNombre.TabIndex = 38;
             // 
             // btnNuevoProducto
@@ -698,7 +701,7 @@
             btnNuevoProducto.FlatStyle = FlatStyle.Flat;
             btnNuevoProducto.ForeColor = Color.FromArgb(23, 54, 93);
             btnNuevoProducto.Image = (Image)resources.GetObject("btnNuevoProducto.Image");
-            btnNuevoProducto.Location = new Point(713, 70);
+            btnNuevoProducto.Location = new Point(699, 70);
             btnNuevoProducto.Name = "btnNuevoProducto";
             btnNuevoProducto.Size = new Size(31, 32);
             btnNuevoProducto.TabIndex = 37;
@@ -799,7 +802,7 @@
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(13, 164);
             dgvListado.Name = "dgvListado";
-            dgvListado.Size = new Size(731, 311);
+            dgvListado.Size = new Size(714, 311);
             dgvListado.TabIndex = 16;
             dgvListado.CellContentClick += dgvListado_CellContentClick;
             // 
@@ -835,7 +838,7 @@
             btnBuscarProveedor.FlatStyle = FlatStyle.Flat;
             btnBuscarProveedor.ForeColor = Color.FromArgb(23, 54, 93);
             btnBuscarProveedor.Image = (Image)resources.GetObject("btnBuscarProveedor.Image");
-            btnBuscarProveedor.Location = new Point(706, 18);
+            btnBuscarProveedor.Location = new Point(697, 16);
             btnBuscarProveedor.Name = "btnBuscarProveedor";
             btnBuscarProveedor.Size = new Size(24, 22);
             btnBuscarProveedor.TabIndex = 13;
@@ -852,6 +855,17 @@
             label14.Size = new Size(679, 15);
             label14.TabIndex = 45;
             label14.Text = "________________________________________________________________________________________________";
+            // 
+            // txtBarCode
+            // 
+            txtBarCode.BorderStyle = BorderStyle.FixedSingle;
+            txtBarCode.Location = new Point(336, 12);
+            txtBarCode.Name = "txtBarCode";
+            txtBarCode.Size = new Size(34, 23);
+            txtBarCode.TabIndex = 59;
+            txtBarCode.TabStop = false;
+            txtBarCode.Text = "0";
+            txtBarCode.Visible = false;
             // 
             // Frm_Compras
             // 
@@ -944,5 +958,6 @@
         public TextBox txtCategoria;
         public TextBox txtProveedor;
         public PictureBox btnCierreVolver;
+        public TextBox txtBarCode;
     }
 }

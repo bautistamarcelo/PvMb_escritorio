@@ -172,6 +172,7 @@
             btnEliminar.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
             btnEliminar.FlatAppearance.MouseOverBackColor = Color.Maroon;
             btnEliminar.Location = new Point(341, 379);
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnCancelar
             // 
@@ -276,9 +277,10 @@
             // 
             // txtLogoUrl
             // 
-            txtLogoUrl.BackColor = Color.Gainsboro;
+            txtLogoUrl.BackColor = Color.FromArgb(4, 41, 68);
             txtLogoUrl.BorderStyle = BorderStyle.FixedSingle;
             txtLogoUrl.Enabled = false;
+            txtLogoUrl.ForeColor = Color.White;
             txtLogoUrl.Location = new Point(497, 231);
             txtLogoUrl.Name = "txtLogoUrl";
             txtLogoUrl.ReadOnly = true;

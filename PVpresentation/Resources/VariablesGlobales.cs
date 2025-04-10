@@ -37,7 +37,7 @@ namespace PVpresentation.Resources
 
          public static int vProveedorID { get; set; }
         public static string vProveedorNombre{get;set;}= string.Empty;
-
+        public static int vProveedorRenta { get; set; } = 0; 
 
         //Instancias de Formularios Ventas
         public static int Frm_Venta01 { get; set; } //values: 0 Cerrado / 1 Abierto

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 
@@ -155,7 +156,7 @@ namespace PVpresentation.Formularios
             txtImpuestosGral.Text = _Impuestos.ToString();
         }
 
-        private async Task AgregarProducto(int ProductoID)
+        private async Task AgregarProducto(string ProductoID)
         {
             var producto = await _productoService.Obtener(ProductoID);
             if (producto.ID == 0)
@@ -173,12 +174,13 @@ namespace PVpresentation.Formularios
             sb.AppendLine("Impuesto: " + txtImpuestoMonto.Text.Trim());
             sb.AppendLine("Cantidad: " + txtCantidad.Text.Trim());
 
-            var encontrado = _CompraDetalle.FirstOrDefault(x => x.ProductoID == ProductoID);
+            var encontrado = _CompraDetalle.FirstOrDefault(x => x.ProductoBarCode == ProductoID);
             if (encontrado == null)
             {
                 _CompraDetalle.Add(new Compra_D_VM
                 {
                     ProductoID = producto.ID,
+                    ProductoBarCode = producto.BarCode,
                     ProductoNombre = producto.Nombre,
                     Cantidad = Convert.ToInt32(txtCantidad.Text.Trim()),
                     pCompra = Convert.ToInt32(txtpCompra.Text.Trim()),
@@ -201,7 +203,7 @@ namespace PVpresentation.Formularios
             dgvListado.Refresh();
         }
 
-        public async Task ObtenerProducto(int ProductoID)
+        public async Task ObtenerProducto(string ProductoID)
         {
 
             vProducTo = await _productoService.Obtener(ProductoID);
@@ -235,7 +237,7 @@ namespace PVpresentation.Formularios
             txtCantidad.Select();
         }
 
-        private void Frm_Compras_Load(object sender, EventArgs e)
+        private async void Frm_Compras_Load(object sender, EventArgs e)
         {
             #region Completo los datos del comboBox no enlazado con otra tabla
             OpcionesComboBox[] itemsTipos = new OpcionesComboBox[]
@@ -263,6 +265,17 @@ namespace PVpresentation.Formularios
             dgvListado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             #endregion
 
+            var _Proveedor = await _proveedoresService.Obtener(1);
+            if (_Proveedor.Nombre !="")
+            {
+                txtRenta.Text = _Proveedor.Renta.ToString();
+            }
+            else
+            {
+                txtProveedorID.Text = "1";
+                txtProveedorNombre.Text = "** Sin Asignar **";
+                txtRenta.Text = "0";
+            }
             txtFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             txtProveedorID.Text = "1"!; // Proveedor por defecto
             txtProveedorNombre.Text = "** Sin Asignar **";
@@ -282,7 +295,7 @@ namespace PVpresentation.Formularios
             {
                 if (txtProductoID.Text.Trim() != "")
                 {
-                    await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+                    await ObtenerProducto(txtProductoID.Text.Trim());
                 }
             }
             if (e.KeyCode == Keys.F3)
@@ -293,14 +306,14 @@ namespace PVpresentation.Formularios
                 {
                     var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
                     txtProductoID.Text = _ProductoSeleccionado.ID.ToString();
-                    await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+                    await ObtenerProducto(txtProductoID.Text.Trim());
                 }
             }
         }
 
         private async void btnAgregarItem_Click(object sender, EventArgs e)
         {
-            await AgregarProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+            await AgregarProducto(txtProductoID.Text.Trim());
 
             VariablesGlobales.vProductoID = Convert.ToInt32(txtProductoID.Text.Trim());
             VariablesGlobales.vProductoBarCode = txtBarCode.Text.ToString();
@@ -309,7 +322,7 @@ namespace PVpresentation.Formularios
             Impresiones imPresiones = new Impresiones();
             PrintDocument printEtiqueta = new PrintDocument();
 
-            #region Crear y enviar la impresión del comprobante
+            #region Crear y enviar la impresión de la etiqueta
             var frmCantidadEtiquetas = _serviceProvider.GetRequiredService<Frm_EtiquetasCantidad>();
             var resultadoCantidad = frmCantidadEtiquetas.ShowDialog();
             if (resultadoCantidad == DialogResult.OK)
@@ -342,7 +355,7 @@ namespace PVpresentation.Formularios
             {
                 return;
             }
-            await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+            await ObtenerProducto(txtProductoID.Text.Trim());
             var frmBuscarProducto = _serviceProvider.GetRequiredService<Frm_Productos_Compras>();
             frmBuscarProducto.MostrarTabs(frmBuscarProducto.tabNuevo.Name);
             frmBuscarProducto.txtID.Text = vProducTo.ID.ToString();
@@ -364,7 +377,7 @@ namespace PVpresentation.Formularios
             {
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
                 txtProductoID.Text = VariablesGlobales.vProductoID.ToString();
-                await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+                await ObtenerProducto(txtProductoID.Text.Trim());
             }
         }
 
@@ -379,7 +392,7 @@ namespace PVpresentation.Formularios
             {
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
                 txtProductoID.Text = VariablesGlobales.vProductoID.ToString();
-                await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+                await ObtenerProducto(txtProductoID.Text.Trim());
             }
         }
 
@@ -394,6 +407,7 @@ namespace PVpresentation.Formularios
             {
                 txtProveedorID.Text = VariablesGlobales.vProveedorID.ToString();
                 txtProveedorNombre.Text = VariablesGlobales.vProveedorNombre.ToString();
+                txtRenta.Text = VariablesGlobales.vProveedorRenta.ToString();
                 txtProductoID.Select();
             }
         }
@@ -406,7 +420,7 @@ namespace PVpresentation.Formularios
             {
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
                 txtProductoID.Text = _ProductoSeleccionado.ID.ToString();
-                await ObtenerProducto(Convert.ToInt32(txtProductoID.Text.Trim()));
+                await ObtenerProducto(txtProductoID.Text.Trim());
             }
         }
 
@@ -550,7 +564,10 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
-                //txtpOferta.Text = string.Empty;
+                int _oferta = Convert.ToInt32(txtpCosto.Text.Trim()) + (Convert.ToInt32(Convert.ToInt32(txtpCosto.Text.Trim()) * (Convert.ToInt32(txtRenta.Text.Trim())-10)/100));
+                int _venta = Convert.ToInt32(txtpCosto.Text.Trim()) + (Convert.ToInt32(Convert.ToInt32(txtpCosto.Text.Trim()) * Convert.ToInt32(txtRenta.Text.Trim())/100));
+                txtpOferta.Text = _oferta.ToString();
+                txtpVenta.Text = _venta.ToString();
                 txtpOferta.Focus();
             }
         }

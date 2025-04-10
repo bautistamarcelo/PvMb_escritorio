@@ -164,5 +164,30 @@ namespace PVrepository.Implementation
 
             return Resultado;
         }
+
+        public async Task<Proveedores> Obtener(int IDproveedor)
+        {
+            Proveedores obJeto = new Proveedores();
+            using (var con = _conexion.ObtenerSqLconexion())
+            {
+                con.Open();
+                var cmd = new SqlCommand("SP_Proveedor_Obtener", con);
+                cmd.Parameters.AddWithValue("@ID", IDproveedor);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        obJeto = new Proveedores()
+                        {
+                            ID = Convert.ToInt32(dr["ID"]),
+                            Nombre = dr["Nombre"].ToString()!,
+                            Renta = Convert.ToInt32(dr["Renta"])
+                        };
+                    }
+                }
+            }
+            return obJeto;
+        }
     }
 }

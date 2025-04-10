@@ -68,8 +68,8 @@
             // 
             // pnGral
             // 
+            pnGral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnGral.BackColor = Color.FromArgb(74, 154, 190);
-            pnGral.Dock = DockStyle.Fill;
             pnGral.Location = new Point(0, 0);
             pnGral.Name = "pnGral";
             pnGral.Size = new Size(984, 561);
@@ -423,6 +423,7 @@
             Controls.Add(pnGral);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmModeloCRUD";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Form1";
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();

@@ -181,6 +181,7 @@
             txtRenta.Name = "txtRenta";
             txtRenta.Size = new Size(288, 22);
             txtRenta.TabIndex = 8;
+            txtRenta.KeyPress += txtRenta_KeyPress;
             // 
             // label7
             // 

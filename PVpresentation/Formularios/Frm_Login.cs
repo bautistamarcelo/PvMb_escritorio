@@ -15,22 +15,27 @@ namespace PVpresentation.Formularios
 
         #region VARIABLES Y CONSTRUCTOR DE SERVICIOS QUE NECESITO EN EL FORMULARIO 
         private readonly IServiceProvider _serviceProvider;
+        private readonly ISituacionService _situacionService;
         private readonly IUsuariosService _usuariosService;
         private readonly ISucursalesService _sucursalesService;
         private readonly IEmpresaService _empresaService;
         private readonly IPredeterminadasService _predeterminadasService;
         private Empresa vEmpresa = new Empresa();
-        public Frm_Login(IServiceProvider serviceProvider, ISucursalesService sucursalesService, IUsuariosService usuariosService, IEmpresaService empresaService, IPredeterminadasService predeterminadasService)
+        public Frm_Login(IServiceProvider serviceProvider, ISucursalesService sucursalesService, 
+                                 IUsuariosService usuariosService, IEmpresaService empresaService, 
+                                 IPredeterminadasService predeterminadasService,ISituacionService situacionService)
         {
             InitializeComponent();
             //Estas lineas eliminan los parpadeos del formulario o controles en la interfaz grafica (Pero no en un 100%)
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.DoubleBuffered = true;
+
             _serviceProvider = serviceProvider;
             _sucursalesService = sucursalesService;
             _usuariosService = usuariosService;
             _empresaService = empresaService;
             _predeterminadasService = predeterminadasService;
+            _situacionService = situacionService;
             // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
             AssignFocusEvents(this);
 
@@ -96,24 +101,33 @@ namespace PVpresentation.Formularios
 
         private async void Frm_Login_Load(object sender, EventArgs e)
         {
-            VariablesGlobales.oPredeterminadas = await _predeterminadasService.Obtener();
-            var ListaEmpresas = await _empresaService.Lista();
-            var itemsEmpresas = ListaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+            var situacion = await _situacionService.Obtener(2);
+            if ((situacion.EstadoID == 1 && situacion.Dias <= 180) || situacion.EstadoID ==2)
+            {
+                VariablesGlobales.oPredeterminadas = await _predeterminadasService.Obtener();
+                var ListaEmpresas = await _empresaService.Lista();
+                var itemsEmpresas = ListaEmpresas.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
 
-            cmbEmpresa.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Empresa", Valor = 0 });
-            cmbEmpresa.InsertarItems(itemsEmpresas);
-            cmbEmpresa.EstablecerValor(VariablesGlobales.oPredeterminadas.EmpresaID);
+                cmbEmpresa.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Empresa", Valor = 0 });
+                cmbEmpresa.InsertarItems(itemsEmpresas);
+                cmbEmpresa.EstablecerValor(VariablesGlobales.oPredeterminadas.EmpresaID);
 
-            //var ListaSucursales = await _sucursalesService.Lista("", predeterMinadas.EmpresaID);
-            //var itemsSucursal = ListaSucursales.Select(item => new OpcionesComboBox { Texto = item.Nombre, Valor = item.ID }).ToArray();
+                var situacionNueva = new Situacion()
+                {
+                    ID = 2,
+                    Nombre =situacion.Nombre,
+                    EstadoID = situacion.EstadoID,
+                };
+                await _situacionService.Editar(situacionNueva);
 
-            //cmbSucursales.Items.Add(new OpcionesComboBox { Texto = "Seleccione una Sucursal", Valor = 0 });
-            //cmbSucursales.InsertarItems(itemsSucursal);
-            //cmbSucursales.EstablecerValor(predeterMinadas.SucursalID);
+                txtUsuario.Focus();
 
-            txtUsuario.Focus();
-
-
+            }
+            else
+            {
+                MessageBox.Show("El sistema no se encuentra habilitado, por favor comuníquese con su proveedor.", "Sistema no habilitado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Application.Exit();
+            }
 
         }
 

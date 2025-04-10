@@ -115,6 +115,7 @@ namespace PVpresentation.Formularios
                 {
                     VariablesGlobales.vProveedorID = ProveedorSeleccionado.ID;
                     VariablesGlobales.vProveedorNombre = ProveedorSeleccionado.Nombre.ToString();
+                    VariablesGlobales.vProveedorRenta = ProveedorSeleccionado.Renta;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -129,6 +130,7 @@ namespace PVpresentation.Formularios
                     txtID.Text = ProveedorSeleccionado.ID.ToString();
                     VariablesGlobales.vProveedorID = ProveedorSeleccionado.ID;
                     VariablesGlobales.vProveedorNombre = ProveedorSeleccionado.Nombre.ToString();
+                    VariablesGlobales.vProveedorRenta = ProveedorSeleccionado.Renta;
                     txtRenta.Text = ProveedorSeleccionado.Renta.ToString();
                     cmbCaracter.EstablecerValor(ProveedorSeleccionado.CaracterID);
 
@@ -314,6 +316,7 @@ namespace PVpresentation.Formularios
                 fProd.CambiarVisibilidadControles();
                 await fProd.agregarProveedorComboBox(txtNombre.Text.Trim());
                 fProd.cmbProveedor.SelectedItem = txtNombre.Text.Trim();
+                
             }
         }
 
@@ -337,6 +340,14 @@ namespace PVpresentation.Formularios
                     _proveedoresService.Eliminar(Convert.ToInt32(txtID.Text.Trim()));
                     LimpiarMantenimiento();
                 }
+            }
+        }
+
+        private void txtRenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla si no es un número
             }
         }
     }

@@ -135,7 +135,7 @@ namespace PVpresentation.Resources
                 float alturaItem = lineasUsadas * alturaLinea;
 
                 // Dibujamos el código del producto
-                g.DrawString(ventaDetalle.ProductoID.ID.ToString(), fontNormal, Brushes.Black, margenIzquierdo, y + 5);
+                g.DrawString(ventaDetalle.ProductoID.BarCode.ToString(), fontNormal, Brushes.Black, margenIzquierdo, y + 5);
 
                 // Dibujamos la descripción en múltiples líneas
                 float yDescripcion = y;// + 5;
@@ -149,7 +149,8 @@ namespace PVpresentation.Resources
                 // Dibujamos los demás campos alineados con la primera línea de la descripción
                 g.DrawString(ventaDetalle.Cantidad.ToString(), fontNormal, Brushes.Black, 160, y += alturaItem);
                 g.DrawString(ventaDetalle.pVenta.ToString("0.00"), fontNormal, Brushes.Black, 200, y);
-                g.DrawString(ventaDetalle.pTotalVenta.ToString("0.00"), fontNormal, Brushes.Black, 260, y);
+                g.DrawString(ventaDetalle.pTotalVenta.ToString("0.00"), fontNormal, Brushes.Black, AlinearDerecha("$" + ventaDetalle.pTotalVenta.ToString("0.00"), fontNegrita), y);
+
 
                 // Ajustamos `y` según la altura del item más alto (descripción más larga)
                 y += alturaItem + 5;

@@ -52,6 +52,7 @@
             // 
             // pnGral
             // 
+            pnGral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnGral.Size = new Size(984, 532);
             // 
             // pnTituloFormulario
@@ -70,15 +71,20 @@
             // 
             // pnlContenedorPrincipal
             // 
-            pnlContenedorPrincipal.Size = new Size(984, 480);
+            pnlContenedorPrincipal.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            pnlContenedorPrincipal.Dock = DockStyle.Fill;
+            pnlContenedorPrincipal.Location = new Point(0, 50);
+            pnlContenedorPrincipal.Size = new Size(984, 482);
             // 
             // tabControlMain
             // 
-            tabControlMain.Size = new Size(979, 480);
+            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControlMain.Dock = DockStyle.None;
+            tabControlMain.Size = new Size(1059, 532);
             // 
             // tabListado
             // 
-            tabListado.Size = new Size(971, 442);
+            tabListado.Size = new Size(1051, 494);
             // 
             // tabNuevo
             // 
@@ -96,7 +102,7 @@
             tabNuevo.Controls.Add(label6);
             tabNuevo.Controls.Add(label5);
             tabNuevo.Controls.Add(label3);
-            tabNuevo.Size = new Size(971, 442);
+            tabNuevo.Size = new Size(1051, 494);
             tabNuevo.Controls.SetChildIndex(btnGrabar, 0);
             tabNuevo.Controls.SetChildIndex(btnCancelar, 0);
             tabNuevo.Controls.SetChildIndex(btnEliminar, 0);

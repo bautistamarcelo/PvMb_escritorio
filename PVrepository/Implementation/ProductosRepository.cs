@@ -253,7 +253,7 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
-        public async Task<Productos> Obtener(int IDproducto)
+        public async Task<Productos> Obtener(string IDproducto)
         {
             Productos oBjeto = new Productos();
             using (var con = _conexion.ObtenerSqLconexion())

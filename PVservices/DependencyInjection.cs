@@ -32,6 +32,7 @@ namespace PVservices
             services.AddTransient<IProductosService, ProductosService>();
             services.AddTransient<IProveedoresService, ProveedoresServices>();
             services.AddTransient<IRolService, RolService>();
+            services.AddTransient<ISituacionService, SituacionService>();
             services.AddTransient<ISucursalesService, SucursalesService>();
             services.AddTransient<ITramitesService, TramitesService>();
             services.AddTransient<IUsuariosService, UsuariosService>();

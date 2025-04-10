@@ -64,7 +64,6 @@
             // pnGral
             // 
             pnGral.BackColor = Color.FromArgb(74, 154, 190);
-            pnGral.Dock = DockStyle.Fill;
             pnGral.Location = new Point(0, 0);
             pnGral.Name = "pnGral";
             pnGral.Size = new Size(968, 522);
@@ -130,6 +129,7 @@
             // pnlContenedorPrincipal
             // 
             pnlContenedorPrincipal.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlContenedorPrincipal.BackColor = Color.FromArgb(74, 134, 160);
             pnlContenedorPrincipal.Controls.Add(tabControlMain);
             pnlContenedorPrincipal.Location = new Point(0, 53);
             pnlContenedorPrincipal.Name = "pnlContenedorPrincipal";
@@ -138,21 +138,21 @@
             // 
             // tabControlMain
             // 
-            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControlMain.BottomBackColor = Color.Black;
             tabControlMain.BottomForeColor = Color.White;
             tabControlMain.Controls.Add(tabListado);
             tabControlMain.Controls.Add(tabNuevo);
             tabControlMain.Cursor = Cursors.Hand;
+            tabControlMain.Dock = DockStyle.Fill;
             tabControlMain.Font = new Font("EngraversGothic BT", 10F);
             tabControlMain.ItemSize = new Size(200, 30);
             tabControlMain.LineBackColor = Color.FromArgb(74, 134, 160);
             tabControlMain.LineForeColor = Color.White;
-            tabControlMain.Location = new Point(2, -3);
+            tabControlMain.Location = new Point(0, 0);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.Padding = new Point(3, 3);
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(963, 469);
+            tabControlMain.Size = new Size(968, 469);
             tabControlMain.SizeMode = TabSizeMode.Fixed;
             tabControlMain.TabIndex = 6;
             tabControlMain.TabStyle = MiTabControl.Style.Line;
@@ -169,7 +169,7 @@
             tabListado.Location = new Point(4, 34);
             tabListado.Name = "tabListado";
             tabListado.Padding = new Padding(3);
-            tabListado.Size = new Size(955, 431);
+            tabListado.Size = new Size(960, 431);
             tabListado.TabIndex = 0;
             tabListado.Text = "Listado";
             // 
@@ -208,6 +208,7 @@
             // 
             // dgvListado
             // 
+            dgvListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(15, 39);
             dgvListado.Name = "dgvListado";
@@ -263,7 +264,7 @@
             tabNuevo.Location = new Point(4, 34);
             tabNuevo.Name = "tabNuevo";
             tabNuevo.Padding = new Padding(3);
-            tabNuevo.Size = new Size(955, 431);
+            tabNuevo.Size = new Size(960, 431);
             tabNuevo.TabIndex = 1;
             tabNuevo.Text = "Mantenimiento";
             // 
@@ -365,8 +366,11 @@
             Controls.Add(pnTituloFormulario);
             Controls.Add(pnGral);
             FormBorderStyle = FormBorderStyle.None;
+            MinimizeBox = false;
             Name = "FrmModeloTransaccion";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "FrmModeloTransaccion";
+            WindowState = FormWindowState.Maximized;
             pnTituloFormulario.ResumeLayout(false);
             pnTituloFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).EndInit();

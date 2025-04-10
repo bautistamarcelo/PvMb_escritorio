@@ -663,5 +663,18 @@ namespace PVpresentation.Formularios
                 e.Handled = true; // Bloquea la tecla si no es un número
             }
         }
+
+        private async void txtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtBuscar.Text.Trim() != "")
+                {
+                    await MostrarProductos(txtBuscar.Text);
+                    txtBuscar.Text = "";
+                }
+            }
+        }
     }
 }

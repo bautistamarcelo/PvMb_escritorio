@@ -98,11 +98,11 @@ namespace PVpresentation.Formularios
             // 
             // tabControlMain
             // 
-            tabControlMain.Size = new Size(971, 471);
+            tabControlMain.Size = new Size(971, 470);
             // 
             // tabListado
             // 
-            tabListado.Size = new Size(963, 433);
+            tabListado.Size = new Size(963, 432);
             // 
             // tabNuevo
             // 
@@ -135,7 +135,7 @@ namespace PVpresentation.Formularios
             tabNuevo.Controls.Add(label24);
             tabNuevo.Controls.Add(cmbSituacion);
             tabNuevo.Controls.Add(label26);
-            tabNuevo.Size = new Size(963, 433);
+            tabNuevo.Size = new Size(963, 432);
             tabNuevo.Controls.SetChildIndex(btnGrabar, 0);
             tabNuevo.Controls.SetChildIndex(btnCancelar, 0);
             tabNuevo.Controls.SetChildIndex(btnEliminar, 0);
@@ -328,6 +328,7 @@ namespace PVpresentation.Formularios
             txtStock.BorderStyle = BorderStyle.FixedSingle;
             txtStock.Location = new Point(807, 88);
             txtStock.Name = "txtStock";
+            txtStock.ReadOnly = true;
             txtStock.Size = new Size(117, 22);
             txtStock.TabIndex = 41;
             txtStock.KeyPress += txtStock_KeyPress;

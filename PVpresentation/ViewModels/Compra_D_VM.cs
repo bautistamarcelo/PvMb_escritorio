@@ -11,6 +11,7 @@ namespace PVpresentation.ViewModels
         public int ID {get; set;}
         public int CompraID {get; set;}
         public int ProductoID {get; set;}
+        public string ProductoBarCode { get; set; } = string.Empty;
         public string ProductoNombre { get; set; }=string.Empty;
         public int Cantidad {get; set;}
         public int pCompra {get; set;}

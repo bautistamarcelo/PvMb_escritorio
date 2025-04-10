@@ -8,6 +8,9 @@ using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 using PVrepository.Entities.ViewModels;
 using PVrepository.Interfaces;
+using PVservices.Implementation;
+using System.Drawing.Printing;
+
 
 
 namespace PVpresentation.Formularios
@@ -24,7 +27,7 @@ namespace PVpresentation.Formularios
         private readonly ICajas_Detalle_VMservice _cajas_Detalle_VMservice;
         private readonly ICajasMovimientosService _cajasMovimientosService;
         private readonly ICajasMonedaMservice _cajasMonedaMservice;
-        
+
         public Frm_Cajas(ICajasService cajasService,
                         ICajas_VMservice cajas_VMservice,
                         IServiceProvider serviceProvider,
@@ -195,19 +198,19 @@ namespace PVpresentation.Formularios
             dgvDetalle.DataSource = VMListaCajasDetalle.ToList();
             dgvDetalle.Columns["CajaID"].Visible = false;
             dgvDetalle.Columns["Descripcion"].FillWeight = 350;
-            
+
             if (VariablesGlobales.cajaSeleccionadaID == null)
             {
                 MessageBox.Show("Debe seleccionar una caja para ver el detalle", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-           txtMuestraSaldoInicial.Text = VariablesGlobales.cajaSeleccionadaSaldoInicial.ToString();
-           txtMuestraSaldoFinal.Text = SaldoActual.Monto.ToString();
-           txtEfectivo.Text = SaldoMonedas.Efectivo.ToString();
-           txtDebito.Text = SaldoMonedas.Debito.ToString();
-           txtTarjeta.Text = SaldoMonedas.Tarjeta.ToString();
-           txtMuestraResultado.Text = (Convert.ToInt32(txtMuestraSaldoFinal.Text.Trim()) - Convert.ToInt32(txtMuestraSaldoInicial.Text.Trim())).ToString();
+            txtMuestraSaldoInicial.Text = VariablesGlobales.cajaSeleccionadaSaldoInicial.ToString();
+            txtMuestraSaldoFinal.Text = SaldoActual.Monto.ToString();
+            txtEfectivo.Text = SaldoMonedas.Efectivo.ToString();
+            txtDebito.Text = SaldoMonedas.Debito.ToString();
+            txtTarjeta.Text = SaldoMonedas.Tarjeta.ToString();
+            txtMuestraResultado.Text = (Convert.ToInt32(txtMuestraSaldoFinal.Text.Trim()) - Convert.ToInt32(txtMuestraSaldoInicial.Text.Trim())).ToString();
         }
 
         #endregion
@@ -275,15 +278,11 @@ namespace PVpresentation.Formularios
             VariablesGlobales.cajaSeleccionadaSaldoInicial = CajaSeleccionada.SaldoInicial;
             MostrarTabs(tabEditar.Name);
             await MostrarDetalleCajas(VariablesGlobales.cajaSeleccionadaID);
-
-            
         }
 
         private void btnCancelarDetalle_Click(object sender, EventArgs e)
         {
             MostrarTabs(tabListado.Name);
         }
-
-                
-        }
+    }
 }

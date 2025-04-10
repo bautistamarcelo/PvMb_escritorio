@@ -37,6 +37,7 @@ namespace PVrepository
             services.AddTransient<IProductosRepository, ProductosRepository>();
             services.AddTransient<IProveedoresRepository, ProveedoresRepository>();
             services.AddTransient<IRolRepository, RolRepository>();
+            services.AddTransient<ISituacionRepository, SituacionRepository>();
             services.AddTransient<ISucursalesRepository, SucursalesRepository>();
             services.AddTransient<ITramitesRepository, TramitesRepository>();
             services.AddTransient<IUsuariosRepository, UsuariosRepository>();

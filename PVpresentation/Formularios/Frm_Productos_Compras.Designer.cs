@@ -282,7 +282,7 @@
             btnNuevo.FlatStyle = FlatStyle.Flat;
             btnNuevo.ForeColor = Color.FromArgb(23, 54, 93);
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(47, 10);
+            btnNuevo.Location = new Point(21, 13);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(47, 49);
             btnNuevo.TabIndex = 55;
@@ -310,11 +310,11 @@
             label4.AutoSize = true;
             label4.Font = new Font("EngraversGothic BT", 10F);
             label4.ForeColor = Color.FromArgb(224, 224, 224);
-            label4.Location = new Point(100, 32);
+            label4.Location = new Point(75, 32);
             label4.Name = "label4";
-            label4.Size = new Size(56, 15);
+            label4.Size = new Size(73, 15);
             label4.TabIndex = 23;
-            label4.Text = "Cliente:";
+            label4.Text = "Producto:";
             // 
             // txtBuscar
             // 
@@ -325,6 +325,7 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(570, 27);
             txtBuscar.TabIndex = 0;
+            txtBuscar.KeyDown += txtBuscar_KeyDown;
             // 
             // dgvListado
             // 

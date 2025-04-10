@@ -42,5 +42,10 @@ namespace PVservices.Implementation
         {
             return await _proveedoresRepository.Eliminar(IDproveedor);
         }
+
+        public async Task<Proveedores> Obtener(int IDproveedor)
+        {
+            return await _proveedoresRepository.Obtener(IDproveedor);
+        }
     }
 }

@@ -79,10 +79,10 @@ namespace PVpresentation.Formularios
             pnMenuPrincipal.Visible = true;
             pnSubAdministracion.Visible = false;
             pnSubCajas.Visible = false;
-            pnSubComprobantes.Visible = false;
+            pnSubCompras.Visible = false;
+            pnSubVentas.Visible = false;
             pnSubConsultas.Visible = false;
             pnSubMantenimiento.Visible = false;
-
         }
 
         public void OcultarSubMEnu()
@@ -93,15 +93,17 @@ namespace PVpresentation.Formularios
             if (pnSubCajas.Visible == true)
                 pnSubCajas.Visible = false;
 
-            if (pnSubComprobantes.Visible == true)
-                pnSubComprobantes.Visible = false;
+            if (pnSubCompras.Visible == true)
+                pnSubCompras.Visible = false;
+
+            if (pnSubVentas.Visible == true)
+                pnSubVentas.Visible = false;
 
             if (pnSubConsultas.Visible == true)
                 pnSubConsultas.Visible = false;
 
             if (pnSubMantenimiento.Visible == true)
                 pnSubMantenimiento.Visible = false;
-
         }
 
         public void ShowSubMenu(Panel subMenu)
@@ -154,89 +156,124 @@ namespace PVpresentation.Formularios
 
         #endregion
 
-        private void btnMenuAdministracion_Click(object sender, EventArgs e)
+        #region Barra de Titulo
+        private void btnMaximizar_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(pnSubAdministracion);
-        }
+            lx = this.Location.X;
+            ly = this.Location.Y;
+            sw = this.Size.Width;
+            sh = this.Size.Height;
+            btnMaximizar.Visible = false;
+            btnRestaurar.Visible = true;
 
-        private async void btnSubRespaldarDatos_Click(object sender, EventArgs e)
+            this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+            this.Location = Screen.PrimaryScreen.WorkingArea.Location;
+        }
+        private void btnRestaurar_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(sw, sh);
+            this.Location = new Point(lx, ly);
+            btnRestaurar.Visible = false;
+            btnMaximizar.Visible = true;
+        }
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private void pnSuperior_MouseMove(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+        #endregion
+
+        #region     menu principal
+        private void btnMenuHome_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
-            string Respaldo =  await _empresaService.RespaldarDB();
-            MessageBox.Show(Respaldo, "Respaldar Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void btnMantenimiento_Click(object sender, EventArgs e)
+        #region ADMINISTRACION
+        private void btnMenuAdministracion_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(pnSubMantenimiento);
+            ShowSubMenu(pnSubAdministracion);
         }
-
-        private void btnComprobantes_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(pnSubComprobantes);
-        }
-
-        private void btnCajas_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(pnSubCajas);
-        }
-
-        private void btnConsultas_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(pnSubConsultas);
-        }
-
         private void btnAdmUsuarios_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Usuarios>();
-
         }
-
+        private void btnAdmEmpresas_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+            AbrirFormulario<Frm_Empresas>();
+        }
+        private void btnAdmSucursales_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+            AbrirFormulario<Frm_Sucursales>();
+        }
         private void btnAdmInventario_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
         }
+        #endregion
 
-        private void btnAdmListas_Click(object sender, EventArgs e)
+        #region MANTENIMIENTO
+        private void btnMantenimiento_Click(object sender, EventArgs e)
         {
-            OcultarSubMEnu();
+            ShowSubMenu(pnSubMantenimiento);
         }
-
-        private void btnAdmRecuperaDatos_Click(object sender, EventArgs e)
-        {
-            OcultarSubMEnu();
-        }
-
         private void btnMntArticulos_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Productos>();
         }
-
         private void btnMntClientes_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Clientes>();
         }
-
         private void btnMntProveedores_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Proveedores>();
         }
+        private void btnCmpNCredito_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+        }
+        private void btnCmpNDebito_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+        }
+        #endregion
 
+        #region COMPRAS
+        private void btnCompras_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnSubCompras);
+        }
         private void btnCmpCompras_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Compras>();
         }
+        private void btnComprasDetalle_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+        }
+        #endregion
 
+        #region VENTAS
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnSubVentas);
+        }
         private async void btnCmpVentas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
@@ -257,7 +294,13 @@ namespace PVpresentation.Formularios
                     var frmVenta01 = _serviceProvider.GetRequiredService<Frm_Ventas>();
                     frmVenta01.lblTituloForm.Text = "Instancia de Venta N° 1";
                     frmVenta01.txtInstancia.Text = "1";
-
+                    frmVenta01.FormClosed += (sender, e) =>
+                    {
+                        if (this.WindowState == FormWindowState.Minimized)
+                        {
+                            this.WindowState = FormWindowState.Normal; // Restaurar
+                        }
+                    };
                     frmVenta01.Show();
                     this.WindowState = FormWindowState.Minimized;
                     return;
@@ -268,6 +311,13 @@ namespace PVpresentation.Formularios
                     var frmVenta02 = _serviceProvider.GetRequiredService<Frm_Ventas>();
                     frmVenta02.lblTituloForm.Text = "Instancia de Venta N° 2";
                     frmVenta02.txtInstancia.Text = "2";
+                    frmVenta02.FormClosed += (sender, e) =>
+                    {
+                        if (this.WindowState == FormWindowState.Minimized)
+                        {
+                            this.WindowState = FormWindowState.Normal; // Restaurar
+                        }
+                    };
                     frmVenta02.Show();
                     this.WindowState = FormWindowState.Minimized;
                     return;
@@ -278,6 +328,13 @@ namespace PVpresentation.Formularios
                     var frmVenta03 = _serviceProvider.GetRequiredService<Frm_Ventas>();
                     frmVenta03.lblTituloForm.Text = "Instancia de Venta N° 3";
                     frmVenta03.txtInstancia.Text = "3";
+                    frmVenta03.FormClosed += (sender, e) =>
+                    {
+                        if (this.WindowState == FormWindowState.Minimized)
+                        {
+                            this.WindowState = FormWindowState.Normal; // Restaurar
+                        }
+                    };
                     frmVenta03.Show();
                     this.WindowState = FormWindowState.Minimized;
                     return;
@@ -285,33 +342,39 @@ namespace PVpresentation.Formularios
             }
 
         }
-
-        private void btnCmpCierresZ_Click(object sender, EventArgs e)
+        private void btnVentasDetalle_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
         }
+        #endregion
 
-        private void btnCmpNCredito_Click(object sender, EventArgs e)
+        #region CAJAS
+        private void btnCajas_Click(object sender, EventArgs e)
         {
-            OcultarSubMEnu();
+            ShowSubMenu(pnSubCajas);
         }
-
-        private void btnCmpNDebito_Click(object sender, EventArgs e)
-        {
-            OcultarSubMEnu();
-        }
-
         private void btnCjaApertura_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
             AbrirFormulario<Frm_Cajas>();
         }
-
-        private void btnCjaCierre_Click(object sender, EventArgs e)
+        private void btnCjaIngresos_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
-        }
+            Frm_Cajas_Movimientos frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
 
+            //currentFormChild = formulario;
+            frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
+            frmIngresos.TopLevel = false;
+            frmIngresos.TopMost = false;
+            pnMain.Controls.Add(frmIngresos);
+            pnMain.Tag = frmIngresos;
+            frmIngresos.Dock = DockStyle.Fill;
+            frmIngresos.txtOpcion.Text = "1";
+            frmIngresos.Show();
+            frmIngresos.tabIngresos.Select();
+            frmIngresos.BringToFront();
+        }
         private void btnCjaSalidas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
@@ -329,133 +392,59 @@ namespace PVpresentation.Formularios
             frmIngresos.tabEgresos.Select();
             frmIngresos.BringToFront();
         }
+        private void btnCmpCierresZ_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+        }
+        #endregion
 
+        #region CONSULTAS
+        private void btnConsultas_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnSubConsultas);
+        }
         private void btnCnsCajas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
         }
-
         private void btnCnsVentas_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
         }
-
         private void btnCnsCtaCte_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
         }
-
         private void btnCnsEstadisticos_Click(object sender, EventArgs e)
         {
             OcultarSubMEnu();
         }
+        #endregion
 
-        private void btnMenuHome_Click(object sender, EventArgs e)
-        {
-            OcultarSubMEnu();
-        }
-
-        private void IconoFormularioActual_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMaximizar_Click(object sender, EventArgs e)
-        {
-            lx = this.Location.X;
-            ly = this.Location.Y;
-            sw = this.Size.Width;
-            sh = this.Size.Height;
-            btnMaximizar.Visible = false;
-            btnRestaurar.Visible = true;
-
-            this.Size = Screen.PrimaryScreen.WorkingArea.Size;
-            this.Location = Screen.PrimaryScreen.WorkingArea.Location;
-
-
-        }
-
-        private void btnRestaurar_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(sw, sh);
-            this.Location = new Point(lx, ly);
-            btnRestaurar.Visible = false;
-            btnMaximizar.Visible = true;
-
-        }
-
-        private void btnMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void pnSuperior_MouseMove(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
-
+        #region RESPALDOS
         private void btnRespaldos_Click(object sender, EventArgs e)
         {
             ShowSubMenu(pnRespaldos);
         }
+        private async void btnSubRespaldarDatos_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+            string Respaldo = await _empresaService.RespaldarDB();
+            MessageBox.Show(Respaldo, "Respaldar Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void btnAdmRecuperaDatos_Click(object sender, EventArgs e)
+        {
+            OcultarSubMEnu();
+        }
+        #endregion
+        #endregion
 
+        #region Panel Inferior
         private void timerFechaHora_Tick(object sender, EventArgs e)
         {
             txtFecha.Text = DateTime.Now.ToLongDateString();
             txtHoraActual.Text = DateTime.Now.ToString("HH:mm:ssss");
         }
-
-        private void btnMntClientes_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCjaIngresos_Click(object sender, EventArgs e)
-        {
-            OcultarSubMEnu();
-            Frm_Cajas_Movimientos frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
-
-            //currentFormChild = formulario;
-            frmIngresos = _serviceProvider.GetRequiredService<Frm_Cajas_Movimientos>();
-            frmIngresos.TopLevel = false;
-            frmIngresos.TopMost = false;
-            pnMain.Controls.Add(frmIngresos);
-            pnMain.Tag = frmIngresos;
-            frmIngresos.Dock = DockStyle.Fill;
-            frmIngresos.txtOpcion.Text = "1";
-            frmIngresos.Show();
-            frmIngresos.tabIngresos.Select();
-            frmIngresos.BringToFront();
-
-        }
-
-        private void pnSuperior_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btnAdmSucursales_Click(object sender, EventArgs e)
-        {
-            OcultarSubMEnu();
-            AbrirFormulario<Frm_Sucursales>();
-        }
-
-        private void btnAdmEmpresas_Click(object sender, EventArgs e)
-        {
-            OcultarSubMEnu();
-            AbrirFormulario<Frm_Empresas>();
-        }
-
-        private void pictureBox2_DoubleClick(object sender, EventArgs e)
-        {
-
-            MessageBox.Show("Empresa: " + VariablesGlobales.EmpresaNombre + " | Url: " + VariablesGlobales.EmpresaLogo);
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

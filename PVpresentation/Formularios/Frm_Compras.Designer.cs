@@ -18,6 +18,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Compras));
             pnTituloFormulario = new Panel();
+            txtRenta = new TextBox();
+            txtBarCode = new TextBox();
             btnCierreVolver = new PictureBox();
             txtProveedor = new TextBox();
             txtImpuesto = new TextBox();
@@ -75,7 +77,6 @@
             txtProveedorNombre = new TextBox();
             btnBuscarProveedor = new Button();
             label14 = new Label();
-            txtBarCode = new TextBox();
             pnTituloFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnCierreVolver).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
@@ -90,6 +91,7 @@
             // pnTituloFormulario
             // 
             pnTituloFormulario.BackColor = Color.FromArgb(74, 134, 160);
+            pnTituloFormulario.Controls.Add(txtRenta);
             pnTituloFormulario.Controls.Add(txtBarCode);
             pnTituloFormulario.Controls.Add(btnCierreVolver);
             pnTituloFormulario.Controls.Add(txtProveedor);
@@ -112,6 +114,27 @@
             pnTituloFormulario.Size = new Size(984, 45);
             pnTituloFormulario.TabIndex = 50;
             pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
+            // 
+            // txtRenta
+            // 
+            txtRenta.BorderStyle = BorderStyle.FixedSingle;
+            txtRenta.Location = new Point(96, 13);
+            txtRenta.Name = "txtRenta";
+            txtRenta.Size = new Size(34, 23);
+            txtRenta.TabIndex = 60;
+            txtRenta.Text = "0";
+            txtRenta.Visible = false;
+            // 
+            // txtBarCode
+            // 
+            txtBarCode.BorderStyle = BorderStyle.FixedSingle;
+            txtBarCode.Location = new Point(336, 12);
+            txtBarCode.Name = "txtBarCode";
+            txtBarCode.Size = new Size(34, 23);
+            txtBarCode.TabIndex = 59;
+            txtBarCode.TabStop = false;
+            txtBarCode.Text = "0";
+            txtBarCode.Visible = false;
             // 
             // btnCierreVolver
             // 
@@ -856,17 +879,6 @@
             label14.TabIndex = 45;
             label14.Text = "________________________________________________________________________________________________";
             // 
-            // txtBarCode
-            // 
-            txtBarCode.BorderStyle = BorderStyle.FixedSingle;
-            txtBarCode.Location = new Point(336, 12);
-            txtBarCode.Name = "txtBarCode";
-            txtBarCode.Size = new Size(34, 23);
-            txtBarCode.TabIndex = 59;
-            txtBarCode.TabStop = false;
-            txtBarCode.Text = "0";
-            txtBarCode.Visible = false;
-            // 
             // Frm_Compras
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -897,6 +909,12 @@
             ((System.ComponentModel.ISupportInitialize)dgvListado).EndInit();
             ResumeLayout(false);
         }
+
+        //// Ensure the Frm_Compras_Load method has the correct signature for the Load event handler.
+        //private void Frm_Compras_Load(object sender, EventArgs e)
+        //{
+        //    // Add your logic here for when the form loads.
+        //}
 
         #endregion
 
@@ -959,5 +977,6 @@
         public TextBox txtProveedor;
         public PictureBox btnCierreVolver;
         public TextBox txtBarCode;
+        public TextBox txtRenta;
     }
 }

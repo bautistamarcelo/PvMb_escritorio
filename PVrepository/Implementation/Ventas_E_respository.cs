@@ -110,6 +110,7 @@ namespace PVrepository.Implementation
                             ProductoID = new Productos
                             {
                                 ID = Convert.ToInt32(dr["ProductoID"]),
+                                BarCode = dr["BarCode"].ToString()!,
                                 Nombre = dr["Nombre"].ToString()!,
                             },
                             Cantidad = Convert.ToInt32(dr["Cantidad"]),

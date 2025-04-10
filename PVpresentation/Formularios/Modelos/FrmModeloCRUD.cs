@@ -16,7 +16,7 @@ namespace PVpresentation.Formularios.Modelos
        
         public void MostrarTabs(string tabName)
         {
-            var tabsMenu = new TabPage[] { tabListado, tabNuevo, tabEditar };
+            var tabsMenu = new TabPage[] { tabListado };//, tabNuevo, tabEditar
             foreach (var tab in tabsMenu)
             {
                 if (tab.Name != tabName)

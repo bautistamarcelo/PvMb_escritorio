@@ -9,6 +9,7 @@ namespace PVpresentation.ViewModels
     public class Venta_D_VM
     {
         public int ProductoID { get; set; }
+        public string ProductoBarCode { get; set; }
         public string ProductoNombre { get; set; }
         public int Cantidad { get; set; }
         public int pOferta { get; set; }

@@ -38,6 +38,8 @@
             txtOpcion = new TextBox();
             lblTituloForm = new Label();
             pnMantenimiento = new Panel();
+            btnReimprimir = new Button();
+            txtVentaReimpresion = new TextBox();
             label9 = new Label();
             label6 = new Label();
             txtBruto = new TextBox();
@@ -200,6 +202,8 @@
             // pnMantenimiento
             // 
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
+            pnMantenimiento.Controls.Add(btnReimprimir);
+            pnMantenimiento.Controls.Add(txtVentaReimpresion);
             pnMantenimiento.Controls.Add(label9);
             pnMantenimiento.Controls.Add(label6);
             pnMantenimiento.Controls.Add(txtBruto);
@@ -233,6 +237,35 @@
             pnMantenimiento.Name = "pnMantenimiento";
             pnMantenimiento.Size = new Size(318, 467);
             pnMantenimiento.TabIndex = 52;
+            // 
+            // btnReimprimir
+            // 
+            btnReimprimir.BackColor = Color.SteelBlue;
+            btnReimprimir.Cursor = Cursors.Hand;
+            btnReimprimir.FlatAppearance.BorderColor = Color.FromArgb(45, 45, 48);
+            btnReimprimir.FlatAppearance.MouseDownBackColor = Color.FromArgb(45, 45, 48);
+            btnReimprimir.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
+            btnReimprimir.FlatStyle = FlatStyle.Flat;
+            btnReimprimir.ForeColor = Color.WhiteSmoke;
+            btnReimprimir.Location = new Point(86, 311);
+            btnReimprimir.Name = "btnReimprimir";
+            btnReimprimir.Size = new Size(86, 32);
+            btnReimprimir.TabIndex = 72;
+            btnReimprimir.Text = "Reimprimir";
+            btnReimprimir.UseVisualStyleBackColor = false;
+            btnReimprimir.Visible = false;
+            btnReimprimir.Click += btnReimprimir_Click;
+            // 
+            // txtVentaReimpresion
+            // 
+            txtVentaReimpresion.BackColor = Color.FromArgb(130, 149, 169);
+            txtVentaReimpresion.BorderStyle = BorderStyle.FixedSingle;
+            txtVentaReimpresion.Location = new Point(178, 318);
+            txtVentaReimpresion.Name = "txtVentaReimpresion";
+            txtVentaReimpresion.Size = new Size(83, 23);
+            txtVentaReimpresion.TabIndex = 71;
+            txtVentaReimpresion.TabStop = false;
+            txtVentaReimpresion.Visible = false;
             // 
             // label9
             // 
@@ -868,5 +901,7 @@
         public Label label6;
         public TextBox txtSaldoPago;
         private System.Drawing.Printing.PrintDocument printVenta;
+        public Button btnReimprimir;
+        public TextBox txtVentaReimpresion;
     }
 }

@@ -238,7 +238,8 @@ namespace PVpresentation.Formularios
                 ProveedorN = item.Proveedor.Nombre,
                 Talle = item.Talle,
                 Color = item.Color
-            }).ToList();
+            })  .OrderByDescending(x => x.ID) // ← Orden descendente por BarCode
+                .ToList();
             dgvListado.DataSource = VMListaProductos; //Llenar el DG con los datos armados de la listaVM
 
             //Selecciono las columnas que no deseo mostrar en el formulario

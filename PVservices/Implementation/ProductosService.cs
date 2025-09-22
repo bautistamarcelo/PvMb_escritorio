@@ -44,7 +44,7 @@ namespace PVservices.Implementation
             return await _productosRepository.ListaSF();
         }
 
-        public async Task<Productos> Obtener(string IDproducto)
+        public async Task<Productos?> Obtener(string IDproducto)
         {
             return await _productosRepository.Obtener(IDproducto);
         }

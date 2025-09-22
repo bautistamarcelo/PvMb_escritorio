@@ -75,6 +75,7 @@ namespace PVpresentation.Formularios
         private readonly IProveedoresService _proveedoresService;
         private readonly IImpuestosService _impuestosService;
         private readonly IComprasService _comprasService;
+        private readonly IUsuariosService _usuariosService;
         // Diccionario para almacenar los colores originales de los controles
         private Dictionary<Control, Color> originalColors = new Dictionary<Control, Color>();
         public Productos vProducTo { get; set; } = null!;
@@ -84,7 +85,8 @@ namespace PVpresentation.Formularios
                                        IProductosService productosService,
                                        IProveedoresService proveedoresService,
                                        IImpuestosService impuestosService,
-                                       IComprasService comprasService)
+                                       IComprasService comprasService,
+                                       IUsuariosService usuariosService)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
@@ -94,6 +96,7 @@ namespace PVpresentation.Formularios
             // Asignar los eventos Enter y Leave solo a TextBox y ComboBox
             AssignFocusEvents(this);
             _comprasService = comprasService;
+            _usuariosService = usuariosService;
         }
 
         #endregion
@@ -151,16 +154,17 @@ namespace PVpresentation.Formularios
             _TotalFinal = _CompraDetalle.Sum(x => x.TotalCosto);
             _Impuestos = _TotalFinal - _SubTotal;
 
-            txtSubTotal.Text = _SubTotal.ToString();
-            txtMontoTotal.Text = _TotalFinal.ToString();
-            txtImpuestosGral.Text = _Impuestos.ToString();
+            txtSubTotal.Text = _SubTotal?.ToString("N0");
+            txtMontoTotal.Text = _TotalFinal?.ToString("N0");
+            txtImpuestosGral.Text = _Impuestos?.ToString("N0");
         }
 
         private async Task AgregarProducto(string ProductoID)
         {
             var producto = await _productoService.Obtener(ProductoID);
-            if (producto.ID == 0)
+            if (producto is null)
             {
+                MessageBox.Show("Producto no encontrado.");
                 txtProductoID.BackColor = Color.FromArgb(255, 227, 227);
                 return;
             }
@@ -205,13 +209,14 @@ namespace PVpresentation.Formularios
 
         public async Task ObtenerProducto(string ProductoID)
         {
-
             vProducTo = await _productoService.Obtener(ProductoID);
-            if (vProducTo.ID == 0)
+            if (vProducTo is null)
             {
+                MessageBox.Show("Producto no encontrado.");
                 txtProductoID.BackColor = Color.FromArgb(255, 227, 227);
                 return;
             }
+
             txtProductoID.BackColor = Color.FromArgb(220, 220, 220);
 
             txtProductoID.Text = vProducTo.ID.ToString();
@@ -261,12 +266,28 @@ namespace PVpresentation.Formularios
             dgvListado.ImplementarConfiguracion("Eliminar");
             dgvListado.DataSource = _CompraDetalle;
             dgvListado.Columns["ProductoID"].Visible = false;
+            dgvListado.Columns["ID"].Visible = false;
+            dgvListado.Columns["CompraID"].Visible = false;
+            dgvListado.Columns["ProductoBarCode"].HeaderText = "BarCode";
+            dgvListado.Columns["ProductoNombre"].HeaderText = "Nombre";
+            dgvListado.Columns["pCompra"].HeaderText = "$ Comp.";
+            dgvListado.Columns["Impuesto"].HeaderText = "Imp.";
+            dgvListado.Columns["Costo"].HeaderText = "$ Costo";
+            dgvListado.Columns["pOferta"].HeaderText = "$ Oferta";
+            dgvListado.Columns["pVenta"].HeaderText = "$ Venta";
+
+            dgvListado.Columns["pVenta"].DefaultCellStyle.Format = "N0"; // Formato numérico sin decimales
+            dgvListado.Columns["pOferta"].DefaultCellStyle.Format = "N0"; // Formato numérico sin decimales
+            dgvListado.Columns["Costo"].DefaultCellStyle.Format = "N0"; // Formato numérico sin decimales
+            dgvListado.Columns["TotalCosto"].DefaultCellStyle.Format = "N0"; // Formato numérico sin decimales
+            dgvListado.Columns["TotalCompra"].DefaultCellStyle.Format = "N0"; // Formato numérico sin decimales
+
             dgvListado.Columns["ProductoNombre"].FillWeight = 350;
             dgvListado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             #endregion
 
             var _Proveedor = await _proveedoresService.Obtener(1);
-            if (_Proveedor.Nombre !="")
+            if (_Proveedor.Nombre != "")
             {
                 txtRenta.Text = _Proveedor.Renta.ToString();
             }
@@ -295,6 +316,7 @@ namespace PVpresentation.Formularios
             {
                 if (txtProductoID.Text.Trim() != "")
                 {
+                    txtBarCode.Text = txtProductoID.Text.Trim();
                     await ObtenerProducto(txtProductoID.Text.Trim());
                 }
             }
@@ -313,12 +335,18 @@ namespace PVpresentation.Formularios
 
         private async void btnAgregarItem_Click(object sender, EventArgs e)
         {
-            await AgregarProducto(txtProductoID.Text.Trim());
+            if (txtProductoID.Text.Trim() == "" || txtCantidad.Text.Trim() == "" || txtpCompra.Text.Trim() == "" || txtImpuestoMonto.Text.Trim() == "" || txtpCosto.Text.Trim() == "" || txtpOferta.Text.Trim() == "" || txtpVenta.Text.Trim() == "")
+            {
+                MessageBox.Show("Por favor, complete todos los campos antes de agregar el producto.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            await AgregarProducto(txtBarCode.Text.Trim());
 
             VariablesGlobales.vProductoID = Convert.ToInt32(txtProductoID.Text.Trim());
             VariablesGlobales.vProductoBarCode = txtBarCode.Text.ToString();
             VariablesGlobales.vProductoPoferta = Convert.ToInt32(txtpOferta.Text.Trim());
             VariablesGlobales.vProductoPventa = Convert.ToInt32(txtpVenta.Text.Trim());
+
             Impresiones imPresiones = new Impresiones();
             PrintDocument printEtiqueta = new PrintDocument();
 
@@ -355,7 +383,14 @@ namespace PVpresentation.Formularios
             {
                 return;
             }
-            await ObtenerProducto(txtProductoID.Text.Trim());
+
+            await ObtenerProducto(txtBarCode.Text.Trim());
+            if (vProducTo is null)
+            {
+                txtProductoID.BackColor = Color.FromArgb(255, 227, 227);
+                return;
+            }
+
             var frmBuscarProducto = _serviceProvider.GetRequiredService<Frm_Productos_Compras>();
             frmBuscarProducto.MostrarTabs(frmBuscarProducto.tabNuevo.Name);
             frmBuscarProducto.txtID.Text = vProducTo.ID.ToString();
@@ -419,7 +454,7 @@ namespace PVpresentation.Formularios
             if (resultadobusqueda == DialogResult.OK)
             {
                 var _ProductoSeleccionado = frmBuscarProducto._ProductoSeleccionado;
-                txtProductoID.Text = _ProductoSeleccionado.ID.ToString();
+                txtProductoID.Text = _ProductoSeleccionado.BarCode.ToString();
                 await ObtenerProducto(txtProductoID.Text.Trim());
             }
         }
@@ -449,20 +484,20 @@ namespace PVpresentation.Formularios
 
             if (_Pago == 1)
             {
-                _Efectivo = Convert.ToInt32(txtMontoTotal.Text.Trim());
+                _Efectivo = Convert.ToInt32(txtMontoTotal.Text.Replace(".", "").Trim());
             }
             else
             {
-                _Credito = Convert.ToInt32(txtMontoTotal.Text.Trim());
+                _Credito = Convert.ToInt32(txtMontoTotal.Text.Replace(".", "").Trim());
             }
 
             XElement Compra = new XElement("Compra",
                 new XElement("Fecha", txtFecha.Text.Trim()),
                 new XElement("Tipo", _Pago.ToString()), //Values: 1 Contado | 2 Cuenta Corriente
                 new XElement("Numero", "001-1025"),
-                new XElement("pCompra", Convert.ToInt32(txtSubTotal.Text.Trim())),
-                new XElement("ImpuestoMonto", Convert.ToInt32(txtImpuestosGral.Text.Trim())),
-                new XElement("Costo", txtMontoTotal.Text.Trim()),
+                new XElement("pCompra", Convert.ToInt32(txtSubTotal.Text.Replace(".", "").Trim())),
+                new XElement("ImpuestoMonto", Convert.ToInt32(txtImpuestosGral.Text.Replace(".", "").Trim())),
+                new XElement("Costo", txtMontoTotal.Text.Replace(".", "").Trim()),
                 new XElement("ImpuestoID", 1), //Convert.ToInt32(txtImpuestoMonto.Text.Trim())
                 new XElement("Situacion", Convert.ToInt32(3)), //Values: 1 Grabada | 2 Anulada | 3 Pendiente
                 new XElement("ProveedorID", Convert.ToInt32(txtProveedorID.Text.Trim())),
@@ -564,8 +599,8 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // Evita el sonido de "beep" en el TextBox
-                int _oferta = Convert.ToInt32(txtpCosto.Text.Trim()) + (Convert.ToInt32(Convert.ToInt32(txtpCosto.Text.Trim()) * (Convert.ToInt32(txtRenta.Text.Trim())-10)/100));
-                int _venta = Convert.ToInt32(txtpCosto.Text.Trim()) + (Convert.ToInt32(Convert.ToInt32(txtpCosto.Text.Trim()) * Convert.ToInt32(txtRenta.Text.Trim())/100));
+                int _oferta = Convert.ToInt32(txtpCosto.Text.Trim()) + (Convert.ToInt32(Convert.ToInt32(txtpCosto.Text.Trim()) * (Convert.ToInt32(txtRenta.Text.Trim()) - 10) / 100));
+                int _venta = Convert.ToInt32(txtpCosto.Text.Trim()) + (Convert.ToInt32(Convert.ToInt32(txtpCosto.Text.Trim()) * Convert.ToInt32(txtRenta.Text.Trim()) / 100));
                 txtpOferta.Text = _oferta.ToString();
                 txtpVenta.Text = _venta.ToString();
                 txtpOferta.Focus();
@@ -642,6 +677,20 @@ namespace PVpresentation.Formularios
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void cmbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbFormaPago.SelectedIndex == 0)
+            {
+                var cajaAbierta = await _usuariosService.BuscaCajaUsuario(VariablesGlobales.UsuarioID);
+                if (cajaAbierta == 0)
+                {
+                    MessageBox.Show("No tiene caja abierta, por favor abra una caja.", "Caja cerrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmbFormaPago.SelectedIndex = 1;
+                    return;
+                }
+            }
         }
     }
 }

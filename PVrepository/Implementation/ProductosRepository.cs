@@ -253,7 +253,7 @@ namespace PVrepository.Implementation
             return respuesta;
         }
 
-        public async Task<Productos> Obtener(string IDproducto)
+        public async Task<Productos?> Obtener(string IDproducto)
         {
             Productos oBjeto = new Productos();
             using (var con = _conexion.ObtenerSqLconexion())
@@ -266,7 +266,8 @@ namespace PVrepository.Implementation
                 {
                     if (await dr.ReadAsync())
                     {
-                        oBjeto = new Productos
+                        //Si puedo leer el DataReader es porque existe el registro
+                        return oBjeto = new Productos
                         {
                             ID = Convert.ToInt32(dr["ID"]),
                             BarCode = dr["BarCode"].ToString()!,
@@ -300,7 +301,7 @@ namespace PVrepository.Implementation
                     }
                 }
             }
-            return oBjeto;
+            return null;//No existe el registro
         }
 
         public async Task<Productos> ObtenerXnombre(string productoNombre)

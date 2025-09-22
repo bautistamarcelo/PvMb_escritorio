@@ -379,6 +379,7 @@ namespace PVpresentation.Formularios
                 respuesta = await _productosService.editar(objeTo);
 
                 VariablesGlobales.vProductoID = objeTo.ID;
+                VariablesGlobales.vProductoBarCode = objeTo.BarCode;
                 VariablesGlobales.vProductoNombre = objeTo.Nombre;
                 VariablesGlobales.vProductoPcosto = objeTo.Costo;
                 VariablesGlobales.vProductoPoferta = objeTo.pOferta;
@@ -392,6 +393,7 @@ namespace PVpresentation.Formularios
                 if (_producto != null)
                 {
                     VariablesGlobales.vProductoID = _producto.ID;
+                    VariablesGlobales.vProductoBarCode = _producto.BarCode;
                     VariablesGlobales.vProductoNombre = _producto.Nombre;
                     VariablesGlobales.vProductoPcosto = _producto.Costo;
                     VariablesGlobales.vProductoPoferta = _producto.pOferta;
@@ -449,6 +451,7 @@ namespace PVpresentation.Formularios
         {
             _ProductoSeleccionado = (ProductosVM)dgvListado.CurrentRow.DataBoundItem;
             VariablesGlobales.vProductoID = _ProductoSeleccionado.ID;
+            VariablesGlobales.vProductoBarCode = _ProductoSeleccionado.BarCode;
             VariablesGlobales.vProductoNombre = _ProductoSeleccionado.Nombre;
             VariablesGlobales.vProductoPcosto = _ProductoSeleccionado.Costo;
             VariablesGlobales.vProductoPoferta = _ProductoSeleccionado.pOferta;

@@ -193,7 +193,7 @@ namespace PVrepository.Implementation
                 try
                 {
                     await cmd.ExecuteNonQueryAsync();
-                    respuesta = "Exito"!;
+                    respuesta = "La Base de Datos se respaldó con éxito"!;
                 }
                 catch (Exception ex)
                 {

@@ -446,5 +446,18 @@ namespace PVpresentation.Formularios
             txtHoraActual.Text = DateTime.Now.ToString("HH:mm:ssss");
         }
         #endregion
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Frm_Splash splash = new Frm_Splash(_serviceProvider);
+            
+            splash.Opcion.Text = "1";
+            splash.label1.ForeColor = Color.White;
+            splash.label3.ForeColor = Color.White;
+            splash.label4.ForeColor = Color.White;
+            splash.BackColor = Color.FromArgb(4,41,68);
+            splash.ShowDialog();
+            
+        }
     }
 }

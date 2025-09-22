@@ -93,6 +93,26 @@ namespace PVpresentation.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Logo_MB_Blanco_SF {
+            get {
+                object obj = ResourceManager.GetObject("Logo_MB_Blanco_SF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_PV_blanco_SF {
+            get {
+                object obj = ResourceManager.GetObject("Logo_PV_blanco_SF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Logo_PV_SinFondo {
             get {
                 object obj = ResourceManager.GetObject("Logo_PV_SinFondo", resourceCulture);

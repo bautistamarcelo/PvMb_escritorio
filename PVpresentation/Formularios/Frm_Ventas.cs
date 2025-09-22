@@ -34,6 +34,14 @@ namespace PVpresentation.Formularios
         #endregion
 
         #region SERVICIOS REQUERIDOAS Y CONSTRUCTOR
+
+        #region DECLARO VARIABLES PARA MOSTRAR LOS CAMPOS CON SEPARADOR DE MILES
+        private int? _tEfe = 0;
+        private int? _tDeb = 0;
+        private int? _tTar = 0;
+        private int? _tCta = 0;
+        #endregion
+
         private readonly IServiceProvider _serviceProvider;
         private readonly IVenta_E_Service _venta_E_Service;
         private readonly IEmpresaService _empresaService;
@@ -41,6 +49,7 @@ namespace PVpresentation.Formularios
         private readonly IProductosService _productoService;
         private readonly IListasService _listasService;
         private BindingList<Venta_D_VM> _VentaDetalle = new BindingList<Venta_D_VM>();
+
 
         public Frm_Ventas(IListasService listasService,
                           IServiceProvider serviceProvider,
@@ -200,6 +209,7 @@ namespace PVpresentation.Formularios
             dgvListado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             #endregion
 
+           
 
         }
 
@@ -287,13 +297,13 @@ namespace PVpresentation.Formularios
                 _TotalFinal = _Bruto - Convert.ToInt32(txtDtoGral.Text);
             }
 
-            int _SumaPagos = Convert.ToInt32(txtTefectivo.Text.Trim()) + Convert.ToInt32(txtTdebito.Text.Trim()) + Convert.ToInt32(txtTtarjeta.Text.Trim()) + Convert.ToInt32(txtTctaCte.Text.Trim());
+            int _SumaPagos = Convert.ToInt32(txtTefectivo.Text.Replace(".", "").Trim()) + Convert.ToInt32(txtTdebito.Text.Replace(".", "").Trim()) + Convert.ToInt32(txtTtarjeta.Text.Replace(".", "").Trim()) + Convert.ToInt32(txtTctaCte.Text.Replace(".", "").Trim());
             int _Diferencia = _TotalFinal - _SumaPagos;
-            txtSubTotal.Text = _SubTotal.ToString();
-            txtDtoEfectivo.Text = (_SubTotal - _Bruto).ToString();
-            txtBruto.Text = _Bruto.ToString();
-            txtMontoFinal.Text = _TotalFinal.ToString();
-            txtSaldoPago.Text = _Diferencia.ToString();
+            txtSubTotal.Text = _SubTotal.ToString("N0");
+            txtDtoEfectivo.Text = (_SubTotal - _Bruto).ToString("N0");
+            txtBruto.Text = _Bruto.ToString("N0");
+            txtMontoFinal.Text = _TotalFinal.ToString("N0");
+            txtSaldoPago.Text = _Diferencia.ToString("N0");
         }
 
         private async void txtBuscarProducto_KeyDown(object sender, KeyEventArgs e)
@@ -346,6 +356,17 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 ActualizaMontos();
+
+                _tEfe = Convert.ToInt32(txtTefectivo.Text.Replace(".", "").Trim());
+                _tDeb = Convert.ToInt32(txtTdebito.Text.Replace(".", "").Trim());
+                _tTar = Convert.ToInt32(txtTtarjeta.Text.Replace(".", "").Trim());
+                _tCta = Convert.ToInt32(txtTctaCte.Text.Replace(".", "").Trim());
+
+                txtTefectivo.Text = _tEfe?.ToString("N0");
+                txtTdebito.Text = _tDeb?.ToString("N0");
+                txtTtarjeta.Text = _tTar?.ToString("N0");
+                txtTctaCte.Text = _tCta?.ToString("N0");
+
                 txtTdebito.Focus();
             }
         }
@@ -355,6 +376,16 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 ActualizaMontos();
+                _tEfe = Convert.ToInt32(txtTefectivo.Text.Replace(".", "").Trim());
+                _tDeb = Convert.ToInt32(txtTdebito.Text.Replace(".", "").Trim());
+                _tTar = Convert.ToInt32(txtTtarjeta.Text.Replace(".", "").Trim());
+                _tCta = Convert.ToInt32(txtTctaCte.Text.Replace(".", "").Trim());
+
+                txtTefectivo.Text = _tEfe?.ToString("N0");
+                txtTdebito.Text = _tDeb?.ToString("N0");
+                txtTtarjeta.Text = _tTar?.ToString("N0");
+                txtTctaCte.Text = _tCta?.ToString("N0");
+
                 txtTtarjeta.Focus();
             }
         }
@@ -364,6 +395,17 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 ActualizaMontos();
+
+                _tEfe = Convert.ToInt32(txtTefectivo.Text.Replace(".", "").Trim());
+                _tDeb = Convert.ToInt32(txtTdebito.Text.Replace(".", "").Trim());
+                _tTar = Convert.ToInt32(txtTtarjeta.Text.Replace(".", "").Trim());
+                _tCta = Convert.ToInt32(txtTctaCte.Text.Replace(".", "").Trim());
+
+                txtTefectivo.Text = _tEfe?.ToString("N0");
+                txtTdebito.Text = _tDeb?.ToString("N0");
+                txtTtarjeta.Text = _tTar?.ToString("N0");
+                txtTctaCte.Text = _tCta?.ToString("N0");
+
                 txtTctaCte.Focus();
             }
         }
@@ -373,6 +415,17 @@ namespace PVpresentation.Formularios
             if (e.KeyCode == Keys.Enter)
             {
                 ActualizaMontos();
+
+                _tEfe = Convert.ToInt32(txtTefectivo.Text.Replace(".", "").Trim());
+                _tDeb = Convert.ToInt32(txtTdebito.Text.Replace(".", "").Trim());
+                _tTar = Convert.ToInt32(txtTtarjeta.Text.Replace(".", "").Trim());
+                _tCta = Convert.ToInt32(txtTctaCte.Text.Replace(".", "").Trim());
+
+                txtTefectivo.Text = _tEfe?.ToString("N0");
+                txtTdebito.Text = _tDeb?.ToString("N0");
+                txtTtarjeta.Text = _tTar?.ToString("N0");
+                txtTctaCte.Text = _tCta?.ToString("N0");
+
                 btnGrabar.Focus();
             }
         }
@@ -498,15 +551,15 @@ namespace PVpresentation.Formularios
                 new XElement("Fecha", txtFecha.Text.Trim()),
                 new XElement("Tipo", _tipo.ToString()),
                 new XElement("Numero", "001-1025"),
-                new XElement("SubTotal", Convert.ToInt32(txtSubTotal.Text.Trim())),
-                new XElement("DtoEfectivo", Convert.ToInt32(txtDtoEfectivo.Text.Trim())),
-                new XElement("Bruto", Convert.ToInt32(txtBruto.Text.Trim())),
-                new XElement("DtoGeneral", Convert.ToInt32(txtDtoGral.Text.Trim())),
-                new XElement("Monto", Convert.ToInt32(txtMontoFinal.Text.Trim())),
-                new XElement("Tefectivo", Convert.ToInt32(txtTefectivo.Text.Trim())),
-                new XElement("Tdebito", Convert.ToInt32(txtTdebito.Text.Trim())),
-                new XElement("Ttarjeta", txtTtarjeta.Text.Trim()),
-                new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Trim())),
+                new XElement("SubTotal", Convert.ToInt32(txtSubTotal.Text.Replace(".", "").Trim())),
+                new XElement("DtoEfectivo", Convert.ToInt32(txtDtoEfectivo.Text.Replace(".", "").Trim())),
+                new XElement("Bruto", Convert.ToInt32(txtBruto.Text.Replace(".", "").Trim())),
+                new XElement("DtoGeneral", Convert.ToInt32(txtDtoGral.Text.Replace(".", "").Trim())),
+                new XElement("Monto", Convert.ToInt32(txtMontoFinal.Text.Replace(".", "").Trim())),
+                new XElement("Tefectivo", Convert.ToInt32(txtTefectivo.Text.Replace(".", "").Trim())),
+                new XElement("Tdebito", Convert.ToInt32(txtTdebito.Text.Replace(".", "").Trim())),
+                new XElement("Ttarjeta", txtTtarjeta.Text.Replace(".", "").Trim()),
+                new XElement("Tcredito", Convert.ToInt32(txtTctaCte.Text.Replace(".", "").Trim())),
                 new XElement("Situacion", 0),//Values: 0;"Grabada";1;"Pendiente";2;"Facturada";3;"Anulada"
                 new XElement("ClienteID", _ClienteID),
                 new XElement("ClienteNombre", _ClienteNombre),

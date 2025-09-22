@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
             panelContenedor = new Panel();
+            pnMain = new Panel();
+            pctLogoCentral = new PictureBox();
             pnSuperior = new Panel();
             IconoFormularioActual = new FontAwesome.Sharp.IconPictureBox();
             btnMaximizar = new PictureBox();
@@ -87,10 +89,10 @@
             btnMenuHome = new FontAwesome.Sharp.IconButton();
             pnLogo = new Panel();
             pictureBox2 = new PictureBox();
-            pnMain = new Panel();
-            pctLogoCentral = new PictureBox();
             timerFechaHora = new System.Windows.Forms.Timer(components);
             panelContenedor.SuspendLayout();
+            pnMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pctLogoCentral).BeginInit();
             pnSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)IconoFormularioActual).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnMaximizar).BeginInit();
@@ -110,8 +112,6 @@
             pnSubAdministracion.SuspendLayout();
             pnLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            pnMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pctLogoCentral).BeginInit();
             SuspendLayout();
             // 
             // panelContenedor
@@ -126,6 +126,27 @@
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(1250, 720);
             panelContenedor.TabIndex = 0;
+            // 
+            // pnMain
+            // 
+            pnMain.BackColor = Color.FromArgb(74, 134, 160);
+            pnMain.Controls.Add(pctLogoCentral);
+            pnMain.Dock = DockStyle.Fill;
+            pnMain.Location = new Point(250, 45);
+            pnMain.Name = "pnMain";
+            pnMain.Size = new Size(1000, 587);
+            pnMain.TabIndex = 13;
+            // 
+            // pctLogoCentral
+            // 
+            pctLogoCentral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pctLogoCentral.Image = (Image)resources.GetObject("pctLogoCentral.Image");
+            pctLogoCentral.Location = new Point(189, 119);
+            pctLogoCentral.Name = "pctLogoCentral";
+            pctLogoCentral.Size = new Size(641, 350);
+            pctLogoCentral.SizeMode = PictureBoxSizeMode.Zoom;
+            pctLogoCentral.TabIndex = 0;
+            pctLogoCentral.TabStop = false;
             // 
             // pnSuperior
             // 
@@ -1356,27 +1377,7 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
-            // 
-            // pnMain
-            // 
-            pnMain.BackColor = Color.FromArgb(74, 134, 160);
-            pnMain.Controls.Add(pctLogoCentral);
-            pnMain.Dock = DockStyle.Fill;
-            pnMain.Location = new Point(250, 45);
-            pnMain.Name = "pnMain";
-            pnMain.Size = new Size(1000, 587);
-            pnMain.TabIndex = 13;
-            // 
-            // pctLogoCentral
-            // 
-            pctLogoCentral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pctLogoCentral.Image = (Image)resources.GetObject("pctLogoCentral.Image");
-            pctLogoCentral.Location = new Point(189, 119);
-            pctLogoCentral.Name = "pctLogoCentral";
-            pctLogoCentral.Size = new Size(641, 350);
-            pctLogoCentral.SizeMode = PictureBoxSizeMode.Zoom;
-            pctLogoCentral.TabIndex = 0;
-            pctLogoCentral.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // timerFechaHora
             // 
@@ -1396,6 +1397,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmMain";
             panelContenedor.ResumeLayout(false);
+            pnMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pctLogoCentral).EndInit();
             pnSuperior.ResumeLayout(false);
             pnSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)IconoFormularioActual).EndInit();
@@ -1417,8 +1420,6 @@
             pnSubAdministracion.ResumeLayout(false);
             pnLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            pnMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pctLogoCentral).EndInit();
             ResumeLayout(false);
         }
 

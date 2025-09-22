@@ -90,6 +90,7 @@
             // 
             // pnTituloFormulario
             // 
+            pnTituloFormulario.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnTituloFormulario.BackColor = Color.FromArgb(74, 134, 160);
             pnTituloFormulario.Controls.Add(txtRenta);
             pnTituloFormulario.Controls.Add(txtBarCode);
@@ -107,11 +108,10 @@
             pnTituloFormulario.Controls.Add(txtInstancia);
             pnTituloFormulario.Controls.Add(txtOpcion);
             pnTituloFormulario.Controls.Add(lblTituloForm);
-            pnTituloFormulario.Dock = DockStyle.Top;
             pnTituloFormulario.Location = new Point(0, 0);
             pnTituloFormulario.Margin = new Padding(0);
             pnTituloFormulario.Name = "pnTituloFormulario";
-            pnTituloFormulario.Size = new Size(984, 45);
+            pnTituloFormulario.Size = new Size(999, 45);
             pnTituloFormulario.TabIndex = 50;
             pnTituloFormulario.MouseMove += pnTituloFormulario_MouseMove;
             // 
@@ -213,7 +213,7 @@
             btnMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMaximizar.Cursor = Cursors.Hand;
             btnMaximizar.Image = Properties.Resources.maximize3;
-            btnMaximizar.Location = new Point(927, 14);
+            btnMaximizar.Location = new Point(942, 14);
             btnMaximizar.Name = "btnMaximizar";
             btnMaximizar.Size = new Size(20, 21);
             btnMaximizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -226,7 +226,7 @@
             btnRestaurar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnRestaurar.Cursor = Cursors.Hand;
             btnRestaurar.Image = Properties.Resources.Normal;
-            btnRestaurar.Location = new Point(927, 14);
+            btnRestaurar.Location = new Point(942, 14);
             btnRestaurar.Name = "btnRestaurar";
             btnRestaurar.Size = new Size(20, 21);
             btnRestaurar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -240,7 +240,7 @@
             btnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnCerrar.Cursor = Cursors.Hand;
             btnCerrar.Image = Properties.Resources.Close;
-            btnCerrar.Location = new Point(953, 14);
+            btnCerrar.Location = new Point(968, 14);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(20, 21);
             btnCerrar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -253,7 +253,7 @@
             btnMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMinimizar.Cursor = Cursors.Hand;
             btnMinimizar.Image = Properties.Resources.Minimize;
-            btnMinimizar.Location = new Point(901, 14);
+            btnMinimizar.Location = new Point(916, 14);
             btnMinimizar.Name = "btnMinimizar";
             btnMinimizar.Size = new Size(20, 21);
             btnMinimizar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -283,12 +283,12 @@
             // 
             // lblTituloForm
             // 
-            lblTituloForm.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblTituloForm.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTituloForm.AutoSize = true;
             lblTituloForm.Enabled = false;
             lblTituloForm.Font = new Font("EngraversGothic BT", 20F);
             lblTituloForm.ForeColor = Color.White;
-            lblTituloForm.Location = new Point(388, 9);
+            lblTituloForm.Location = new Point(403, 9);
             lblTituloForm.Name = "lblTituloForm";
             lblTituloForm.Size = new Size(181, 28);
             lblTituloForm.TabIndex = 4;
@@ -296,6 +296,7 @@
             // 
             // pnMantenimiento
             // 
+            pnMantenimiento.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             pnMantenimiento.BackColor = Color.FromArgb(4, 41, 68);
             pnMantenimiento.Controls.Add(label9);
             pnMantenimiento.Controls.Add(txtImpuestosGral);
@@ -313,10 +314,9 @@
             pnMantenimiento.Controls.Add(btnGrabar);
             pnMantenimiento.Controls.Add(txtMontoTotal);
             pnMantenimiento.Controls.Add(label7);
-            pnMantenimiento.Dock = DockStyle.Right;
             pnMantenimiento.Location = new Point(736, 45);
             pnMantenimiento.Name = "pnMantenimiento";
-            pnMantenimiento.Size = new Size(248, 487);
+            pnMantenimiento.Size = new Size(263, 487);
             pnMantenimiento.TabIndex = 52;
             // 
             // label9
@@ -337,10 +337,10 @@
             txtImpuestosGral.BorderStyle = BorderStyle.FixedSingle;
             txtImpuestosGral.Font = new Font("Square721 BT", 14.25F);
             txtImpuestosGral.ForeColor = Color.White;
-            txtImpuestosGral.Location = new Point(24, 302);
+            txtImpuestosGral.Location = new Point(21, 302);
             txtImpuestosGral.Name = "txtImpuestosGral";
             txtImpuestosGral.ReadOnly = true;
-            txtImpuestosGral.Size = new Size(202, 31);
+            txtImpuestosGral.Size = new Size(220, 31);
             txtImpuestosGral.TabIndex = 51;
             txtImpuestosGral.TextAlign = HorizontalAlignment.Right;
             // 
@@ -362,10 +362,10 @@
             txtSubTotal.BorderStyle = BorderStyle.FixedSingle;
             txtSubTotal.Font = new Font("Square721 BT", 14.25F);
             txtSubTotal.ForeColor = Color.White;
-            txtSubTotal.Location = new Point(24, 252);
+            txtSubTotal.Location = new Point(21, 252);
             txtSubTotal.Name = "txtSubTotal";
             txtSubTotal.ReadOnly = true;
-            txtSubTotal.Size = new Size(202, 31);
+            txtSubTotal.Size = new Size(220, 31);
             txtSubTotal.TabIndex = 49;
             txtSubTotal.TextAlign = HorizontalAlignment.Right;
             // 
@@ -375,10 +375,11 @@
             cmbFormaPago.BackColor = Color.Gainsboro;
             cmbFormaPago.Font = new Font("Square721 BT", 12F);
             cmbFormaPago.FormattingEnabled = true;
-            cmbFormaPago.Location = new Point(24, 141);
+            cmbFormaPago.Location = new Point(21, 141);
             cmbFormaPago.Name = "cmbFormaPago";
-            cmbFormaPago.Size = new Size(202, 28);
+            cmbFormaPago.Size = new Size(220, 28);
             cmbFormaPago.TabIndex = 48;
+            cmbFormaPago.SelectedIndexChanged += cmbFormaPago_SelectedIndexChanged;
             // 
             // label6
             // 
@@ -397,9 +398,9 @@
             cmbTipo.BackColor = Color.Gainsboro;
             cmbTipo.Font = new Font("Square721 BT", 12F);
             cmbTipo.FormattingEnabled = true;
-            cmbTipo.Location = new Point(24, 90);
+            cmbTipo.Location = new Point(21, 90);
             cmbTipo.Name = "cmbTipo";
-            cmbTipo.Size = new Size(202, 28);
+            cmbTipo.Size = new Size(220, 28);
             cmbTipo.TabIndex = 46;
             // 
             // label15
@@ -431,10 +432,10 @@
             txtFecha.BorderStyle = BorderStyle.FixedSingle;
             txtFecha.Font = new Font("Square721 BT", 12F);
             txtFecha.ForeColor = Color.White;
-            txtFecha.Location = new Point(21, 35);
+            txtFecha.Location = new Point(18, 35);
             txtFecha.Name = "txtFecha";
             txtFecha.ReadOnly = true;
-            txtFecha.Size = new Size(202, 27);
+            txtFecha.Size = new Size(220, 27);
             txtFecha.TabIndex = 25;
             txtFecha.TextAlign = HorizontalAlignment.Center;
             // 
@@ -455,9 +456,9 @@
             txtID.BackColor = Color.Gainsboro;
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Font = new Font("Square721 BT", 12F);
-            txtID.Location = new Point(24, 192);
+            txtID.Location = new Point(21, 192);
             txtID.Name = "txtID";
-            txtID.Size = new Size(202, 27);
+            txtID.Size = new Size(220, 27);
             txtID.TabIndex = 23;
             txtID.TextAlign = HorizontalAlignment.Center;
             // 
@@ -471,7 +472,7 @@
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 192, 192);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.WhiteSmoke;
-            btnCancelar.Location = new Point(128, 423);
+            btnCancelar.Location = new Point(143, 423);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(86, 32);
             btnCancelar.TabIndex = 21;
@@ -489,7 +490,7 @@
             btnGrabar.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnGrabar.FlatStyle = FlatStyle.Flat;
             btnGrabar.ForeColor = Color.WhiteSmoke;
-            btnGrabar.Location = new Point(28, 423);
+            btnGrabar.Location = new Point(43, 423);
             btnGrabar.Name = "btnGrabar";
             btnGrabar.Size = new Size(86, 32);
             btnGrabar.TabIndex = 20;
@@ -504,10 +505,10 @@
             txtMontoTotal.BorderStyle = BorderStyle.FixedSingle;
             txtMontoTotal.Font = new Font("Square721 BT", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtMontoTotal.ForeColor = Color.White;
-            txtMontoTotal.Location = new Point(22, 355);
+            txtMontoTotal.Location = new Point(19, 355);
             txtMontoTotal.Name = "txtMontoTotal";
             txtMontoTotal.ReadOnly = true;
-            txtMontoTotal.Size = new Size(204, 37);
+            txtMontoTotal.Size = new Size(222, 37);
             txtMontoTotal.TabIndex = 29;
             txtMontoTotal.TabStop = false;
             txtMontoTotal.TextAlign = HorizontalAlignment.Right;
@@ -518,7 +519,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("EngraversGothic BT", 10F);
             label7.ForeColor = Color.FromArgb(224, 224, 224);
-            label7.Location = new Point(22, 337);
+            label7.Location = new Point(37, 337);
             label7.Name = "label7";
             label7.Size = new Size(88, 15);
             label7.TabIndex = 30;
@@ -555,7 +556,7 @@
             pnListado.Controls.Add(label14);
             pnListado.Location = new Point(0, 45);
             pnListado.Name = "pnListado";
-            pnListado.Size = new Size(742, 487);
+            pnListado.Size = new Size(757, 487);
             pnListado.TabIndex = 51;
             // 
             // btnAgregarItem
@@ -568,7 +569,7 @@
             btnAgregarItem.FlatAppearance.MouseOverBackColor = Color.FromArgb(84, 141, 212);
             btnAgregarItem.FlatStyle = FlatStyle.Flat;
             btnAgregarItem.ForeColor = Color.WhiteSmoke;
-            btnAgregarItem.Location = new Point(641, 126);
+            btnAgregarItem.Location = new Point(644, 124);
             btnAgregarItem.Name = "btnAgregarItem";
             btnAgregarItem.Size = new Size(86, 32);
             btnAgregarItem.TabIndex = 7;
@@ -799,7 +800,6 @@
             txtProductoID.Name = "txtProductoID";
             txtProductoID.Size = new Size(120, 27);
             txtProductoID.TabIndex = 0;
-            txtProductoID.TextChanged += txtProductoID_TextChanged;
             txtProductoID.KeyDown += txtProductoID_KeyDown;
             // 
             // btnBuscarProducto
@@ -821,11 +821,11 @@
             // 
             // dgvListado
             // 
-            dgvListado.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvListado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvListado.Location = new Point(13, 164);
             dgvListado.Name = "dgvListado";
-            dgvListado.Size = new Size(714, 311);
+            dgvListado.Size = new Size(717, 311);
             dgvListado.TabIndex = 16;
             dgvListado.CellContentClick += dgvListado_CellContentClick;
             // 
@@ -884,12 +884,12 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(74, 134, 160);
-            ClientSize = new Size(984, 532);
+            ClientSize = new Size(999, 532);
             Controls.Add(pnMantenimiento);
             Controls.Add(pnListado);
             Controls.Add(pnTituloFormulario);
             FormBorderStyle = FormBorderStyle.None;
-            MaximumSize = new Size(984, 532);
+            MaximumSize = new Size(1984, 1532);
             MinimumSize = new Size(984, 532);
             Name = "Frm_Compras";
             StartPosition = FormStartPosition.CenterScreen;

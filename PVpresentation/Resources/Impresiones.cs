@@ -206,11 +206,12 @@ namespace PVpresentation.Resources
             Font fontTitulo = new Font("Arial Narrow", 14, FontStyle.Bold);
             Font fontNormal = new Font("Arial Narrow", 10);
             Font fontNegrita = new Font("Arial Narrow", 10, FontStyle.Bold);
+            Font fontNegritaPlus = new Font("Arial Narrow", 11, FontStyle.Bold);
             float y = 10;
 
-            int anchoPagina = 200;
-            int margenIzquierdo = 10;
-            int margenDerecho = 10;
+            int anchoPagina = 250;
+            int margenIzquierdo = 5;
+            int margenDerecho = 5;
 
             // Función para centrar texto
             float CentrarTexto(string texto, Font fuente)
@@ -260,14 +261,20 @@ namespace PVpresentation.Resources
             #endregion
 
             #region PRECIOS DE LA ETIQUETA 
-            //Imprimir precios del artículo
-            g.DrawString("Oferta Cdo.", fontNegrita, Brushes.Black, margenIzquierdo, y);
-            string precioOfertaFormateado = VariablesGlobales.vProductoPoferta.ToString("N2");
-            g.DrawString(precioOfertaFormateado, fontNegrita, Brushes.Black, 140, y);
-            y += 15;
+            //Imprimir precio Mayorista
             g.DrawString("Mayorista", fontNormal, Brushes.Black, margenIzquierdo, y);
             string precioVentaFormateado = VariablesGlobales.vProductoPventa.ToString("N2");
-            g.DrawString(precioVentaFormateado, fontNormal, Brushes.Black, 140, y);
+            g.DrawString(precioVentaFormateado, fontNormal, Brushes.Black, 175, y);
+            y += 10;
+
+            // Línea separadora
+            g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
+            y += 10;
+
+            //Imprimir precio Contado
+            g.DrawString("Oferta Cdo.", fontNegrita, Brushes.Black, margenIzquierdo, y);
+            string precioOfertaFormateado = VariablesGlobales.vProductoPoferta.ToString("N2");
+            g.DrawString(precioOfertaFormateado, fontNegritaPlus, Brushes.Black, 170, y);
 
             // Línea separadora
             g.DrawLine(Pens.Black, margenIzquierdo, y, margenDerecho, y);
@@ -289,25 +296,25 @@ namespace PVpresentation.Resources
                     VariablesGlobales.vProductoBarCode.ToString(),
                     SKColors.Black, // Color del código de barras (SKColor)
                     SKColors.White, // Color de fondo (SKColor)
-                    180, // Ancho
-                    40  // Alto
+                    220, // Ancho
+                    35  // Alto
                 );
 
             // Convertir SKImage a Bitmap (System.Drawing.Image)
-            using (SKData data = skImage.Encode(SKEncodedImageFormat.Png, 180))
+            using (SKData data = skImage.Encode(SKEncodedImageFormat.Png, 200))
             using (MemoryStream ms = new MemoryStream(data.ToArray()))
             {
                 Bitmap bitmap = new Bitmap(ms);
-                e.Graphics.DrawImage(bitmap, new Point(10, 50));
+                e.Graphics.DrawImage(bitmap, new Point(5, 50));
             }
-            y += 60;
+            y += 45;
             // Imprimir el código del producto
-            g.DrawString(VariablesGlobales.vProductoBarCode.ToString(), fontNormal, Brushes.Black, 70, y);
-
+            g.DrawString(VariablesGlobales.vProductoBarCode.ToString(), fontNormal, Brushes.Black, 90,y);
 
             // Si no hay más datos, indicar que no hay más páginas
             e.HasMorePages = false;
             detalleIndex = 0; // Resetear índice para futuras impresiones
+           
             #endregion
 
         }
